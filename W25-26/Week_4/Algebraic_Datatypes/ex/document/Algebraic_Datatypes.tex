@@ -1,0 +1,112 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Algebraic{\isacharunderscore}{\kern0pt}Datatypes}%
+%
+\begin{isamarkuptext}%
+\section*{Algebraic Datatypes in Isabelle/HOL}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Algebraic{\isacharunderscore}{\kern0pt}Datatypes\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+Algebraic data types are a fundamental way to model data in functional programming. The
+      following examples show how we model natural numbers, lists, binary trees with data in the
+      inner nodes, and binary trees with data in the leaves.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{datatype}\isamarkupfalse%
+\ Nat\ {\isacharequal}{\kern0pt}\ Zero\ {\isacharbar}{\kern0pt}\ Succ\ Nat\isanewline
+\isanewline
+\isacommand{term}\isamarkupfalse%
+\ {\isachardoublequoteopen}Zero{\isachardoublequoteclose}\isanewline
+\isacommand{term}\isamarkupfalse%
+\ {\isachardoublequoteopen}Succ\ {\isacharparenleft}{\kern0pt}Succ\ Zero{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ {\isacharprime}{\kern0pt}a\ List\ {\isacharequal}{\kern0pt}\ Nill\ {\isacharbar}{\kern0pt}\ Conss\ {\isacharprime}{\kern0pt}a\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ List{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{term}\isamarkupfalse%
+\ {\isachardoublequoteopen}Nill{\isachardoublequoteclose}\isanewline
+\isacommand{term}\isamarkupfalse%
+\ {\isachardoublequoteopen}Conss\ {\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Conss\ {\isadigit{3}}\ Nill{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ {\isacharprime}{\kern0pt}a\ tree\ {\isacharequal}{\kern0pt}\ Leaf\ {\isacharbar}{\kern0pt}\ Node\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}\ {\isacharprime}{\kern0pt}a\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{term}\isamarkupfalse%
+\ {\isachardoublequoteopen}Node\ {\isacharparenleft}{\kern0pt}Node\ \ Leaf\ {\isadigit{2}}\ Leaf{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isadigit{1}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Node\ Leaf\ {\isadigit{3}}\ Leaf{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ {\isacharprime}{\kern0pt}a\ tree{\isacharprime}{\kern0pt}\ {\isacharequal}{\kern0pt}\ Leaf{\isacharprime}{\kern0pt}\ {\isacharprime}{\kern0pt}a\ {\isacharbar}{\kern0pt}\ Node{\isacharprime}{\kern0pt}\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isacharprime}{\kern0pt}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isacharprime}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{term}\isamarkupfalse%
+\ {\isachardoublequoteopen}Node{\isacharprime}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Node{\isacharprime}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Leaf{\isacharprime}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Leaf{\isacharprime}{\kern0pt}\ {\isadigit{1}}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Leaf{\isacharprime}{\kern0pt}\ {\isadigit{3}}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Algebraic_Datatypes.tex%:%
+%:%6=1%:%
+%:%14=2%:%
+%:%15=2%:%
+%:%16=3%:%
+%:%17=4%:%
+%:%26=6%:%
+%:%27=7%:%
+%:%28=8%:%
+%:%30=10%:%
+%:%31=10%:%
+%:%32=11%:%
+%:%33=12%:%
+%:%34=12%:%
+%:%35=13%:%
+%:%36=13%:%
+%:%37=14%:%
+%:%38=15%:%
+%:%39=15%:%
+%:%40=16%:%
+%:%41=17%:%
+%:%42=17%:%
+%:%43=18%:%
+%:%44=18%:%
+%:%45=19%:%
+%:%46=20%:%
+%:%47=20%:%
+%:%48=21%:%
+%:%49=22%:%
+%:%50=22%:%
+%:%51=23%:%
+%:%52=24%:%
+%:%53=24%:%
+%:%54=25%:%
+%:%55=26%:%
+%:%56=26%:%
+%:%59=27%:%
+%:%64=28%:%

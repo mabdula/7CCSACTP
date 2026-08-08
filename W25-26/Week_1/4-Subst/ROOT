@@ -1,0 +1,7 @@
+ session Subst in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   Subst
+  document_files
+    "root.tex"

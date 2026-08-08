@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage{isabelle,isabellesym}
+\usepackage{amsmath}
+
+\newcommand{\Lecture}{Formal Verification: 6CCS3VER}
+\newcommand{\Semester}{Semester 1}
+\newcommand{\Prof}{}
+\newcommand{\Tutor}{}
+\providecommand{\bf}{}
+
+\newcounter{sheet}
+\newcounter{homework}
+
+\newlength{\abslength}\setlength{\abslength}{2mm plus 1mm minus 1mm}
+\newcommand{\abs}{\par\vspace{\abslength}}
+
+\newlength{\TUMBr}\settowidth{\TUMBr}{{\bf King's College London}}
+\newcommand{\Header}[5]{{\bf
+ \makebox[\TUMBr]{King's College London} \hfill #3\\
+ \makebox[\TUMBr]{Department of Informaitcs} \hfill #4\\
+ \makebox[\TUMBr]{#1} \hfill #5\\
+ \makebox[\TUMBr]{#2}}\abs}
+
+\newcommand{\Title}[1]{%
+  \begin{center}{\LARGE\bf\Lecture}\\[1ex]{\bf Exercise Sheet #1}\end{center}}
+
+\newcommand{\ExerciseSheet}[2]{%
+  \pagestyle{empty}%
+  \setcounter{sheet}{#1}%
+  \vspace*{-2cm}\Header{\Prof}{\Tutor}{\Semester}{#2}{}\vspace*{1cm}%
+  \Title{#1}\abs}
+
+\newcounter{exercise}
+\newcommand{\Exercise}[1]{%
+  \refstepcounter{exercise}%
+  \pagebreak[3]%
+  \relax%
+  \vspace{0.8em}%
+  \subsection*{{Exercise \arabic{sheet}.\arabic{exercise}\ \ \normalfont\sffamily #1}}}
+
+\newcommand{\Homework}[2]{%
+  \pagebreak[3]%
+  \relax%
+  \vspace{0.8em}%
+  \subsection*{{Homework \arabic{sheet}\ \ \normalfont\sffamily #1}}%
+  \emph{Submission until Friday, #2, 10:00am.}}
+
+\newcommand{\NumHomework}[2]{%
+  \refstepcounter{homework}%
+  \pagebreak[3]%
+  \relax%
+  \vspace{0.8em}%
+  \subsection*{{Homework \arabic{sheet}.\arabic{homework}\ \ \normalfont\sffamily #1}}%
+  \emph{Submission until Friday, #2, 10:00am.}}
+
+
+% further packages required for unusual symbols (see also
+% isabellesym.sty), use only when needed
+
+\usepackage{amssymb}
+  %for \<leadsto>, \<box>, \<diamond>, \<sqsupset>, \<mho>, \<Join>,
+  %\<lhd>, \<lesssim>, \<greatersim>, \<lessapprox>, \<greaterapprox>,
+  %\<triangleq>, \<yen>, \<lozenge>
+
+%\usepackage[greek,english]{babel}
+  %option greek for \<euro>
+  %option english (default language) for \<guillemotleft>, \<guillemotright>
+
+%\usepackage[latin1]{inputenc}
+  %for \<onesuperior>, \<onequarter>, \<twosuperior>, \<onehalf>,
+  %\<threesuperior>, \<threequarters>, \<degree>
+
+\usepackage[only,bigsqcap]{stmaryrd}
+  %for \<Sqinter>
+
+%\usepackage{eufrak}
+  %for \<AA> ... \<ZZ>, \<aa> ... \<zz> (also included in amssymb)
+
+%\usepackage{textcomp}
+  %for \<cent>, \<currency>
+
+% this should be the last package used
+\usepackage{pdfsetup}
+
+% urls in roman style, theory text in math-similar italics
+\urlstyle{rm}
+\isabellestyle{it}
+
+% for uniform font size
+%\renewcommand{\isastyle}{\isastyleminor}
+
+\begin{document}
+
+% sane default for proof documents
+\parindent 0pt\parskip 0.5ex
+
+
+\renewcommand{\isachardoublequote}{`\"}
+\renewcommand{\isachardoublequoteopen}{``}
+\renewcommand{\isachardoublequoteclose}{''}
+\renewcommand{\isacharunderscore}{\_}
+\renewcommand{\isacharunderscorekeyword}{\_}
+
+
+% generated text of all theories
+\input{session}
+
+% optional bibliography
+%\bibliographystyle{abbrv}
+%\bibliography{root}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

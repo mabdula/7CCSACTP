@@ -1,0 +1,98 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Primitive{\isacharunderscore}{\kern0pt}Recursion}%
+%
+\begin{isamarkuptext}%
+\section*{Primitive Recursion on Algebraic Data Types}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Primitive{\isacharunderscore}{\kern0pt}Recursion\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+We can define functions recursively on algebraic data types in a way that is analogous to 
+      previous recursive functions we discussed on natural numbers or lists. Below is a function
+      that recursively computes the set of elements in a tree, and the list of elements in the
+      tree traversed in order.%
+\end{isamarkuptext}\isamarkuptrue%
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ tree{\isacharunderscore}{\kern0pt}set{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ set{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}set\ Leaf\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}set\ {\isacharparenleft}{\kern0pt}Node\ l\ a\ r{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ insert\ a\ {\isacharparenleft}{\kern0pt}{\isacharparenleft}{\kern0pt}tree{\isacharunderscore}{\kern0pt}set\ l{\isacharparenright}{\kern0pt}\ {\isasymunion}\ {\isacharparenleft}{\kern0pt}tree{\isacharunderscore}{\kern0pt}set\ r{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ tree{\isacharunderscore}{\kern0pt}eg\ \isakeyword{where}\ {\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}eg\ {\isasymequiv}\ Node\ {\isacharparenleft}{\kern0pt}Node\ \ Leaf\ {\isadigit{1}}\ {\isacharparenleft}{\kern0pt}Node\ Leaf\ {\isadigit{2}}\ Leaf{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isadigit{4}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Node\ Leaf\ {\isadigit{3}}\ Leaf{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{value}\isamarkupfalse%
+\ {\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}set\ tree{\isacharunderscore}{\kern0pt}eg{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ inorder{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}inorder\ Leaf\ {\isacharequal}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}inorder\ {\isacharparenleft}{\kern0pt}Node\ l\ a\ r{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}inorder\ l{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}a{\isacharbrackright}{\kern0pt}\ {\isacharat}{\kern0pt}\ {\isacharparenleft}{\kern0pt}inorder\ r{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{value}\isamarkupfalse%
+\ {\isachardoublequoteopen}inorder\ tree{\isacharunderscore}{\kern0pt}eg{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Primitive_Recursion.tex%:%
+%:%6=1%:%
+%:%14=3%:%
+%:%15=3%:%
+%:%16=4%:%
+%:%17=5%:%
+%:%26=7%:%
+%:%27=8%:%
+%:%28=9%:%
+%:%29=10%:%
+%:%31=25%:%
+%:%32=26%:%
+%:%33=26%:%
+%:%34=27%:%
+%:%35=28%:%
+%:%36=29%:%
+%:%37=30%:%
+%:%38=30%:%
+%:%39=31%:%
+%:%40=32%:%
+%:%41=32%:%
+%:%42=33%:%
+%:%43=34%:%
+%:%44=34%:%
+%:%45=35%:%
+%:%46=36%:%
+%:%47=37%:%
+%:%48=38%:%
+%:%49=38%:%
+%:%52=39%:%
+%:%57=40%:%

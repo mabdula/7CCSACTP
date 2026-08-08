@@ -1,0 +1,253 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Induction}%
+%
+\begin{isamarkuptext}%
+\section*{Mathematical Induction in Isabelle/HOL}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Induction\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+The following proof shows how perform an induction on natural numbers in Isabelle. After
+      reproducing it, take a close look in the base case and into the step case, including the
+      induction hypothesis.
+      In the base case, one usually tries to use previously proved facts or just unfold defining
+      equations.
+      In the step case, one tries to manipulate the goal until the induction hypothesis is applicable,
+      in this case we can substitute it.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isadigit{0}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ x\ {\isacharequal}{\kern0pt}\ x{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}\isanewline
+\ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ Suc{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}{\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}x\ {\isacharplus}{\kern0pt}\ Suc\ y\ {\isacharequal}{\kern0pt}\ Suc\ {\isacharparenleft}{\kern0pt}x\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right\isanewline
+\ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}x{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ y\ {\isacharequal}{\kern0pt}\ y\ {\isacharplus}{\kern0pt}\ x{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}induction\ y{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{0}}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isacharplus}{\kern0pt}\ {\isadigit{0}}\ {\isacharequal}{\kern0pt}\ x{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}right{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}\ {\isacharplus}{\kern0pt}\ x{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Suc\ y{\isacharparenright}{\kern0pt}\isanewline
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isacharplus}{\kern0pt}\ Suc\ y\ {\isacharequal}{\kern0pt}\ Suc\ {\isacharparenleft}{\kern0pt}x\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ Suc{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}{\isadigit{2}}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ Suc\ {\isacharparenleft}{\kern0pt}y\ {\isacharplus}{\kern0pt}\ x{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ Suc{\isachardot}{\kern0pt}IH{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Suc\ y{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ x{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ add{\isacharunderscore}{\kern0pt}Suc{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Induction.tex%:%
+%:%6=1%:%
+%:%14=3%:%
+%:%15=3%:%
+%:%16=4%:%
+%:%17=5%:%
+%:%26=7%:%
+%:%27=8%:%
+%:%28=9%:%
+%:%29=10%:%
+%:%30=11%:%
+%:%31=12%:%
+%:%32=13%:%
+%:%34=15%:%
+%:%35=15%:%
+%:%38=16%:%
+%:%42=16%:%
+%:%43=16%:%
+%:%44=17%:%
+%:%50=17%:%
+%:%53=18%:%
+%:%54=19%:%
+%:%55=19%:%
+%:%58=20%:%
+%:%62=20%:%
+%:%63=20%:%
+%:%64=21%:%
+%:%70=21%:%
+%:%73=22%:%
+%:%74=23%:%
+%:%75=23%:%
+%:%82=24%:%
+%:%83=24%:%
+%:%84=25%:%
+%:%85=25%:%
+%:%86=26%:%
+%:%87=26%:%
+%:%88=27%:%
+%:%89=27%:%
+%:%90=28%:%
+%:%91=28%:%
+%:%92=29%:%
+%:%93=29%:%
+%:%94=29%:%
+%:%95=30%:%
+%:%96=30%:%
+%:%97=31%:%
+%:%98=31%:%
+%:%99=32%:%
+%:%100=32%:%
+%:%101=32%:%
+%:%102=33%:%
+%:%103=33%:%
+%:%104=34%:%
+%:%105=34%:%
+%:%106=35%:%
+%:%107=35%:%
+%:%108=36%:%
+%:%109=37%:%
+%:%110=37%:%
+%:%111=38%:%
+%:%112=38%:%
+%:%113=39%:%
+%:%114=39%:%
+%:%115=40%:%
+%:%116=41%:%
+%:%117=41%:%
+%:%118=41%:%
+%:%119=42%:%
+%:%120=42%:%
+%:%121=43%:%
+%:%122=43%:%
+%:%123=44%:%
+%:%124=44%:%
+%:%125=44%:%
+%:%126=45%:%
+%:%127=45%:%
+%:%128=46%:%
+%:%129=46%:%
+%:%130=47%:%
+%:%131=48%:%
+%:%132=48%:%
+%:%133=48%:%
+%:%134=49%:%
+%:%135=49%:%
+%:%136=50%:%
+%:%142=50%:%
+%:%145=51%:%
+%:%148=52%:%
+%:%153=53%:%

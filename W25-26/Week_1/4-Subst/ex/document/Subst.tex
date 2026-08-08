@@ -1,0 +1,146 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Subst}%
+%
+\begin{isamarkuptext}%
+\section*{Substitution in Isabelle/HOL}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Subst\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharparenleft}{\kern0pt}x{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}\ {\isacharasterisk}{\kern0pt}\ {\isacharparenleft}{\kern0pt}a\ {\isacharplus}{\kern0pt}\ b{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ b\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ b{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharminus}{\kern0pt}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}x\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}\ {\isacharasterisk}{\kern0pt}\ {\isacharparenleft}{\kern0pt}a\ {\isacharplus}{\kern0pt}\ b{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}\ {\isacharasterisk}{\kern0pt}\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ distrib{\isacharunderscore}{\kern0pt}left{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharplus}{\kern0pt}\ y{\isacharparenright}{\kern0pt}\ {\isacharasterisk}{\kern0pt}\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ distrib{\isacharunderscore}{\kern0pt}right{\isacharparenright}{\kern0pt}\ \isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{3}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharasterisk}{\kern0pt}\ b\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ b{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ distrib{\isacharunderscore}{\kern0pt}right{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{4}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ b\ {\isacharplus}{\kern0pt}\ y\ {\isacharasterisk}{\kern0pt}\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ add{\isachardot}{\kern0pt}assoc{\isacharbrackleft}{\kern0pt}symmetric{\isacharbrackright}{\kern0pt}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Subst.tex%:%
+%:%6=1%:%
+%:%14=3%:%
+%:%15=3%:%
+%:%16=4%:%
+%:%17=5%:%
+%:%24=5%:%
+%:%25=6%:%
+%:%26=7%:%
+%:%27=7%:%
+%:%28=8%:%
+%:%35=9%:%
+%:%36=9%:%
+%:%37=10%:%
+%:%38=10%:%
+%:%39=11%:%
+%:%40=11%:%
+%:%41=12%:%
+%:%42=12%:%
+%:%43=13%:%
+%:%44=13%:%
+%:%45=13%:%
+%:%46=14%:%
+%:%47=14%:%
+%:%48=15%:%
+%:%49=15%:%
+%:%50=16%:%
+%:%51=16%:%
+%:%52=16%:%
+%:%53=17%:%
+%:%54=17%:%
+%:%55=18%:%
+%:%56=18%:%
+%:%57=19%:%
+%:%58=19%:%
+%:%59=19%:%
+%:%60=20%:%
+%:%61=20%:%
+%:%62=21%:%
+%:%63=21%:%
+%:%64=22%:%
+%:%65=22%:%
+%:%66=22%:%
+%:%67=23%:%
+%:%68=23%:%
+%:%69=24%:%
+%:%75=24%:%
+%:%78=25%:%
+%:%81=26%:%
+%:%86=27%:%

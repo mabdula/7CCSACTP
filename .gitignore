@@ -1,0 +1,74 @@
+# Isabelle build outputs and session artifacts
+output/
+heaps/
+.isabelle/
+*.thy~
+.*.thy.marks
+*.thy.bck
+*.thy.bak
+
+# LaTeX build artifacts (from Beamer presentations & Isabelle document generation)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+
+# Editor backup & auto-save files
+*~
+\#*#
+.#*
+*.swp
+*.swo
+*.swn
+.*.sw?
+*.bak
+*.tmp
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.directory
+
+# IDE settings & temporary files
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Teaching / Course administration private files
+marking/
+Exam_Questions/
+August2024/
+January2024/
+Quiz_List_Sum_Filter*
+Lab/
+
+# Nested git repositories / external components
+isabelle-pide-mcp/
+
+
+

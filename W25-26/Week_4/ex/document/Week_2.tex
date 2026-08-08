@@ -1,0 +1,193 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Week{\isacharunderscore}{\kern0pt}{\isadigit{2}}}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+\ExerciseSheet{7}{}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+\Exercise{Fold function}
+  The fold function is a very generic function, that can be used to express 
+  multiple other interesting functions over lists.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Have a look at Isabelle/HOL's standard function \isa{fold}.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{thm}\isamarkupfalse%
+\ fold{\isachardot}{\kern0pt}simps%
+\begin{isamarkuptext}%
+Write a function to compute the sum of the elements of a list. 
+  Define two versions, one direct recursive definition, and one using fold.
+  Show that both are equal.
+
+  Hint: use automation!%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isanewline
+\ \ \isanewline
+\isacommand{definition}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\isanewline
+\ \ %
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}list{\isacharunderscore}{\kern0pt}sum\ xs\ {\isacharequal}{\kern0pt}\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ xs{\isachardoublequoteclose}\isanewline
+\ \ %
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Tail recursive \isa{reverse}}
+In Isabelle, there is the reverse function \isa{rev}, which, given a list, computes another list
+with the same elements but in reverse order.
+Take a loot into its definition:%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{thm}\isamarkupfalse%
+\ rev{\isachardot}{\kern0pt}simps%
+\begin{isamarkuptext}%
+Recall tail recursion: a function is tail recursive if in all recursive calls it does not call 
+  anything after itself\footnote{See \url{https://en.wikipedia.org/wiki/Tail_call.} for a quick review.}.
+  For instance, the implementaion of \isa{rev} in Isabelle is not tail recursive, because it calls
+  \isa{{\isacharparenleft}{\kern0pt}{\isacharat}{\kern0pt}{\isacharparenright}{\kern0pt}} after it calls \isa{rev} in the second equation.
+  
+  Write an alternative implementation of the reverse function that is tail recursive.
+
+  Hint: recall that you can most of the times derive a tail recursive function using an accumulator
+        argument.%
+\end{isamarkuptext}\isamarkuptrue%
+\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ rev{\isacharunderscore}{\kern0pt}tr{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list{\isachardoublequoteclose}\ \isakeyword{where}%
+\begin{isamarkuptext}%
+Show that the two implementations are equivalent.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\ \isanewline
+%
+\endisadelimproof
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}rev{\isacharunderscore}{\kern0pt}tr\ xs\ {\isacharequal}{\kern0pt}\ rev\ xs{\isachardoublequoteclose}%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Week_2.tex%:%
+%:%19=6%:%
+%:%23=8%:%
+%:%24=9%:%
+%:%25=10%:%
+%:%29=13%:%
+%:%31=14%:%
+%:%32=14%:%
+%:%34=17%:%
+%:%35=18%:%
+%:%36=19%:%
+%:%37=20%:%
+%:%38=21%:%
+%:%40=26%:%
+%:%41=26%:%
+%:%42=27%:%
+%:%42=32%:%
+%:%43=33%:%
+%:%44=33%:%
+%:%45=34%:%
+%:%56=42%:%
+%:%59=43%:%
+%:%60=43%:%
+%:%61=44%:%
+%:%76=48%:%
+%:%77=49%:%
+%:%78=50%:%
+%:%79=51%:%
+%:%81=54%:%
+%:%82=54%:%
+%:%84=57%:%
+%:%85=58%:%
+%:%86=59%:%
+%:%87=60%:%
+%:%88=61%:%
+%:%89=62%:%
+%:%90=63%:%
+%:%91=64%:%
+%:%92=65%:%
+%:%94=74%:%
+%:%95=75%:%
+%:%96=76%:%
+%:%97=77%:%
+%:%98=77%:%
+%:%100=82%:%
+%:%113=105%:%
+%:%116=106%:%
+%:%117=106%:%

@@ -1,0 +1,161 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{List{\isacharunderscore}{\kern0pt}Recursion}%
+%
+\begin{isamarkuptext}%
+\section*{Recursive Functions on Lists in Isabelle/HOL}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ List{\isacharunderscore}{\kern0pt}Recursion\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+Lists are some of the most basic structures in computation. You can use them to represent data
+      structures with a number of elements and that are ordered in a sequence.
+      In functional programming, such lists can be computationally processed using recursion.
+      The following example shows how to recursively define functions that add up all the numbers in
+      a list of natural numbers.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ sum{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}sum\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}sum\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharplus}{\kern0pt}\ sum\ xs{\isachardoublequoteclose}\ \isanewline
+\isanewline
+\isacommand{value}\isamarkupfalse%
+\ {\isachardoublequoteopen}sum\ {\isacharbrackleft}{\kern0pt}{\isadigit{1}}{\isacharcomma}{\kern0pt}{\isadigit{2}}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{thm}\isamarkupfalse%
+\ sum{\isachardot}{\kern0pt}simps%
+\begin{isamarkuptext}%
+Note the output for the given list and the theorems corresponding to the defining equations.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+A function that appends two lists to form one list containing all elements of the given two
+      lists%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ Append{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}Append\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ ys\ {\isacharequal}{\kern0pt}\ ys{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Append\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}xs{\isacharparenright}{\kern0pt}\ ys\ {\isacharequal}{\kern0pt}\ x\ {\isacharhash}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Append\ xs\ ys{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{thm}\isamarkupfalse%
+\ Append{\isachardot}{\kern0pt}simps\isanewline
+\isanewline
+\isacommand{value}\isamarkupfalse%
+\ {\isachardoublequoteopen}Append\ {\isacharparenleft}{\kern0pt}{\isacharbrackleft}{\kern0pt}{\isadigit{1}}{\isacharcomma}{\kern0pt}{\isadigit{2}}{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat\ list{\isacharparenright}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}{\isadigit{3}}{\isacharcomma}{\kern0pt}{\isadigit{4}}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Three different functions to compute the largest number in a list using different Isabelle/HOL
+      constructs: \isa{if{\isacharminus}{\kern0pt}then{\isacharminus}{\kern0pt}else}, \isa{max}, which is a predefined function, and \isa{let{\isacharminus}{\kern0pt}in}.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ Max{\isacharunderscore}{\kern0pt}list{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}if\ {\isacharparenleft}{\kern0pt}x\ {\isasymge}\ Max{\isacharunderscore}{\kern0pt}list\ xs{\isacharparenright}{\kern0pt}\ then\ x\ else\ {\isacharparenleft}{\kern0pt}Max{\isacharunderscore}{\kern0pt}list\ xs{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ max\ x\ {\isacharparenleft}{\kern0pt}Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}{\isacharprime}{\kern0pt}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}{\isacharprime}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list{\isacharprime}{\kern0pt}{\isacharprime}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}let\ M\ {\isacharequal}{\kern0pt}\ Max{\isacharunderscore}{\kern0pt}list\ xs\ in\ {\isacharparenleft}{\kern0pt}if\ x\ {\isasymge}\ M\ then\ x\ else\ M{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{value}\isamarkupfalse%
+\ {\isachardoublequoteopen}Max{\isacharunderscore}{\kern0pt}list\ {\isacharbrackleft}{\kern0pt}{\isadigit{4}}{\isacharcomma}{\kern0pt}{\isadigit{1}}{\isacharcomma}{\kern0pt}{\isadigit{4}}{\isacharcomma}{\kern0pt}{\isadigit{5}}{\isacharcomma}{\kern0pt}{\isadigit{2}}{\isacharcomma}{\kern0pt}{\isadigit{3}}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{thm}\isamarkupfalse%
+\ Max{\isacharunderscore}{\kern0pt}list{\isachardot}{\kern0pt}simps\isanewline
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=List_Recursion.tex%:%
+%:%6=1%:%
+%:%14=2%:%
+%:%15=2%:%
+%:%16=3%:%
+%:%17=4%:%
+%:%26=6%:%
+%:%27=7%:%
+%:%28=8%:%
+%:%29=9%:%
+%:%30=10%:%
+%:%32=13%:%
+%:%33=13%:%
+%:%34=14%:%
+%:%35=15%:%
+%:%36=16%:%
+%:%37=17%:%
+%:%38=17%:%
+%:%39=18%:%
+%:%40=19%:%
+%:%41=19%:%
+%:%43=21%:%
+%:%47=23%:%
+%:%48=24%:%
+%:%50=26%:%
+%:%51=26%:%
+%:%52=27%:%
+%:%53=28%:%
+%:%54=29%:%
+%:%55=30%:%
+%:%56=30%:%
+%:%57=31%:%
+%:%58=32%:%
+%:%59=32%:%
+%:%61=34%:%
+%:%62=35%:%
+%:%64=37%:%
+%:%65=37%:%
+%:%66=38%:%
+%:%67=39%:%
+%:%68=40%:%
+%:%69=41%:%
+%:%70=41%:%
+%:%71=42%:%
+%:%72=43%:%
+%:%73=44%:%
+%:%74=45%:%
+%:%75=45%:%
+%:%76=46%:%
+%:%77=47%:%
+%:%78=48%:%
+%:%79=49%:%
+%:%80=49%:%
+%:%81=50%:%
+%:%82=51%:%
+%:%83=51%:%
+%:%84=52%:%
+%:%87=53%:%
+%:%92=54%:%

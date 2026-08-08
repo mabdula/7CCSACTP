@@ -1,0 +1,156 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Structural{\isacharunderscore}{\kern0pt}Induction}%
+%
+\begin{isamarkuptext}%
+\section*{Proofs by Structural Induction}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Structural{\isacharunderscore}{\kern0pt}Induction\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+Defining a well-formed (recursive) algebraic data type automatically, in Isabelle/HOL, leads
+      to the generation of an induction principle. For instance, for the following binary trees data type%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{datatype}\isamarkupfalse%
+\ {\isacharprime}{\kern0pt}a\ tree\ {\isacharequal}{\kern0pt}\ Leaf\ {\isacharbar}{\kern0pt}\ Node\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}\ {\isacharprime}{\kern0pt}a\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+that induction principle is 
+
+  \[\frac{P\; \text{Leaf};\;\;\; [\forall\; t_1\; t_2\; a.\; P\; t_1;\; P\; t_2\; \Longrightarrow\; P\; \text{Node t1 a t2}]}{P\; t}.\]
+
+As a general rule of thumb, you should follow the same heuristics for induction: manipulate the goal
+until you can apply the Induction Hypothesis (I.H.). In this example, you have two induction hypotheses, one
+for each subtree.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+The following is an example proof by structural induction on trees.
+      After replicating it on your own, take a close look at the two goals: the base case and the step case, and note the two I.H.'s,
+      each corresponding to a subtree.
+
+      \emph{Exercise}: write down a detailed manual Isabelle/HOL proof using only forward reasoning
+                (i.e.\ \isatt{O{\kern0pt}F{\kern0pt}}), backward reasoning (i.e.\ \isatt{r{\kern0pt}u{\kern0pt}l{\kern0pt}e{\kern0pt}}), and
+                substitution (i.e.\ \isatt{s{\kern0pt}u{\kern0pt}b{\kern0pt}s{\kern0pt}t{\kern0pt}}).%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}set\ {\isacharparenleft}{\kern0pt}inorder\ t{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ tree{\isacharunderscore}{\kern0pt}set\ t{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}induction\ t{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Leaf\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Node\ t{\isadigit{1}}\ x{\isadigit{2}}\ t{\isadigit{2}}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isanewline
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Structural_Induction.tex%:%
+%:%6=1%:%
+%:%14=3%:%
+%:%15=3%:%
+%:%16=4%:%
+%:%17=5%:%
+%:%26=7%:%
+%:%27=8%:%
+%:%29=11%:%
+%:%30=11%:%
+%:%32=15%:%
+%:%33=16%:%
+%:%34=17%:%
+%:%35=18%:%
+%:%36=19%:%
+%:%37=20%:%
+%:%38=21%:%
+%:%42=58%:%
+%:%43=59%:%
+%:%44=60%:%
+%:%45=61%:%
+%:%46=62%:%
+%:%47=63%:%
+%:%48=64%:%
+%:%50=66%:%
+%:%51=66%:%
+%:%58=67%:%
+%:%59=67%:%
+%:%60=68%:%
+%:%61=68%:%
+%:%62=69%:%
+%:%63=69%:%
+%:%64=69%:%
+%:%65=70%:%
+%:%66=70%:%
+%:%67=71%:%
+%:%68=71%:%
+%:%69=72%:%
+%:%70=72%:%
+%:%71=73%:%
+%:%72=73%:%
+%:%73=73%:%
+%:%74=74%:%
+%:%75=74%:%
+%:%76=75%:%
+%:%82=75%:%
+%:%85=76%:%
+%:%86=77%:%
+%:%87=78%:%
+%:%90=79%:%
+%:%95=80%:%

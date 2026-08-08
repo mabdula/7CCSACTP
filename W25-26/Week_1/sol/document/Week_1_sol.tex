@@ -1,0 +1,198 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Week{\isacharunderscore}{\kern0pt}{\isadigit{1}}{\isacharunderscore}{\kern0pt}sol}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Week{\isacharunderscore}{\kern0pt}{\isadigit{1}}{\isacharunderscore}{\kern0pt}sol\isanewline
+\isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+\vspace{15ex}\ExerciseSheet{6}{}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Important Note: Please download Isabelle from the link provided in the slides and bring a 
+      laptop to the large group tutorial. Performing the proofs in Isabelle will be an integral part
+      of those tutorials.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Before you start, please open a new Isabelle/HOL theory file called Week\_1.thy and add the
+       following to its beginning.
+
+\noindent theory Week\_1\\
+imports Main\\
+begin%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+\Exercise{Trying out Isabelle}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+In this sheet, you should try out the Isabelle theorem prover.
+Prove the following theorem, first on pen-and-paper, then formally in Isabelle.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\isanewline
+\ \ \isakeyword{assumes}\ T{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}T\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isakeyword{and}\ A{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}A\ a\ {\isasymand}\ A\ b\ {\isasymLongrightarrow}\ a\ {\isacharequal}{\kern0pt}\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isakeyword{and}\ TA{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymAnd}x{\isachardot}{\kern0pt}\ T\ x\ {\isasymLongrightarrow}\ A\ x{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isakeyword{and}\ Aab{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}A\ a{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}T\ a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharminus}{\kern0pt}\isanewline
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}A\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ TA{\isacharbrackleft}{\kern0pt}OF\ T{\isacharbrackright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}A\ a\ {\isasymand}\ A\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}rule\ conjI{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Aab\ {\isadigit{1}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{3}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}a\ {\isacharequal}{\kern0pt}\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}rule\ A{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isadigit{2}}\ \isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ T\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ {\isadigit{3}}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Week_1_sol.tex%:%
+%:%6=1%:%
+%:%11=2%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%14=4%:%
+%:%23=6%:%
+%:%27=8%:%
+%:%28=9%:%
+%:%29=10%:%
+%:%33=13%:%
+%:%34=14%:%
+%:%35=15%:%
+%:%36=16%:%
+%:%37=17%:%
+%:%38=18%:%
+%:%42=21%:%
+%:%46=25%:%
+%:%47=26%:%
+%:%49=29%:%
+%:%50=29%:%
+%:%51=30%:%
+%:%52=31%:%
+%:%53=32%:%
+%:%54=33%:%
+%:%55=34%:%
+%:%58=35%:%
+%:%63=36%:%
+%:%64=36%:%
+%:%65=37%:%
+%:%66=38%:%
+%:%67=38%:%
+%:%68=39%:%
+%:%69=39%:%
+%:%70=40%:%
+%:%71=40%:%
+%:%72=41%:%
+%:%73=42%:%
+%:%74=42%:%
+%:%75=43%:%
+%:%76=43%:%
+%:%77=44%:%
+%:%78=44%:%
+%:%79=45%:%
+%:%80=45%:%
+%:%81=46%:%
+%:%82=47%:%
+%:%83=48%:%
+%:%84=48%:%
+%:%85=49%:%
+%:%86=49%:%
+%:%87=50%:%
+%:%88=50%:%
+%:%89=51%:%
+%:%90=51%:%
+%:%91=52%:%
+%:%92=53%:%
+%:%93=53%:%
+%:%94=54%:%
+%:%95=54%:%
+%:%96=55%:%
+%:%97=55%:%
+%:%98=56%:%
+%:%99=56%:%
+%:%100=57%:%
+%:%106=57%:%
+%:%109=58%:%
+%:%110=59%:%
+%:%113=60%:%
+%:%118=61%:%

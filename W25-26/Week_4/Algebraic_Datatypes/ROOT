@@ -1,0 +1,7 @@
+ session Algebraic_Datatypes in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   Algebraic_Datatypes
+  document_files
+    "root.tex"

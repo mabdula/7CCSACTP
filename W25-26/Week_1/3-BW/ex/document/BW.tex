@@ -1,0 +1,232 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{BW}%
+%
+\begin{isamarkuptext}%
+\section*{Backward Reasoning in Isabelle/HOL}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ BW\isanewline
+\isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ implication{\isacharunderscore}{\kern0pt}introduction{\isacharcolon}{\kern0pt}\isanewline
+\ \ {\isachardoublequoteopen}X\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}Y\ {\isasymlongrightarrow}\ X{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{sorry}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ neg{\isacharunderscore}{\kern0pt}intro{\isacharcolon}{\kern0pt}\isanewline
+\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}X\ {\isasymlongrightarrow}\ Y{\isacharparenright}{\kern0pt}\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}X\ {\isasymlongrightarrow}\ {\isasymnot}\ Y{\isacharparenright}{\kern0pt}\ {\isasymLongrightarrow}\ {\isasymnot}\ X{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{sorry}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ \isakeyword{assumes}\isanewline
+\ \ \ assum{\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}P\ {\isasymlongrightarrow}\ Q{\isachardoublequoteclose}\ \isakeyword{and}\ assum{\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Q\ {\isasymlongrightarrow}\ R{\isachardoublequoteclose}\ \isakeyword{and}\ assum{\isadigit{3}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymnot}\ R{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}{\isasymnot}P{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharminus}{\kern0pt}\isanewline
+\ \ \isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymnot}R{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ assum{\isadigit{3}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Q\ {\isasymlongrightarrow}\ R{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ assum{\isadigit{2}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{3}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Q\ {\isasymlongrightarrow}\ {\isasymnot}\ R{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}rule\ implication{\isacharunderscore}{\kern0pt}introduction{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isadigit{1}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{4}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymnot}Q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}rule\ neg{\isacharunderscore}{\kern0pt}intro{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isadigit{2}}\ {\isadigit{3}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{5}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}P\ {\isasymlongrightarrow}\ {\isasymnot}\ Q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}rule\ implication{\isacharunderscore}{\kern0pt}introduction{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isadigit{4}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymnot}\ P{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}rule\ neg{\isacharunderscore}{\kern0pt}intro{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ assum{\isadigit{1}}\ {\isadigit{5}}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=BW.tex%:%
+%:%6=1%:%
+%:%14=3%:%
+%:%15=3%:%
+%:%16=4%:%
+%:%17=5%:%
+%:%24=5%:%
+%:%25=6%:%
+%:%26=7%:%
+%:%27=7%:%
+%:%28=8%:%
+%:%31=9%:%
+%:%35=9%:%
+%:%41=9%:%
+%:%44=10%:%
+%:%45=11%:%
+%:%46=11%:%
+%:%47=12%:%
+%:%50=13%:%
+%:%54=13%:%
+%:%60=13%:%
+%:%63=14%:%
+%:%64=15%:%
+%:%65=15%:%
+%:%66=16%:%
+%:%67=17%:%
+%:%74=18%:%
+%:%75=18%:%
+%:%76=19%:%
+%:%77=20%:%
+%:%78=20%:%
+%:%79=21%:%
+%:%80=21%:%
+%:%81=22%:%
+%:%82=22%:%
+%:%83=23%:%
+%:%84=23%:%
+%:%85=24%:%
+%:%86=24%:%
+%:%87=25%:%
+%:%88=25%:%
+%:%89=26%:%
+%:%90=26%:%
+%:%91=27%:%
+%:%92=27%:%
+%:%93=28%:%
+%:%94=28%:%
+%:%95=29%:%
+%:%96=29%:%
+%:%97=30%:%
+%:%98=30%:%
+%:%99=31%:%
+%:%100=31%:%
+%:%101=32%:%
+%:%102=32%:%
+%:%103=33%:%
+%:%104=33%:%
+%:%105=34%:%
+%:%106=35%:%
+%:%107=35%:%
+%:%108=36%:%
+%:%109=36%:%
+%:%110=37%:%
+%:%111=37%:%
+%:%112=38%:%
+%:%113=38%:%
+%:%114=39%:%
+%:%115=40%:%
+%:%116=40%:%
+%:%117=41%:%
+%:%118=41%:%
+%:%119=42%:%
+%:%120=42%:%
+%:%121=43%:%
+%:%122=43%:%
+%:%123=44%:%
+%:%124=45%:%
+%:%130=45%:%
+%:%133=46%:%
+%:%136=47%:%
+%:%141=48%:%

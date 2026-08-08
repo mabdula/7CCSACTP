@@ -1,0 +1,7 @@
+ session Structural_Induction in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   Structural_Induction
+  document_files
+    "root.tex"

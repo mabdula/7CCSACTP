@@ -1,0 +1,227 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Week{\isacharunderscore}{\kern0pt}{\isadigit{3}}}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+\ExerciseSheet{8}{}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+\Exercise{Fold function}
+  The fold function is a very generic function, that can be used to express 
+  multiple other interesting functions over lists.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Have a look at Isabelle/HOL's standard function \isa{fold}, defined as follows:%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ fold{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharprime}{\kern0pt}a\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b{\isacharparenright}{\kern0pt}\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}fold\ f\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ acc\ {\isacharequal}{\kern0pt}\ acc{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}fold\ f\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}xs{\isacharparenright}{\kern0pt}\ acc\ {\isacharequal}{\kern0pt}\ fold\ f\ xs\ {\isacharparenleft}{\kern0pt}f\ x\ acc{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Write a function to compute the sum of the elements of a list. 
+  Define two versions, one direct recursive definition, and one using fold.
+  Show that both are equal.
+
+  Hint: use automation!%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isanewline
+\ \ \isanewline
+\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\isanewline
+\ \ %
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}list{\isacharunderscore}{\kern0pt}sum\ xs\ {\isacharequal}{\kern0pt}\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ xs{\isachardoublequoteclose}\isanewline
+\ \ %
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Tail recursive \isa{reverse}}
+In Isabelle, there is the reverse function \isa{rev}, which, given a list, computes another list
+with the same elements but in reverse order.
+Take a loot into its definition:%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{thm}\isamarkupfalse%
+\ rev{\isachardot}{\kern0pt}simps%
+\begin{isamarkuptext}%
+Recall tail recursion: a function is tail recursive if in all recursive calls it does not call 
+  anything after itself\footnote{See \url{https://en.wikipedia.org/wiki/Tail_call.} for a quick review.}.
+  For instance, the implementaion of \isa{rev} in Isabelle is not tail recursive, because it calls
+  \isa{{\isacharparenleft}{\kern0pt}{\isacharat}{\kern0pt}{\isacharparenright}{\kern0pt}} after it calls \isa{rev} in the second equation.
+  
+  Write an alternative implementation of the reverse function that is tail recursive.
+
+  Hint: recall that you can most of the times derive a tail recursive function using an accumulator
+        argument.%
+\end{isamarkuptext}\isamarkuptrue%
+\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ rev{\isacharunderscore}{\kern0pt}tr{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list{\isachardoublequoteclose}\ \isakeyword{where}%
+\begin{isamarkuptext}%
+Show that the two implementations are equivalent.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\ \isanewline
+%
+\endisadelimproof
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}rev{\isacharunderscore}{\kern0pt}tr\ xs\ {\isacharequal}{\kern0pt}\ rev\ xs{\isachardoublequoteclose}%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Week_3.tex%:%
+%:%19=6%:%
+%:%23=8%:%
+%:%24=9%:%
+%:%25=10%:%
+%:%29=13%:%
+%:%31=15%:%
+%:%32=15%:%
+%:%33=16%:%
+%:%34=17%:%
+%:%36=20%:%
+%:%37=21%:%
+%:%38=22%:%
+%:%39=23%:%
+%:%40=24%:%
+%:%42=27%:%
+%:%43=27%:%
+%:%44=28%:%
+%:%44=33%:%
+%:%45=34%:%
+%:%46=38%:%
+%:%47=39%:%
+%:%48=39%:%
+%:%49=40%:%
+%:%86=112%:%
+%:%89=113%:%
+%:%90=113%:%
+%:%91=114%:%
+%:%106=118%:%
+%:%107=119%:%
+%:%108=120%:%
+%:%109=121%:%
+%:%111=124%:%
+%:%112=124%:%
+%:%114=127%:%
+%:%115=128%:%
+%:%116=129%:%
+%:%117=130%:%
+%:%118=131%:%
+%:%119=132%:%
+%:%120=133%:%
+%:%121=134%:%
+%:%122=135%:%
+%:%124=144%:%
+%:%125=145%:%
+%:%126=146%:%
+%:%127=147%:%
+%:%128=147%:%
+%:%130=152%:%
+%:%143=175%:%
+%:%146=176%:%
+%:%147=176%:%

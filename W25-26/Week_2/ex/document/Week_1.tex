@@ -1,0 +1,217 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Week{\isacharunderscore}{\kern0pt}{\isadigit{1}}}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+\ExerciseSheet{6}{}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Important Note: Please download Isabelle from the link provided in the slides and bring a 
+      laptop to the large group tutorial. Performing the proofs in Isabelle will be an integral part
+      of those tutorials.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Before you start, please open a new Isabelle/HOL theory file called Week\_1.thy and add the
+       following to its beginning.
+
+\noindent theory Week\_1\\
+imports Main\\
+begin%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+\Exercise{Addition Commutes}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Consider the function \isa{{\isacharparenleft}{\kern0pt}{\isacharplus}{\kern0pt}{\isacharparenright}{\kern0pt}} defined in Isabelle/HOL for natural numbers.
+
+Prove the following theorem, first pen-and-paper, and then formally in Isabelle.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ add{\isacharunderscore}{\kern0pt}commutes{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}n{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ m\ {\isacharplus}{\kern0pt}\ n{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+\paragraph{Hints:} 
+
+ 1. Perform the proof by inuction on \isa{n}, using substitutions \isa{subst}, and forward reasoning using
+   the method \isa{rule}.
+
+ 2. You will need to identify multiple lemmas about how \isa{add} works. Do not prove those lemmas. Use 
+    \isa{sorry} as the proof. This is the top-down approach. 
+
+ 3. There is a proof which uses the following lemmas:
+
+   \isa{add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Multiplication is Monotone}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Consider the multiplication function \isa{{\isacharparenleft}{\kern0pt}{\isacharasterisk}{\kern0pt}{\isacharparenright}{\kern0pt}} defined in Isabelle. Prove the following
+      property of it, i.e.\ that it is monotonically increasing in both arguments. You should prove
+      it both, pen-and-paper and in Isabelle.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ mult{\isacharunderscore}{\kern0pt}mono{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{fixes}\ a\ b\ c\ d{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ nat\ %
+\isamarkupcmt{Note the alternative way of fixing the types of the constants%
+}\isanewline
+\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ {\isachardoublequoteopen}c\ {\isasymle}\ d{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}a\ {\isacharasterisk}{\kern0pt}\ c\ {\isasymle}\ b\ {\isacharasterisk}{\kern0pt}\ d{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Your pen-and-paper proof should indicate
+
+ 1. what lemmas are you assuming,
+
+ 2. on what variable are you preforming induction,
+
+ 3. what are assumptions and the proof goals in the base case and the step case, and what is the
+    induction hypothesis, and
+
+ 4. how are you instantiating the induction hypothesis, i.e. how do you show that its assumptions
+    hold and which quantified variables are instantiated with which constants.
+
+\paragraph{Hints:}
+ 1. The proof should be by induction
+
+  2. If the induction hypothesis is too week, you might need to strengthen by generalising/
+     universally quantifying over one of the variables. E.g. if you want to universally quantify on
+     a variable \isa{x}, then you can use \isa{induction\ {\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ arbitrary{\isacharcolon}{\kern0pt}\ x}.
+
+  3. The following lemmas suffice to prove the goal with only substitution, forward reasoning, and
+     induction:
+
+     \isa{refl{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}self{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{2}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}zero{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ le{\isadigit{0}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}mono{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}eq{\isacharunderscore}{\kern0pt}plus{\isadigit{1}}{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}conv}
+
+  4. When you have a term like \isa{x\ {\isacharminus}{\kern0pt}\ y}, where \isa{x} is a \isa{nat}, in the goal or the assumptions, you 
+     should perform proof by case analysis on whether \isa{y\ {\isasymle}\ x}. This is because of the way \isa{{\isacharminus}{\kern0pt}} is
+     defined for natural numbers, where \isa{x\ {\isacharminus}{\kern0pt}\ y\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}}, for any \isa{x\ {\isasymle}\ y}.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isanewline
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Week_1.tex%:%
+%:%19=6%:%
+%:%23=8%:%
+%:%24=9%:%
+%:%25=10%:%
+%:%29=13%:%
+%:%30=14%:%
+%:%31=15%:%
+%:%32=16%:%
+%:%33=17%:%
+%:%34=18%:%
+%:%38=21%:%
+%:%42=25%:%
+%:%43=26%:%
+%:%44=27%:%
+%:%46=44%:%
+%:%47=44%:%
+%:%49=46%:%
+%:%50=47%:%
+%:%51=48%:%
+%:%52=49%:%
+%:%53=50%:%
+%:%54=51%:%
+%:%55=52%:%
+%:%56=53%:%
+%:%57=54%:%
+%:%58=55%:%
+%:%59=56%:%
+%:%76=104%:%
+%:%80=106%:%
+%:%81=107%:%
+%:%82=108%:%
+%:%84=131%:%
+%:%85=131%:%
+%:%86=132%:%
+%:%87=132%:%
+%:%88=132%:%
+%:%89=133%:%
+%:%90=134%:%
+%:%92=137%:%
+%:%93=138%:%
+%:%94=139%:%
+%:%95=140%:%
+%:%96=141%:%
+%:%97=142%:%
+%:%98=143%:%
+%:%99=144%:%
+%:%100=145%:%
+%:%101=146%:%
+%:%102=147%:%
+%:%103=148%:%
+%:%104=149%:%
+%:%105=150%:%
+%:%106=151%:%
+%:%107=152%:%
+%:%108=153%:%
+%:%109=154%:%
+%:%110=155%:%
+%:%111=156%:%
+%:%112=157%:%
+%:%113=158%:%
+%:%114=159%:%
+%:%114=160%:%
+%:%115=161%:%
+%:%116=162%:%
+%:%117=163%:%
+%:%118=164%:%
+%:%126=268%:%

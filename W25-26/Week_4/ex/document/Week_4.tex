@@ -1,0 +1,205 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Week{\isacharunderscore}{\kern0pt}{\isadigit{4}}}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+\ExerciseSheet{10}{}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Recall the binary trees which we discussed in the lecture and the function \isa{tree{\isacharunderscore}{\kern0pt}set}.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{datatype}\isamarkupfalse%
+\ {\isacharprime}{\kern0pt}a\ tree\ {\isacharequal}{\kern0pt}\ Leaf\ {\isacharbar}{\kern0pt}\ Node\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}\ {\isacharprime}{\kern0pt}a\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ tree{\isacharunderscore}{\kern0pt}set\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}set\ Leaf\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}set\ {\isacharparenleft}{\kern0pt}Node\ l\ a\ r{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ insert\ a\ {\isacharparenleft}{\kern0pt}tree{\isacharunderscore}{\kern0pt}set\ l{\isacharparenright}{\kern0pt}\ {\isasymunion}\ {\isacharparenleft}{\kern0pt}tree{\isacharunderscore}{\kern0pt}set\ r{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+\Exercise{Binary Search Trees: Invariant}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Recall that a binary tree can be used to make searching for elements easier by imposing the
+    following constraint: the content \isa{a} of every node \isa{Node\ l\ a\ r} in the binary tree has to be:
+
+     1. Strictly greater than the content of all nodes in the left sub-tree \isa{l} of that node, and
+
+     2. Strictly smaller than the content of all nodes in the right sub-tree \isa{r} of that node.
+
+    A tree satisfying such conditions is called a \isa{binary\ serach\ tree}, and the above conditions
+    are called the binary search tree invariant.
+
+    Write a functional program \isa{bst}, both pen-and-paper and in Isabelle, which can check whether a given
+    tree is a binary search tree.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ bst{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}nat\ tree\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}%
+\begin{isamarkuptext}%
+\Exercise{Binary Search Trees: Search}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+If a binary tree satisfies the constraints of a binary search tree, then it can make searching 
+   for an element easier. In particular, you can avoid searching in one of the subtrees based on 
+   how the value you are looking for compares to the root:
+    
+    - if it bigger then you only search in the right sub-tree,
+
+    - if it is smaller, then you only search in the left sub-tree, and
+
+    - if it is the same as the root then you know the element you look for is in the tree. 
+
+    Write a functional program \isa{isin}, both pen-and-paper and in Isabelle, which can check if a
+    a given value is present in a given binary search tree. The program should not search in a
+    sub-tree where you know the element will not be present.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ isin\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharprime}{\kern0pt}a{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}linorder{\isacharparenright}{\kern0pt}\ tree\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}%
+\begin{isamarkuptext}%
+Prove that this program is correct.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ tree{\isacharunderscore}{\kern0pt}set{\isacharunderscore}{\kern0pt}isin{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}bst\ t\ {\isasymLongrightarrow}\ isin\ t\ x\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isasymin}\ tree{\isacharunderscore}{\kern0pt}set\ t{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Binary Search Trees: Inserting an Element}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Write a functional program that inserts an element into a binary search tree. Make sure that
+      the new tree computed by the program is also a binary search tree.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ ins\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharprime}{\kern0pt}a{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}linorder\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ tree\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ tree{\isachardoublequoteclose}\ \isakeyword{where}%
+\begin{isamarkuptext}%
+Prove that your program is correct by showing that the inserted element is actually in the 
+      resulting tree, and that the resulting tree is a binary search tree.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ tree{\isacharunderscore}{\kern0pt}set{\isacharunderscore}{\kern0pt}ins{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}tree{\isacharunderscore}{\kern0pt}set\ {\isacharparenleft}{\kern0pt}ins\ x\ t{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}x{\isacharbraceright}{\kern0pt}\ {\isasymunion}\ tree{\isacharunderscore}{\kern0pt}set\ t{\isachardoublequoteclose}%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{lemma}\isamarkupfalse%
+\ bst{\isacharunderscore}{\kern0pt}ins{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}bst\ t\ {\isasymLongrightarrow}\ bst\ {\isacharparenleft}{\kern0pt}ins\ x\ t{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Week_4.tex%:%
+%:%19=7%:%
+%:%23=12%:%
+%:%25=15%:%
+%:%26=15%:%
+%:%27=16%:%
+%:%28=17%:%
+%:%29=17%:%
+%:%30=18%:%
+%:%31=19%:%
+%:%33=22%:%
+%:%37=25%:%
+%:%38=26%:%
+%:%39=27%:%
+%:%40=28%:%
+%:%41=29%:%
+%:%42=30%:%
+%:%43=31%:%
+%:%44=32%:%
+%:%45=33%:%
+%:%46=34%:%
+%:%47=35%:%
+%:%48=36%:%
+%:%50=39%:%
+%:%51=39%:%
+%:%53=45%:%
+%:%57=48%:%
+%:%58=49%:%
+%:%59=50%:%
+%:%60=51%:%
+%:%61=52%:%
+%:%62=53%:%
+%:%63=54%:%
+%:%64=55%:%
+%:%65=56%:%
+%:%66=57%:%
+%:%67=58%:%
+%:%68=59%:%
+%:%69=60%:%
+%:%71=63%:%
+%:%72=63%:%
+%:%74=72%:%
+%:%76=74%:%
+%:%77=74%:%
+%:%92=81%:%
+%:%96=83%:%
+%:%97=84%:%
+%:%99=86%:%
+%:%100=86%:%
+%:%102=96%:%
+%:%103=97%:%
+%:%105=99%:%
+%:%106=99%:%
+%:%117=105%:%
+%:%120=106%:%
+%:%121=106%:%

@@ -1,0 +1,14 @@
+ session Week_1 in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   Week_1
+  document_files
+    "root.tex"
+session Week_1_sol in sol = "Main" +
+ description "Solution 2"
+ options [timeout = 601]
+ theories
+  "Week_1_sol"
+ document_files
+   "root.tex"

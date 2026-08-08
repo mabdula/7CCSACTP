@@ -1,0 +1,217 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{List{\isacharunderscore}{\kern0pt}Induction}%
+%
+\begin{isamarkuptext}%
+\section*{Proofs by Mathematical Induction on Lists}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ List{\isacharunderscore}{\kern0pt}Induction\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+In analogy to natural numbers, facts about lists can be proved by induction. However, instead
+      of the base case being \isa{{\isadigit{0}}}, we use the empty list \isa{{\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}}, and the step case is proved for \isa{x\ {\isacharhash}{\kern0pt}\ xs}
+      instead of \isa{Suc\ n}. The induction principle is 
+
+  \[\frac{P\; [];\;\;\; [\forall\; x.\; P\; xs;\; \Longrightarrow\; P\; x#xs]}{P\; t}.\]
+
+The following is a proof of the associativity of Isabelle's list append \isa{{\isacharat}{\kern0pt}}. Reproduce it and note
+base case and the step-case. In the base case we almost always unfold defining equations and in the
+step-case we always manipulate the goal until the induction hypothesis is applicable.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{thm}\isamarkupfalse%
+\ append{\isachardot}{\kern0pt}simps\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}xs\ {\isacharat}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ zs\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}xs\ {\isacharat}{\kern0pt}\ {\isacharparenleft}{\kern0pt}ys\ {\isacharat}{\kern0pt}\ zs{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}induction\ xs{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharat}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ zs\ {\isacharequal}{\kern0pt}\ ys\ {\isacharat}{\kern0pt}\ zs{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}subst\ append{\isachardot}{\kern0pt}simps{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharat}{\kern0pt}\ {\isacharparenleft}{\kern0pt}\ ys\ {\isacharat}{\kern0pt}\ zs{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ append{\isachardot}{\kern0pt}simps{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Cons\ x\ xs{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ zs\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ {\isacharparenleft}{\kern0pt}xs\ {\isacharat}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ zs{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}subst\ append{\isachardot}{\kern0pt}simps{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharhash}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isacharparenleft}{\kern0pt}xs\ {\isacharat}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ zs{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ append{\isachardot}{\kern0pt}simps{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharhash}{\kern0pt}\ {\isacharparenleft}{\kern0pt}xs\ {\isacharat}{\kern0pt}\ {\isacharparenleft}{\kern0pt}ys\ {\isacharat}{\kern0pt}\ zs{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ Cons{\isachardot}{\kern0pt}IH{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ xs{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ ys\ {\isacharat}{\kern0pt}\ zs{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ append{\isachardot}{\kern0pt}simps{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=List_Induction.tex%:%
+%:%6=1%:%
+%:%14=3%:%
+%:%15=3%:%
+%:%16=4%:%
+%:%17=5%:%
+%:%26=6%:%
+%:%27=7%:%
+%:%28=8%:%
+%:%29=9%:%
+%:%30=10%:%
+%:%31=11%:%
+%:%32=12%:%
+%:%33=13%:%
+%:%34=14%:%
+%:%36=17%:%
+%:%37=17%:%
+%:%38=18%:%
+%:%39=19%:%
+%:%40=19%:%
+%:%47=20%:%
+%:%48=20%:%
+%:%49=21%:%
+%:%50=21%:%
+%:%51=22%:%
+%:%52=22%:%
+%:%53=23%:%
+%:%54=23%:%
+%:%55=24%:%
+%:%56=24%:%
+%:%57=25%:%
+%:%58=25%:%
+%:%59=25%:%
+%:%60=26%:%
+%:%61=26%:%
+%:%62=27%:%
+%:%63=27%:%
+%:%64=28%:%
+%:%65=28%:%
+%:%66=28%:%
+%:%67=29%:%
+%:%68=29%:%
+%:%69=30%:%
+%:%70=30%:%
+%:%71=31%:%
+%:%72=31%:%
+%:%73=32%:%
+%:%74=32%:%
+%:%75=33%:%
+%:%76=33%:%
+%:%77=34%:%
+%:%78=34%:%
+%:%79=35%:%
+%:%80=36%:%
+%:%81=36%:%
+%:%82=36%:%
+%:%83=37%:%
+%:%84=37%:%
+%:%85=38%:%
+%:%86=38%:%
+%:%87=39%:%
+%:%88=39%:%
+%:%89=39%:%
+%:%90=40%:%
+%:%91=40%:%
+%:%92=41%:%
+%:%93=41%:%
+%:%94=42%:%
+%:%95=42%:%
+%:%96=42%:%
+%:%97=43%:%
+%:%98=43%:%
+%:%99=44%:%
+%:%100=44%:%
+%:%101=45%:%
+%:%102=45%:%
+%:%103=45%:%
+%:%104=46%:%
+%:%105=46%:%
+%:%106=47%:%
+%:%112=47%:%
+%:%115=48%:%
+%:%118=49%:%
+%:%123=50%:%

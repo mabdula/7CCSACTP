@@ -1,0 +1,7 @@
+ session CaseAnalysis in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   CaseAnalysis
+  document_files
+    "root.tex"

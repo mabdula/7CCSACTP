@@ -1,0 +1,7 @@
+ session Induction in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   Induction
+  document_files
+    "root.tex"

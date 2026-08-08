@@ -1,0 +1,7 @@
+ session List_Recursion in ex = "Main" +
+  description "Homework 2"
+  options [timeout = 601]
+  theories
+   List_Recursion
+  document_files
+    "root.tex"

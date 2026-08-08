@@ -1,0 +1,388 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Week{\isacharunderscore}{\kern0pt}{\isadigit{2}}{\isacharunderscore}{\kern0pt}sol}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Week{\isacharunderscore}{\kern0pt}{\isadigit{2}}{\isacharunderscore}{\kern0pt}sol\isanewline
+\isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+\vspace{15ex}\ExerciseSheet{7}{}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+\Exercise{Fold function}
+  The fold function is a very generic function, that can be used to express 
+  multiple other interesting functions over lists.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Have a look at Isabelle/HOL's standard function \isa{fold}, defined as follows:%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ fold{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharprime}{\kern0pt}a\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b{\isacharparenright}{\kern0pt}\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}b{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}fold\ f\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ acc\ {\isacharequal}{\kern0pt}\ acc{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}fold\ f\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}xs{\isacharparenright}{\kern0pt}\ acc\ {\isacharequal}{\kern0pt}\ fold\ f\ xs\ {\isacharparenleft}{\kern0pt}f\ x\ acc{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Write a function to compute the sum of the elements of a list. 
+  Define two versions, one direct recursive definition, and one using fold.
+  Show that both are equal.
+
+  Hint: use automation!%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \isanewline
+\ \ \isakeyword{where}\isanewline
+\ \ \ \ {\isachardoublequoteopen}list{\isacharunderscore}{\kern0pt}sum\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}list{\isacharunderscore}{\kern0pt}sum\ {\isacharparenleft}{\kern0pt}x{\isacharhash}{\kern0pt}xs{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ x\ {\isacharplus}{\kern0pt}\ list{\isacharunderscore}{\kern0pt}sum\ xs{\isachardoublequoteclose}\ \ \isanewline
+\ \ \ \ \ \ \isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isanewline
+\ \ \isakeyword{where}\ {\isachardoublequoteopen}list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ xs\ {\isasymequiv}\ fold\ {\isacharparenleft}{\kern0pt}{\isacharplus}{\kern0pt}{\isacharparenright}{\kern0pt}\ xs\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isanewline
+\isanewline
+\ \ \ \ \isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ aux{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}fold\ {\isacharparenleft}{\kern0pt}{\isacharplus}{\kern0pt}{\isacharparenright}{\kern0pt}\ xs\ a\ {\isacharequal}{\kern0pt}\ list{\isacharunderscore}{\kern0pt}sum\ xs\ {\isacharplus}{\kern0pt}\ a{\isachardoublequoteclose}\ \ \isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induction\ xs\ arbitrary{\isacharcolon}{\kern0pt}\ a{\isacharparenright}{\kern0pt}\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\ \ \ \ \ \ \ \ \isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}list{\isacharunderscore}{\kern0pt}sum\ xs\ {\isacharequal}{\kern0pt}\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}\ xs{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ \ \ \ \ \isanewline
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ list{\isacharunderscore}{\kern0pt}sum{\isacharprime}{\kern0pt}{\isacharunderscore}{\kern0pt}def\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ aux{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Tail recursive \isa{reverse}}
+In Isabelle, there is the reverse function \isa{rev}, which, given a list, computes another list
+with the same elements but in reverse order.
+Take a loot into its definition:%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{thm}\isamarkupfalse%
+\ rev{\isachardot}{\kern0pt}simps%
+\begin{isamarkuptext}%
+Recall tail recursion: a function is tail recursive if in all recursive calls it does not call 
+  anything after itself\footnote{See \url{https://en.wikipedia.org/wiki/Tail_call.} for a quick review.}.
+  For instance, the implementaion of \isa{rev} in Isabelle is not tail recursive, because it calls
+  \isa{{\isacharparenleft}{\kern0pt}{\isacharat}{\kern0pt}{\isacharparenright}{\kern0pt}} after it calls \isa{rev} in the second equation.
+  
+  Write an alternative implementation of the reverse function that is tail recursive.
+
+  Hint: recall that you can most of the times derive a tail recursive function using an accumulator
+        argument.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{fun}\isamarkupfalse%
+\ rev{\isacharprime}{\kern0pt}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}rev{\isacharprime}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ acc\ {\isacharequal}{\kern0pt}\ acc{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}rev{\isacharprime}{\kern0pt}\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}xs{\isacharparenright}{\kern0pt}\ acc\ {\isacharequal}{\kern0pt}\ rev{\isacharprime}{\kern0pt}\ xs\ {\isacharparenleft}{\kern0pt}x\ {\isacharhash}{\kern0pt}\ acc{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ rev{\isacharunderscore}{\kern0pt}tr{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isacharprime}{\kern0pt}a\ list\ {\isasymRightarrow}\ {\isacharprime}{\kern0pt}a\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\isanewline
+\ \ {\isachardoublequoteopen}rev{\isacharunderscore}{\kern0pt}tr\ xs\ {\isacharequal}{\kern0pt}\ rev{\isacharprime}{\kern0pt}\ xs\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Show that the two implementations are equivalent.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ rev{\isacharprime}{\kern0pt}{\isacharunderscore}{\kern0pt}append{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}rev{\isacharprime}{\kern0pt}\ xs\ ys\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}rev{\isacharprime}{\kern0pt}\ xs\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ ys{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induction\ xs\ arbitrary{\isacharcolon}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Cons\ a\ xs{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}rev{\isacharprime}{\kern0pt}\ xs\ {\isacharparenleft}{\kern0pt}a\ {\isacharhash}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}rev{\isacharprime}{\kern0pt}\ xs\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ {\isacharparenleft}{\kern0pt}a\ {\isacharhash}{\kern0pt}\ ys{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ Cons{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}rev{\isacharprime}{\kern0pt}\ xs\ {\isacharbrackleft}{\kern0pt}a{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}rev{\isacharprime}{\kern0pt}\ xs\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isacharat}{\kern0pt}\ {\isacharbrackleft}{\kern0pt}a{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ Cons{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{{\isachardot}{\kern0pt}{\isachardot}{\kern0pt}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isadigit{1}}\ {\isadigit{2}}\isanewline
+\ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\ \isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}rev{\isacharunderscore}{\kern0pt}tr\ xs\ {\isacharequal}{\kern0pt}\ rev\ xs{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}induction\ xs{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ Nil\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Cons\ a\ xs{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}{\kern0pt}subst\ rev{\isacharprime}{\kern0pt}{\isacharunderscore}{\kern0pt}append{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=Week_2_sol.tex%:%
+%:%6=1%:%
+%:%11=2%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%14=4%:%
+%:%23=6%:%
+%:%27=8%:%
+%:%28=9%:%
+%:%29=10%:%
+%:%33=13%:%
+%:%35=15%:%
+%:%36=15%:%
+%:%37=16%:%
+%:%38=17%:%
+%:%40=20%:%
+%:%41=21%:%
+%:%42=22%:%
+%:%43=23%:%
+%:%44=24%:%
+%:%46=29%:%
+%:%47=29%:%
+%:%48=30%:%
+%:%49=31%:%
+%:%50=32%:%
+%:%51=33%:%
+%:%52=34%:%
+%:%53=35%:%
+%:%54=36%:%
+%:%55=36%:%
+%:%56=37%:%
+%:%57=38%:%
+%:%58=39%:%
+%:%59=40%:%
+%:%60=41%:%
+%:%61=42%:%
+%:%62=42%:%
+%:%65=43%:%
+%:%69=43%:%
+%:%70=43%:%
+%:%75=43%:%
+%:%78=44%:%
+%:%79=45%:%
+%:%80=46%:%
+%:%81=46%:%
+%:%84=47%:%
+%:%85=48%:%
+%:%89=48%:%
+%:%90=48%:%
+%:%91=48%:%
+%:%100=51%:%
+%:%101=52%:%
+%:%102=53%:%
+%:%103=54%:%
+%:%105=57%:%
+%:%106=57%:%
+%:%108=60%:%
+%:%109=61%:%
+%:%110=62%:%
+%:%111=63%:%
+%:%112=64%:%
+%:%113=65%:%
+%:%114=66%:%
+%:%115=67%:%
+%:%116=68%:%
+%:%118=73%:%
+%:%119=73%:%
+%:%120=74%:%
+%:%121=75%:%
+%:%122=76%:%
+%:%123=77%:%
+%:%124=78%:%
+%:%125=79%:%
+%:%126=80%:%
+%:%127=80%:%
+%:%128=81%:%
+%:%129=82%:%
+%:%131=85%:%
+%:%133=90%:%
+%:%134=90%:%
+%:%141=91%:%
+%:%142=91%:%
+%:%143=92%:%
+%:%144=92%:%
+%:%145=93%:%
+%:%146=93%:%
+%:%147=93%:%
+%:%148=94%:%
+%:%149=94%:%
+%:%150=95%:%
+%:%151=95%:%
+%:%152=96%:%
+%:%153=96%:%
+%:%154=97%:%
+%:%155=97%:%
+%:%156=98%:%
+%:%157=98%:%
+%:%158=99%:%
+%:%159=99%:%
+%:%160=100%:%
+%:%161=100%:%
+%:%162=101%:%
+%:%163=101%:%
+%:%164=102%:%
+%:%165=102%:%
+%:%166=103%:%
+%:%167=103%:%
+%:%168=104%:%
+%:%169=104%:%
+%:%170=105%:%
+%:%171=105%:%
+%:%172=106%:%
+%:%178=106%:%
+%:%181=107%:%
+%:%182=108%:%
+%:%183=109%:%
+%:%184=109%:%
+%:%187=110%:%
+%:%192=111%:%
+%:%193=111%:%
+%:%194=112%:%
+%:%195=112%:%
+%:%196=113%:%
+%:%197=113%:%
+%:%198=113%:%
+%:%199=114%:%
+%:%200=114%:%
+%:%201=115%:%
+%:%202=115%:%
+%:%203=116%:%
+%:%204=116%:%
+%:%205=117%:%
+%:%206=117%:%
+%:%207=117%:%
+%:%208=118%:%
+%:%209=118%:%
+%:%210=119%:%
+%:%211=119%:%
+%:%212=120%:%
+%:%213=120%:%
+%:%214=121%:%
+%:%220=121%:%
+%:%223=122%:%
+%:%224=123%:%
+%:%227=124%:%
+%:%232=125%:%
