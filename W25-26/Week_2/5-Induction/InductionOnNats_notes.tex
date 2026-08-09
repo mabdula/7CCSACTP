@@ -1,0 +1,119 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Mathematical Induction for Natural Numbers}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title=Context \& Induction Intuition]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ Previous Videos:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Basic elements of interface (terms, theorems)
+    \item Basic proof methods (FW, BW, \texttt{subst})
+\end{itemize}
+
+\textbf{$\rightarrow$ \underline{This Video}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Mathematical induction for natural numbers (\texttt{nat})
+\end{itemize}
+
+\columnbreak
+
+\textbf{Intuition for Mathematical Induction:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item To prove a property $P$ holds for all $n \in \mathbb{N}$ (e.g. $?x \le ?x + 3$), we prove two cases:
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item $\textbf{goal}_1 \textbf{ (Base Case):}$ $P(0)$ holds.
+        \item $\textbf{goal}_2 \textbf{ (Step Case):}$ Assuming $P(n)$ holds (Induction Hypothesis, \textsf{I.H.}), $P(n+1)$ holds.
+    \end{itemize}
+    \item Algorithmic view of induction:
+    \begin{center}
+    $P(0) \xrightarrow{\textbf{goal}_1} P(1) \xrightarrow{\textbf{goal}_2} P(2) \xrightarrow{\textbf{goal}_2} \dots \xrightarrow{\textbf{goal}_2} P(n)$
+    \end{center}
+    \item \textbf{Isabelle Note:} In Isabelle, $n+1$ is represented as \texttt{Suc n} for natural numbers.
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={Detailed Example: Commutativity of Addition ($?x + ?y = ?y + ?x$)}]
+\textbf{Proof Strategy:} Induction on $y$.
+
+\begin{multicols}{2}
+\textbf{Base Case ($y = 0$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $\textbf{goal}_1::$ $x + 0 = 0 + x$
+    \item \textit{Lemmas:} \texttt{lem1:} $x + 0 = x$, \quad \texttt{lem2:} $0 + x = x$
+    \item \textbf{Proof steps:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $x + 0 = x$ \quad \textit{(by subst \texttt{lem1})}
+        \item $\dots = 0 + x$ \quad \textit{(by subst \texttt{lem2})}
+    \end{enumerate}
+    \item \textsf{finally} $x + 0 = 0 + x \quad \checkmark$
+\end{itemize}
+
+\columnbreak
+
+\textbf{Step Case ($y \to \text{Suc } y$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Assume I.H.:} $x + y = y + x$
+    \item $\textbf{goal}_2::$ $x + (\text{Suc } y) = (\text{Suc } y) + x$
+    \item \textit{Lemmas:}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \texttt{lem3:} $?a + (\text{Suc } ?b) = \text{Suc } (?a + ?b)$
+        \item \texttt{lem4:} $(\text{Suc } ?a) + ?b = \text{Suc } (?a + ?b)$
+    \end{itemize}
+    \item \textbf{Proof steps:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $x + (\text{Suc } y) = \text{Suc } (x + y)$ \quad \textit{(by subst \texttt{lem3})}
+        \item $\dots = \text{Suc } (y + x)$ \quad \textit{(by subst \textsf{I.H.})}
+        \item $\dots = (\text{Suc } y) + x$ \quad \textit{(by subst \texttt{lem4})}
+    \end{enumerate}
+    \item \textsf{finally} $x + (\text{Suc } y) = (\text{Suc } y) + x \quad \checkmark$
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title=Isabelle Syntax Reminder]
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item In Isabelle: \texttt{Suc x} $\approx x + 1$ for terms of type \texttt{nat}.
+    \item Induction rule applied via: \texttt{apply (induct y)} or \texttt{proof (induct y)}.
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

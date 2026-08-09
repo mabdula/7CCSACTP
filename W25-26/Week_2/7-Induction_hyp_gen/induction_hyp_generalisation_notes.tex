@@ -1,0 +1,147 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Induction Hypothesis Generalisation}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Mathematical Induction Recipe \& Generalisation Strategy}]
+\begin{multicols}{2}
+\textbf{Standard Mathematical Induction Schema:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item To prove $P(n)$ holds for all $n :: \text{nat}$:
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \textbf{Base Case:} $P(0)$
+        \item \textbf{Step Case:} $P(n) \Longrightarrow P(\text{Suc } n)$ \quad (where $P(n)$ is I.H.)
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Three-Step Mechanical Strategy:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Identify} property $P$ to prove.
+    \item \textbf{Apply schema} (determine base and step cases).
+    \item \textbf{Attempt proof:}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item If I.H. succeeds $\implies \checkmark$
+        \item If I.H. fails $\implies$ Generalise $P$ to a stronger property $P'$ (typically by adding universal quantifiers $\forall$). Return to step 2 with $P'$.
+    \end{itemize}
+\end{enumerate}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Worked Example: Proving $a \le b \Longrightarrow c \le d \Longrightarrow a \cdot c \le b \cdot d$}]
+\textbf{Property Formulation:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Original property ($P$):} $a \le b \Longrightarrow c \le d \Longrightarrow a \cdot c \le b \cdot d$ \quad (Induction on $d$)
+    \item \textbf{Generalised property ($P'$):} $\forall c.\; a \le b \Longrightarrow c \le d \Longrightarrow a \cdot c \le b \cdot d$ \quad (Stronger I.H. quantifying over $c$)
+\end{itemize}
+
+\vspace{0.3em}
+\begin{multicols}{2}
+\textbf{Base Case ($d = 0$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Assumptions:} 1. $a \le b$, \; 2. $c \le 0$
+    \item \textbf{Goal:} $a \cdot c \le b \cdot 0$
+    \item \textbf{Proof steps:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $c = 0$ \quad \textit{(from lem1 \& assump 2)}
+        \item $a \cdot 0 = 0$ \quad \textit{(from lem2)}
+        \item $a \cdot c = 0$ \quad \textit{(from step 2, subst 1)}
+        \item $a \cdot c \le b \cdot 0$ \quad \textit{(from lem3)} $\checkmark$
+    \end{enumerate}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Step Case ($d \to \text{Suc } d$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{I.H.:} $\forall c.\; a \le b \Longrightarrow c \le d \Longrightarrow a \cdot c \le b \cdot d$
+    \item \textbf{Assumptions:} 1. I.H., \; 2. $a \le b$, \; 3. $c \le \text{Suc } d$
+    \item \textbf{Goal:} $a \cdot c \le b \cdot (\text{Suc } d)$
+    \item \textbf{Derivation:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $c - 1 \le d$ \quad \textit{(from lem4 \& assump 3)}
+        \item $a \cdot (c - 1) \le b \cdot d$ \quad \textit{(from I.H., assump 2 \& 1)}
+        \item $a \cdot (\text{Suc }(c - 1)) \le b \cdot (\text{Suc } d)$ \quad \textit{(lem5, assump 2, step 2)}
+    \end{enumerate}
+\end{itemize}
+\end{multicols}
+
+\vspace{0.2em}
+\textbf{Case Analysis on $c \ge 1$:}
+\begin{multicols}{2}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Case 1 ($c \ge 1$):}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $\text{Suc }(c - 1) = c$ \quad \textit{(minus-def \& case assump)}
+        \item $a \cdot c \le b \cdot (\text{Suc } d)$ \quad \textit{(from step 3, subst 4)} $\checkmark$
+    \end{enumerate}
+\end{itemize}
+
+\columnbreak
+
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Case 2 ($c \ngeq 1$, i.e. $c < 1$):}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $c < 1$ \quad \textit{(from lem6)}
+        \item $c = 0$ \quad \textit{(from lem7 \& step 4 $\implies$ reduces to base case)} $\checkmark$
+    \end{enumerate}
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={Auxiliary Lemmas Used in Proof}]
+\begin{multicols}{2}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{lem1:} $x \le 0 \Longrightarrow x = 0$
+    \item \texttt{lem2:} $x \cdot 0 = 0$
+    \item \texttt{lem3:} $0 \le x$
+    \item \texttt{lem4:} $x \le \text{Suc } y \Longrightarrow x - 1 \le y$
+\end{itemize}
+
+\columnbreak
+
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{lem5:} $x \le y \Longrightarrow x \cdot l \le y \cdot m \Longrightarrow x \cdot (\text{Suc } l) \le y \cdot (\text{Suc } m)$
+    \item \texttt{lem6:} $\neg (x \ge y) \Longrightarrow x < y$
+    \item \texttt{lem7:} $x < 1 \Longrightarrow x = 0$
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\end{document}

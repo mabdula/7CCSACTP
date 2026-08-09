@@ -1,0 +1,102 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Forward Reasoning in Isabelle (FW)}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Context \& Overview}]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ \underline{Last Video Revision}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Basic Functional Programming:} Currying, Lambda expressions, Polymorphic types.
+    \item \textbf{Isabelle Interface:} Theory files, terms (numbers, lists, sets, products/tuples, functions) and type annotations.
+    \item \textbf{Logical Specifications:} Connectives and theorem structure.
+\end{itemize}
+
+\columnbreak
+
+\textbf{$\rightarrow$ \underline{Performing Proofs in Isabelle}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Logical Reasoning:} Forward reasoning (FW) \& Backward reasoning (BW).
+    \item \textbf{Proofs by Substitution.}
+    \item \textbf{Mathematical Induction} on natural numbers (\texttt{nat}).
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Forward Reasoning Mechanics: Example Proof}]
+\textbf{Goal Statement:} $P \rightarrow Q, \quad Q \rightarrow R, \quad \neg R \;\vdash\; \neg P$
+
+\begin{multicols}{2}
+\textbf{Step-by-Step Derivation:}
+\begin{enumerate}[leftmargin=1.5em, itemsep=3pt]
+    \item $\neg R$ \quad \textit{(Assumption 1)}
+    \item $Q \rightarrow R$ \quad \textit{(Assumption 2)}
+    \item $Q \rightarrow \neg R$ \quad \textit{(from 1, using $\rightarrow I$ rule)}
+    \item $\neg Q$ \quad \textit{(from 2, 3, using $\neg I$ rule)}
+    \item $P \rightarrow \neg Q$ \quad \textit{(from 4, using $\rightarrow I$ rule)}
+    \item $\neg P$ \quad \textit{(from assumption $P \rightarrow Q$ and 5, using $\neg I$)} $\checkmark$
+\end{enumerate}
+
+\columnbreak
+
+\textbf{Inference Rules \& Isabelle Syntax:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item Implication Introduction ($\rightarrow I$):
+    \[ \frac{X}{Y \Rightarrow X} \]
+    \item Negation Introduction ($\neg I$):
+    \[ \frac{X \rightarrow Y \qquad X \rightarrow \neg Y}{\neg X} \]
+    \item \textbf{Isabelle Forward Attribute (\texttt{OF}):}
+    \begin{center}
+    \texttt{$f_2$ [OF $f_1$]}
+    \end{center}
+    Instantiates premise of rule $f_2$ with known fact $f_1$ (e.g. \texttt{impI[OF fact1]}).
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={3. Isabelle Forward Reasoning Notes}]
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Using Facts:} To obtain and utilize a fact $P$ in Isar:
+    \begin{center}
+    \texttt{have P \quad using P}
+    \end{center}
+    \item \textbf{Schematic Variables:} In Isabelle, schematic variables written with a question mark (e.g. \texttt{?x}) represent universally quantified variables ($\forall x$).
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

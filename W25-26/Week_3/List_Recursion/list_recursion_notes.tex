@@ -1,0 +1,119 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Defining Recursive Functions on Lists}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Context \& List Representation Intuition}]
+\begin{multicols}{2}
+\textbf{Last Week Revision:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Introduction to Isabelle interface (terms, theorems)
+    \item Proof styles: FW, BW, induction, substitution, cases
+\end{itemize}
+
+\textbf{This Video Agenda:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Defining recursive functions on lists (Theory + Isabelle)
+\end{itemize}
+
+\columnbreak
+
+\textbf{List Intuition \& Structure:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Any list $xs$ is constructed via:
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \texttt{Nil} (\texttt{[]})
+        \item \texttt{Cons x xs} ($x \# xs$)
+    \end{itemize}
+    \item Syntactic sugar:
+    \[ a \# [] \approx [a], \qquad [a,b,c] \approx a \# b \# c \# [] \]
+    \item Uses: Arrays, Association lists (e.g. $[(\text{Bob}, 23), (\text{Alice}, 34)]$)
+    \item \textbf{Finiteness:} Lists in Isabelle are always finite applications of \texttt{Cons}: $x_1 \# x_2 \# \dots \# x_n \# []$.
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Recursive Functions on Lists}]
+\textbf{Concept:} A function $f$ on lists is recursive if $f(x \# xs)$ is evaluated in terms of $f(xs)$ (calling itself on the tail). A fully-defined recursive function must cover all input patterns (\texttt{[]} and $x \# xs$).
+
+\begin{multicols}{2}
+\textbf{Example 1: Sum of List}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Signature:} \texttt{sum :: nat list $\Rightarrow$ nat}
+    \item \textbf{Equations:}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \texttt{sum [] = 0}
+        \item \texttt{sum (x \# xs) = x + sum xs}
+    \end{itemize}
+    \item \textbf{Evaluation trace:}
+    \begin{align*}
+    \text{sum }[0,1,3] &= 0 + \text{sum }[1,3] \\
+    &= 0 + (1 + \text{sum }[3]) \\
+    &= 0 + (1 + (3 + \text{sum }[])) \\
+    &= 0 + (1 + (3 + 0)) = 4
+    \end{align*}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Example 2: Append}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Signature:} \texttt{append :: 'a list $\Rightarrow$ 'a list $\Rightarrow$ 'a list}
+    \item \textbf{Equations:}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \texttt{append [] ys = ys}
+        \item \texttt{append (x \# xs) ys = x \# (append xs ys)}
+    \end{itemize}
+    \item \textbf{Evaluation trace:}
+    \begin{align*}
+    \text{append }[1,2]\;[3] &= 1 \# (\text{append }[2]\;[3]) \\
+    &= 1 \# (2 \# (\text{append }[]\;[3])) \\
+    &= 1 \# (2 \# [3]) = [1,2,3]
+    \end{align*}
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={3. Important Rules for Termination \& Simpset}]
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Termination Requirement:} To guarantee termination, all recursive calls must be on strictly smaller arguments (e.g. $xs$ is structurally smaller than $x \# xs$).
+    \item \textbf{Simpset Generation:} Only proven terminating functions will have automatic simplification rules (\texttt{f.simps}) generated and added to Isabelle's simpset.
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

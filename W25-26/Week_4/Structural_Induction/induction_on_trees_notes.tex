@@ -1,0 +1,109 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Structural Induction on Trees}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Definitions \& Recalled Concepts}]
+\begin{multicols}{2}
+\textbf{Functions on Lists \& Trees:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{List-set :: 'a list $\Rightarrow$ 'a set}
+    \begin{align*}
+    \text{\texttt{List-set []}} &= \emptyset \\
+    \text{\texttt{List-set (x \# xs)}} &= \text{insert } x \; (\text{\texttt{List-set }} xs)
+    \end{align*}
+    \item \texttt{Tree-set :: 'a tree $\Rightarrow$ 'a set}
+    \begin{align*}
+    \text{\texttt{Tree-set Leaf}} &= \emptyset \\
+    \text{\texttt{Tree-set (Node l x r)}} &= \text{insert } x \; (\text{\texttt{Tree-set }} l \cup \text{\texttt{Tree-set }} r)
+    \end{align*}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Inorder Traversal:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{inorder :: 'a tree $\Rightarrow$ 'a list}
+    \begin{align*}
+    \text{\texttt{inorder Leaf}} &= [] \\
+    \text{\texttt{inorder (Node l x r)}} &= (\text{\texttt{inorder }} l) \mathbin{@} [x] \mathbin{@} (\text{\texttt{inorder }} r)
+    \end{align*}
+\end{itemize}
+\textbf{Theorem to Prove:}
+\[ \text{\texttt{List-set}}(\text{\texttt{inorder }} t) = \text{\texttt{Tree-set }} t \qquad (\text{by induction on } t) \]
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Base Case ($t = \text{Leaf}$)}]
+\textbf{Goal:} $\text{\texttt{List-set}}(\text{\texttt{inorder Leaf}}) = \text{\texttt{Tree-set Leaf}}$
+
+\textbf{Proof Steps:}
+\begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item $\text{\texttt{List-set}}(\text{\texttt{inorder Leaf}}) = \text{\texttt{List-set []}}$ \quad \textit{(by subst inorder.simps(1))}
+    \item $\dots = \emptyset$ \quad \textit{(by subst List-set.simps(1))}
+    \item $\dots = \text{\texttt{Tree-set Leaf}}$ \quad \textit{(by Tree-set.simps(1))} $\quad \checkmark$
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={3. Step Case ($t = \text{Node } t_1 \; a \; t_2$)}]
+\textbf{Induction Hypotheses:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $\text{I.H.}_1: \text{\texttt{List-set}}(\text{\texttt{inorder }} t_1) = \text{\texttt{Tree-set }} t_1$
+    \item $\text{I.H.}_2: \text{\texttt{List-set}}(\text{\texttt{inorder }} t_2) = \text{\texttt{Tree-set }} t_2$
+\end{itemize}
+\textbf{Goal:} $\text{\texttt{List-set}}(\text{\texttt{inorder}}(\text{\texttt{Node }} t_1 \; a \; t_2)) = \text{\texttt{Tree-set}}(\text{\texttt{Node }} t_1 \; a \; t_2)$
+
+\vspace{0.3em}
+\textbf{Auxiliary Lemma (\texttt{Lem 1}):} $\text{\texttt{List-set}}(xs \mathbin{@} ys) = \text{\texttt{List-set }} xs \cup \text{\texttt{List-set }} ys$
+
+\vspace{0.3em}
+\textbf{Step-by-Step Equational Proof:}
+\begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item $\text{\texttt{List-set}}(\text{\texttt{inorder}}(\text{\texttt{Node }} t_1 \; a \; t_2)) = \text{\texttt{List-set}}(\text{\texttt{inorder }} t_1 \mathbin{@} [a] \mathbin{@} \text{\texttt{inorder }} t_2)$ \quad \textit{(inorder.simps(2))}
+    \item $\dots = \text{\texttt{List-set}}(\text{\texttt{inorder }} t_1) \cup \text{\texttt{List-set}}([a] \mathbin{@} \text{\texttt{inorder }} t_2)$ \quad \textit{(by Lem 1)}
+    \item $\dots = \text{\texttt{List-set}}(\text{\texttt{inorder }} t_1) \cup \text{\texttt{List-set}}[a] \cup \text{\texttt{List-set}}(\text{\texttt{inorder }} t_2)$ \quad \textit{(by Lem 1)}
+    \item $\dots = \text{\texttt{Tree-set }} t_1 \cup \text{\texttt{List-set}}[a] \cup \text{\texttt{List-set}}(\text{\texttt{inorder }} t_2)$ \quad \textit{(by I.H.$_1$)}
+    \item $\dots = \text{\texttt{Tree-set }} t_1 \cup \text{insert } a \; (\text{\texttt{List-set []}}) \cup \text{\texttt{List-set}}(\text{\texttt{inorder }} t_2)$ \quad \textit{(List-set.simps(2))}
+    \item $\dots = \text{\texttt{Tree-set }} t_1 \cup \text{insert } a \; \emptyset \cup \text{\texttt{List-set}}(\text{\texttt{inorder }} t_2)$ \quad \textit{(List-set.simps(1))}
+    \item $\dots = \text{\texttt{Tree-set }} t_1 \cup \{a\} \cup \text{\texttt{Tree-set }} t_2$ \quad \textit{(by I.H.$_2$)}
+    \item $\dots = \{a\} \cup (\text{\texttt{Tree-set }} t_1 \cup \text{\texttt{Tree-set }} t_2)$
+    \item $\dots = \text{\texttt{Tree-set}}(\text{\texttt{Node }} t_1 \; a \; t_2) \quad \checkmark$
+\end{enumerate}
+\end{tcolorbox}
+
+\end{document}

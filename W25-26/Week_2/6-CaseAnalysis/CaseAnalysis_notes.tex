@@ -1,0 +1,125 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Proofs by Case Analysis in Isabelle}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Context \& Intuition}]
+\begin{multicols}{2}
+\textbf{Revision of Previous Topics:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Isabelle interface, terms, and theorem statements.
+    \item Forward reasoning (FW), Backward reasoning (BW).
+    \item Proofs by substitution (\texttt{subst}).
+    \item Mathematical induction for natural numbers (\texttt{nat}).
+\end{itemize}
+
+\columnbreak
+
+\textbf{Case Analysis Intuition:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item When proving a property for all numbers/lists, different cases may require distinct reasoning paths.
+    \item \textbf{Example (Monus / Subtraction on \texttt{nat}):}
+    \[ 3 - 1 = 2, \quad 3 - 2 = 1, \quad 3 - 3 = 0, \quad 3 - 4 = 0 \]
+    In Isabelle, $x - y = 0$ whenever $x \le y$. Thus, proving statements with subtraction often requires a case split on $x \ge y$ vs. $x < y$.
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Worked Example: Proving $x - y \le x$}]
+\textbf{Theorem:} $x - y \le x \qquad (\text{Induction on } x)$
+
+\vspace{0.3em}
+\textbf{Base Case ($x = 0$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $\textbf{goal}::$ $0 - y \le 0$
+    \item \textbf{Proof steps:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $0 - y = 0$ \quad \textit{(by subst lem1: $0 - a = 0$)}
+        \item $0 \le 0$ \quad \textit{(by lem2: $a \le a$)}
+    \end{enumerate}
+    \item \textsf{finally} $0 - y \le 0 \quad \checkmark$
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={3. Step Case ($x \to \text{Suc } x$) with Case Analysis}]
+\textbf{Induction Hypothesis (I.H.):} $x - y \le x$ \\
+\textbf{Goal:} $(\text{Suc } x) - y \le \text{Suc } x$
+
+\vspace{0.3em}
+\textbf{Proof by Case Analysis on $x \ge y$:}
+
+\begin{multicols}{2}
+\textbf{Case 1 ($x \ge y$):}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item $(\text{Suc } x) - y = \text{Suc } (x - y)$ \quad \textit{(by lem1 [Case 1 assump])}
+    \item $(\text{Suc } x) - y \le \text{Suc } (x - y)$ \quad \textit{(from 1, lem3)}
+    \item $\dots \le \text{Suc } x$ \quad \textit{(using lem4 [OF I.H.]) $\checkmark$}
+\end{enumerate}
+
+\columnbreak
+
+\textbf{Case 2 ($x \ngeq y$, i.e. $x < y$):}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item $x < y$ \quad \textit{(from lem5 [OF Case 2 assump])}
+    \item $\text{Suc } x \le y$ \quad \textit{(from 1)}
+    \item $(\text{Suc } x) - y = 0$ \quad \textit{(from lem2 [OF 2])}
+    \item $0 \le \text{Suc } x$ \quad \textit{(from lem6)}
+    \item $(\text{Suc } x) - y \le \text{Suc } x$ \quad \textit{(using 4, subst 3) $\checkmark$}
+\end{enumerate}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={Auxiliary Lemmas Used in Proof}]
+\begin{multicols}{2}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{lem1:} $a \ge b \Longrightarrow (\text{Suc } a) - b = \text{Suc } (a - b)$
+    \item \texttt{lem2:} $a \le b \Longrightarrow a - b = 0$
+    \item \texttt{lem3:} $a \le a$
+\end{itemize}
+\columnbreak
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{lem4:} $a \le b \Longrightarrow \text{Suc } a \le \text{Suc } b$
+    \item \texttt{lem5:} $a \ngeq b \Longrightarrow a < b$
+    \item \texttt{lem6:} $0 \le a$
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\end{document}

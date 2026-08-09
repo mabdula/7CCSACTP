@@ -1,0 +1,108 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge List Induction (Part 1: Structural Induction Principles)}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title=1. Induction on Lists (Structural Induction)]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ Context:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Introduction to recursion on lists
+    \item Structural induction principle on finite lists
+\end{itemize}
+
+\textbf{$\rightarrow$ Intuition \& Analogy:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Natural numbers:} Built via finite applications of \texttt{Suc}.
+    \item \textbf{Lists:} Any list is constructed with a finite sequence of \texttt{Cons} (\texttt{\#}) ending in \texttt{[]}:
+    \[ x_1 \# x_2 \# \dots \# x_n \# [] \]
+    \item To prove $P(xs)$ holds for all lists $xs$:
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item $\textbf{goal}_1 \textbf{ (Base Case):}$ $P([])$
+        \item $\textbf{goal}_2 \textbf{ (Step Case):}$ Assuming $P(xs)$, prove $P(x \# xs)$ for any $x$.
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Formal Inference Rules:}
+\begin{itemize}[leftmargin=1.2em, itemsep=4pt]
+    \item \textbf{Natural Numbers:}
+    \[ \frac{P(0) \qquad P(m) \Longrightarrow P(m+1)}{P(n)} \]
+    
+    \item \textbf{Lists:}
+    \[ \frac{P([]) \qquad P(ys) \Longrightarrow \forall y.\; P(y \# ys)}{P(xs)} \]
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title=2. Worked Example: Associativity of List Append]
+\textbf{Definition of Append (\texttt{@}):}
+\[ \text{append } [] \; ys = ys \qquad \text{append } (x \# xs) \; ys = x \# (\text{append } xs \; ys) \]
+
+\textbf{Theorem:} $(xs \mathbin{@} ys) \mathbin{@} zs = xs \mathbin{@} (ys \mathbin{@} zs) \qquad (\text{Induction on } xs)$
+
+\begin{multicols}{2}
+\textbf{Base Case ($xs = []$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $\textbf{goal}::$ $([] \mathbin{@} ys) \mathbin{@} zs = [] \mathbin{@} (ys \mathbin{@} zs)$
+    \item \textbf{Proof steps:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $([] \mathbin{@} ys) \mathbin{@} zs = ys \mathbin{@} zs$ \quad \textit{(by append.simps)}
+        \item $\dots = [] \mathbin{@} (ys \mathbin{@} zs)$ \quad \textit{(by append.simps)}
+    \end{enumerate}
+    \item \textsf{finally} $([] \mathbin{@} ys) \mathbin{@} zs = [] \mathbin{@} (ys \mathbin{@} zs) \quad \checkmark$
+\end{itemize}
+
+\columnbreak
+
+\textbf{Step Case ($xs \to x \# xs$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Assume I.H.:} $(xs \mathbin{@} ys) \mathbin{@} zs = xs \mathbin{@} (ys \mathbin{@} zs)$
+    \item $\textbf{goal}::$ $((x \# xs) \mathbin{@} ys) \mathbin{@} zs = (x \# xs) \mathbin{@} (ys \mathbin{@} zs)$
+    \item \textbf{Proof steps:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1pt]
+        \item $((x \# xs) \mathbin{@} ys) \mathbin{@} zs = (x \# (xs \mathbin{@} ys)) \mathbin{@} zs$ \quad \textit{(append.simps)}
+        \item $\dots = x \# ((xs \mathbin{@} ys) \mathbin{@} zs)$ \quad \textit{(append.simps)}
+        \item $\dots = x \# (xs \mathbin{@} (ys \mathbin{@} zs))$ \quad \textit{(by I.H.)}
+        \item $\dots = (x \# xs) \mathbin{@} (ys \mathbin{@} zs)$ \quad \textit{(append.simps)}
+    \end{enumerate}
+    \item \textsf{finally} $((x \# xs) \mathbin{@} ys) \mathbin{@} zs = (x \# xs) \mathbin{@} (ys \mathbin{@} zs) \quad \checkmark$
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\end{document}

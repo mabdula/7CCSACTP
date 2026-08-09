@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge List Induction (Part 2: Complex Properties \& Case Analysis)}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={Definitions \& Goal Statement}]
+\textbf{Functions:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{Max\_list [] = 0}, \quad \texttt{Max\_list (x \# xs) = max x (Max\_list xs)}
+    \item \texttt{List\_set [] = $\emptyset$}, \quad \texttt{List\_set (x \# xs) = insert x (List\_set xs)}
+\end{itemize}
+\textbf{Goal:} Prove $x \in \text{List\_set } xs \Longrightarrow x \le \text{Max\_list } xs$ by induction on $xs$.
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={Base Case ($xs = []$)}]
+\begin{multicols}{2}
+\textbf{Assumptions \& Goal:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Assumption: $x \in \text{List\_set } []$
+    \item Goal: $x \le \text{Max\_list } []$
+\end{itemize}
+
+\columnbreak
+
+\textbf{Proof Steps:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item $\text{Max\_list } [] = 0$ \quad \textit{(by Max\_list.simps)}
+    \item $x \in \emptyset$ \quad \textit{(from base assumption \& List\_set.simps)}
+    \item $\text{False}$ \quad \textit{(using lem3 [2, lem1])}
+    \item $x \le \text{Max\_list } []$ \quad \textit{(using lem2 [OF 3])}
+\end{enumerate}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={Step Case ($xs \to y \mathbin{\#} ys$)}]
+\textbf{Induction Hypothesis (I.H.):} $x \in \text{List\_set } ys \Longrightarrow x \le \text{Max\_list } ys$ \\
+\textbf{Premise:} $x \in \text{List\_set } (y \# ys)$ \qquad \textbf{Goal:} $x \le \text{Max\_list } (y \# ys)$
+
+\vspace{0.3em}
+\textbf{Proof by Case Analysis on $x = y$:}
+
+\begin{multicols}{2}
+\textbf{Case 1 ($x = y$):}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item $y \le \text{Max\_list } (y \# ys)$ \quad \textit{(from lem1)}
+    \item $x \le \text{Max\_list } (y \# ys)$ \quad \textit{(by subst case assump $x=y$)}
+\end{enumerate}
+
+\columnbreak
+
+\textbf{Case 2 ($x \neq y$):}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item $x \in \text{List\_set } ys$ \quad \textit{(from case assump \& lem2)}
+    \item $x \le \text{Max\_list } ys$ \quad \textit{(from I.H. [OF 1])}
+    \item $\text{Max\_list } ys \le \text{Max\_list } (y \# ys)$ \quad \textit{(using lem3)}
+    \item $x \le \text{Max\_list } (y \# ys)$ \quad \textit{(using lem4 [OF 2 3]) $\checkmark$}
+\end{enumerate}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={Auxiliary Lemmas Used in Proof}]
+\begin{multicols}{2}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{lem1:} $a \le \text{Max\_list } (a \# xs)$
+    \item \texttt{lem2:} $a \in \text{List\_set } (b \# bs) \Longrightarrow a = b \lor a \in \text{List\_set } bs$
+\end{itemize}
+\columnbreak
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \texttt{lem3:} $\text{Max\_list } xs \le \text{Max\_list } (x \# xs)$
+    \item \texttt{lem4 (Transitivity):} $a \le b \Longrightarrow b \le c \Longrightarrow a \le c$
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\end{document}

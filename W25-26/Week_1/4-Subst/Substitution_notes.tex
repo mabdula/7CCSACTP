@@ -1,0 +1,117 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Proofs by Substitution}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title=Context \& Concept of Substitution]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ Previous Videos:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Introduced Isabelle interface
+    \item How to write terms / theorems in Isabelle
+    \item Two basic proof / reasoning approaches:
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item Forward reasoning (FW)
+        \item Backward reasoning (BW)
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{$\rightarrow$ \underline{This Video}: Proofs by Substitution}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Suppose we have a theorem:
+    \begin{center}
+    \texttt{lem1:} $\{?x + ?y = ?y + ?x\} \longrightarrow$ \textit{simplification rule}
+    \end{center}
+    \item And we have a goal: \quad \texttt{goal :: 1 + 3 > 3 + 1}
+    \item Substituting \texttt{lem1} into the goal gives a new goal:
+    \begin{center}
+    \texttt{goal :: 3 + 1 > 3 + 1}
+    \end{center}
+    \item \textbf{When does substitution make sense?}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item If R.H.S. of the simp rule is simpler than L.H.S., or if we have a proof on R.H.S.
+    \end{itemize}
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title=Worked Example: Distributivity on Nats]
+\textbf{Goal:} $\vdash (x + y) \cdot (a + b) = x \cdot a + x \cdot b + y \cdot a + y \cdot b \qquad (\text{Note: all variables are } \text{nat})$
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=4pt]
+    \item $(x + y) \cdot (a + b) = (x + y) \cdot a + (x + y) \cdot b$
+    \begin{itemize}[leftmargin=1em, label=$\rightarrow$]
+        \item \textit{Using rule:} $?x \cdot (?a + ?b) = ?x \cdot ?a + ?x \cdot ?b$ \quad (\texttt{lem1})
+    \end{itemize}
+    
+    \item $\underline{(x + y) \cdot a} + (x + y) \cdot b = x \cdot a + y \cdot a + (x + y) \cdot b$
+    \begin{itemize}[leftmargin=1em, label=$\rightarrow$]
+        \item \textit{Using rule:} $(?a + ?b) \cdot ?x = ?a \cdot ?x + ?b \cdot ?x$ \quad (\texttt{lem2})
+    \end{itemize}
+    
+    \item $\dots = x \cdot a + y \cdot a + x \cdot b + y \cdot b \quad \checkmark$
+    \begin{itemize}[leftmargin=1em, label=$\rightarrow$]
+        \item \textit{Using distributive and associative lemmas.}
+    \end{itemize}
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title=Isabelle Practical Notes]
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Show proof steps:} How to perform the proof step-by-step using rules.
+    \item \textbf{Library Search:} Find lemmas that already exist in Isabelle's library.
+    \item \textbf{Reflexivity:} A goal of the form $x = x$ can be proved using \texttt{by (rule refl)} or \texttt{by simp}.
+    \item \textbf{Associativity convention:} $a + b + c$ is parsed as $a + (b + c)$.
+    \item \textbf{Symmetric attribute:} If \texttt{lem1: x = y}, then \texttt{lem1[symmetric]} gives \texttt{y = x}.
+    \item \textbf{Closing proofs:} If the goal is $P \vdash P$, close it by \texttt{"."} (or \texttt{by assumption}).
+    \item \textbf{Calculational Reasoning (Isar):}
+    \begin{center}
+    \begin{tabular}{lll}
+    \texttt{have} & \texttt{"x = y"} & \texttt{...} \\
+    \texttt{also have} & \texttt{"... = z"} & \texttt{...} \\
+    \texttt{also have} & \texttt{"... = a"} & \texttt{...} \\
+    \texttt{also have} & \texttt{"... = b"} & \texttt{...} \\
+    \texttt{finally show} & \texttt{"x = b"} & \texttt{.}
+    \end{tabular}
+    \end{center}
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

@@ -1,0 +1,92 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Backward Reasoning in Isabelle (BW)}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Context \& Comparison with Forward Reasoning}]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ \underline{Last Video (Forward Reasoning)}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Given a rule/fact with premises ($P \Longrightarrow Q$), instantiate those premises using known facts to derive new results forward ($Q$).
+\end{itemize}
+
+\columnbreak
+
+\textbf{$\rightarrow$ \underline{This Video (Backward Reasoning)}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Reasoning from the target goal backwards to required premises using rules (\texttt{apply (rule ...)}).
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Intuition \& Mechanics of Backward Reasoning}]
+\begin{multicols}{2}
+\textbf{Core Intuition:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item Suppose your target goal is $P$.
+    \item If you have a lemma \texttt{lem1:} $Q \vdash P$ (or $Q \Longrightarrow P$), backward reasoning replaces the goal $P$ with the simpler/new subgoal $Q$.
+    \item \textbf{In Isabelle:} Executed via the \texttt{rule} proof method.
+\end{itemize}
+
+\columnbreak
+
+\textbf{Example Execution:}
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Rule (\texttt{lem1}):} & $Q \vdash P$ & \\
+\textbf{Current Goal:} & \texttt{goal : P} & \\
+\textbf{Proof Method:} & \texttt{apply (rule lem1)} & \\
+\textbf{New Subgoal:} & \texttt{goal : Q} & $\checkmark$
+\end{tabular}
+\end{center}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={3. Connectives, Advantages \& Next Topics}]
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Operator Introduction Rules:} If the goal contains a logical connective \textit{"op"} (e.g. $\land, \lor, \rightarrow, \forall$), analyze/decompose that goal using the corresponding \textit{op-introduction} rule.
+    \item \textbf{Why Use Backward Reasoning?}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \textbf{Debugging:} Allows clear visibility and debugging of proof goals.
+        \item \textbf{Top-Down Development:} Enables structured, top-down proof construction.
+    \end{itemize}
+    \item \textbf{Next Video Topic:} Proofs by substitution (\texttt{subst}).
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

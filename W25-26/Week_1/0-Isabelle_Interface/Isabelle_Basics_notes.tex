@@ -1,0 +1,158 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Isabelle / HOL Basics}\\[0.3em]
+\large Lecture Notes Transcription}
+\author{\textbf{Course:} Interactive Theorem Proving (7CCSACTP)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+% Section 1: Overview & Concepts
+\begin{tcolorbox}[title=1. Introduction \& Functional Programming Concepts]
+\begin{multicols}{2}
+\textbf{Introducing Isabelle/HOL:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item KEATS / Course platform
+    \item \textbf{Higher-Order Logic (HOL):}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item Logic: $\forall, \exists, \lor, \land, \rightarrow, \dots$
+        \item Functional programming paradigm
+    \end{itemize}
+    \item \textbf{Key Features:}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item Define datatypes
+        \item Functions (recursive \& non-recursive)
+        \item State \& prove logical properties of functions
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Functional Programming Concepts:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Currying:}
+    \begin{itemize}[leftmargin=1em, label=$\Rightarrow$]
+        \item \textit{Maths textbook:} $g(x,y), \quad h(x,y,z)$
+        \item \textit{Curried version:} $g\;x\;y, \quad h\;x\;y\;z$
+    \end{itemize}
+    
+    \item \textbf{Lambda Expressions ($\lambda$):}
+    \begin{itemize}[leftmargin=1em, label=$\Rightarrow$]
+        \item \textit{Maths textbook:} $f(x,y) = 2x + y$
+        \item \textit{Lambda form:} $f' = (\lambda x\; y.\; 2x + y)$
+        \item $f(a,b) = 2a + b \iff (f'\; a\; b) = 2a + b$
+        \item Partial application: $f'\; a = (\lambda y.\; 2a + y)$
+    \end{itemize}
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+% Section 2: Types & Terms
+\begin{tcolorbox}[title=2. Types \& Terms in Isabelle]
+\begin{multicols}{2}
+\textbf{Terms \& Overloading:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item Terms include numbers, functions, lists, trees, etc.
+    \item Booleans: \texttt{True}, \texttt{False}
+    \item Numerals $0, 1, \dots$ and operators $(+), (-), (*)$ are \textbf{overloaded} across types (\texttt{nat}, \texttt{int}, \texttt{real}).
+    \item \textit{Note:} Blue terms in Isabelle PIDE indicate unbound / free variables.
+\end{itemize}
+
+\textbf{Natural Numbers \& Lists:}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Naturals (\texttt{nat}):} either \texttt{"0"} or \texttt{"Suc a"} (where $a$ is a natural number).
+    \item \textbf{Lists (\texttt{'a list}):}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item Empty: \texttt{[]}
+        \item Non-empty: \texttt{Cons x xs} (or \texttt{x \# xs})
+        \item $[a, b, c] \sim \text{Cons } a \; (\text{Cons } b \; (\text{Cons } c \; []))$
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Type Annotation Syntax ($\tau$):}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Base types:} \texttt{bool}, \texttt{nat}, \texttt{int}, \texttt{real}, \dots
+    \item \textbf{Polymorphic type variables:} \texttt{'a}, \texttt{'b}, \texttt{'c}, \dots
+    \item \textbf{Function type ($\Rightarrow$):} $\tau \Rightarrow \tau$
+    \begin{itemize}[leftmargin=1em, label=$\rightarrow$]
+        \item $f :: \text{nat} \Rightarrow \text{nat}$
+        \item $f' :: \text{nat} \Rightarrow (\text{nat} \Rightarrow \text{nat})$
+    \end{itemize}
+    \item \textbf{Product type ($\times$):} $\tau \times \tau$
+    \begin{itemize}[leftmargin=1em, label=$\rightarrow$]
+        \item $f :: (\text{nat} \times \text{nat}) \Rightarrow \text{nat}$
+        \item \texttt{fst} $:: ('a \times 'b) \Rightarrow 'a$, \quad \texttt{snd} $:: ('a \times 'b) \Rightarrow 'b$
+    \end{itemize}
+    \item \textbf{List / Set types:} $\tau \text{ list}$, $\tau \text{ set}$, user-defined.
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+% Section 3: Logical Properties & Theorem Statements
+\begin{tcolorbox}[title=3. Logical Properties \& Theorem Statements]
+\begin{multicols}{2}
+\textbf{Specifying Logical Properties:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item Logical statements are terms of type \texttt{bool}:
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \texttt{True :: bool}
+        \item \texttt{True $\land$ False :: bool}
+        \item $[a, b] \neq [c]$
+        \item $a = b \longrightarrow [a] = [b]$
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{Theorem Statements \& Proof Meta-Logic:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item Natural deduction style: $A, B \vdash C$
+    \item \textbf{Object-Logic vs Meta-Logic ($\Longrightarrow$):}
+    \begin{itemize}[leftmargin=1em, label=$\rightarrow$]
+        \item Object-logic implication: $\longrightarrow$
+        \item Meta-logic implication (Isabelle meta-arrow): $\Longrightarrow$
+    \end{itemize}
+    \item \textbf{Lemma Formats in Isabelle:}
+    \begin{itemize}[leftmargin=1em, label=$\bullet$]
+        \item \texttt{lemma "A $\Longrightarrow$ B $\Longrightarrow$ C"}
+        \item \texttt{lemma "$\llbracket$ A; B $\rrbracket \Longrightarrow$ C"}
+    \end{itemize}
+    \item \textbf{Top-Down Proofs:} \texttt{"sorry"} can be used as a temporary placeholder to "prove" a lemma while continuing top-down proof structure.
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\end{document}
