@@ -1,0 +1,97 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,stmaryrd}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\definecolor{isabelleblue}{RGB}{0, 70, 140}
+\definecolor{isabellekw}{RGB}{120, 0, 120}
+\definecolor{boxbg}{RGB}{248, 249, 250}
+
+\tcbset{
+  colback=boxbg,
+  colframe=isabelleblue,
+  fonttitle=\bfseries\large,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\title{\textbf{\huge Logical Reasoning Overview}\\[0.3em]
+\large Lecture Notes}
+\author{\textbf{Course:} Computer-Assisted Theorem Proving (7CCSACTP) \quad|\quad \textbf{Lecturer:} Dr. Mohammad Abdulaziz}
+\date{King's College London}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{tcolorbox}[title={1. Background \& Functional Programming Revision}]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ \underline{Last Video Revision}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Revise basic functional programming:}
+    \begin{itemize}[leftmargin=1em, itemsep=1pt]
+        \item Currying ($f :: \alpha \to \beta \to \gamma$)
+        \item Lambda expressions ($\lambda x.\, e$)
+        \item Polymorphic types (type variables `'a`, `'b`)
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\textbf{$\rightarrow$ \underline{Basic Isabelle Interface}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Manipulating theory file} (\texttt{.thy})
+    \item \textbf{Writing terms:}
+    \begin{itemize}[leftmargin=1em, itemsep=1pt]
+        \item Numbers ($\text{nat}, \text{int}, \text{real}$)
+        \item Lists (\texttt{[]}, \texttt{\#}, \texttt{@})
+        \item Sets (\texttt{\{x. P x\}}, \texttt{$\cup$}, \texttt{$\cap$})
+        \item Products / tuples (\texttt{(a, b)})
+        \item Functions ($f :: \alpha \to \beta$)
+    \end{itemize}
+    \item \textbf{Type annotations} for all these terms (\texttt{t :: type})
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\vspace{0.3em}
+
+\begin{tcolorbox}[title={2. Logical Specifications \& Isabelle Proof Overview}]
+\begin{multicols}{2}
+\textbf{$\rightarrow$ \underline{How to Write Down a Logical Spec}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Logical Connectives:}
+    \begin{itemize}[leftmargin=1em, itemsep=1pt]
+        \item Implication ($\longrightarrow$, $\Longrightarrow$)
+        \item Conjunction ($\land$), Disjunction ($\lor$), Negation ($\neg$)
+        \item Quantifiers ($\forall$, $\exists$)
+    \end{itemize}
+    \item \textbf{How do we write theorems} (\texttt{lemma}, \texttt{theorem})
+\end{itemize}
+
+\columnbreak
+
+\textbf{$\rightarrow$ \underline{Performing Proofs in Isabelle}:}
+\begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Logical Reasoning:}
+    \begin{itemize}[leftmargin=1em, itemsep=1pt]
+        \item Forward reasoning (\texttt{FW})
+        \item Backward reasoning (\texttt{BW})
+    \end{itemize}
+    \item \textbf{Substitution}
+    \item \textbf{Mathematical Induction} (on natural numbers \texttt{nat})
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}
+
+\end{document}
