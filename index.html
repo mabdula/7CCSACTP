@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>7CCSACTP — Computer-Assisted Theorem Proving</title>
+</head>
+<body>
+  <div style="width: 800px; margin: 0 auto; font-family: Times, 'Times New Roman', serif; line-height: 1.5;">
+    <figure style="margin-bottom: 20px;">
+      <figcaption style="float: left;">
+        <p>
+          <font size="+3"><pre>7CCSACTP: Computer-Assisted Theorem Proving  </pre></font>
+          <font size="+0">
+            King's College London — Department of Informatics<br/>
+            Module Leader: Mohammad Abdulaziz<br/>
+            Interactive Theorem Prover: Isabelle/HOL
+          </font>
+        </p>
+      </figcaption>
+      <img src="isabelle.jpg" style="width: 180px; height: auto; float: right; margin-top: 15px;" alt="Isabelle/HOL Logo">
+      <div style="clear: both;"></div>
+    </figure>
+
+    <p style="width: 800px;">
+      <b>Module Overview:</b><br/>
+      This module introduces mechanical theorem proving using the Isabelle/HOL interactive theorem prover. Topics covered include basic Isabelle term and theorem syntax, forward and backward reasoning, substitution, natural number induction, case analysis, induction hypothesis generalisation, list recursion, structural induction on lists, Isabelle proof automation, algebraic datatypes, primitive recursion, and tree induction.
+    </p>
+
+    <p style="width: 800px; font-size: 0.95em; background: #f0f4f8; padding: 10px 14px; border-left: 4px solid #00468c; margin-top: 15px;">
+      <b>Textbooks &amp; Obligatory Reading Material (Freely Available Online):</b><br/>
+      • <b>Concrete Semantics:</b> Tobias Nipkow &amp; Gerwin Klein — <a href="http://concrete-semantics.org/">concrete-semantics.org</a><br/>
+      • <b>Isabelle/HOL Tutorial:</b> Tobias Nipkow, Lawrence C. Paulson, &amp; Markus Wenzel — <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">isabelle.in.tum.de (PDF)</a>
+    </p>
+
+    <p style="width: 800px; text-align: center; margin: 15px 0;">
+      <a href="#week1">Week 1</a> | 
+      <a href="#week2">Week 2</a> | 
+      <a href="#week3">Week 3</a> | 
+      <a href="#week4">Week 4</a>
+    </p>
+
+    <hr/>
+
+    <h3 id="week1">Week 1: Foundations of Computer-Assisted Theorem Proving</h3>
+    <ul style="width: 800px;">
+      <li style="margin-bottom: 14px;">
+        <b>Topic 0: Isabelle Interface & Functional Programming Basics</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/presentation/motivation.mp4">Theory Video</a> | 
+          <a href="W25-26/Week_1/0-Isabelle_Interface/Isabelle_Basics_h264.mp4">Practice Video (Isabelle)</a> | 
+          <a href="W25-26/Week_1/0-Isabelle_Interface/Isabelle_Basics_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Chapter 1 &amp; Section 2.1)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Topic 1: Logical Reasoning Overview</b><br/>
+        [ <a href="../../Formal_Verification/W23-24/Week_1/1-Logical_Reasoning_Overview.mp4">Overview Video</a> | 
+          <a href="W25-26/Week_1/1-Logical_Reasoning_Overview/Logical_Reasoning_Overview_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Chapter 1)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Topic 2: Forward Reasoning (FW)</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/FW/FW-Split-Begin-FW-Theory-Correct.mp4">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_1/FW/FW-Split-Begin-fw-Isabelle-Correct.mp4">Practice Video (Isabelle)</a> | 
+          <a href="W25-26/Week_1/2-FW/FW_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 4.4.1, 4.4.4, 5 prelude &amp; Section 5.1)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Topic 3: Backward Reasoning (BW)</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/BW/BW-Split-BW-Theory-Begin.mp4">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_1/BW/BW-Split-BW-Isabelle-Begin.mp4">Practice Video (Isabelle)</a> | 
+          <a href="W25-26/Week_1/3-BW/BW_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 4.4.2 &amp; 4.4.3) | <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Section 5.2)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Topic 4: Proofs by Substitution</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/Subst/Subst-Split-Begin-subst-theory.mp4">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_1/Subst/Subst-Split-Begin-subst-isabelle.mp4">Practice Video (Isabelle)</a> | 
+          <a href="W25-26/Week_1/4-Subst/Substitution_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Section 5.8.1)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Large Group Tutorial (LGT)</b><br/>
+        [ <a href="W25-26/Week_1/Week_1.pdf">Exercise Sheet (PDF)</a> | 
+          <a href="W25-26/Week_1/Week_1.thy">Exercise Theory (.thy)</a> | 
+          <a href="W25-26/Week_1/Week_1_sol.pdf">Solution Sheet (PDF)</a> | 
+          <a href="W25-26/Week_1/sol/Week_1_sol.thy">Solution Theory (.thy)</a> ]
+      </li>
+    </ul>
+
+    <h3 id="week2">Week 2: Mathematical Induction & Case Analysis</h3>
+    <ul style="width: 800px;">
+      <li style="margin-bottom: 14px;">
+        <b>Topic 5: Mathematical Induction on Natural Numbers</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/Induction/Induction_Theory-Correct.mp4">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_1/Induction/Induction_Demo.mp4">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_2/5-Induction/InductionOnNats_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 2.2.2 &amp; 5.4.2)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Topic 6: Proofs by Case Analysis</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/CaseAnalysis/CaseAnalysis-Split-begin.mp4">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_1/CaseAnalysis/CaseAnalysis-Split-Caseanalysis-Isabelle-Begin.mp4">Practice Video (Isabelle)</a> | 
+          <a href="W25-26/Week_2/6-CaseAnalysis/CaseAnalysis_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 4.4 &amp; 5.4)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Topic 7: Induction Hypothesis Generalisation</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_1/induction_hyp_gen/induction_hyp_generalisation.mp4">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_1/induction_hyp_gen/induction_hyp_generalisation_demo.mkv">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_2/7-Induction_hyp_gen/induction_hyp_generalisation_notes.pdf">Transcribed PDF Notes</a> | 
+          <a href="W25-26/Week_2/7-Induction_hyp_gen/induction_hyp_generalisation.thy">Isabelle Theory (.thy)</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Section 2.2.4 &amp; Section 5.4.2)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Large Group Tutorial (LGT)</b><br/>
+        [ <a href="W25-26/Week_2/Week_2.pdf">Exercise Sheet (PDF)</a> | 
+          <a href="W25-26/Week_2/ex/Week_2.thy">Exercise Theory (.thy)</a> | 
+          <a href="W25-26/Week_2/Week_2_sol.pdf">Solution Sheet (PDF)</a> | 
+          <a href="W25-26/Week_2/sol/Week_2_sol.thy">Solution Theory (.thy)</a> ]
+      </li>
+    </ul>
+
+    <h3 id="week3">Week 3: Lists, Structural Induction & Proof Automation</h3>
+    <ul style="width: 800px;">
+      <li style="margin-bottom: 14px;">
+        <b>Defining Recursive Functions on Lists</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_2/list_recursion/list_recursion.mkv">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_2/list_recursion/list_recursion_demo.mkv">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_3/List_Recursion/list_recursion_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 2.2.3 &amp; 2.2.5)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>List Induction (Part 1: Structural Induction Principles)</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_2/list_induction/list_induction.mkv">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_2/list_induction/list_induction_demo.mkv">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_3/List_Induction/list_induction_1_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 2.2.3–2.2.5 &amp; 2.4) | <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Section 2.3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>List Induction (Part 2: Complex Properties & Case Analysis)</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_2/list_induction/list_induciton_2.mkv">Theory Video</a> | 
+          <a href="W25-26/Week_3/List_Induction/list_induction_2_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 2.2.4 &amp; 2.4) | <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Section 2.3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Isabelle Proof Automation</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_2/isabelle_automation/automation_simp.mkv">Simplifier Demo Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_2/isabelle_automation/automation_auto.mkv">Auto Tac Demo Video</a> | 
+          <a href="W25-26/Week_3/isabelle_automation/automation_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 2.5 &amp; 4.3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Large Group Tutorial (LGT)</b><br/>
+        [ <a href="W25-26/Week_3/Week_3.pdf">Exercise Sheet (PDF)</a> | 
+          <a href="W25-26/Week_3/ex/Week_3.thy">Exercise Theory (.thy)</a> | 
+          <a href="W25-26/Week_3/Week_3_sol.pdf">Solution Sheet (PDF)</a> | 
+          <a href="W25-26/Week_3/sol/Week_3_sol.thy">Solution Theory (.thy)</a> ]
+      </li>
+    </ul>
+
+    <h3 id="week4">Week 4: Datatypes, Primitive Recursion & Trees</h3>
+    <ul style="width: 800px;">
+      <li style="margin-bottom: 14px;">
+        <b>Algebraic Data Types in Isabelle</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_3/datatypes/datatypes.mkv">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_3/datatypes/datatypes_demo.mkv">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_4/Algebraic_Datatypes/datatypes_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Section 2.3.1) | <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Sections 2.5.1–2.5.2)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Primitive Recursion on Datatypes</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_3/recursion/recursion.mkv">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_3/recursion/recursion_demo.mkv">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_4/Primitive_Recursion/recursion_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Section 2.3.1) | <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Section 2.5.3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Structural Induction on Trees</b><br/>
+        [ <a href="../../Formal_Verification/W22-23/Week_3/proofs_on_primitive_recrusive_fns/induction_on_trees.mkv">Theory Video</a> | 
+          <a href="../../Formal_Verification/W22-23/Week_3/proofs_on_primitive_recrusive_fns/induction_on_trees_demo.mkv">Practice Video (Demo)</a> | 
+          <a href="W25-26/Week_4/Structural_Induction/induction_on_trees_notes.pdf">Transcribed PDF Notes</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Sections 2.3.1 &amp; 5.4.2) | <a href="https://isabelle.in.tum.de/doc/tutorial.pdf">Isabelle Tutorial</a> (Section 2.5.3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Large Group Tutorial (LGT)</b><br/>
+        [ <a href="W25-26/Week_4/Week_4.pdf">Exercise Sheet (PDF)</a> | 
+          <a href="W25-26/Week_4/ex/Week_4.thy">Exercise Theory (.thy)</a> | 
+          <a href="W25-26/Week_4/Week_4_sol.pdf">Solution Sheet (PDF)</a> | 
+          <a href="W25-26/Week_4/sol/Week_4_sol.thy">Solution Theory (.thy)</a> ]
+      </li>
+    </ul>
+
+    <hr style="margin-top: 30px;"/>
+    <p style="font-size: 0.85em; text-align: center; color: #555; margin-bottom: 30px;">
+      7CCSACTP Computer-Assisted Theorem Proving — Department of Informatics, King's College London
+    </p>
+  </div>
+</body>
+</html>
