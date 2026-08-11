@@ -217,6 +217,10 @@
   </div>
 
   <script>
+  if (window.location.search.indexOf('v=') !== -1) {
+    window.location.href = 'watch.html' + window.location.search;
+  }
+
   function playVideo(url, title) {
     var modal = document.getElementById("videoModal");
     var player = document.getElementById("player");
