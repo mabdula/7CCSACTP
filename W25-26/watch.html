@@ -5,9 +5,33 @@
   <title>7CCSACTP Video</title>
   <style>
     html, body, video { width: 100%; height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden; }
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 20px;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+    }
   </style>
 </head>
 <body>
+  <button class="close-btn" onclick="history.back()" title="Close">&times;</button>
   <video id="v" controls autoplay playsinline></video>
   <script>
     var file = new URLSearchParams(location.search).get('v');
