@@ -70,5 +70,7 @@ Lab/
 # Nested git repositories / external components
 isabelle-pide-mcp/
 
-
-
+# Exclude all solution files from public repository
+**/sol/
+*_sol.pdf
+*_sol.thy
