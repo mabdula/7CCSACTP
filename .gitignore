@@ -74,3 +74,5 @@ isabelle-pide-mcp/
 **/sol/
 *_sol.pdf
 *_sol.thy
+long_paper.bib
+**/long_paper.bib
