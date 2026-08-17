@@ -1,0 +1,77 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[Proving Basic Algorithms Correct]{Proving Basic Algorithms Correct: Sorting & Locales}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 6}
+
+\begin{document}
+
+\chictitle{Proving Basic Algorithms Correct: Sorting & Locales}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. Formal Correctness of Merge Sort}
+\note{
+\begin{itemize}
+  \item Specifying sortedness: \texttt{sorted} predicate
+  \item Permutation & element preservation: \texttt{mset xs = mset ys}
+  \item Proving correctness of list merging
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Specifying sortedness:}
+    \begin{itemize}
+      \item \texttt{sorted} predicate
+    \end{itemize}
+  \item \textbf{Permutation & element preservation:}
+    \begin{itemize}
+      \item \texttt{mset xs = mset ys}
+    \end{itemize}
+  \item \textbf{Proving correctness of list merging:} Proving correctness of list merging
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. Complexity & Step Bounds}
+\note{
+\begin{itemize}
+  \item Defining step-counting functions in Isabelle/HOL
+  \item Setting up recurrence relations for recursive algorithms
+  \item Proving $O(n \log n)$ step bounds via master theorem techniques
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Defining step-counting functions in Isabelle/HOL:} Defining step-counting functions in Isabelle/HOL
+  \item \textbf{Setting up recurrence relations for recursive algorithms:} Setting up recurrence relations for recursive algorithms
+  \item \textbf{Proving $O(n \log n)$ step bounds via master theorem techniques:} Proving $O(n \log n)$ step bounds via master theorem techniques
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. Abstract Data Types via Locales}
+\note{
+\begin{itemize}
+  \item Locales: structuring proof contexts and modular specifications
+  \item Specifying abstract Set and Map ADTs
+  \item Instantiating locales with concrete implementations
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Locales:}
+    \begin{itemize}
+      \item structuring proof contexts and modular specifications
+    \end{itemize}
+  \item \textbf{Specifying abstract Set and Map ADTs:} Specifying abstract Set and Map ADTs
+  \item \textbf{Instantiating locales with concrete implementations:} Instantiating locales with concrete implementations
+\end{itemize}
+\end{frame}
+
+
+\end{document}

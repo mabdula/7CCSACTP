@@ -1,0 +1,74 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[Program Verification & Loop Invariants]{Program Verification & Loop Invariants}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 9}
+
+\begin{document}
+
+\chictitle{Program Verification & Loop Invariants}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. The Need for Invariants in Program Verification}
+\note{
+\begin{itemize}
+  \item From pure structural induction to iterative state transformations
+  \item State spaces, transition systems, and reachable states
+  \item Formulating inductive invariants
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{From pure structural induction to iterative state transformations:} From pure structural induction to iterative state transformations
+  \item \textbf{State spaces, transition systems, and reachable states:} State spaces, transition systems, and reachable states
+  \item \textbf{Formulating inductive invariants:} Formulating inductive invariants
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. Loop Invariants for Graph & Search Algorithms}
+\note{
+\begin{itemize}
+  \item DFS loop invariants: visited sets, frontier, and target states
+  \item Preservation of invariants across traversal steps
+  \item Inductive proofs over state transitions
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{DFS loop invariants:}
+    \begin{itemize}
+      \item visited sets, frontier, and target states
+    \end{itemize}
+  \item \textbf{Preservation of invariants across traversal steps:} Preservation of invariants across traversal steps
+  \item \textbf{Inductive proofs over state transitions:} Inductive proofs over state transitions
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. State Invariants & Safety Properties}
+\note{
+\begin{itemize}
+  \item Proving invariant adequacy: invariant implies postcondition
+  \item Handling non-trivial invariant generalisations
+  \item Bridge to imperative Hoare logic and weakest preconditions
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Proving invariant adequacy:}
+    \begin{itemize}
+      \item invariant implies postcondition
+    \end{itemize}
+  \item \textbf{Handling non-trivial invariant generalisations:} Handling non-trivial invariant generalisations
+  \item \textbf{Bridge to imperative Hoare logic and weakest preconditions:} Bridge to imperative Hoare logic and weakest preconditions
+\end{itemize}
+\end{frame}
+
+
+\end{document}

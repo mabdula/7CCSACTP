@@ -1,0 +1,77 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[Algebraic Datatypes & Tree Induction]{Algebraic Datatypes & Tree Induction}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 4}
+
+\begin{document}
+
+\chictitle{Algebraic Datatypes & Tree Induction}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. Custom Algebraic Datatypes}
+\note{
+\begin{itemize}
+  \item Defining recursive tree types: \texttt{datatype 'a tree = Tip | Node ...}
+  \item Constructor injectivity and distinctness theorems
+  \item Case distinction on custom datatypes
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Defining recursive tree types:}
+    \begin{itemize}
+      \item \texttt{datatype 'a tree = Tip | Node ...}
+    \end{itemize}
+  \item \textbf{Constructor injectivity and distinctness theorems:} Constructor injectivity and distinctness theorems
+  \item \textbf{Case distinction on custom datatypes:} Case distinction on custom datatypes
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. Primitive Recursion & Termination}
+\note{
+\begin{itemize}
+  \item Defining functions over algebraic trees
+  \item Automated termination proofs via size measures
+  \item Structural induction over trees
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Defining functions over algebraic trees:} Defining functions over algebraic trees
+  \item \textbf{Automated termination proofs via size measures:} Automated termination proofs via size measures
+  \item \textbf{Structural induction over trees:} Structural induction over trees
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. Tree Traversal & Correctness}
+\note{
+\begin{itemize}
+  \item Flattening trees to lists: \texttt{inorder}, \texttt{preorder}
+  \item Proving preservation of elements: \texttt{set (inorder t) = set_tree t}
+  \item Height and size bounds
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Flattening trees to lists:}
+    \begin{itemize}
+      \item \texttt{inorder}, \texttt{preorder}
+    \end{itemize}
+  \item \textbf{Proving preservation of elements:}
+    \begin{itemize}
+      \item \texttt{set (inorder t) = set_tree t}
+    \end{itemize}
+  \item \textbf{Height and size bounds:} Height and size bounds
+\end{itemize}
+\end{frame}
+
+
+\end{document}

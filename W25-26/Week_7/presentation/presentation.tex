@@ -1,0 +1,74 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[Proving Data Structures Correct]{Proving Data Structures Correct: 2-3 Trees}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 7}
+
+\begin{document}
+
+\chictitle{Proving Data Structures Correct: 2-3 Trees}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. Balanced Search Trees Intuition}
+\note{
+\begin{itemize}
+  \item Binary search trees vs balanced trees
+  \item Height bounds and logarithmic lookup guarantees
+  \item The 2-3 tree invariants: search tree ordering & height balance
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Binary search trees vs balanced trees:} Binary search trees vs balanced trees
+  \item \textbf{Height bounds and logarithmic lookup guarantees:} Height bounds and logarithmic lookup guarantees
+  \item \textbf{The 2-3 tree invariants:}
+    \begin{itemize}
+      \item search tree ordering & height balance
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. Search & Insertion in 2-3 Trees}
+\note{
+\begin{itemize}
+  \item Defining the 2-3 tree datatype and lookup function
+  \item Recursive insertion with node splitting
+  \item Proving preservation of the complete binary balance invariant
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Defining the 2-3 tree datatype and lookup function:} Defining the 2-3 tree datatype and lookup function
+  \item \textbf{Recursive insertion with node splitting:} Recursive insertion with node splitting
+  \item \textbf{Proving preservation of the complete binary balance invariant:} Proving preservation of the complete binary balance invariant
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. Verifying the Set Interface}
+\note{
+\begin{itemize}
+  \item Connecting 2-3 trees to the abstract Set ADT locale
+  \item Proving functional correctness: lookup, insert, delete
+  \item Extracting verified executable code
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Connecting 2-3 trees to the abstract Set ADT locale:} Connecting 2-3 trees to the abstract Set ADT locale
+  \item \textbf{Proving functional correctness:}
+    \begin{itemize}
+      \item lookup, insert, delete
+    \end{itemize}
+  \item \textbf{Extracting verified executable code:} Extracting verified executable code
+\end{itemize}
+\end{frame}
+
+
+\end{document}

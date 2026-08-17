@@ -1,0 +1,74 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[List Recursion & List Induction]{List Recursion & List Induction}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 3}
+
+\begin{document}
+
+\chictitle{List Recursion & List Induction}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. Structural Induction on Lists}
+\note{
+\begin{itemize}
+  \item Defining recursive functions on lists (\texttt{fun}, \texttt{primrec})
+  \item Structural induction rule: \texttt{list.induct}
+  \item Generalising the induction hypothesis
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Defining recursive functions on lists (\texttt{fun}, \texttt{primrec}):} Defining recursive functions on lists (\texttt{fun}, \texttt{primrec})
+  \item \textbf{Structural induction rule:}
+    \begin{itemize}
+      \item \texttt{list.induct}
+    \end{itemize}
+  \item \textbf{Generalising the induction hypothesis:} Generalising the induction hypothesis
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. List Recursion & Equational Reasoning}
+\note{
+\begin{itemize}
+  \item Proof automation with \texttt{simp} and \texttt{auto}
+  \item Proving properties of \texttt{map}, \texttt{filter}, and \texttt{fold}
+  \item Accumulator generalisation techniques
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Proof automation with \texttt{simp} and \texttt{auto}:} Proof automation with \texttt{simp} and \texttt{auto}
+  \item \textbf{Proving properties of \texttt{map}, \texttt{filter}, and \texttt{fold}:} Proving properties of \texttt{map}, \texttt{filter}, and \texttt{fold}
+  \item \textbf{Accumulator generalisation techniques:} Accumulator generalisation techniques
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. Automated Proof Search in Isabelle}
+\note{
+\begin{itemize}
+  \item Proof methods: \texttt{fastforce}, \texttt{blast}, \texttt{force}
+  \item Managing simplification rule sets (\texttt{[simp]})
+  \item Structured Isar proofs for complex inductive goals
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Proof methods:}
+    \begin{itemize}
+      \item \texttt{fastforce}, \texttt{blast}, \texttt{force}
+    \end{itemize}
+  \item \textbf{Managing simplification rule sets (\texttt{[simp]}):} Managing simplification rule sets (\texttt{[simp]})
+  \item \textbf{Structured Isar proofs for complex inductive goals:} Structured Isar proofs for complex inductive goals
+\end{itemize}
+\end{frame}
+
+
+\end{document}

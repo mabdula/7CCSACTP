@@ -1,0 +1,77 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[Functional Graph Algorithms]{Functional Graph Algorithms}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 8}
+
+\begin{document}
+
+\chictitle{Functional Graph Algorithms}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. Graph Representation in Isabelle/HOL}
+\note{
+\begin{itemize}
+  \item Directed graphs as algebraic sets of vertices and edges
+  \item Successor functions and path definitions
+  \item Acyclic graphs and reachability
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Directed graphs as algebraic sets of vertices and edges:} Directed graphs as algebraic sets of vertices and edges
+  \item \textbf{Successor functions and path definitions:} Successor functions and path definitions
+  \item \textbf{Acyclic graphs and reachability:} Acyclic graphs and reachability
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. Functional Depth-First Search (DFS)}
+\note{
+\begin{itemize}
+  \item Formulating DFS functionally with visited sets
+  \item Termination measures: decreasing unvisited vertex set
+  \item Well-founded recursion and termination proofs in Isabelle
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Formulating DFS functionally with visited sets:} Formulating DFS functionally with visited sets
+  \item \textbf{Termination measures:}
+    \begin{itemize}
+      \item decreasing unvisited vertex set
+    \end{itemize}
+  \item \textbf{Well-founded recursion and termination proofs in Isabelle:} Well-founded recursion and termination proofs in Isabelle
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. Graph Reachability Correctness}
+\note{
+\begin{itemize}
+  \item Proving that functional DFS finds all reachable nodes
+  \item Soundness: all returned nodes are connected by paths
+  \item Completeness: all valid paths are traversed
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Proving that functional DFS finds all reachable nodes:} Proving that functional DFS finds all reachable nodes
+  \item \textbf{Soundness:}
+    \begin{itemize}
+      \item all returned nodes are connected by paths
+    \end{itemize}
+  \item \textbf{Completeness:}
+    \begin{itemize}
+      \item all valid paths are traversed
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\end{document}

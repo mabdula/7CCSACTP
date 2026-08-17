@@ -1,0 +1,80 @@
+\documentclass[compress,10pt,xcolor=dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
+\setbeamerfont{note page}{size=\footnotesize}
+
+\input{../../setup/commands.tex}
+\input{../../setup/design.tex}
+
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+
+\title[Verifying Real-World Programs]{Verifying Real-World Programs: AutoCorres2}
+\author[7CCSACTP]{Mohammad Abdulaziz}
+\date{Week 10}
+
+\begin{document}
+
+\chictitle{Verifying Real-World Programs: AutoCorres2}{Computer-Assisted Theorem Proving (7CCSACTP)}
+
+\begin{frame}{1. AutoCorres2: 4-Stage Data Refinement Pipeline}
+\note{
+\begin{itemize}
+  \item Bridging low-level imperative code to high-level Isabelle specifications
+  \item C-to-Isabelle parser & \texttt{Simpl} language representation
+  \item The 4 abstraction stages: \texttt{SimplConv}, \texttt{LocalVarExtract}, \texttt{TypeStrengthen}, \texttt{HeapAbs}
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Bridging low-level imperative code to high-level Isabelle specifications:} Bridging low-level imperative code to high-level Isabelle specifications
+  \item \textbf{C-to-Isabelle parser & \texttt{Simpl} language representation:} C-to-Isabelle parser & \texttt{Simpl} language representation
+  \item \textbf{The 4 abstraction stages:}
+    \begin{itemize}
+      \item \texttt{SimplConv}, \texttt{LocalVarExtract}, \texttt{TypeStrengthen}, \texttt{HeapAbs}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{2. Program Logics for C: Level 4 Monadic WP Calculus}
+\note{
+\begin{itemize}
+  \item Interactive proving directly at Level 4 abstract monadic functions
+  \item Weakest precondition calculus via \texttt{apply (wp)}
+  \item Typed heap abstraction (\texttt{heap_int}) and pointer validity (\texttt{valid_ptr})
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Interactive proving directly at Level 4 abstract monadic functions:} Interactive proving directly at Level 4 abstract monadic functions
+  \item \textbf{Weakest precondition calculus via \texttt{apply (wp)}:} Weakest precondition calculus via \texttt{apply (wp)}
+  \item \textbf{Typed heap abstraction (\texttt{heap_int}) and pointer validity (\texttt{valid_ptr}):} Typed heap abstraction (\texttt{heap_int}) and pointer validity (\texttt{valid_ptr})
+\end{itemize}
+\end{frame}
+
+\begin{frame}{3. Industrial Verification Case Studies}
+\note{
+\begin{itemize}
+  \item \textbf{Apple corecrypto}: Formal verification of post-quantum crypto in Isabelle/HOL
+  \item \textbf{AWS Nitro}: Hypervisor memory isolation engine verification
+  \item \textbf{seL4}: Fully verified operating system microkernel
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{\textbf{Apple corecrypto}:}
+    \begin{itemize}
+      \item Formal verification of post-quantum crypto in Isabelle/HOL
+    \end{itemize}
+  \item \textbf{\textbf{AWS Nitro}:}
+    \begin{itemize}
+      \item Hypervisor memory isolation engine verification
+    \end{itemize}
+  \item \textbf{\textbf{seL4}:}
+    \begin{itemize}
+      \item Fully verified operating system microkernel
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,44 @@
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+
+\mode<presentation>
+{
+    \usenavigationsymbolstemplate{}
+    \setbeamertemplate{headline}
+    {
+        \begin{beamercolorbox}[sep=1ex,wd=\paperwidth]{whitebox}
+            \hfill{\color{awesome}\insertframenumber}\hspace*{0.4em}
+        \end{beamercolorbox}
+    }
+
+    \setbeamercovered{invisible}
+    \setbeamercolor{frametitle}{fg=awesome}
+    \setbeamercolor{date in head/foot}{fg=awesome}
+    \setbeamercolor{itemize item}{fg=awesome}
+    \setbeamercolor{itemize subitem}{fg=awesome}
+    \setbeamercolor{itemize subsubitem}{fg=awesome}
+    \setbeamercolor{enumerate item}{fg=awesome}
+
+    \setbeamertemplate{itemize item}[square]
+    \setbeamertemplate{itemize subitem}[circle]
+    \setbeamertemplate{itemize subsubitem}[triangle]
+}
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-6pt}{\color{lightergrey}\copyright Mohammad Abdulaziz}\hfill\insertshortauthor\hfill{\color{awesome}}}}
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand{\chictitle}[2]{
+  \begin{frame}[plain,noframenumbering]
+    \begin{center}
+      \vspace{2.5em}
+      {\color{awesome}\Large\textbf{#1}} \\
+      \vspace{0.8em}
+      \small{#2}
+      \vspace{3em}
+      \begin{center}
+        {\color{awesome}\large Mohammad Abdulaziz}
+      \end{center}
+    \end{center}
+  \end{frame}
+}
