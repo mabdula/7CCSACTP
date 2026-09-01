@@ -8,43 +8,111 @@
 
 \setbeamersize{text margin left=8pt,text margin right=8pt}
 
-\title[Agentic AI for Theorem Proving]{Agentic LLMs and AI for Theorem Proving}
+\title[AI-Assisted Theorem Proving]{AI-Assisted Theorem Proving}
 \author[7CCSACTP]{Mohammad Abdulaziz}
 \date{Week 5}
 
 \begin{document}
 
-\chictitle{Agentic LLMs and AI for Theorem Proving}{Computer-Assisted Theorem Proving (7CCSACTP)}
+\chictitle{AI-Assisted Theorem Proving}{Computer-Assisted Theorem Proving (7CCSACTP)}
 
+%--------------------------------------------------------------------
+% Recap of Previous Weeks
+%--------------------------------------------------------------------
+\begin{frame}{Where We Are in the Course}
+\note{
+\begin{itemize}
+  \item In the first four weeks, we established the foundations of interactive theorem proving:
+  \item Week 1: Introduction to ITPs, the logical kernel, and Isabelle/HOL basics.
+  \item Week 2: Mathematical induction and induction hypothesis generalisation.
+  \item Week 3: Functional programming on lists, structural list induction, and basic automation.
+  \item Week 4: Custom algebraic datatypes, primitive recursion, and tree induction.
+\end{itemize}
+}
+
+\begin{itemize}
+  \item \textbf{Covered in Weeks 1--4:}
+    \begin{itemize}
+      \item \textbf{Week 1:} ITP fundamentals, logical kernels, and the Isabelle/HOL environment.
+      \item \textbf{Week 2:} Mathematical induction and induction hypothesis generalisation.
+      \item \textbf{Week 3:} List recursion, structural induction, and proof automation (\texttt{simp}, \texttt{auto}).
+      \item \textbf{Week 4:} Algebraic datatypes, termination size measures, and tree induction.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%--------------------------------------------------------------------
+% Learning Objectives / Overview
+%--------------------------------------------------------------------
+\begin{frame}{This Week}
+\note{
+\begin{itemize}
+  \item Today I will introduce you to the last and most recent part of computer-assisted theorem provers' foundations: AI-assisted theorem proving.
+  \item I will cover two types: classical machine-learning based approaches and LLM-based approaches.
+\end{itemize}
+}
+
+\begin{itemize}
+  \item<1-> Today I will introduce you to the last and most recent part of computer-assisted theorem provers' foundations: \textbf{AI-assisted theorem proving}.
+  \vspace{0.8em}
+  \item<2-> \textbf{Two types covered:}
+    \begin{enumerate}
+      \item \textbf{Classical machine-learning based approaches:}
+        \begin{itemize}
+          \item Premise selection \& external automated provers (Sledgehammer).
+          \item Reinforcement learning (RL) loops with compiler verifiers (AlphaProof, Aristotle).
+        \end{itemize}
+      \vspace{0.4em}
+      \item \textbf{LLM-based approaches:}
+        \begin{itemize}
+          \item Off-the-shelf coding agents via Model Context Protocol (MCP).
+          \item Two-stage Draft, Sketch, and Prove (DSP) architectures.
+        \end{itemize}
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+%--------------------------------------------------------------------
+% Slide 1: History: AI & Theorem Proving
+%--------------------------------------------------------------------
 \begin{frame}{1. History: AI \& Theorem Proving}
 \note{
 \begin{itemize}
   \item AI has been considered as a tool to improve theorem proving for a long time by now.
   \item The first and most impactful attempt was the development of Sledgehammer for Isabelle by Larry Paulson et al. \citep{paulson2010three}.
   \item Sledgehammer bridges interactive theorem proving with automated theorem provers (ATPs) and SMT solvers.
+  \item Architecture: Fact Filter (MePo/MaSh) $\to$ TPTP/SMT-LIB $\to$ External Solvers (E, Vampire, Z3) $\to$ Proof Reconstruction via \texttt{metis} in Isabelle Kernel.
 \end{itemize}
 }
 
 \begin{itemize}
-  \item \textbf{AI for Theorem Proving:}
+  \item<1-> \textbf{First \& Most Impactful Automation Attempt:}
     \begin{itemize}
-      \item AI has been considered as a tool to improve theorem proving for a long time by now.
+      \item \textbf{"Sledgehammer"} in Isabelle/HOL \citep{paulson2010three} (Paulson, Blanchette et al.).
+      \item Bridges interactive theorem proving with external ATPs and SMT solvers.
     \end{itemize}
-  \vspace{0.5em}
-  \item \textbf{First \& Most Impactful Attempt:}
+\end{itemize}
+
+\vspace{-0.2em}
+\uncover<2->{
+\begin{center}
+  \input{sledgehammer_chart.tex}
+\end{center}
+}
+
+\vspace{-0.4em}
+\begin{itemize}
+  \item<3-> \textbf{Core Workflow \& Reconstruction:}
     \begin{itemize}
-      \item \textbf{"Sledgehammer"} in Isabelle/HOL.
-      \item First developed by Larry Paulson and Jasmin Blanchette \citep{paulson2010three}.
-      \item Combines external Automated Theorem Provers (ATPs) and SMT solvers to automate subgoals.
-    \end{itemize}
-  \vspace{0.5em}
-  \item \textbf{Tutorial \& Practical Usage:}
-    \begin{itemize}
-      \item Sledgehammer invocation and automated proof reconstruction in Isar.
+      \item \textbf{Fact Filter:} Selects relevant lemmas via heuristic/ML filters (MePo, MaSh).
+      \item \textbf{Kernel Soundness:} External proofs are reconstructed natively in Isabelle using \texttt{metis} (preventing soundness bugs from external provers).
     \end{itemize}
 \end{itemize}
 \end{frame}
 
+%--------------------------------------------------------------------
+% Slide 2: Custom Models for Formal Proving
+%--------------------------------------------------------------------
 \begin{frame}{2. Custom Models for Formal Proving}
 \note{
 \begin{itemize}
@@ -54,86 +122,75 @@
   \item Specialised startups like Harmonic (Aristotle) and Axiom Math (AxiomProver / AXLE) trained custom transformer policy and value models using RL feedback loops with theorem prover compilers.
   \item IMO Gold was achieved by AI in 2025 by DeepMind and Harmonic.
   \item PutnamBench 2025 is currently solved by at least 20 different proving systems.
+  \item High compute and training cost: Base foundation pre-training costs \$5M--\$100M+, targeted RL stages cost \$250k--\$1M+ (e.g.\ DeepSeek-R1 $\approx \$294\text{k}$), and test-time search costs \$60--\$300+ per solved theorem.
 \end{itemize}
 }
 
 \begin{itemize}
-  \item \textbf{Custom RL Loop with Formal Verifiers:}
-\end{itemize}
-
-\vspace{-0.3em}
-\begin{center}
-  \input{rl_math_chart.tex}
-\end{center}
-
-\vspace{-0.3em}
-\begin{itemize}
-  \item \textbf{Key Players \& Breakthroughs:}
+  \item<1-> \textbf{Key Players \& Breakthroughs:}
     \begin{itemize}
       \item \textbf{DeepMind} (AlphaProof), \textbf{Harmonic} (Aristotle), \textbf{Axiom Math} (AxiomProver).
       \item \textbf{IMO Gold} achieved in 2025; \textbf{PutnamBench 2025} solved by $\ge 20$ proving systems.
     \end{itemize}
+  \vspace{0.2em}
+  \item<2-> \textbf{Custom RL Loop with Formal Verifiers:}
+\end{itemize}
+
+\vspace{-0.3em}
+\uncover<2->{
+\begin{center}
+  \input{rl_math_chart.tex}
+\end{center}
+}
+
+\vspace{-0.4em}
+\begin{itemize}
+  \item<3-> {\color{red}\textbf{Problem: Inaccessibility \& Prohibitive Costs}}
+    \begin{itemize}
+      \item Requires dedicated GPU clusters and multi-million-dollar training budgets.
+      \item \textbf{Pre-training / RL Stage:} \$5M -- \$100M+ base / \$250k -- \$1M+ RL fine-tuning.
+      \item \textbf{Inference / Test-Time Search:} \$60 -- \$300+ per solved theorem.
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
+%--------------------------------------------------------------------
+% Slide 3: Democratisation via Agentic Proving
+%--------------------------------------------------------------------
 \begin{frame}{3. Democratisation via Agentic Proving}
 \note{
 \begin{itemize}
-  \item Proprietary custom models were extremely expensive and inaccessible to students or individual researchers.
   \item Josef Urban and collaborators discovered that standard, off-the-shelf LLM coding agents are remarkably capable when connected to interactive theorem provers.
   \item In a recent landmark experiment, standard coding agents formalised an entire 800+ theorem textbook on Topology (Munkres) for $\approx \$200$/month.
   \item This connects off-the-shelf agents via Model Context Protocol (MCP) servers, eliminating the multi-million-dollar cost of training custom foundation models.
+  \item Any student or researcher with a standard coding agent and a laptop can now interactively formalise mathematics and software.
 \end{itemize}
 }
 
 \begin{itemize}
-  \item \textbf{Inaccessibility of Proprietary Custom Models:}
+  \item<1-> \textbf{Off-the-Shelf Coding Agents:}
     \begin{itemize}
-      \item Heavy RL infrastructure requires multi-million-dollar compute clusters.
+      \item Josef Urban et al.\ showed standard coding agents (e.g.\ \emph{Claude Code}, \emph{Agy}) formalised an entire textbook (\emph{Munkres Topology}, 800+ theorems) for $\approx \mathbf{\$200}$ \textbf{/ month}.
     \end{itemize}
-  \vspace{0.5em}
-  \item \textbf{Standard Coding Agents + Theorem Prover Loops:}
+  \vspace{0.6em}
+  \item<2-> \textbf{Interactive Proving via MCP:}
     \begin{itemize}
-      \item Josef Urban showed standard coding agents (e.g.\ \emph{Claude Code}, \emph{Open Code}, \emph{Agy}) can formalise entire textbooks (e.g.\ \emph{Munkres Topology}) for $\approx \$200$/month.
+      \item Direct prover integration via \textbf{Model Context Protocol (MCP)}.
+      \item Replaces large cluster training with accessible API agents.
     \end{itemize}
-  \vspace{0.5em}
-  \item \textbf{Agentic Interactive Workflow:}
+  \vspace{0.6em}
+  \item<3-> \textbf{Practical Advantages:}
     \begin{itemize}
-      \item Connects off-the-shelf LLMs directly to provers via Model Context Protocol (MCP).
-      \item Eliminates the need for pre-training or fine-tuning custom models.
-    \end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{4. Current State \& Industrial Adoption}
-\note{
-\begin{itemize}
-  \item The agentic proving revolution has rapidly transitioned into commercial and industrial application.
-  \item Specialised companies have secured significant venture capital funding (e.g.\ Harmonic, Math Inc, Axiom Math).
-  \item Major technology companies have adopted formal verification for mission-critical software and hardware systems (e.g.\ AWS, Apple, Arm, Intel).
-  \item Top mathematicians like Terence Tao have actively incorporated agentic formal provers into mainstream mathematical research.
-\end{itemize}
-}
-
-\begin{itemize}
-  \item \textbf{Commercial Ecosystem \& Venture Funding:}
-    \begin{itemize}
-      \item Specialised companies: \emph{Harmonic}, \emph{Math Inc}, \emph{Axiom Math}, etc.\ (securing major VC funding).
-    \end{itemize}
-  \vspace{0.5em}
-  \item \textbf{Industrial Formal Verification:}
-    \begin{itemize}
-      \item Adoption for mission-critical software \& hardware verification (e.g.\ AWS, Apple, Arm, Intel).
-    \end{itemize}
-  \vspace{0.5em}
-  \item \textbf{Integration in Mathematical Research:}
-    \begin{itemize}
-      \item Top mathematicians (e.g.\ Terence Tao) incorporating agentic formal provers into active research.
+      \item No specialised GPU infrastructure or training required.
+      \item Fast, interactive feedback loop directly with the Isabelle/HOL logical kernel.
     \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{5. Technical Setup: Agentic LLMs for Theorem Proving}
+%--------------------------------------------------------------------
+% Slide 4: Technical Setup: Agentic LLMs for Theorem Proving
+%--------------------------------------------------------------------
+\begin{frame}{4. Technical Setup: Agentic LLMs for Theorem Proving}
 \note{
 \begin{itemize}
   \item In this week I will demonstrate a new but strongly emerging way to apply theorem provers like Isabelle, via integration with LLMs.
@@ -146,14 +203,15 @@
 }
 
 \begin{itemize}
-  \item \textbf{Integrating Theorem Provers with LLMs:}
+  \item<1-> \textbf{Integrating Theorem Provers with LLMs:}
     \begin{itemize}
       \item Connect a coding agent (e.g.\ \emph{Claude Code}, \emph{Open Code}, \emph{Codex}, \emph{Agy}) directly to Isabelle.
     \end{itemize}
   \vspace{0.5em}
-  \item \textbf{Model Context Protocol (MCP) Architecture:}
+  \item<2-> \textbf{Model Context Protocol (MCP) Architecture:}
 \end{itemize}
 
+\uncover<2->{
 \begin{center}
 \begin{tikzpicture}[node distance=1.8cm, auto]
   \node [boxnode, fill=blue!8] (llm) {LLM / Agent};
@@ -164,9 +222,10 @@
   \draw [arrow] (mcp) -- (isabelle);
 \end{tikzpicture}
 \end{center}
+}
 
 \begin{itemize}
-  \item \textbf{MCP Implementations \& Repositories:}
+  \item<3-> \textbf{MCP Implementations \& Repositories:}
     \begin{itemize}
       \item Programmatic actions: \texttt{write-file}, \texttt{process-file}, \texttt{save-file}, etc.
       \item \textbf{PIDE-MCP}: \href{https://github.com/kappelmann/isabelle-pide-mcp}{\textcolor{awesome}{github.com/kappelmann/isabelle-pide-mcp}}
@@ -175,7 +234,10 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{6. Agentic Proving Architectures}
+%--------------------------------------------------------------------
+% Slide 5: Agentic Proving Architectures
+%--------------------------------------------------------------------
+\begin{frame}{5. Agentic Proving Architectures}
 \note{
 \begin{itemize}
   \item The most basic agentic architecture for theorem proving consists of a Planner/Sketcher, a Coder, an MCP server, and Isabelle.
@@ -187,34 +249,79 @@
 \end{itemize}
 }
 
-\textbf{Basic Two-Stage Agentic Architecture \citep{wendaLiSketchProveLLMs}:}
-
-\begin{center}
-\begin{tikzpicture}[node distance=1.5cm, auto]
-  \node [boxnode, fill=blue!8] (planner) {\small \textbf{Planner / Sketcher}\\[0.2em] \scriptsize Proof plans \& sketches\\[-0.2em]\scriptsize (sorried proofs)};
-  \node [boxnode, fill=orange!8, right=of planner] (coder) {\small \textbf{Coder}\\[0.2em] \scriptsize Completes proofs,\\[-0.2em]\scriptsize fixes errors};
-  \node [boxnode, fill=green!8, right=of coder] (isabelle) {\small \textbf{Isabelle/HOL}\\[0.2em] \scriptsize via MCP};
-  
-  \draw [arrow] (planner) -- (coder);
-  \draw [arrow] (coder) -- (isabelle);
-\end{tikzpicture}
-\end{center}
-
 \begin{itemize}
-  \item \textbf{Workflow \& Feedback Loop (Draft, Sketch \& Prove):}
+  \item<1-> \textbf{Basic Two-Stage Architecture \citep{wendaLiSketchProveLLMs}:}
+\end{itemize}
+
+\vspace{-0.3em}
+\uncover<1->{
+\begin{center}
+  \begin{tikzpicture}[node distance=1.2cm, auto, >=stealth, thick]
+    \node [boxnode, fill=blue!6, minimum width=2.6cm, minimum height=0.75cm] (planner) {\textbf{Planner / Sketcher}\\[0.08em]\tiny Proof plans \& sketches\\[-0.08em]\tiny (\texttt{sorry} subgoals)};
+    \node [boxnode, fill=orange!8, right=of planner, minimum width=2.6cm, minimum height=0.75cm] (coder) {\textbf{Coder Agent}\\[0.08em]\tiny Fills Isar proof steps,\\[-0.08em]\tiny repairs errors};
+    \node [boxnode, fill=green!8, right=of coder, minimum width=2.6cm, minimum height=0.75cm] (isabelle) {\textbf{Isabelle/HOL}\\[0.08em]\tiny via MCP Server};
+    
+    \draw [<->, thick] (planner) -- node[above, font=\tiny]{Sketches / Errors} (coder);
+    \draw [<->, thick] (coder) -- node[above, font=\tiny]{Check} (isabelle);
+  \end{tikzpicture}
+\end{center}
+}
+
+\vspace{-0.3em}
+\begin{itemize}
+  \item<2-> \textbf{Two-Stage Workflow \& Feedback Loop:}
     \begin{itemize}
-      \item Planner creates structured proof sketches (\texttt{sorry}) \citep{wendaLiSketchProveLLMs}.
-      \item Coder fills in Isar proof steps \& verifies against Isabelle via MCP.
-      \item Unresolved errors loop back from Coder to Planner.
+      \item \textbf{Planner / Sketcher:} Produces high-level proof sketches (\texttt{sorry}) \citep{wendaLiSketchProveLLMs}.
+      \item \textbf{Coder:} Fills in intermediate Isar proof steps \& verifies against Isabelle via MCP.
+      \item \textbf{Error Loop:} Unresolved errors pass back to the Planner with diagnostics.
     \end{itemize}
-  \vspace{0.2em}
-  \item \textbf{Further Reading \& LGT Discussion:}
+  \vspace{0.3em}
+  \item<3-> \textbf{Further Reading \& LGT Discussion:}
     \begin{itemize}
-      \item As the field is moving very fast, a paper will be provided on \textbf{KEATS} to read and discuss in the \textbf{LGT}.
+      \item A paper on \textbf{KEATS} will be provided for reading and discussion in the \textbf{LGT}.
     \end{itemize}
 \end{itemize}
 \end{frame}
 
+%--------------------------------------------------------------------
+% Slide 6: Current State & Industrial Adoption
+%--------------------------------------------------------------------
+\begin{frame}{6. Current State \& Industrial Adoption}
+\note{
+\begin{itemize}
+  \item AI-assisted proving is being adopted in commercial and industrial settings.
+  \item Specialised companies have secured significant venture capital funding (e.g.\ Harmonic, Math Inc, Axiom Math).
+  \item Major technology companies have adopted formal verification for mission-critical software and hardware systems (e.g.\ AWS, Apple, Arm, Intel).
+  \item Top mathematicians like Terence Tao have actively incorporated agentic formal provers into mainstream mathematical research.
+\end{itemize}
+}
+
+\begin{itemize}
+  \item<1-> \textbf{Specialised Startups:}
+    \begin{itemize}
+      \item Companies developing formal reasoning tools: \emph{Harmonic}, \emph{Math Inc}, \emph{Axiom Math}.
+    \end{itemize}
+  \vspace{0.5em}
+  \item<2-> \textbf{Industrial Applications:}
+    \begin{itemize}
+      \item Formal verification in industry:
+        \begin{itemize}
+          \item \textbf{Apple}: Post-quantum cryptography verification in \emph{corecrypto} via AutoCorres2.
+          \item \textbf{AWS}: Automated verification for hypervisors (Nitro) and cloud security policies.
+          \item \textbf{Arm \& Intel}: Hardware, firmware, and instruction set architecture verification.
+        \end{itemize}
+    \end{itemize}
+  \vspace{0.5em}
+  \item<3-> \textbf{Mathematical Research:}
+    \begin{itemize}
+      \item Mathematicians (e.g.\ Terence Tao) using automated and agentic provers in active research.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%--------------------------------------------------------------------
+% Slide 7: Closing Remarks & Coursework Guidelines
+%--------------------------------------------------------------------
 \begin{frame}{7. Closing Remarks \& Coursework Guidelines}
 \note{
 \begin{itemize}
@@ -230,24 +337,25 @@
 }
 
 \begin{itemize}
-  \item \textbf{Core Skills You Must Master:}
+  \item<1-> \textbf{Core Skills You Must Master Yourself:}
     \begin{enumerate}
-      \item Splitting problems into subproblems.
+      \item Splitting problems into manageable formal subproblems.
       \item Formally modelling problem domains.
-      \item Formulating correct specifications.
-      \item Constructing correct, concise, fast-checking proofs (Isabelle linter).
+      \item Formulating mathematically sound, correct specifications.
+      \item Constructing correct, readable, concise, and fast-checking proofs (Isabelle linter).
     \end{enumerate}
   \vspace{0.3em}
-  \item \textbf{LLM Usage Policy for Coursework:}
-    \begin{itemize}
-      \item \textbf{Design \& Sketches:} Allowed for exploring design alternatives (must justify choices).
-      \item \textbf{Lemma Proving:} Allowed \emph{only} for facts referencing standard library definitions. \textbf{Not allowed} for facts about your own defined constants.
-    \end{itemize}
+  \item<2-> \textbf{Module Guidelines for LLM Use in Coursework:}
+    \begin{enumerate}
+      \item \textbf{Design decisions \& proof sketches:} Allowed for exploring alternatives (must defend and justify choices).
+      \item \textbf{Proving lower-level facts:} Allowed \textbf{ONLY} for facts referencing standard Isabelle distribution definitions.
+      \item \textbf{Strict Prohibition:} Do \textbf{NOT} use LLMs for facts about your own defined constants!
+    \end{enumerate}
   \vspace{0.3em}
-  \item \textbf{Assessment (50\% Coursework + 50\% Exam):}
+  \item<3-> \textbf{Assessment (50\% Coursework + 50\% Exam):}
     \begin{itemize}
-      \item \textbf{Coursework (50\%):} Includes a \textbf{Viva} to explain design choices.
-      \item \textbf{Exam (50\%):} Paper-based written examination.
+      \item \textbf{Coursework (50\%):} Includes a mandatory \textbf{Viva} where you must defend your formal design choices and proof architecture.
+      \item \textbf{Exam (50\%):} Paper-based written examination testing your independent understanding of formal reasoning and proof techniques.
     \end{itemize}
 \end{itemize}
 \end{frame}
