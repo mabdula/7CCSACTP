@@ -2,30 +2,35 @@ theory Week_1
 imports Main
 begin
 
-lemma impI: assumes "P"
-  shows "Q \<Longrightarrow> P"
-  sorry
+text \<open>\vspace{15ex}\ExerciseSheet{1}{}\<close>
 
-lemma lem2: 
-  assumes "Q \<Longrightarrow> \<not>R"
-  shows "\<not>Q"
-  sorry
+text \<open>Important Note: Please download Isabelle from the link provided in the slides and bring a 
+      laptop to the large group tutorial. Performing the proofs in Isabelle will be an integral part
+      of those tutorials.\<close>
 
-lemma assumes assum1: "P \<Longrightarrow> Q"
-  assumes assum2: "Q \<Longrightarrow> R"
-  shows "\<not> R \<Longrightarrow> \<not> P"
-  sorry
-  
-lemma assumes assum1: "b = a"
-  assumes assum2: "a \<and> c"
-  shows "b \<and> c"
-  sorry
 
-lemma assumes assum1: "T y"
-  assumes assum2: "A x \<and> A y \<Longrightarrow> x = y"
-  assumes assum3: "\<And>z. T z \<Longrightarrow> A z"
-  assumes assum4: "A x"
-  shows "T x"
+text \<open>Before you start, please open a new Isabelle/HOL theory file called Week\_1.thy and add the
+       following to its beginning.
+
+\noindent theory Week\_1\\
+imports Main\\
+begin
+\<close>
+
+text\<open>\Exercise{Trying out Isabelle}\<close>
+
+
+text\<open>
+In this sheet, you should try out the Isabelle theorem prover.
+Prove the following theorem, first on pen-and-paper, then formally in Isabelle.
+\<close>
+
+lemma
+  assumes T: "T b"
+          and A: "A a \<and> A b \<Longrightarrow> a = b"
+          and TA: "\<And>x. T x \<Longrightarrow> A x"
+          and Aab: "A a"
+  shows "T a"
   sorry
 
 end

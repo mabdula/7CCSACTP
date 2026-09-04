@@ -23,9 +23,9 @@
 \note{
 \begin{itemize}
   \item In the first four weeks, we established the foundations of interactive theorem proving:
-  \item Week 1: Introduction to ITPs, the logical kernel, and Isabelle/HOL basics.
+  \item Week 1: Introduction to ITPs and Isabelle/HOL basics.
   \item Week 2: Mathematical induction and induction hypothesis generalisation.
-  \item Week 3: Functional programming on lists, structural list induction, and basic automation.
+  \item Week 3: Functional programming on lists, structural list induction, and basic automation (\texttt{simp}, \texttt{auto}, \texttt{nitpick}).
   \item Week 4: Custom algebraic datatypes, primitive recursion, and tree induction.
 \end{itemize}
 }
@@ -33,9 +33,9 @@
 \begin{itemize}
   \item \textbf{Covered in Weeks 1--4:}
     \begin{itemize}
-      \item \textbf{Week 1:} ITP fundamentals, logical kernels, and the Isabelle/HOL environment.
+      \item \textbf{Week 1:} ITP fundamentals and the Isabelle/HOL environment.
       \item \textbf{Week 2:} Mathematical induction and induction hypothesis generalisation.
-      \item \textbf{Week 3:} List recursion, structural induction, and proof automation (\texttt{simp}, \texttt{auto}).
+      \item \textbf{Week 3:} List recursion, structural induction, and proof automation (\texttt{simp}, \texttt{auto}, \texttt{nitpick}).
       \item \textbf{Week 4:} Algebraic datatypes, termination size measures, and tree induction.
     \end{itemize}
 \end{itemize}
@@ -48,7 +48,7 @@
 \note{
 \begin{itemize}
   \item Today I will introduce you to the last and most recent part of computer-assisted theorem provers' foundations: AI-assisted theorem proving.
-  \item I will cover two types: classical machine-learning based approaches and LLM-based approaches.
+  \item I will cover two types: classical machine-learning based approaches and modern machine learning-based approaches.
 \end{itemize}
 }
 
@@ -60,11 +60,11 @@
       \item \textbf{Classical machine-learning based approaches:}
         \begin{itemize}
           \item Premise selection \& external automated provers (Sledgehammer).
-          \item Reinforcement learning (RL) loops with compiler verifiers (AlphaProof, Aristotle).
         \end{itemize}
       \vspace{0.4em}
-      \item \textbf{LLM-based approaches:}
+      \item \textbf{Modern machine learning-based approaches:}
         \begin{itemize}
+          \item Reinforcement learning (RL) loops with compiler verifiers (AlphaProof, Aristotle).
           \item Off-the-shelf coding agents via Model Context Protocol (MCP).
           \item Two-stage Draft, Sketch, and Prove (DSP) architectures.
         \end{itemize}
@@ -73,15 +73,16 @@
 \end{frame}
 
 %--------------------------------------------------------------------
-% Slide 1: History: AI & Theorem Proving
+% Slide 1: Sledgehammer
 %--------------------------------------------------------------------
-\begin{frame}{1. History: AI \& Theorem Proving}
+\begin{frame}{1. Sledgehammer}
 \note{
 \begin{itemize}
   \item AI has been considered as a tool to improve theorem proving for a long time by now.
   \item The first and most impactful attempt was the development of Sledgehammer for Isabelle by Larry Paulson et al. \citep{paulson2010three}.
   \item Sledgehammer bridges interactive theorem proving with automated theorem provers (ATPs) and SMT solvers.
-  \item Architecture: Fact Filter (MePo/MaSh) $\to$ TPTP/SMT-LIB $\to$ External Solvers (E, Vampire, Z3) $\to$ Proof Reconstruction via \texttt{metis} in Isabelle Kernel.
+  \item Architecture: Fact Filter (MePo/MaSh) $\to$ TPTP/SMT-LIB $\to$ External Solvers (E, Vampire, Z3) $\to$ Proof Reconstruction in Isabelle Kernel.
+  \item Live demonstration of Sledgehammer in Isabelle.
 \end{itemize}
 }
 
@@ -105,8 +106,10 @@
   \item<3-> \textbf{Core Workflow \& Reconstruction:}
     \begin{itemize}
       \item \textbf{Fact Filter:} Selects relevant lemmas via heuristic/ML filters (MePo, MaSh).
-      \item \textbf{Kernel Soundness:} External proofs are reconstructed natively in Isabelle using \texttt{metis} (preventing soundness bugs from external provers).
+      \item \textbf{Kernel Soundness:} External proofs are reconstructed in Isabelle (preventing soundness bugs from external provers).
     \end{itemize}
+  \vspace{0.2em}
+  \item<4-> \textbf{Demo!}
 \end{itemize}
 \end{frame}
 
@@ -160,29 +163,29 @@
 \begin{frame}{3. Democratisation via Agentic Proving}
 \note{
 \begin{itemize}
-  \item Josef Urban and collaborators discovered that standard, off-the-shelf LLM coding agents are remarkably capable when connected to interactive theorem provers.
+  \item Josef Urban and collaborators discovered that standard, off-the-shelf LLM coding agents are remarkably capable using simple batch builds (\texttt{isabelle build}).
   \item In a recent landmark experiment, standard coding agents formalised an entire 800+ theorem textbook on Topology (Munkres) for $\approx \$200$/month.
-  \item This connects off-the-shelf agents via Model Context Protocol (MCP) servers, eliminating the multi-million-dollar cost of training custom foundation models.
-  \item Any student or researcher with a standard coding agent and a laptop can now interactively formalise mathematics and software.
+  \item Following this, subsequent work connected off-the-shelf agents via Model Context Protocol (MCP) servers for direct, interactive proving.
+  \item Any student or researcher with a standard coding agent and a laptop can now formalise mathematics and software without multi-million-dollar training clusters.
 \end{itemize}
 }
 
 \begin{itemize}
-  \item<1-> \textbf{Off-the-Shelf Coding Agents:}
+  \item<1-> \textbf{Off-the-Shelf Coding Agents (Batch Loop):}
     \begin{itemize}
-      \item Josef Urban et al.\ showed standard coding agents (e.g.\ \emph{Claude Code}, \emph{Agy}) formalised an entire textbook (\emph{Munkres Topology}, 800+ theorems) for $\approx \mathbf{\$200}$ \textbf{/ month}.
+      \item Josef Urban et al.\ showed standard coding agents (e.g.\ \emph{Claude Code}) formalised an entire textbook (\emph{Munkres Topology}, 800+ theorems) using simple \texttt{isabelle build} for $\approx \mathbf{\$200}$ \textbf{/ month}.
     \end{itemize}
   \vspace{0.6em}
-  \item<2-> \textbf{Interactive Proving via MCP:}
+  \item<2-> \textbf{Follow-up: Interactive Proving via MCP:}
     \begin{itemize}
-      \item Direct prover integration via \textbf{Model Context Protocol (MCP)}.
-      \item Replaces large cluster training with accessible API agents.
+      \item Subsequent work connects agents directly via \textbf{Model Context Protocol (MCP)}.
+      \item Replaces batch CLI loops with rich, interactive kernel feedback (no cluster training needed).
     \end{itemize}
   \vspace{0.6em}
   \item<3-> \textbf{Practical Advantages:}
     \begin{itemize}
       \item No specialised GPU infrastructure or training required.
-      \item Fast, interactive feedback loop directly with the Isabelle/HOL logical kernel.
+      \item Fast, interactive feedback loop directly with the Isabelle/HOL environment.
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -231,6 +234,8 @@
       \item \textbf{PIDE-MCP}: \href{https://github.com/kappelmann/isabelle-pide-mcp}{\textcolor{awesome}{github.com/kappelmann/isabelle-pide-mcp}}
       \item \textbf{Isabelle/Q}: \href{https://github.com/awslabs/AutoCorrode}{\textcolor{awesome}{github.com/awslabs/AutoCorrode}} (AWS Labs)
     \end{itemize}
+  \vspace{0.3em}
+  \item<4-> \textbf{Demo!}
 \end{itemize}
 \end{frame}
 
@@ -289,10 +294,20 @@
 \begin{frame}{6. Current State \& Industrial Adoption}
 \note{
 \begin{itemize}
-  \item AI-assisted proving is being adopted in commercial and industrial settings.
+  \item AI-assisted proving and autoformalization are directly solving open mathematical problems.
   \item Specialised companies have secured significant venture capital funding (e.g.\ Harmonic, Math Inc, Axiom Math).
-  \item Major technology companies have adopted formal verification for mission-critical software and hardware systems (e.g.\ AWS, Apple, Arm, Intel).
-  \item Top mathematicians like Terence Tao have actively incorporated agentic formal provers into mainstream mathematical research.
+  \item Industry formal verification:
+    \begin{itemize}
+      \item Apple corecrypto: \href{https://security.apple.com/blog/corecrypto-formal-verification/}{\texttt{security.apple.com}}
+      \item AWS Nitro: \href{https://www.amazon.science/blog/how-formal-verification-makes-aws-nitro-the-first-formally-verified-cloud-hypervisor}{\texttt{amazon.science/nitro-hypervisor}}
+    \end{itemize}
+  \item Mathematical breakthroughs:
+    \begin{itemize}
+      \item Terence Tao: \href{https://terrytao.wordpress.com/}{\texttt{terrytao.wordpress.com}}
+      \item OpenAI Astra: \href{https://github.com/openai/ten-proofs}{\texttt{github.com/openai/ten-proofs}}
+      \item Claude: \href{https://oeis.org/A000729}{\texttt{oeis.org/A000729}}
+      \item Axiom Math: \href{https://primegaps.axiommath.ai/}{\texttt{primegaps.axiommath.ai}}
+    \end{itemize}
 \end{itemize}
 }
 
@@ -301,62 +316,50 @@
     \begin{itemize}
       \item Companies developing formal reasoning tools: \emph{Harmonic}, \emph{Math Inc}, \emph{Axiom Math}.
     \end{itemize}
-  \vspace{0.5em}
-  \item<2-> \textbf{Industrial Applications:}
+  \vspace{0.3em}
+  \item<2-> \textbf{Formal Verification in Industry:}
     \begin{itemize}
-      \item Formal verification in industry:
-        \begin{itemize}
-          \item \textbf{Apple}: Post-quantum cryptography verification in \emph{corecrypto} via AutoCorres2.
-          \item \textbf{AWS}: Automated verification for hypervisors (Nitro) and cloud security policies.
-          \item \textbf{Arm \& Intel}: Hardware, firmware, and instruction set architecture verification.
-        \end{itemize}
+      \item \textbf{Apple}: \href{https://security.apple.com/blog/corecrypto-formal-verification/}{\textcolor{awesome}{Post-quantum cryptography verification}} in \emph{corecrypto} via AutoCorres2.
+      \item \textbf{AWS}: Automated verification for hypervisors (\href{https://www.amazon.science/blog/how-formal-verification-makes-aws-nitro-the-first-formally-verified-cloud-hypervisor}{\textcolor{awesome}{Nitro Hypervisor}}) and cloud security policies.
+      \item \textbf{Arm \& Intel}: Hardware, firmware, and instruction set architecture verification.
     \end{itemize}
-  \vspace{0.5em}
-  \item<3-> \textbf{Mathematical Research:}
+  \vspace{0.3em}
+  \item<3-> \textbf{Mathematical Research \& Breakthroughs:}
     \begin{itemize}
-      \item Mathematicians (e.g.\ Terence Tao) using automated and agentic provers in active research.
+      \item \textbf{Terence Tao}: Integrating \href{https://terrytao.wordpress.com/}{\textcolor{awesome}{autoformalization and agentic provers}} into active research.
+      \item \textbf{OpenAI (Astra)}: Solved \href{https://github.com/openai/ten-proofs}{\textcolor{awesome}{10 open problems}} with machine-checked Lean certificates.
+      \item \textbf{Claude}: Discovered \href{https://oeis.org/A000729}{\textcolor{awesome}{Hadamard matrices}} for all open orders $< 2000$ (e.g.\ order 668).
+      \item \textbf{Axiom Math}: Proved \href{https://primegaps.axiommath.ai/}{\textcolor{awesome}{prime gap bound $\le 212$}} (reduced from 246) in Lean 4.
     \end{itemize}
 \end{itemize}
 \end{frame}
 
 %--------------------------------------------------------------------
-% Slide 7: Closing Remarks & Coursework Guidelines
+% Slide 7: Closing Remarks
 %--------------------------------------------------------------------
-\begin{frame}{7. Closing Remarks \& Coursework Guidelines}
+\begin{frame}{7. Closing Remarks}
 \note{
 \begin{itemize}
-  \item You still need to understand technical details yourself: (1) splitting problems, (2) formal modelling, (3) specifications, (4) proving properties (correct, readable/concise, fast checking).
-  \item Module Guidelines for LLM use:
-    \begin{enumerate}
-      \item Design decisions \& proof sketches: Explore alternatives and justify choices.
-      \item Proving lower-level facts: Allowed ONLY for facts referencing standard Isabelle distribution definitions. Do NOT use LLMs for facts about your own defined constants.
-    \end{enumerate}
-  \item Coursework includes a Viva where you must defend your design choices.
-  \item Assessment: 50% Coursework (includes Viva) + 50% Exam (paper-based written examination).
+  \item Even with modern AI assistance, you still need to master the foundational formalisation skills yourself:
+  \item (1) Splitting complex problems into manageable formal subproblems.
+  \item (2) Formally modelling problem domains.
+  \item (3) Formulating mathematically sound, correct specifications.
+  \item (4) Constructing correct, readable, concise, and fast-checking proofs.
 \end{itemize}
 }
 
 \begin{itemize}
-  \item<1-> \textbf{Core Skills You Must Master Yourself:}
+  \item \textbf{Core Skills You Must Master Yourself:}
     \begin{enumerate}
+      \vspace{0.4em}
       \item Splitting problems into manageable formal subproblems.
+      \vspace{0.4em}
       \item Formally modelling problem domains.
+      \vspace{0.4em}
       \item Formulating mathematically sound, correct specifications.
+      \vspace{0.4em}
       \item Constructing correct, readable, concise, and fast-checking proofs (Isabelle linter).
     \end{enumerate}
-  \vspace{0.3em}
-  \item<2-> \textbf{Module Guidelines for LLM Use in Coursework:}
-    \begin{enumerate}
-      \item \textbf{Design decisions \& proof sketches:} Allowed for exploring alternatives (must defend and justify choices).
-      \item \textbf{Proving lower-level facts:} Allowed \textbf{ONLY} for facts referencing standard Isabelle distribution definitions.
-      \item \textbf{Strict Prohibition:} Do \textbf{NOT} use LLMs for facts about your own defined constants!
-    \end{enumerate}
-  \vspace{0.3em}
-  \item<3-> \textbf{Assessment (50\% Coursework + 50\% Exam):}
-    \begin{itemize}
-      \item \textbf{Coursework (50\%):} Includes a mandatory \textbf{Viva} where you must defend your formal design choices and proof architecture.
-      \item \textbf{Exam (50\%):} Paper-based written examination testing your independent understanding of formal reasoning and proof techniques.
-    \end{itemize}
 \end{itemize}
 \end{frame}
 
