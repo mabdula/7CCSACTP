@@ -1,11 +1,11 @@
-\begin{tikzpicture}[node distance=1.4cm, auto, >=stealth, thick, font=\scriptsize]
-  \node [boxnode, fill=blue!8, minimum width=2.2cm] (policy) {\scriptsize \textbf{Policy Model $\pi_\theta$}\\[0.1em] \tiny Generates Proof Steps / Tactics};
-  \node [boxnode, fill=orange!8, right=1.5cm of policy, minimum width=2.2cm] (kernel) {\scriptsize \textbf{Formal Kernel}\\[0.1em] \tiny Lean / Isabelle Verifier};
-  \node [boxnode, fill=green!8, below=0.7cm of kernel, minimum width=2.2cm] (reward) {\scriptsize \textbf{Verifier Feedback}\\[0.1em] \tiny Pass (+1) / Fail (0)};
-  \node [boxnode, fill=purple!8, below=0.7cm of policy, minimum width=2.2cm] (rl) {\scriptsize \textbf{RL Optimiser}\\[0.1em] \tiny Policy Gradient (PPO/GRPO)};
+\begin{tikzpicture}[node distance=1.1cm and 1.3cm, auto, >=stealth, thick, font=\scriptsize]
+  \node [boxnode, fill=blue!6, minimum width=2.0cm, minimum height=0.6cm, inner sep=3pt] (policy) {\scriptsize \textbf{Policy Model $\pi_\theta$}\\[0.05em] \tiny Generates Proof Steps};
+  \node [boxnode, fill=orange!8, right=1.2cm of policy, minimum width=2.0cm, minimum height=0.6cm, inner sep=3pt] (kernel) {\scriptsize \textbf{Formal Kernel}\\[0.05em] \tiny Lean / Isabelle Verifier};
+  \node [boxnode, fill=green!8, below=0.45cm of kernel, minimum width=2.0cm, minimum height=0.6cm, inner sep=3pt] (reward) {\scriptsize \textbf{Verifier Reward}\\[0.05em] \tiny Pass (+1) / Fail (0)};
+  \node [boxnode, fill=purple!8, below=0.45cm of policy, minimum width=2.0cm, minimum height=0.6cm, inner sep=3pt] (rl) {\scriptsize \textbf{RL Optimiser}\\[0.05em] \tiny PPO / GRPO Update};
 
-  \draw [->] (policy) -- node [above] {\tiny Proof Candidate} (kernel);
-  \draw [->] (kernel) -- node [right] {\tiny State / Error} (reward);
-  \draw [->] (reward) -- node [below] {\tiny Reward $R$} (rl);
-  \draw [->] (rl) -- node [left] {\tiny Parameter Update $\Delta \theta$} (policy);
+  \draw [->] (policy) -- node [above, font=\tiny] {Candidate} (kernel);
+  \draw [->] (kernel) -- node [right, font=\tiny] {State} (reward);
+  \draw [->] (reward) -- node [below, font=\tiny] {Reward $R$} (rl);
+  \draw [->] (rl) -- node [left, font=\tiny] {$\Delta \theta$} (policy);
 \end{tikzpicture}
