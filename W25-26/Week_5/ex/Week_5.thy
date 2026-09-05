@@ -18,7 +18,7 @@ text \<open>
       \begin{center}
         \texttt{git clone -b Isabelle2025-2 https://github.com/kappelmann/isabelle-pide-mcp}
       \end{center}
-    \item \textbf{Read README \& Register Component}: Follow the instructions in the repository's
+    \item \textbf{Register Component}: Follow the instructions in the repository's
       \texttt{README.md} to register the MCP server as an Isabelle component:
       \begin{center}
         \texttt{isabelle components -u <path-to-isabelle-pide-mcp>}
@@ -26,12 +26,29 @@ text \<open>
       Please read the \texttt{README.md} carefully for full setup and agent configuration options.
     \item \textbf{Recommended Coding Agent}: We recommend using \textbf{OpenCode} (\url{https://opencode.ai}),
       an open-source terminal coding agent supporting MCP. OpenCode connects to free model tiers
-      (such as Google Gemini 2.5 Flash / Flash-Lite or local models via Ollama), allowing you to
-      complete the exercises completely free of charge.
+      (such as \texttt{opencode/big-pickle}, Google Gemini 2.5 Flash / Flash-Lite, or local models via Ollama),
+      allowing you to complete the exercises completely free of charge.
+    \item \textbf{Building Skill Files \& Agent Definitions}:
+      In OpenCode, you can define specialized \textbf{skills} and \textbf{subagents}:
+      \begin{itemize}
+        \item \emph{Skills}: Stored in \texttt{.opencode/skills/<name>/SKILL.md} or \texttt{\textasciitilde/.agents/skills/<name>/SKILL.md}
+          with YAML frontmatter (\texttt{name}, \texttt{description}) followed by instructions.
+        \item \emph{Subagents}: Stored in \texttt{.opencode/agents/<name>.md} or \texttt{\textasciitilde/.config/opencode/agents/<name>.md}
+          with frontmatter specifying \texttt{mode: all}, \texttt{model}, and a dedicated system prompt.
+      \end{itemize}
+    \item \textbf{The Four Agent Proving Roles}:
+      As discussed in the lectures on agentic proving architectures, complex formal proofs benefit from
+      coordinating four specialized roles:
+      \begin{enumerate}
+        \item \textbf{Planner / Sketcher Agent}: High-level architectural reasoning, decomposing main goals,
+          discovering auxiliary invariant lemmas, and sketching Isar proof skeletons with \texttt{sorry}.
+        \item \textbf{Prover / Coder Agent}: Tactical execution, expanding equations, and filling routine subgoals.
+        \item \textbf{Repairer Agent}: Interactive compiler feedback loop via \texttt{isabelle-pide-mcp}, inspecting
+          goal states, diagnosing type/syntax errors and failed tactics, generalizing variables, and eliminating \texttt{sorry}.
+        \item \textbf{Critic / Sledgehammer Agent}: Soundness evaluation, circularity checks, and invoking automated
+          provers (E, Vampire, Z3, CVC4) to compress multi-line proofs into single-line automated steps.
+      \end{enumerate}
   \end{enumerate}
-
-  Below, we investigate model finding (counterexample generation), the two-stage ``Draft, Sketch,
-  and Prove'' (DSP) paradigm using structured Isar proofs, and automated proof search using Sledgehammer.
 \<close>
 
 text \<open>\Exercise{Recursive Summation and Counterexample Finding}\<close>
@@ -155,6 +172,91 @@ text \<open>
 lemma sum_upto_acc_gauss: "2 * sum_upto_acc n 0 = n * (n + 1)"
 (*<*)
   using sum_upto_acc_eq[of n 0] sum_upto_gauss by simp
+(*>*)
+
+text \<open>\Exercise{Multi-Agent Proof Engineering: Stack Machine Compiler Correctness}\<close>
+
+text \<open>
+  A classic benchmark in verified compilation is the correctness of an expression compiler targeting
+  a stack machine.
+  Consider an expression datatype supporting integer constants, addition, and multiplication:
+\<close>
+
+datatype exp = Val int | Plus exp exp | Mult exp exp
+
+datatype instr = PUSH int | ADD | MULT
+
+fun eval :: "exp \<Rightarrow> int" where
+  "eval (Val n) = n"
+| "eval (Plus e1 e2) = eval e1 + eval e2"
+| "eval (Mult e1 e2) = eval e1 * eval e2"
+
+text \<open>
+  The stack machine executes a sequence of instructions on an integer stack:
+\<close>
+
+fun exec :: "instr list \<Rightarrow> int list \<Rightarrow> int list" where
+  "exec [] s = s"
+| "exec (PUSH n # ins) s = exec ins (n # s)"
+| "exec (ADD # ins) (n2 # n1 # s) = exec ins ((n1 + n2) # s)"
+| "exec (ADD # ins) _ = []"
+| "exec (MULT # ins) (n2 # n1 # s) = exec ins ((n1 * n2) # s)"
+| "exec (MULT # ins) _ = []"
+
+text \<open>
+  The compiler compiles an expression into a list of postfix instructions:
+\<close>
+
+fun compile :: "exp \<Rightarrow> instr list" where
+  "compile (Val n) = [PUSH n]"
+| "compile (Plus e1 e2) = compile e1 @ compile e2 @ [ADD]"
+| "compile (Mult e1 e2) = compile e1 @ compile e2 @ [MULT]"
+
+text \<open>
+  \paragraph{Task A: Direct Proof Failure with a Single LLM Agent}
+  The target correctness theorem states:
+  \[
+    \text{exec}(\text{compile}(e), []) = [\text{eval}(e)]
+  \]
+  \begin{enumerate}
+    \item Attempt to prove this theorem directly in one shot using OpenCode with a free model tier
+      (e.g., \texttt{opencode/big-pickle} or Gemini Flash) via the Isabelle PIDE MCP server.
+    \item \textbf{Observe and document the failure}: Direct structural induction on $e$ fails because
+      \texttt{compile} concatenates instruction sequences with \texttt{@}, whereas \texttt{exec} is
+      defined recursively on instruction lists. Without an append-distribution or continuation lemma,
+      the induction hypothesis cannot be applied to recursive subexpressions. A single-shot LLM typically
+      gets stuck in infinite repair loops, generates invalid Isar scopes, or hallucinates non-existent lemmas.
+  \end{enumerate}
+
+  \paragraph{Task B: Skill Engineering for Multi-Agent Proving}
+  Now, build two cooperating skill files (or subagent definitions) in OpenCode:
+  \begin{enumerate}
+    \item \textbf{Planner Skill (\texttt{isabelle-planner})}:
+      Creates a proof plan by discovering the necessary generalized invariant:
+      \[
+        \text{exec}(\text{compile}(e) @ \text{ins}, s) = \text{exec}(\text{ins}, \text{eval}(e) \# s)
+      \]
+      The planner drafts this lemma with \texttt{sorry}, and completes the proof of
+      \texttt{compiler\_correct} by instantiating the helper lemma with empty lists (\texttt{ins = []}, \texttt{s = []}).
+      \emph{Important}: Name the instruction stream variable \texttt{ins} or \texttt{ils}; do \textbf{not}
+      name it \texttt{is}, because \texttt{is} is a reserved Isar keyword!
+    \item \textbf{Repairer Skill (\texttt{isabelle-repairer})}:
+      Connects to \texttt{isabelle-pide-mcp} to inspect compiler diagnostics and remaining subgoals.
+      The repairer reads the sorried lemma, supplies the generalization variables
+      (\texttt{induction e arbitrary: ins s}), handles algebraic properties, and verifies that the proof
+      reaches 0 errors and eliminates all \texttt{sorry} statements.
+  \end{enumerate}
+  Verify that chaining your Planner agent followed by your Repairer agent successfully solves the theorem!
+\<close>
+
+lemma exec_compile: "exec (compile e @ ins) s = exec ins (eval e # s)"
+(*<*)
+  by (induction e arbitrary: ins s) simp_all
+(*>*)
+
+theorem compiler_correct: "exec (compile e) [] = [eval e]"
+(*<*)
+  using exec_compile[where ins="[]" and s="[]"] by simp
 (*>*)
 
 (*<*)
