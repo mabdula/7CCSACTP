@@ -1,0 +1,62 @@
+WEBVTT
+
+
+1
+00:00:00.000 --> 00:00:11.840
+In this video, what are we doing? We're doing backward reasoning, okay? So backward reasoning,
+
+2
+00:00:20.960 --> 00:00:32.350
+so intuitively, backward reasoning doesn't have a logical difference from forward reasoning.
+
+3
+00:00:32.990 --> 00:00:40.110
+What do I mean by that? At the end of the day, both of them are modus ponens in either you apply it
+
+4
+00:00:40.110 --> 00:00:45.630
+backwards or forwards. So let me just give you the very intuitive idea behind backwards reasoning,
+
+5
+00:00:45.630 --> 00:00:50.620
+and then I will show you how to do it in Isabelle, but I don't think you need to write,
+
+6
+00:00:51.900 --> 00:00:55.740
+like, I don't think you can use it to write pen and paper proofs. So backward reasoning is
+
+7
+00:00:55.740 --> 00:01:08.340
+the following, okay? So the idea, backwards reasoning. So intuition, and then I will just do an
+
+8
+00:01:08.580 --> 00:01:48.350
+example. Intuition is if you want to prove p and you know how to prove, sorry, and you already have
+
+9
+00:01:48.350 --> 00:02:00.610
+proved that, and you already have effect, and you have that, for example, some q, from some q, you
+
+10
+00:02:00.610 --> 00:02:33.100
+can derive p. Then with backward reasoning, you can change the goal of proving p to q. What does
+
+11
+00:02:33.100 --> 00:02:40.500
+that mean? If I want to prove p and I know that I always can derive p from q, then if I prove q,
+
+12
+00:02:41.300 --> 00:02:50.260
+then I know I can derive p from that using this fact. So basically, let's go in Isabelle to show
+
+13
+00:02:50.260 --> 00:02:56.580
+you how that works. Or maybe let me just try and look at how the goals would evolve here in the
+
+14
+00:02:56.580 --> 00:03:12.910
+paper. So if you have a goal, so let me just write it down. That is to say, if the goal is p
+
+15
+00:03:12.910 --> 00:03:30.370
+using q, we can change the goal to q.

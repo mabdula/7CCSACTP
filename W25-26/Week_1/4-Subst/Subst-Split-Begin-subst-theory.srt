@@ -1,0 +1,227 @@
+1
+00:00:00,000 --> 00:00:23,750
+In this video, I'll be talking to you about substitution, so proofs by substitution, which
+
+2
+00:00:23,750 --> 00:00:28,520
+is another basic, very basic and elementary way of proving things.
+
+3
+00:00:28,520 --> 00:00:35,620
+So basically, what I'm doing in these few videos, so the theory behind proving something by substitution
+
+4
+00:00:35,620 --> 00:01:04,160
+is the following, suppose we have a theorem saying, let's say, that X equals Y, okay? Or
+
+5
+00:01:04,160 --> 00:01:10,520
+like, not X equals Y, I would just use like a mixture of Isabelle and Isabelle notation,
+
+6
+00:01:10,520 --> 00:01:23,240
+so for all X, let's make it more concrete, maybe, so let's say that this, like we have
+
+7
+00:01:23,240 --> 00:01:37,110
+a theorem that says that X, for all X, if you have an X and you add a Y to it, then you can
+
+8
+00:01:37,110 --> 00:01:44,070
+substitute that with a Y and an X, so for any X and Y, X plus Y equals Y plus X, which is
+
+9
+00:01:44,070 --> 00:01:47,820
+a commutativity of addition, suppose we have that.
+
+10
+00:01:47,820 --> 00:02:11,230
+Suppose we have, so if we have a theorem saying that, and we have a goal saying, let's say,
+
+11
+00:02:11,230 --> 00:02:24,150
+so I will just use the same notation, so goal saying 1 plus 3 is greater than or equal
+
+12
+00:02:24,150 --> 00:02:49,940
+to 3 plus 1, then we can substitute that lemma, which I'll call here lemma 1, for example, in
+
+13
+00:02:49,940 --> 00:03:11,600
+the goal, and from that we get a new goal, which says that 3 plus 1 is greater than or
+
+14
+00:03:11,600 --> 00:03:20,380
+equal to 3 plus 1, and so that basically is the, these are the mechanics of the operation.
+
+15
+00:03:20,380 --> 00:03:36,060
+So when does it make sense?
+
+16
+00:03:36,060 --> 00:03:49,760
+If the right-hand side of the lemma, and I will just call this any lemma of that form,
+
+17
+00:03:49,760 --> 00:04:03,360
+I'll just call these, which is the standard name in Isabelle, in Isabelle literature, so
+
+18
+00:04:03,360 --> 00:04:15,240
+I'll call this, if the right-hand side of the simplification rule, this improve for short,
+
+19
+00:04:15,240 --> 00:04:34,300
+is simpler than the LHS, or optimally, even if we already have a proof of the right-hand
+
+20
+00:04:34,300 --> 00:04:45,250
+side.
+
+21
+00:04:45,250 --> 00:04:50,250
+Okay, so that basically is the mechanic, this is the mechanics, then I will just show you
+
+22
+00:04:50,250 --> 00:04:58,900
+how to do like a simple proof example here on the board as usual, and then on Isabelle.
+
+23
+00:04:58,900 --> 00:05:06,420
+So let's say the following, so I will do the same thing, we will have like a theorem statement,
+
+24
+00:05:06,420 --> 00:05:14,620
+and then we will need to come up with the lemmas, to guess some lemmas basically, and
+
+25
+00:05:14,620 --> 00:05:23,150
+then use those lemmas to prove that theorem, in this case, this will just be proved by only
+
+26
+00:05:23,150 --> 00:05:25,080
+substitution, okay?
+
+27
+00:05:25,080 --> 00:05:41,210
+So let's say, so example, suppose we want to prove that x plus y times a plus b, or all
+
+28
+00:05:41,210 --> 00:05:53,800
+these are natural numbers, equals x times a plus x times b plus y times a plus y times
+
+29
+00:05:53,800 --> 00:06:21,610
+b, these are all natural numbers, so okay, so what's, what is the first step of the proof
+
+30
+00:06:21,610 --> 00:06:22,610
+here?
+
+31
+00:06:22,610 --> 00:06:29,750
+So let's say one, for example, so earlier when we did backward and forward reasoning,
+
+32
+00:06:29,750 --> 00:06:33,710
+we would take the assumptions and then go forward from them, but here we will take one side of
+
+33
+00:06:33,710 --> 00:06:39,590
+the equation and then keep substituting and changing it by substituting, so I'll just
+
+34
+00:06:39,590 --> 00:06:52,250
+say, let's just take the left-hand side, so we say x plus y times a plus b, then what?
+
+35
+00:06:52,250 --> 00:06:53,770
+How can we proceed?
+
+36
+00:06:53,770 --> 00:07:01,790
+So we will, we will basically, I'll just write down the steps, which are very simple, and
+
+37
+00:07:01,790 --> 00:07:15,280
+then we can figure out the, the, the, the lemmas that are needed to do those steps.
+
+38
+00:07:15,280 --> 00:07:21,220
+So if we say x plus y, x plus y, if we want to simplify that expression, we would just
+
+39
+00:07:21,220 --> 00:07:36,480
+use the normal distributivity law of addition, so we then get an x plus y, x plus y times
+
+40
+00:07:36,480 --> 00:07:54,420
+a plus x plus y times b, so here what's the lemma here that we use, so this is just using
+
+41
+00:07:54,420 --> 00:08:03,580
+distributivity and then we can then further analyze that, so we can take the right-hand
+
+42
+00:08:03,580 --> 00:08:16,200
+side of the previous equation, say x plus y times a plus x plus y times b, again we apply
+
+43
+00:08:16,200 --> 00:08:25,730
+the left distributivity, so we then have an x, so, so let's just write distributivity lemmas
+
+44
+00:08:25,730 --> 00:08:38,360
+explicitly so that it's clear what's going on, so here, let me just, so we use, using
+
+45
+00:08:38,360 --> 00:09:01,820
+a lemma that says, for any x, like x times any, let's say, a plus b, this is the lemma,
+
+46
+00:09:01,820 --> 00:09:20,300
+basically, we just call this lemma 1 equals x times a plus x times b, so I'll just call
+
+47
+00:09:20,300 --> 00:09:28,430
+this lemma 1, right, and this is like a simplification rule, this is the left distributivity of addition
+
+48
+00:09:28,430 --> 00:09:34,310
+and then we can do the right distributivity of addition, so we can, for example, analyze
+
+49
+00:09:34,310 --> 00:09:45,370
+that, that part, x plus y times a, so we can say x, so we can say this equals x times a
+
+50
+00:09:45,370 --> 00:09:58,640
+plus y times a plus x plus y times b, and this is going to be using lemma 2, which is
+
+51
+00:09:58,640 --> 00:10:10,400
+a plus b times x equals a times x, for any, this is, of course, all of these are quantified,
+
+52
+00:10:10,400 --> 00:10:21,000
+so that's why we have the question marks, plus b times x, okay, and then we apply the
+
+53
+00:10:21,000 --> 00:10:28,320
+same lemma tool, so we get, we proceed with number, with step number 3, so we take that
+
+54
+00:10:28,320 --> 00:10:38,130
+right-hand side and I will just write dots here, and then I will say x times a plus y
+
+55
+00:10:38,130 --> 00:10:49,790
+times a plus x times b plus y times b, and that also is using, okay, and then we have
+
+56
+00:10:49,790 --> 00:10:57,760
+our proof, so here, as you can see, we just did three steps of substitution, both of them
+
+57
+00:10:57,760 --> 00:11:02,890
+are depending on those laws of addition, so that's very simple.

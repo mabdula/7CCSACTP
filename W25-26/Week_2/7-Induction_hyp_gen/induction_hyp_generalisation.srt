@@ -1,0 +1,703 @@
+1
+00:00:01,230 --> 00:00:10,450
+Hello, everyone. Today, I will quickly do one of the problems from the large group tutorial
+
+2
+00:00:10,450 --> 00:00:31,940
+here. So, the problem that we are doing today focuses on something called the induction hypothesis
+
+3
+00:00:31,940 --> 00:00:38,110
+generalisation. So, when you're doing mathematical induction and your induction hypothesis is not
+
+4
+00:00:38,110 --> 00:00:51,140
+strong enough to be applied, how can you strengthen it or generalise it? So, let me just remind you
+
+5
+00:00:51,140 --> 00:01:02,560
+of mathematical induction and how we use it and then tell you the problem. So, let me just recall
+
+6
+00:01:04,420 --> 00:01:34,270
+that to prove that a property P with natural numbers n, we prove two things. We have to prove two things,
+
+7
+00:01:34,270 --> 00:01:42,060
+right? The first one is that the property holds for zero, okay? Base case. And the second case
+
+8
+00:01:42,860 --> 00:01:53,390
+is that if you know that the property holds for number n from that, you can show that the
+
+9
+00:01:53,390 --> 00:02:03,170
+property holds for number n plus 1, which in our terminology will be that the property holds for
+
+10
+00:02:03,170 --> 00:02:17,490
+the successor of n, okay? So, that is proof by a mathematical induction is like that.
+
+11
+00:02:18,130 --> 00:02:28,430
+And we call this the induction hypothesis, okay? Let me also make a small remark, which is that
+
+12
+00:02:31,390 --> 00:02:51,500
+try to prove, if you want to prove something by induction, a theorem by mathematical induction,
+
+13
+00:03:09,150 --> 00:03:28,480
+use that schema or that rule, which is that in order to prove P, you have to prove P of zero
+
+14
+00:03:28,480 --> 00:03:43,580
+and this second goal or that schema or that rule or that recipe as mechanically as possible,
+
+15
+00:03:43,580 --> 00:04:12,030
+as mechanically as you can. What does that mean? That is to say, identify the P you are proving.
+
+16
+00:04:21,060 --> 00:04:35,010
+That's step number one. Step number two, apply the schema. Step number three, see if you can
+
+17
+00:04:38,270 --> 00:05:07,580
+use the induction hypothesis, the goal, to prove the step case. You have two cases. If yes,
+
+18
+00:05:10,130 --> 00:05:41,360
+then that's fine. If no, then try to find a more general P. Let's call it P prime. And then
+
+19
+00:05:45,900 --> 00:05:59,740
+go to step two, okay? Usually this thing, this step here, or this second branch,
+
+20
+00:06:00,620 --> 00:06:12,740
+usually here, usually you will need to quantify. You can do this. You can come up with this.
+
+21
+00:06:13,620 --> 00:06:23,150
+You can come up with P prime by
+
+22
+00:06:23,870 --> 00:06:36,820
+quantifying, by introducing a universal quantifier or something as simple as that.
+
+23
+00:06:54,080 --> 00:06:59,550
+Now that we're done with this, with the general idea, let's try and apply that to
+
+24
+00:06:59,950 --> 00:07:10,350
+an example. That example is the second problem in the large group tutorial
+
+25
+00:07:11,630 --> 00:07:32,660
+cheat. Prove that A is smaller than or equal to B and C is smaller than or equal to D.
+
+26
+00:07:35,700 --> 00:07:40,820
+So that if A is smaller than or equal to B and C is smaller than or equal to D, then
+
+27
+00:07:41,780 --> 00:07:47,970
+A multiplied by C is smaller than or equal to B multiplied by D. And I will tell you,
+
+28
+00:07:47,970 --> 00:08:13,250
+let's do that by induction on D. So we prove it by induction on D. So step number one,
+
+29
+00:08:13,970 --> 00:08:36,880
+what is P, okay? What is P which we are trying, the P that we're trying to prove is
+
+30
+00:08:38,910 --> 00:08:44,830
+the entire theorem statement, okay? So it is the whole thing. Not just the conclusion of
+
+31
+00:08:44,830 --> 00:08:53,790
+the theorem statement, but the entire theorem statement. So that is the P, okay? So
+
+32
+00:08:54,750 --> 00:09:08,590
+I'll write that there. So the P is that if given an A and the B and the C and the D,
+
+33
+00:09:08,590 --> 00:09:19,620
+if A is less than or equal to B and C is less than or equal to D, then A multiplied by C is smaller
+
+34
+00:09:19,620 --> 00:09:32,530
+than or equal to B multiplied by D, okay? First of all, that is the P, okay? Now, okay, so that's
+
+35
+00:09:32,530 --> 00:09:39,090
+step number one in our schema. Now apply step number one in this recipe, which is this step,
+
+36
+00:09:39,090 --> 00:09:48,220
+okay? Now we're in this step. So apply the induction schema. So basically, we say,
+
+37
+00:09:50,190 --> 00:10:10,820
+we try to find out what is the base case and what is the step case. So the base case is,
+
+38
+00:10:10,820 --> 00:10:16,100
+we're doing induction on D. So the base case will be P of zero. So P of zero. So
+
+39
+00:10:17,250 --> 00:10:27,010
+this zero we passed in as the value of D. So that is, so this is the base case. So P of zero,
+
+40
+00:10:27,010 --> 00:10:36,160
+which is equivalent to saying that we want to prove that A is smaller than or equal to B implies
+
+41
+00:10:36,160 --> 00:10:43,700
+C is smaller than or equal to zero implies A multiplied by C is smaller than or equal to B
+
+42
+00:10:43,700 --> 00:10:58,740
+multiplied by zero, okay? So the base case, to prove the base case, our first step is to say that
+
+43
+00:11:00,140 --> 00:11:11,980
+C equals zero, okay? And then I will write again our assumptions on the right here. So if
+
+44
+00:11:11,980 --> 00:11:20,260
+anything, if X is smaller than zero, then that implies X equals zero. So we have, let C is smaller
+
+45
+00:11:20,260 --> 00:11:27,860
+than or equal to zero. That implies that C equals zero. But let me just rewrite something before I
+
+46
+00:11:27,860 --> 00:11:35,620
+continue the proof. Let me just rewrite that. So I will just copy that and rewrite it in the form
+
+47
+00:11:35,620 --> 00:11:41,220
+of assumptions and the goal, okay? So what are the assumptions that we have here? The assumptions
+
+48
+00:11:41,220 --> 00:11:53,620
+that we have here are 1A smaller than or equal to B, 2C smaller than or equal to zero, okay? And
+
+49
+00:11:53,620 --> 00:12:03,150
+the goal is A is multiplied by C is smaller than or equal to B multiplied by zero, okay? So that is,
+
+50
+00:12:03,150 --> 00:12:12,350
+so I copied that and just simply rewrote it like this, okay? So from that we have
+
+51
+00:12:12,910 --> 00:12:28,610
+in the first step, C equals zero. This follows from lemma one and assumption two. And then
+
+52
+00:12:29,790 --> 00:12:50,580
+step number two, A multiplied by C equals zero. And again, this should follow from a lemma
+
+53
+00:12:51,630 --> 00:13:00,590
+saying that anything multiplied by zero equals zero. X multiplied by zero equals zero.
+
+54
+00:13:00,590 --> 00:13:16,460
+Sorry, so before I do that, we missed a smaller step. So A multiplied by zero equals zero from
+
+55
+00:13:18,640 --> 00:13:52,690
+lemma two and then 3A multiplied by C equals zero from step two and substituting one,
+
+56
+00:13:53,740 --> 00:14:02,940
+substituting step one, right? So substituting this, let C equals zero. And then four, we can say that
+
+57
+00:14:03,920 --> 00:14:12,640
+A multiplied by C is smaller than or equal to B multiplied by zero, which is our goal. Based on
+
+58
+00:14:12,640 --> 00:14:25,470
+the lemma, that should say any zero is smaller than or equal to any X, okay? So that is from
+
+59
+00:14:26,510 --> 00:14:46,610
+lemma number three, okay? So now let's go to the step case. What is the step case? Again,
+
+60
+00:14:47,410 --> 00:14:52,290
+the P, as I said, is the whole thing, is the whole theorem statement. So what is the step
+
+61
+00:14:52,290 --> 00:14:59,490
+case? Based on our recipe, is that if we have P of N, then from that we can get P of N plus one,
+
+62
+00:14:59,490 --> 00:15:06,610
+okay? N here is going to be the D, and N plus one is going to be the D plus one or suck D,
+
+63
+00:15:06,610 --> 00:15:12,860
+okay? So let me rewrite that. So basically what we want to prove is, if you have an A
+
+64
+00:15:12,940 --> 00:15:17,460
+that is smaller than or equal to B, sorry, an A that is smaller than or equal to C,
+
+65
+00:15:19,900 --> 00:15:29,790
+the theorem statement again, and a B that is, sorry, that's the theorem statement,
+
+66
+00:15:29,790 --> 00:15:40,880
+A is smaller than or equal to B, and C smaller than or equal to D, then we have A multiplied by
+
+67
+00:15:42,690 --> 00:16:01,440
+C smaller than or equal to B multiplied by D. That is P of N, which is the induction hypothesis.
+
+68
+00:16:01,440 --> 00:16:05,520
+And we want to show that if we have that, this implies, from that we can show that
+
+69
+00:16:07,220 --> 00:16:16,000
+A smaller than or equal to B, implies C smaller than or equal to D, implies A multiplied by C
+
+70
+00:16:16,000 --> 00:16:24,290
+smaller than or equal to B multiplied by the successor of D, okay? So that's the goal,
+
+71
+00:16:24,290 --> 00:16:43,730
+okay? And that this is P of N plus one, okay? P of suck N, okay? Okay. Now, again, I will write
+
+72
+00:16:43,730 --> 00:16:50,990
+that in the form of assumptions and a goal, okay? So what are our assumptions? So assumptions,
+
+73
+00:16:54,530 --> 00:17:26,380
+the first assumption is the induction hypothesis, which is that, so we'll just copy that, okay?
+
+74
+00:17:27,920 --> 00:17:42,700
+And the second assumption is that, is the assumption of that and the, sorry, and this one should be
+
+75
+00:17:42,700 --> 00:17:51,900
+suck D, because as I said, we want to prove, this is supposed to be the P of suck N, and N
+
+76
+00:17:51,900 --> 00:17:59,660
+is just the D here. So the second assumption is A smaller than or equal to B, and then the second,
+
+77
+00:17:59,660 --> 00:18:04,940
+and the third assumption should be the third assumption of our goal, the second assumption
+
+78
+00:18:04,940 --> 00:18:12,660
+of what we want to prove, which is C smaller than or equal to the successor of D. And the goal
+
+79
+00:18:14,020 --> 00:18:25,300
+is that we want to prove is that A multiplied by C is smaller than or equal to B multiplied by the
+
+80
+00:18:25,300 --> 00:18:37,230
+successor of D, okay? So now, let us prove it. So the proof, the first step of the proof,
+
+81
+00:18:37,950 --> 00:18:45,940
+we want to show that because C is more than or equal to the successor of D, then C minus one is
+
+82
+00:18:46,020 --> 00:18:53,780
+more than or equal to D, okay? So we want to just have C minus one is more than or equal to D, okay?
+
+83
+00:18:53,780 --> 00:19:22,050
+So we can get that by assuming a lemma here, which says that if I know that
+
+84
+00:19:25,970 --> 00:19:31,890
+A is more than or equal to the successor, not A and B, I'll just use X and Y so that it's clear
+
+85
+00:19:31,890 --> 00:19:40,370
+we're talking about general lemmas. So if X is more than or equal to the successor of Y, then X minus one
+
+86
+00:19:40,370 --> 00:19:51,090
+is more than or equal to Y, okay? So this should follow from lemma four and assumption three.
+
+87
+00:20:02,740 --> 00:20:09,700
+The second step here, okay, so now we want to apply the induction hypothesis.
+
+88
+00:20:10,400 --> 00:20:13,680
+So the induction hypothesis says that C is more than or equal to D, okay?
+
+89
+00:20:17,120 --> 00:20:21,520
+In order for us to apply the induction hypothesis, we need to show that the assumptions of the
+
+90
+00:20:21,520 --> 00:20:27,120
+induction hypothesis hold. We need to prove both of those assumptions. We only could prove that C
+
+91
+00:20:27,760 --> 00:20:33,120
+minus one is smaller than or equal to D. We could not prove that C is more than or equal to D,
+
+92
+00:20:33,120 --> 00:20:38,720
+right? We don't know that C is more than or equal to D. So in order for us to use this
+
+93
+00:20:38,720 --> 00:20:46,320
+induction hypothesis, we can use that to show that this assumption holds, but how can we show that
+
+94
+00:20:46,320 --> 00:20:57,170
+the second assumption holds? How can we do that? We cannot do that with this step that we have here,
+
+95
+00:20:57,170 --> 00:21:05,010
+which means that we cannot currently, we cannot apply this induction hypothesis. So remember,
+
+96
+00:21:05,010 --> 00:21:10,500
+let's go back to the simple schema that I gave you. So see if you can use the induction
+
+97
+00:21:10,500 --> 00:21:15,540
+hypothesis to prove the step, okay? If yes, then it's fine. If no, then we can try to find a more
+
+98
+00:21:15,540 --> 00:21:22,700
+general P. So we strengthen our P, usually by universally quantifying over some variable
+
+99
+00:21:22,700 --> 00:21:31,840
+that we cannot instantiate currently. So here, our problem is that we cannot instantiate
+
+100
+00:21:31,840 --> 00:21:36,640
+this C with C minus one, okay? We have here C minus one is more than or equal to D. We
+
+101
+00:21:36,640 --> 00:21:42,640
+cannot use that to prove that C, that C is more than or equal to the induction hypothesis,
+
+102
+00:21:42,640 --> 00:21:47,200
+right? So we need to strengthen, we need to generalise that assumption to be able to basically
+
+103
+00:21:47,200 --> 00:21:56,500
+use C minus one instead of C. How can we do that? It can simply be done by strengthening the P
+
+104
+00:21:59,040 --> 00:22:05,980
+and turning it into this universally quantified P, okay? So let me
+
+105
+00:22:06,780 --> 00:22:18,880
+just insert a P prime there. So copy all of that and give some space for the P prime, okay?
+
+106
+00:22:18,880 --> 00:22:49,780
+So as a stronger P prime, we need to get a stronger P prime. What is that? Stronger P prime? We can
+
+107
+00:22:49,780 --> 00:23:07,860
+just use a P prime where we quantify over the C. So if we turn our P prime into, if we turn our P
+
+108
+00:23:08,580 --> 00:23:14,100
+into that P prime, which is stronger, so if we can prove this second P prime with induction, then we
+
+109
+00:23:14,100 --> 00:23:18,820
+have proved the first one, because the second one is stronger than the first one, because
+
+110
+00:23:20,260 --> 00:23:25,060
+in the second one, we're quantifying for all Cs, while the first one, we're talking about
+
+111
+00:23:25,060 --> 00:23:35,730
+a specific C, so you can just instantiate the C of the first one. You can instantiate the
+
+112
+00:23:35,730 --> 00:23:45,550
+C of the P prime with the C of the P, if that makes sense. So if we do that and then we use this
+
+113
+00:23:45,550 --> 00:23:59,360
+P prime for our proof, then our base case will turn into a quantified base case. So it will be for
+
+114
+00:23:59,360 --> 00:24:07,860
+all C, we have that, and our step case, which is the more interesting thing, will turn into,
+
+115
+00:24:08,500 --> 00:24:20,940
+the induction hypothesis will turn into for all C. It's not equal to B implies C, okay? So we'll
+
+116
+00:24:23,150 --> 00:24:36,860
+copy it here, okay? So now we can instantiate, so now we can use the second, this assumption to
+
+117
+00:24:36,860 --> 00:24:43,900
+instantiate that, so this assumption to instantiate that, and this assumption to instantiate that by
+
+118
+00:24:44,540 --> 00:24:49,500
+saying that the C minus one goes in the place of C, because here we're saying for all Cs, okay?
+
+119
+00:24:51,650 --> 00:25:03,140
+So we can conclude that A multiplied by C minus one is smaller than or equal to B
+
+120
+00:25:03,860 --> 00:25:20,540
+multiplied by D from the induction hypothesis, and assumption to end step, right? Just forward,
+
+121
+00:25:20,540 --> 00:25:31,940
+normal forward reasoning, okay? Now, because, okay, now we want to say the following. We want to
+
+122
+00:25:32,900 --> 00:25:39,840
+get, we want to turn this into C, we want to turn this term into C,
+
+123
+00:25:40,670 --> 00:25:44,670
+so we want to transform that into C, and we want to transform that into successor of D.
+
+124
+00:25:45,310 --> 00:25:58,960
+So we can do that by, we basically, we need a lemma that says if A is, if A multiplied by
+
+125
+00:26:01,680 --> 00:26:13,540
+the successor of C minus one is smaller than or equal to B multiplied, sorry, let me just take that off,
+
+126
+00:26:13,540 --> 00:26:20,020
+this is not it. We want to say that if A multiplied by C minus, if A multiplied by C minus one
+
+127
+00:26:21,780 --> 00:26:28,450
+as written here is smaller than or equal to B multiplied by D, then from that we can conclude
+
+128
+00:26:28,450 --> 00:26:40,590
+that A multiplied by the successor of C minus one is smaller than or equal to B multiplied by the
+
+129
+00:26:40,590 --> 00:26:46,030
+successor of D, okay? So basically add one to the second term here and add one to the second term
+
+130
+00:26:46,030 --> 00:26:54,270
+there. This is not in general, so what is the lemma that allows us to do that? So let us
+
+131
+00:26:55,150 --> 00:27:02,340
+try to come up with the lemma that allows us to basically add the one here and the one there,
+
+132
+00:27:02,340 --> 00:27:11,020
+which would then help us go to that conclusion that we want, right? So let's add lemma five.
+
+133
+00:27:17,740 --> 00:27:27,540
+So lemma five is we want to say some, we want something that says that basically X multiplied
+
+134
+00:27:30,830 --> 00:27:49,060
+by the successor of Y is smaller than or equal L multiplied by the successor of M,
+
+135
+00:27:49,940 --> 00:28:02,850
+if X multiplied by Y is smaller than or equal to L multiplied by M and if X is equal to L. So that is
+
+136
+00:28:04,700 --> 00:28:10,820
+the lemma that we want, right? So then from this lemma, we get the following.
+
+137
+00:28:12,720 --> 00:28:23,200
+So from this lemma, we can get that A multiplied by the successor of C minus one is smaller than
+
+138
+00:28:23,200 --> 00:28:32,400
+equal to B multiplied by the successor of D. And where do we get that? This is from lemma number
+
+139
+00:28:32,400 --> 00:28:54,190
+five and assumption number two and step number two. Okay, so now the last step to show our goal
+
+140
+00:28:54,190 --> 00:28:59,310
+is we basically want to see if this is the same as C. We want to basically say that this is C.
+
+141
+00:29:00,510 --> 00:29:09,150
+As I said in the module tutorial and in my previous videos that minus is defined in the
+
+142
+00:29:09,150 --> 00:29:17,150
+following ways. The definition of minus, let me just write it there. The definition of minus is
+
+143
+00:29:17,150 --> 00:29:44,320
+as follows. So X minus Y is defined to be zero if X is smaller than or equal to Y and otherwise
+
+144
+00:29:45,040 --> 00:30:08,540
+it is defined to be, let me just write it in a different way. So if we'll just shuffle this.
+
+145
+00:30:08,540 --> 00:30:30,270
+So zero, just turn the zero into the second case. X minus Y equals X prime minus Y prime.
+
+146
+00:30:31,070 --> 00:30:46,850
+If X is greater than or equal to Y and if X equals the successor of X prime
+
+147
+00:30:48,350 --> 00:31:01,570
+and Y equals the successor of Y prime. Otherwise X is zero, otherwise X minus Y is zero. So it's zero
+
+148
+00:31:02,700 --> 00:31:10,700
+otherwise. What does that mean in our case? That means that basically minus behaves only normally
+
+149
+00:31:11,420 --> 00:31:17,860
+if X is greater than or equal to Y. So if X is greater than or equal to Y then it behaves normally.
+
+150
+00:31:17,860 --> 00:31:23,140
+If X is smaller than or equal to Y it always returns zero. So whenever you're proving something
+
+151
+00:31:23,220 --> 00:31:32,770
+about minus you have to take, you have to do your proof by case splitting. So here we then,
+
+152
+00:31:34,930 --> 00:31:39,410
+sorry, you have to do your proof by case splitting on whether X is greater than or equal to Y,
+
+153
+00:31:39,410 --> 00:31:49,550
+just to be clear. So here in our case the X is C and the Y is minus one. So the proof
+
+154
+00:31:51,380 --> 00:32:00,240
+by case is on whether C is greater than or equal to one. So the first step of that proof,
+
+155
+00:32:00,240 --> 00:32:05,170
+I will just continue. So this is one, two, three, and then step number four. So if C is greater than
+
+156
+00:32:05,170 --> 00:32:12,660
+or equal to one, from that I'll just call this minus definition. I'll just call this the
+
+157
+00:32:12,660 --> 00:32:33,410
+definition of minus. So from minus definition we know that from minus definition and
+
+158
+00:32:33,410 --> 00:32:41,300
+the assumption which is that C is greater than or equal to one, we know that C,
+
+159
+00:32:42,820 --> 00:32:56,340
+the successor of C minus one will just be C. The successor of C minus one is just C.
+
+160
+00:32:57,230 --> 00:33:21,810
+That is from minus definition case assumption. And then from that we say that we can conclude our
+
+161
+00:33:21,810 --> 00:33:29,170
+goal, which is that A multiplied by C is smaller than or equal to B multiplied by the successor
+
+162
+00:33:29,730 --> 00:33:47,020
+of D, and that should follow from three substituting four. And that is our goal,
+
+163
+00:33:47,020 --> 00:33:54,750
+right? So the goal is A multiplied by C is more than or equal to B multiplied by C.
+
+164
+00:33:54,750 --> 00:34:27,020
+The other case is, sorry, I should just say that this is case number one. Number two is that C
+
+165
+00:34:27,820 --> 00:34:40,050
+is not bigger than or equal to one. So that means that, again, I will start step number four,
+
+166
+00:34:40,050 --> 00:34:44,370
+because these are two branches of the proof. So step number four here would be that C is
+
+167
+00:34:45,330 --> 00:34:55,460
+strictly smaller than one from a lemma that says if something is not greater than or equal to
+
+168
+00:34:55,460 --> 00:35:01,060
+something else, then it's strictly smaller than it. So I'll just say that. So this should be lemma
+
+169
+00:35:01,060 --> 00:35:20,210
+six is not smaller than or equal to I, not greater than or equal to I, is not greater than or equal
+
+170
+00:35:20,290 --> 00:35:34,610
+to I. That implies that X is strictly smaller than Y. And lemma seven, if X is strictly smaller
+
+171
+00:35:34,610 --> 00:35:54,770
+than one, that means X is zero. So from lemma six, we know that. From lemma seven and step four,
+
+172
+00:35:54,770 --> 00:36:14,830
+we know that C is zero. And then the rest is like the base case. Because in the base case,
+
+173
+00:36:14,910 --> 00:36:25,310
+if you recall, we have proved that C equals zero there. And then the rest of the, and here
+
+174
+00:36:25,310 --> 00:36:30,190
+we also have the C equals zero. And then the rest of these steps can be used there.
+
+175
+00:36:31,780 --> 00:36:40,740
+So that's all for the proof. Thank you very much. I hope you have understood that. If you
+
+176
+00:36:40,740 --> 00:36:45,300
+have any questions, please let me know.

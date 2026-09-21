@@ -1,0 +1,175 @@
+1
+00:00:01,520 --> 00:00:19,150
+So, now that we've seen the basic how to use AI at the basic level, with the Isabelle theorem prover button, it's applicable to others theorem provers as well.
+
+2
+00:00:19,150 --> 00:00:28,150
+I want to discuss how to do more advanced workflows with AI in the area of mathematics or formal verification.
+
+3
+00:00:28,150 --> 00:00:33,150
+So, how do we do it?
+
+4
+00:00:33,150 --> 00:00:38,430
+So, suppose, for example, we have the following task in mind.
+
+5
+00:00:38,430 --> 00:00:48,430
+You have a big textbook and you want to turn it in a big textbook or like a big proof in some paper, and you want to make that proof an Isabelle form of proof.
+
+6
+00:00:48,430 --> 00:01:00,430
+You can just, if you have a very, if you have a front-view coding agent like GPT-6 or missiles or Fable, you can ask them to turn that, you can just write a very simple form.
+
+7
+00:01:00,430 --> 00:01:12,430
+Okay, this is a, this is the paper, I want to send this into Isabelle proof, and then these very expensive, very advanced models will be, may be able to turn it, maybe also they may not, but they would like to be able to turn it into a proof.
+
+8
+00:01:12,430 --> 00:01:17,430
+But if you're trying to use smaller models, for instance, or open source models, then their capabilities are not like that.
+
+9
+00:01:17,430 --> 00:01:21,430
+You can just tell them to turn this book into a formal proof in Isabelle, and then it will do it.
+
+10
+00:01:21,430 --> 00:01:24,430
+So, you have to create so-called harnesses.
+
+11
+00:01:24,430 --> 00:01:41,620
+So, basically, this, a lot of research in the area of AI for theorem proving, and they are also for programming, but we'll focus on theorem proving here, is that you create so-called harnesses where you basically ask the AI agent,
+
+12
+00:01:41,620 --> 00:01:56,980
+so you don't ask the AI agent for the whole thing, but you structure the work for it, and you can even create, like you can even create specialized agents.
+
+13
+00:01:56,980 --> 00:01:59,980
+So, for example, you have a coder agent and a planner agent.
+
+14
+00:01:59,980 --> 00:02:20,010
+Like, for example, one famous such architecture is by Jiang et al., where instead of just having, instead of just getting a honey agent like Claude or something and telling it, okay, give me a form of proof of this paper, what they do is they create a specialized Claude model for one task and another one for another task.
+
+15
+00:02:21,010 --> 00:02:23,010
+So, the first task is planning the proof.
+
+16
+00:02:23,010 --> 00:02:32,070
+So, basically, here, you get the paper, and then you turn it into a formal proof, but not a full, complete formal proof, just high-level steps of formal proof, and all the lemmas are sorted.
+
+17
+00:02:32,070 --> 00:02:45,230
+And then, you have another Claude, which takes that sorted proof, or that sketch, and then repairs it by replacing all the stories with proofs.
+
+18
+00:02:45,230 --> 00:03:03,230
+Okay, you divide the labor up across more than one instance of the same model, or more than one model, which makes it easier, because, you know, these models have limited context, so if you give them a lot of work, they can just be forgetful, and efficiency can be lower, and so forth.
+
+19
+00:03:04,230 --> 00:03:24,680
+So, basically, the architecture would be, okay, you get the planner model, it gives you a plan with stories, and then you have the coder, it gets to that plan with the stories, and replaces these stories with proofs, actually, and then tries to make those proofs work with Isabelle via the NCP server,
+
+20
+00:03:25,680 --> 00:03:45,780
+and then if the coder fails, which is the one that repairs, then it gets the error and sends it back to the other LLM, which is the planner, and tells it, okay, this is that error, please try to fix your plan, so that when I'm repairing it, I can actually do it.
+
+21
+00:03:45,780 --> 00:04:08,780
+And because maybe the plan is, maybe the plan is based on some wrong assumption, for instance, and maybe the plan is not too detailed, or maybe, so basically, you have this loop of the planner generating a plan, coding, try to fix it, give it to Isabelle, Isabelle says yes, or says no, there's an error, then the coding either gives the error back to the planner, or maybe tries to work on it.
+
+22
+00:04:08,780 --> 00:04:27,160
+So, in any case, this is just some paper and one architecture that is quite, that improves the ability of even very weak models to perform a lot more tasks, and to perform them also a lot more cheaply than if you do them, say, with frontier model like GPT-6 and so forth.
+
+23
+00:04:27,160 --> 00:04:42,640
+And there are many, many other papers in this direction. So, those papers, like before this LGD, I wanted to read, like, I'll put one of those papers, or a couple of those papers on key, then I want to take a quick look into them.
+
+24
+00:04:42,640 --> 00:04:59,740
+So, basically, each one of those papers is an architecture of a proving agent, so you have an architecture and a harness of a proving agent, so you have, like, for example, a planner and a sketcher from this 2023 paper, and you have many other architectures.
+
+25
+00:04:59,740 --> 00:05:10,370
+So, this is an area that's very quickly moving, so I would just leave a modern paper on keys, and then you should read it before the LGD.
+
+26
+00:05:10,370 --> 00:05:24,620
+So, lastly, so what is the current state? So, basically, the current state is the following, if you want to think about what you could do also after you're done with your studies, if you're interested in this area.
+
+27
+00:05:24,620 --> 00:05:34,940
+Like, what is the current state of the art? So, there are specialized startups that do, as I said, model, mathematical models, specialized models for mathematics.
+
+28
+00:05:34,940 --> 00:05:47,140
+I don't know if they will be continuing, because as I said, coding models are very, very good, but it will be good for you to just know the three of them, harmonic, math, ink, and axiomath, for instance.
+
+29
+00:05:47,140 --> 00:06:04,260
+And then there is also coding agents are used very heavily in the industry, like, as I said, Apple and AWS at least use them, like, and publicly, and ARM and Intel, I also know they use them, but internally, but you always, if you check the jobs advertised in those companies, you'll see a lot of them.
+
+30
+00:06:04,260 --> 00:06:17,330
+So, that's also one of the places where AI, fourth year improving is heavily used by just using coding agents, and indeed, as you've seen, one of the main MCP servers for Isabelle was developed by AWS.
+
+31
+00:06:17,330 --> 00:06:34,490
+And lastly, it's also used a lot in research, whether in mathematics by academics, like Terry Tsao, who's a very famous mathematician, or companies like OpenAI and Claude themselves doing, trying to do mathematical breakthroughs with them.
+
+32
+00:06:34,490 --> 00:06:45,700
+So, that's also a possible direction for, or a possible direction that's currently being pursued in the state of the art.
+
+33
+00:06:45,700 --> 00:06:59,700
+So, lastly, what I would like to remind you of is a few things. You need to actually, like, in order for you to be able to do well in, say, if you want to continue in this direction, you should not depend completely on the AI.
+
+34
+00:06:59,700 --> 00:07:14,700
+You should actually understand how to do the basic tasks yourself, because a lot of the times, you need, like, the AI makes mistakes, not only mathematical mistakes, but also sometimes it just makes mistakes.
+
+35
+00:07:14,700 --> 00:07:27,700
+It can sometimes get stuck in a loop. It can sometimes give you, you tell it, okay, prove that this algorithm is correct, but then it gives you a proof of correctness of a similar algorithm, not the same one, and so forth.
+
+36
+00:07:27,700 --> 00:07:40,770
+So, you cannot debug or understand what AI is doing, or basically, you cannot collaborate with AI unless you yourself have a very good foundation and a good understanding of the basics yourself.
+
+37
+00:07:40,770 --> 00:07:55,990
+So, you should be able to know how to split models yourself, how to split problems yourself into manageable subproblems, each of them to formalize them, and then how you can combine those to solve your initial problem, for instance.
+
+38
+00:07:55,990 --> 00:08:17,340
+You should also be able to develop the skill of formally modelling problem domains in Isabelle and so forth, or Lean and so forth, because there are many ways to formally model the same thing, and some of them are good, some of them are bad, so you should really have a good understanding of how to do that.
+
+39
+00:08:17,340 --> 00:08:27,760
+And you should have that skill, because otherwise, the LLM might just, you might not be able to collaborate with it, basically. You might just tell it something, and then you don't know what it's doing, and then that's it.
+
+40
+00:08:27,760 --> 00:08:35,760
+And if that's the case, you will not be able to simply, you will not be able to do anything useful with LLM.
+
+41
+00:08:35,760 --> 00:08:56,180
+And lastly, you need to be able to know how to construct high-quality formal proofs, because you can prove the same fact with 100 lines or 2 lines, or you can prove the same fact in a proof that takes 100 seconds to check or 2 seconds to check.
+
+42
+00:08:56,180 --> 00:09:16,910
+So you need to know the tradeoffs also to do that, and the only way for you to know any of these things is by practicing things yourself. And as I said, if you don't know how to – but these are all the problems that LLMs fail at, and you need to be good at these skills yourself in order for you to productively collaborate with an LLM.
+
+43
+00:09:17,910 --> 00:09:39,910
+And that's really the end of the first part of this module, where I was introducing you to the foundations of theorem proving, and then in the next five weeks, I will be talking to you and we'll be working on more advanced applications of theorem provers, mostly focused on – in computer science, a formal verification of software and algorithms.
+
+44
+00:09:39,910 --> 00:09:56,260
+And so basically how you can harness theorem provers to prove relatively large and relatively complicated systems correct. So that's it, and I hope you've enjoyed the introduction and the foundations of theorem proving.

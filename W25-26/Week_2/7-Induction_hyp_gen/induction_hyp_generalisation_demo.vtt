@@ -1,0 +1,366 @@
+WEBVTT
+
+
+1
+00:00:01.900 --> 00:00:14.940
+Hello everyone, now I'm going to do with you the exercise on generalising the second hypothesis in Isabelle.
+
+2
+00:00:14.940 --> 00:00:29.160
+So let's firstly open an Isabelle theory, as you must have done in the previous examples, and please let's write the theorem statement first.
+
+3
+00:00:29.160 --> 00:00:39.350
+So we have two assumptions, the first assumption is that a is more than or equal to b, the second one is a c is more than or equal to d,
+
+4
+00:00:39.350 --> 00:00:55.750
+and we say that we have one conclusion for the theorem, that a multiplied by c is more than or equal to b multiplied by d.
+
+5
+00:00:55.750 --> 00:01:04.750
+So of course we didn't fix the types here, and as I said in many, that's why it's even giving us a counter example Isabelle.
+
+6
+00:01:04.750 --> 00:01:22.600
+So we need to fix the types, so one way to fix the types is just by saying fixes a, b, c, d, and then we say that all of them are of type nat.
+
+7
+00:01:22.600 --> 00:01:51.560
+So now let's do the proof, as we said earlier in the pen and paper version, we do it by induction on d, so we do proof by induction on d.
+
+8
+00:01:51.560 --> 00:02:04.380
+So you have two cases, the base case and the step case. So the base case is that, so what is the base case?
+
+9
+00:02:04.380 --> 00:02:12.700
+So the base case is you have no assumptions, and you want to prove that a times c is more than or equal to b times zero.
+
+10
+00:02:12.700 --> 00:02:22.700
+So the first mistake that you should notice here is that we have no assumptions. Remember, when I said the p that we are identifying, which is the property of proving,
+
+11
+00:02:22.700 --> 00:02:27.700
+for this theorem has two assumptions, a is more than or equal to b, and c is more than or equal to e.
+
+12
+00:02:27.700 --> 00:02:40.730
+So in order for us to get these assumptions into the proof by induction, you say using assumptions, that is basically the way you write it in Isabelle.
+
+13
+00:02:40.730 --> 00:02:46.730
+So now we have two assumptions that a is more than or equal to b, and c is more than or equal to zero, implies that.
+
+14
+00:02:46.730 --> 00:02:51.730
+So we firstly need to find a theorem that gives us c equals zero, as we did in the pen and paper proof.
+
+15
+00:02:51.730 --> 00:03:07.180
+So let's do that. So find theorems, or we can assume that. So we find a theorem that shows that, I mean, we have them.
+
+16
+00:03:07.180 --> 00:03:13.600
+I think I've written all the theorems that we can use in the sheet anyway, the lemmas.
+
+17
+00:03:13.600 --> 00:03:33.730
+So we have, so this is going to be one second. So let me just write it down. So we want to show something that says that x is smaller than or equal to zero, implies x equals zero.
+
+18
+00:03:33.730 --> 00:04:02.500
+So it's called extremum unique i. So we take that. So, okay, and then we get from that. Okay, so we want to say have c equals zero.
+
+19
+00:04:02.500 --> 00:04:16.980
+And then using this extremum unique i, I don't think I copied the name completely. I think botnet zero is a part of the name as well here.
+
+20
+00:04:16.980 --> 00:04:39.680
+So we have, yeah, so we say using that and our assumption is, we take a first assumption from the base case, which is that, sorry, the second assumption, which is that c is more than or equal to zero.
+
+21
+00:04:39.680 --> 00:04:53.320
+So we do that by saying of the base case is called, usually the theorems are all called zero here and suck there. So you can just say zero.
+
+22
+00:04:53.320 --> 00:05:14.320
+I think that's how we write it. Yeah. So now we have zero. So that gave it to us. So the second assumption of zero, right? It gives us equals zero.
+
+23
+00:05:14.320 --> 00:05:24.770
+Now, the second thing is, was it? So now we need to show that now we need to have that a times c equals zero.
+
+24
+00:05:24.770 --> 00:05:52.700
+So we can say, have a times c equals zero. And then we say, no, firstly, I would say a times zero equals zero and a times zero equal zero.
+
+25
+00:05:52.700 --> 00:06:16.480
+Okay. And we do that by what was the name of the lemma? We just quickly try and find it. It's called mod zero, right? So, okay.
+
+26
+00:06:16.480 --> 00:06:41.780
+So that's number one is that and number two is that. And number three is a times c equals zero. And then I can say using two and by substituting one.
+
+27
+00:06:42.780 --> 00:07:02.060
+So that gives us a times zero for zero and zero equals zero. And then we can say that. Okay. Now we have a times c equals zero. Now we need to find, we need to also show that zero is smaller.
+
+28
+00:07:02.060 --> 00:07:22.580
+So this is step number three. Now we need to show, we need to show that firstly zero is smaller than equal b multiplied by zero.
+
+29
+00:07:22.580 --> 00:07:39.780
+And we should be able to do that by finding a theorem that says zero is more than equal to anything. So let's just see that. What is it called? Zero le.
+
+30
+00:07:39.780 --> 00:08:07.550
+So we can say that using zero and then finally we apply and then we can finally get the final goal by using this lemma number four and then substituting three.
+
+31
+00:08:07.550 --> 00:08:19.540
+Okay. So that's the first case. The second case, as you remember. Okay. So let's just look at it.
+
+32
+00:08:19.540 --> 00:08:28.540
+So now we want to get c minus one is more than or equal to d. That was our first step. And we get it from this assumption. So let's look for the lemma that does that.
+
+33
+00:08:28.540 --> 00:08:48.540
+I'll just look for something smaller than or equal to successor of something implies that the minus, if we cannot find it, we can just assume it with a sorry for now.
+
+34
+00:08:48.540 --> 00:09:48.210
+Let me see if I wrote it in the sheet. Maybe it's called le def come. I think find that one. So I would just so I would just assume that lemma because I don't think it makes sense to spend so much time trying to find it.
+
+35
+00:09:48.210 --> 00:10:08.430
+So if X is smaller than equal to successor of Y, then X minus one is smaller than equal Y. And I will just call this lemma number one. Sorry. Okay. So from lemma one.
+
+36
+00:10:08.430 --> 00:10:28.540
+Okay. So now we can say have step number one is that c minus one is more than equal to d using successor of two. I think it was fact number two. No, was fact number three.
+
+37
+00:10:28.540 --> 00:11:11.260
+Number one. In fact, number three with forward reasoning. It was called them one. One. Yeah. With forward reasoning like that. And then we say, if you remember, we said we then want to instantiate.
+
+38
+00:11:11.260 --> 00:11:25.520
+We want to then get that conclusion of the induction hypothesis and we cannot do it because we have we only have that c minus one is smaller than equal to d. But one of the assumptions of induction hypothesis is that c is more than equal to d. So what we did was that we quantified over c.
+
+39
+00:11:25.520 --> 00:11:39.190
+So we can do that in Isabelle. The syntax to do that is you can just write arbitrary c and then that will give you the quantification overseas. So let's go back to the induction hypothesis.
+
+40
+00:11:39.190 --> 00:11:52.510
+So now we have the quantification for your call. We had this question mark. So that means that we're quantifying over c. So now we can instantiate that question mark c with any with any value, including c minus one.
+
+41
+00:11:52.510 --> 00:12:09.440
+So let's instantiate the induction hypothesis and say we have that a multiplied by c minus one is smaller than equal b multiplied by d.
+
+42
+00:12:09.440 --> 00:12:25.470
+And then we say using suck ih the induction hypothesis and then the first assumption is instantiated with the first.
+
+43
+00:12:25.470 --> 00:12:36.660
+No, the first. Okay, so let me just go back and slowly explain something here. So here we have this is this is the step case, right? So we have the induction hypothesis and two assumptions.
+
+44
+00:12:36.660 --> 00:13:05.080
+So in order for you to access the induction hypothesis, you say the induction suck ih. In order for you to, which is this one, right? In order for you to access the second fact, which is a smaller than equal to b in our case, you just say suck of two because suck is a list of facts one, two, three.
+
+45
+00:13:05.080 --> 00:13:27.670
+So this is two, this is three. In order for you to access the third one, as we did here, we just say suck of three. Okay, so now we have here we need we need suck of two, one and fact number one and then we have what we need.
+
+46
+00:13:27.670 --> 00:13:48.740
+So now, if you remember, the next step was to show was to get a successor in here and a successor in there and then show the successor of c minus one is the same as the this can only work if we know that c is greater than or equal to one.
+
+47
+00:13:48.740 --> 00:14:12.420
+So we prove that we do that we open another proof context, we say prove by cases on whether c is greater than or equal to one. Okay, so that's that's exactly what we did in the board on the board.
+
+48
+00:14:12.420 --> 00:14:48.150
+But, but in Isabelle, another syntax for for that you can say cases proof cases on c and then you have two cases case where c is zero and another case where where c is not zero, but I'll just use cases on c on c greater than or equal to one to not use everyone.
+
+49
+00:14:48.150 --> 00:15:00.530
+So here we have the case where c is greater than or equal to one, then we can use that assumption. This is the first case. So from that, we want to we want to say that.
+
+50
+00:15:00.530 --> 00:15:22.420
+Okay, before actually one more step before we did this, we went into that case split independent paper. We did the following. We said that a multiplied by successor of c minus one is smaller than or equal b multiplied by the successor of d.
+
+51
+00:15:22.420 --> 00:15:35.890
+And that was based on a lemma that said, let's just assume it for now, because I hope you now know how to find things.
+
+52
+00:15:35.890 --> 00:16:24.620
+So if we have X smaller than or equal to Y and X multiplied by L is smaller than equal Y multiplied by M and you have X multiplied by suck L smaller than equal to Y multiplied by suck.
+
+53
+00:16:24.620 --> 00:16:58.500
+Okay, so that was the lemma. So using lemma two, and then the first assumption is that a smaller than equal to b. So we had that assumption. If you recall, it was called successor of two.
+
+54
+00:16:58.500 --> 00:17:13.720
+So another way to refer to these assumptions, if you don't remember what it was called, you can just write exactly the assumption. So you can you can do the following. You can do this double quote, and then you have that option of this thing, which is called a cartouche.
+
+55
+00:17:13.720 --> 00:17:22.360
+And then you open that cartouche with a tab by pressing tab, and then you say you copy and paste whatever assumption you want as it is. So I would just copy and paste that.
+
+56
+00:17:22.360 --> 00:17:37.910
+And then you get exactly the same effect as writing so if you don't remember, for example. And then the second assumption of this.
+
+57
+00:17:37.910 --> 00:17:52.300
+Okay, now we have this assumption of that lemma and then the second one is can be satisfied with step number two. So that would be like this.
+
+58
+00:17:52.300 --> 00:18:16.970
+It would give us what we want. Okay, so now we have that. And now we want to say that if C is greater than or equal to one, then successor of C minus one is the same as one. So let's assume that lemma.
+
+59
+00:18:16.970 --> 00:19:01.500
+X is greater than or equal to one. And I'll just say that this one is the net one, then successor of X minus one equals X. So now we now we say, okay, have successor of C minus one equals C using lemma three was it.
+
+60
+00:19:01.500 --> 00:19:26.090
+And then changing the first assumption of lemma three with the assumption that we have here, which is one smaller than equal to C. And then we have that them from that step, we can show that our goal is correct.
+
+61
+00:19:26.090 --> 00:20:09.500
+So we can say this step is one and then say show thesis using three, right, using three and then substituting one. Okay, let's just see which one I'm referring to because we actually made a mistake.
+
+62
+00:20:09.500 --> 00:20:20.350
+We have this one and that one there. So I'll just call this actually four and put it in the paper to just make sure that we're not referring to the wrong thing. Okay.
+
+63
+00:20:20.350 --> 00:20:34.150
+So let's see what's wrong there. So here we say I am. We need to substitute with the other direction. So if you recall, I said that substitution always goes from right to left. Right.
+
+64
+00:20:34.150 --> 00:20:38.180
+So we need to substitute instead of substituting.
+
+65
+00:20:38.180 --> 00:20:51.050
+Suck C minus one equals C, we need to substitute the other way around the C, we need to turn it into suck C minus one to match the assumption. So we do that by saying symmetric.
+
+66
+00:20:51.050 --> 00:21:00.910
+Okay, so now we have the goal.
+
+67
+00:21:00.910 --> 00:21:24.340
+The next step, which is when C is not greater than equal to one. So we want to show we want to have a lemma that says if something so not here you write a tilde and then something this
+
+68
+00:21:24.340 --> 00:21:43.510
+not negation comes up and then you say not X greater than or equal to Y implies X is strictly smaller than Y.
+
+69
+00:21:43.510 --> 00:22:15.690
+Just make sure that the types are correct. And then the lemma five lemma five is that X is smaller than one. Then X is zero.
+
+70
+00:22:15.690 --> 00:22:27.710
+I just will make the assumptions because we already know these things from the pen and paper proof. So now we have that. So let me just do two steps then.
+
+71
+00:22:28.840 --> 00:22:44.840
+So here we have this case assumption is that not one one is not small than equal to C, which is the same as Isabelle's language, the same as C's is not greater than equal to one.
+
+72
+00:22:44.840 --> 00:23:12.150
+So here we say from that we can have let's see strictly smaller than one using lemma four and the fact that one is not greater than or equal to C.
+
+73
+00:23:12.150 --> 00:23:40.910
+I think I made a mistake there. So it's not smaller than equal to C. So first of all, you don't do that. You do a double quotation and then wait until the cartouche thing comes up and then press a tab and then say not equal to C.
+
+74
+00:23:40.910 --> 00:24:30.880
+You see that was the correct direction. Yeah. And then from that we have C equals zero. So that would mean that sorry that would come from one and lemma was five. I think from there we can just continue as the base case.
+
+75
+00:24:30.880 --> 00:24:46.650
+So here I would just copy and paste the proof, but we will have to just change these numbers of the fact names. So we just so let's just try and remember. Okay.
+
+76
+00:24:46.650 --> 00:25:05.030
+First of all, we hear with this. We should just use this country before. And that one should be five. Okay. And then everything after that we should just carefully change the number.
+
+77
+00:25:05.030 --> 00:25:26.790
+So I'll just call this six and anything that uses two, I will just change it to six. And then anything this one uses it uses one one there was the C equals zero. So we can replace that with five.
+
+78
+00:25:26.790 --> 00:25:42.260
+So anyone should replace it with five. Okay, then this three, we should replace it with seven. And then anything that uses three, you should replace it with seven.
+
+79
+00:25:42.260 --> 00:25:57.260
+Okay, this was also not called case like here. Remember, like you need to make to make sure that you have the same like the name of the goal has to be the same as the one that's generated by Isabelle when you when you when you in the template that you copy and paste.
+
+80
+00:25:57.260 --> 00:26:05.260
+Because sometimes it causes case sometimes it causes thesis, depending on whether you're proving something by induction or by case splitting or something else or some other method.
+
+81
+00:26:05.260 --> 00:26:26.950
+And then I will call this eight. And I think this was here we need to use. So let me just try and see what's what's happening there in the step in the best case.
+
+82
+00:26:26.950 --> 00:26:48.260
+So for is that zero is more than equals to be multiplied by zero. So zero is more than equal to this should be eight. Okay, so this is zero is more than equal to be multiplied by zero versus zero is more than equal to be multiplied by 60.
+
+83
+00:26:48.260 --> 00:26:57.260
+Okay, so we have discovered the mistake actually, in the approach where we cannot just copy exactly the same proof we still have.
+
+84
+00:27:00.780 --> 00:27:15.940
+Instead of saying that zero is more than equal to be multiplied by zero, we need to we need to use to say that zero is more than equal to be multiplied by suck D because zero is more than equal to anything based on this lemma zero le.
+
+85
+00:27:15.940 --> 00:27:29.480
+So that was a mistake. That was a mistake. Now, it all works out and we have the proof. Okay, so I hope I'm not going to upload this theory file as it is because I want you to do it yourself.
+
+86
+00:27:29.480 --> 00:27:43.480
+And I want to repeat my recommendation again from the beginning, you have to do these proofs yourself. Otherwise, you will not be able to do the coursework, and it will be very difficult for you even to follow the theory if you don't do this.
+
+87
+00:27:43.480 --> 00:27:54.740
+The reason you should be doing these proofs yourself is because this is how you will get the general gist of doing formal reasoning in a theorem prover.
+
+88
+00:27:54.740 --> 00:28:09.740
+And accordingly, this is how you'll be able to solve the problems that we have in this module or in this in this part of the module, where you're required to prove things formally, in order for you to understand what is forward reasoning, backward reasoning, substitution, induction, etc.
+
+89
+00:28:10.740 --> 00:28:23.930
+At the level of Isabelle, you need to do this yourself. Okay, so I will look at the solution that you will have next week is actually actually has another proof that doesn't have these stories.
+
+90
+00:28:23.930 --> 00:28:38.930
+It has all the lemmas fixed there. So you should you should check that out also, but it will only be as usual, the next month, like it will be in the coming one day to be out in the coming one day.
+
+91
+00:28:38.930 --> 00:28:45.930
+So I hope that you try this solution by until then. Okay, thank you very much.

@@ -28,16 +28,133 @@
       background: rgba(255, 255, 255, 0.9);
       color: #000;
     }
+    .cc-badge {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.6);
+      color: #ccc;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: opacity 0.3s;
+    }
+    .cc-badge a {
+      color: #90caf9;
+      text-decoration: none;
+      margin-left: 6px;
+    }
+    .cc-badge a:hover {
+      text-decoration: underline;
+    }
+    ::cue {
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.4;
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
   </style>
 </head>
 <body>
+  <div id="ccBadge" class="cc-badge" style="display:none;">
+    <span>CC: English</span>
+    <span id="ccLinks"></span>
+  </div>
   <button class="close-btn" onclick="history.back()" title="Close">&times;</button>
   <video id="v" controls autoplay playsinline></video>
   <script>
+    var VIDEO_CAPTIONS = {
+      "Isabelle_Basics_h264.mp4": "Week_1/0-Isabelle_Interface/Isabelle_Basics_h264.vtt",
+      "motivation.mp4": "Week_1/0-Isabelle_Interface/motivation.vtt",
+      "motivation_remastered_v2.mp4": "Week_1/0-Isabelle_Interface/motivation_remastered_v2.vtt",
+      "1-Logical_Reasoning_Overview.mp4": "Week_1/1-Logical_Reasoning_Overview/1-Logical_Reasoning_Overview.vtt",
+      "FW-Split-Begin-FW-Theory-Correct.mp4": "Week_1/2-FW/FW-Split-Begin-FW-Theory-Correct.vtt",
+      "FW-Split-Begin-Outline-Proof-Techs.mp4": "Week_1/2-FW/FW-Split-Begin-Outline-Proof-Techs.vtt",
+      "FW-Split-Begin-fw-Isabelle-Correct.mp4": "Week_1/2-FW/FW-Split-Begin-fw-Isabelle-Correct.vtt",
+      "BW-Split-BW-Isabelle-Begin.mp4": "Week_1/3-BW/BW-Split-BW-Isabelle-Begin.vtt",
+      "BW-Split-BW-Theory-Begin.mp4": "Week_1/3-BW/BW-Split-BW-Theory-Begin.vtt",
+      "Subst-Split-Begin-subst-isabelle.mp4": "Week_1/4-Subst/Subst-Split-Begin-subst-isabelle.vtt",
+      "Subst-Split-Begin-subst-theory.mp4": "Week_1/4-Subst/Subst-Split-Begin-subst-theory.vtt",
+      "Induction_Demo.mp4": "Week_2/5-Induction/Induction_Demo.vtt",
+      "Induction_Theory-Correct.mp4": "Week_2/5-Induction/Induction_Theory-Correct.vtt",
+      "CaseAnalysis-Split-Caseanalysis-Isabelle-Begin.mp4": "Week_2/6-CaseAnalysis/CaseAnalysis-Split-Caseanalysis-Isabelle-Begin.vtt",
+      "CaseAnalysis-Split-begin.mp4": "Week_2/6-CaseAnalysis/CaseAnalysis-Split-begin.vtt",
+      "induction_hyp_generalisation.mp4": "Week_2/7-Induction_hyp_gen/induction_hyp_generalisation.vtt",
+      "induction_hyp_generalisation_demo.mp4": "Week_2/7-Induction_hyp_gen/induction_hyp_generalisation_demo.vtt",
+      "LGT_problem_2.mp4": "Week_2/LGT_problem_2.vtt",
+      "LGT_problem2.mp4": "Week_3/LGT_problem2.vtt",
+      "list_induciton_2.mp4": "Week_3/List_Induction/list_induciton_2.vtt",
+      "list_induction.mp4": "Week_3/List_Induction/list_induction.vtt",
+      "list_induction_demo.mp4": "Week_3/List_Induction/list_induction_demo.vtt",
+      "list_recursion.mp4": "Week_3/List_Recursion/list_recursion.vtt",
+      "list_recursion_demo.mp4": "Week_3/List_Recursion/list_recursion_demo.vtt",
+      "list_recursion_demo_2.mp4": "Week_3/List_Recursion/list_recursion_demo_2.vtt",
+      "automation_auto.mp4": "Week_3/isabelle_automation/automation_auto.vtt",
+      "automation_simp.mp4": "Week_3/isabelle_automation/automation_simp.vtt",
+      "Algebraic_Datatypes-Examples.mp4": "Week_4/Algebraic_Datatypes/Algebraic_Datatypes-Examples.vtt",
+      "Algebraic_Datatypes-Intuition.mp4": "Week_4/Algebraic_Datatypes/Algebraic_Datatypes-Intuition.vtt",
+      "Algebraic_Datatypes-Overview.mp4": "Week_4/Algebraic_Datatypes/Algebraic_Datatypes-Overview.vtt",
+      "Algebraic_Datatypes_Demo.mp4": "Week_4/Algebraic_Datatypes/Algebraic_Datatypes_Demo.vtt",
+      "Primitive_Recursion-Example.mp4": "Week_4/Primitive_Recursion/Primitive_Recursion-Example.vtt",
+      "Primitive_Recursion-Intuition.mp4": "Week_4/Primitive_Recursion/Primitive_Recursion-Intuition.vtt",
+      "Primitive_Recursion-Overview.mp4": "Week_4/Primitive_Recursion/Primitive_Recursion-Overview.vtt",
+      "recursion_demo.mp4": "Week_4/Primitive_Recursion/recursion_demo.vtt",
+      "Structural_Induction-Intuition.mp4": "Week_4/Structural_Induction/Structural_Induction-Intuition.vtt",
+      "Structural_Induction-Overview.mp4": "Week_4/Structural_Induction/Structural_Induction-Overview.vtt",
+      "Structural_Induction_Eg-Problem_Statement.mp4": "Week_4/Structural_Induction/Structural_Induction_Eg-Problem_Statement.vtt",
+      "Structural_Induction_Eg-Proof.mp4": "Week_4/Structural_Induction/Structural_Induction_Eg-Proof.vtt",
+      "1-Introduction.mp4": "Week_5/0-Introduction/1-Introduction.vtt",
+      "2-Sledgehammer.mp4": "Week_5/1-Sledgehammer/2-Sledgehammer.vtt",
+      "2-Sledgehammer_Demo.mp4": "Week_5/1-Sledgehammer/2-Sledgehammer_Demo.vtt",
+      "3-Custom_Models_and_Agentic_Proving.mp4": "Week_5/2-Custom_Models_and_Agentic_Proving/3-Custom_Models_and_Agentic_Proving.vtt",
+      "MCP_Tutorial.mp4": "Week_5/2-LLMs-for-Isabelle/MCP_Tutorial.vtt",
+      "4-Agentic_Proving_Architectures.mp4": "Week_5/3-Agentic_Proving_Architectures/4-Agentic_Proving_Architectures.vtt"
+    };
+
+    var prefix = window.location.pathname.indexOf('/W25-26/') !== -1 ? '' : 'W25-26/';
     var file = new URLSearchParams(location.search).get('v');
     if (file) {
-      document.getElementById('v').src = 'https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/' + encodeURIComponent(file);
+      document.title = file.replace(/\.mp4$/, '') + ' - 7CCSACTP Video';
+      var video = document.getElementById('v');
+      video.src = 'https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/' + encodeURIComponent(file);
+
+      var vttRel = VIDEO_CAPTIONS[file];
+      if (vttRel) {
+        var vttPath = prefix + vttRel;
+        var srtPath = vttPath.replace(/\.vtt$/, '.srt');
+        var track = document.createElement('track');
+        track.kind = 'subtitles';
+        track.label = 'English (CC)';
+        track.srclang = 'en';
+        track.src = vttPath;
+        track.default = true;
+        video.appendChild(track);
+
+        track.addEventListener('load', function() {
+          if (this.track) this.track.mode = 'showing';
+        });
+
+        var badge = document.getElementById('ccBadge');
+        var links = document.getElementById('ccLinks');
+        links.innerHTML = '(<a href="' + vttPath + '" download>VTT</a> | <a href="' + srtPath + '" download>SRT</a>)';
+        badge.style.display = 'block';
+        setTimeout(function() {
+          badge.style.opacity = '0.35';
+        }, 4000);
+        badge.addEventListener('mouseenter', function() { badge.style.opacity = '1'; });
+        badge.addEventListener('mouseleave', function() { badge.style.opacity = '0.35'; });
+      }
     }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') history.back();
+    });
   </script>
 </body>
 </html>

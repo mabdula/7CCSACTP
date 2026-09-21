@@ -1,0 +1,203 @@
+1
+00:00:01,420 --> 00:00:08,900
+So in order for us to show that, we show it by induction on a tree, right?
+
+2
+00:00:08,900 --> 00:00:22,430
+So let's start the proof. So you have two goals, again.
+
+3
+00:00:22,430 --> 00:00:33,740
+So Goal 0, or the base case, that...
+
+4
+00:00:33,740 --> 00:00:45,340
+No, sorry, we have the base case where roughly tree is the leaf.
+
+5
+00:00:45,340 --> 00:00:50,400
+The goal here, we have no assumptions, right? We have an empty list of assumptions.
+
+6
+00:00:50,400 --> 00:01:11,150
+Maybe let me just write that. And that is empty, right?
+
+7
+00:01:11,150 --> 00:01:28,210
+And the goal here, we have to show that list set in order of leaf equals tree set.
+
+8
+00:01:28,210 --> 00:01:39,100
+So if you look into the equations, right? Let's say this base case.
+
+9
+00:01:39,100 --> 00:01:47,780
+So this base case, like if you just substitute this equation and that equation and that equation, you'll get it.
+
+10
+00:01:47,780 --> 00:02:05,420
+But let's just do the steps. So step number one, you just do, you say, list set of in order of leaf
+
+11
+00:02:05,420 --> 00:02:21,300
+equals list set of empty by substituting in order simps.
+
+12
+00:02:21,300 --> 00:02:34,210
+You will just get, in fact, the first sim rule out of those. So this one, first equation, because this is a leaf, right?
+
+13
+00:02:34,210 --> 00:03:01,820
+And then you can say that list, the right-hand side of the previous thing is the same as the empty set by, again, substituting in order, sorry, substituting the set simps.
+
+14
+00:03:01,820 --> 00:03:11,540
+Again, this is going to be the first equation, because it's an empty list.
+
+15
+00:03:11,540 --> 00:03:40,450
+And then lastly, you say that the empty set is the same as tree set of leaf, again, by substituting tree set simps, the first equation.
+
+16
+00:03:40,450 --> 00:03:54,020
+Then we have our goal, right?
+
+17
+00:03:54,020 --> 00:04:08,040
+That's the base case, the step case. If you remember, we said that in general the pattern was that you have some assumptions, right?
+
+18
+00:04:08,040 --> 00:04:19,340
+And these assumptions are at least the induction hypothesis plus any other assumptions of the theorem, premises of the theorem, we call them.
+
+19
+00:04:19,340 --> 00:04:28,980
+But here we have two induction hypotheses, right? One for, let's go back to the other slide, to the other picture.
+
+20
+00:04:28,980 --> 00:04:41,590
+Here we have the first induction hypothesis that the, like, if you have basically two trees, and the induction hypothesis shows for the, like, the induction hypothesis that you have the property for the two trees.
+
+21
+00:04:41,590 --> 00:04:54,420
+So here we have in our assumption that, like, two induction hypotheses, right? One for the first tree.
+
+22
+00:04:54,420 --> 00:05:25,230
+In the induction hypothesis one, you have that the property holds for the first tree, so the property was that list set of in order of the first tree is the same as, I'm sorry, this is tree set, and then this is tree set.
+
+23
+00:05:25,230 --> 00:05:30,460
+No, there was no mistake, I think. Yeah, sorry.
+
+24
+00:05:30,460 --> 00:05:59,100
+List set of in order of T1 equals tree set of T1, and then induction hypothesis two, you have list set of in order of T2 equals tree set of tree number two, right?
+
+25
+00:05:59,100 --> 00:06:47,470
+These are the assumptions, and the goal is to show that this in order of a node T1 in some x or a, and T2 is where a is the root, is the same as tree set of that tree.
+
+26
+00:06:47,470 --> 00:07:12,820
+Okay, so that's the step case. The proof, again, I will just do it by substitution, but I would propose actually that you pause the video and then try to do this proof on your own, just to, you know, to make sure that you are getting the point of automatic induction trees.
+
+27
+00:07:12,820 --> 00:08:02,710
+So the proof would be the following. So first of all, let's just see what the left hand side was. So, list set of in order, so list set of in order of node T1, A, and T2 is the same as list set of in order of T1.
+
+28
+00:08:02,710 --> 00:08:45,120
+Appended with that, appended with in order of, okay? Now, that's the first substitution, and that's by substituting in order the second equation, define the second equation that goes into that case, which is the non-empty tree case.
+
+29
+00:08:45,120 --> 00:09:00,720
+But now we're here, all right? Now we have this set of a big, depending of three lists, and how can we further analyze that? Okay, we cannot, and we want, okay, so the strategy is the following.
+
+30
+00:09:00,720 --> 00:09:12,720
+Like, you're looking to apply the induction hypothesis, and the induction hypothesis here says something about list set of in order of just T1 and this set of in order of just T2.
+
+31
+00:09:12,720 --> 00:09:26,670
+So we want to turn that into expressions that are either list set in order of T1 or list set in order of T2 so that you can substitute with the induction hypothesis.
+
+32
+00:09:26,670 --> 00:09:53,370
+How can we do that? We actually need a lemma, so again, if you remember this, so we need a lemma that basically analyzes this term for us, analyzes this term for us, and then gets us list set of in order of T1 on its own and list set of in order of T2 on its own.
+
+33
+00:09:53,370 --> 00:10:09,460
+So the way we do that is to find the lemma that connects list set and append. So basically, if you have this set of something appended, then what does that, how can, what is the relation, what can you simplify that to?
+
+34
+00:10:09,460 --> 00:10:44,500
+So the lemma one here is simple. You can just say list set of any two lists x's appended to y's is the same as list set of x's union list set y's. That's the lemma, right?
+
+35
+00:10:44,500 --> 00:11:13,940
+And then we can substitute with that lemma, substitute with that lemma on the right hand side, and then we have list set of in order T1 union list set of, so remember these substitutions are just one step at a time.
+
+36
+00:11:13,940 --> 00:11:55,580
+So, so this set of a and in order of T2 by substituting lemma one, where in lemma one, we mapped x's was mapped to in order of T1 and y's was mapped to a appended with in order of T1.
+
+37
+00:11:55,580 --> 00:12:14,500
+In order of T2. Okay, so then you get that. And then the third step is basically just apply the induction hypothesis. You can apply the induction hypothesis or finish just analysis using lemma one, we can just do the following.
+
+38
+00:12:14,500 --> 00:13:01,980
+We can just say list set in order of T1 union set of a union list set of T2. Again, by substituting lemma one, we can then apply the induction hypothesis here.
+
+39
+00:13:01,980 --> 00:13:35,220
+So now we can use the induction hypothesis one. And step number four is you would just say that you apply induction hypothesis one to that.
+
+40
+00:13:35,220 --> 00:14:27,280
+So you would get, you get, what was it? Three set of in order, sorry, three set of T1 by substituting the first induction hypothesis union list set of a union list set of in order of T2.
+
+41
+00:14:27,280 --> 00:15:11,890
+Then again, get step number five. You can say of T1, this union. Okay, so maybe I will just before I apply the second induction hypothesis or just say, okay, so we just unfold that to list set of the singleton set that has just a.
+
+42
+00:15:11,890 --> 00:15:57,780
+Should just be the singleton set A. That's union list set in order of T2. Again, by substituting induction hypothesis two. And that's, that can be further analyzed substituting list set, since the first equation, the second equation, right?
+
+43
+00:16:03,060 --> 00:16:30,240
+The second equation, and then actually that wouldn't give you this, that would just give you insert A into list, the empty list union that.
+
+44
+00:16:30,240 --> 00:17:05,250
+And then you can say three set T1 union. So insert A into the empty set union list in order of T2. And that by substituting list set the first equation, because there you have an empty list.
+
+45
+00:17:05,250 --> 00:17:36,580
+And then we can show that you can also just read the second induction hypothesis and say, three set T1 union. So I'll just abbreviate this into, I'll just abbreviate insert A into the empty set as this singleton set.
+
+46
+00:17:36,580 --> 00:18:13,720
+And then that's three set second tree by substituting the second induction hypothesis. And then lastly, you can then show that this is the same as, first of all, singleton A union tree set T1 of the first tree.
+
+47
+00:18:13,720 --> 00:18:37,840
+Remember, because we look in order for us to match the second equation of the tree set, we need to exactly have that order of arguments, right? Because that's how, that's how, that's how the form of proofs work, really.
+
+48
+00:18:37,840 --> 00:19:12,990
+So here we have, so that union three set T1, we need to just order that A to be outside there. Union three set T2, which is, which can finally be showing to be equal to three set A T2, which is our goal.
+
+49
+00:19:12,990 --> 00:19:30,450
+So, as you can see, like the proof, the ideas are very similar to doing induction on natural numbers or lists, but there it just is a bit more involved.
+
+50
+00:19:30,450 --> 00:19:40,860
+So I recommend you try and solve the logic tutorial examples by pen and paper first, and then we can discuss them in the tutorial. Thank you very much.
+
+51
+00:19:40,860 --> 00:19:45,860
+I hope you have enjoyed this and let's try and do it on Isabelle.

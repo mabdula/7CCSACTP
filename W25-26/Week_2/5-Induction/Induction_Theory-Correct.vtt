@@ -1,0 +1,266 @@
+WEBVTT
+
+
+1
+00:00:01.300 --> 00:00:45.370
+Hello, everyone. I hope you're well. In the previous videos, which I hope you have watched and hopefully enjoyed at least a little bit, I have discussed with you basic elements of Isabelle's interface and some basic proof methods or commands.
+
+2
+00:00:46.370 --> 00:01:12.820
+And these included forward reasoning, backward reasoning and substitution. OK, and let me just say also what we did in the interface.
+
+3
+00:01:12.820 --> 00:01:25.680
+So what we did was writing terms and theorems, theorem statements. And now and then we have done some proofs using some of the basic proof methods.
+
+4
+00:01:25.680 --> 00:01:39.200
+So in this video, we'll do another basic proof method. I'll demonstrate another basic proof method or proof command in Isabelle.
+
+5
+00:01:39.200 --> 00:02:08.670
+And that is in this video, we will be doing another basic proof method, which is mathematical induction over to prove theorems about natural numbers.
+
+6
+00:02:09.670 --> 00:02:24.530
+OK, so let me just as usual give you a good reminder of the intuition behind that, which you should have done in previous modules.
+
+7
+00:02:24.530 --> 00:02:35.590
+But I will do it here as well. So what it means to do mathematical induction and when is it useful and when is it not useful and what to use it for, et cetera.
+
+8
+00:02:35.590 --> 00:03:25.980
+So intuition, suppose we have suppose we want to prove a proper suppose we suppose we want to prove a property P called P whole proof that a property P holds for all natural numbers.
+
+9
+00:03:25.980 --> 00:03:37.340
+OK, so how can we do that? We can do that by induction in the following way. So let me just give you an example property first.
+
+10
+00:03:37.340 --> 00:03:48.220
+So, for example, if you want to say let's just say we want to prove that addition is commutative.
+
+11
+00:03:48.220 --> 00:04:02.860
+So we want to show that, again, use the Isabelle notation. So for all x and y, x plus y equals y plus x.
+
+12
+00:04:02.860 --> 00:04:16.140
+OK, so this is, for example, this is a property. So this is a property that, well, here this property actually holds for two numbers, but it can be proved by induction on one number.
+
+13
+00:04:16.140 --> 00:04:22.140
+But, OK, let me just do a simpler property, actually, just a property that just depends on one number.
+
+14
+00:04:22.140 --> 00:04:36.870
+So let's say we want to, for example, prove that any number x is smaller than or equal to x, let's say, plus a constant three.
+
+15
+00:04:36.870 --> 00:04:57.840
+Right. So how do we prove that? We prove that by induction, prove it by induction. What does that mean? That means that we prove two things.
+
+16
+00:05:02.230 --> 00:05:09.580
+We prove, firstly, a goal. We prove two things or two goals, right? We have two obligations to prove.
+
+17
+00:05:09.580 --> 00:05:40.960
+Let me, before I write them down, just write down the intuition behind them. So we have to prove things in order for us to show that P holds for all n.
+
+18
+00:05:40.960 --> 00:06:17.630
+First, the first goal is that P holds zero, which is the smallest natural number. And second, which is the second goal, P, like if assuming P holds a number n, any number n.
+
+19
+00:06:17.630 --> 00:06:45.500
+Right. I would just call, we can call it m as well, because it's not the constant, it's not the same n here as this one there. So assuming P holds for any number n, we can show P holds for n plus one.
+
+20
+00:06:46.500 --> 00:07:25.800
+Okay. Why does that prove that P holds for any n? Because this proof, those two goals basically give us kind of an algorithm, because we have an algorithm to show that P holds for any given number.
+
+21
+00:07:25.800 --> 00:08:01.400
+How? How? Simply by, simply by, you firstly have, from the first goal, you already have that it holds from P four, four, zero. And then you can, using the second goal, because the second goal basically proved that if you have P holding for n, then you can show that it holds for any n plus one.
+
+22
+00:08:01.400 --> 00:08:18.580
+So you can use that, apply it to this n, which is here zero, then you can get from that P of one, and then you can apply it to get, again, apply goal two to get P of two until you have P of the given n.
+
+23
+00:08:18.580 --> 00:08:44.740
+So that basically, so here you apply the base case, or goal one. Goal one gives you that. That's from goal one. And then this, you get it from the step case, which is goal two. Goal two, you can use goal two until, or the step case, the theorem that you proved in the step case.
+
+24
+00:08:44.740 --> 00:09:06.870
+So, as I was just mentioning up there, that our second goal, that this is, goal one is called the base case, and goal two is called the step case, right?
+
+25
+00:09:08.220 --> 00:09:23.820
+So now let's start with proving an example theorem. So here, our example property for natural numbers. So let's start as usual doing it here, and then we will do it in Isabelle.
+
+26
+00:09:23.820 --> 00:09:36.370
+So we have, let's say we want to prove that addition is commutative. So what that means is that any x plus y is always equals to y plus x, right?
+
+27
+00:09:36.370 --> 00:09:46.940
+So that's called add-commute. So in order for us to prove that by induction, we firstly need to know what the property is, and the property is the whole theorem statement.
+
+28
+00:09:46.940 --> 00:09:58.940
+So in our case, the theorem statement here doesn't have any assumptions, so that property is just that. But sometimes you can have assumptions, and then in this case, it's different.
+
+29
+00:09:58.940 --> 00:10:18.750
+So we have add-commute, and then, so proof by induction. So I would just do the proof by induction on y, but you can also do it on your own by induction x, for example, as an exercise, right?
+
+30
+00:10:18.750 --> 00:10:32.800
+So if we do the proof of induction by y, we have two cases, as we stated earlier. We have the case when y is zero, and then we call that the base case, y equals zero.
+
+31
+00:10:32.800 --> 00:10:39.800
+And then in this case, we have, what is our goal? Our goal is to prove that the property holds for the case when the number is zero.
+
+32
+00:10:39.800 --> 00:10:47.800
+So that means that the property holds that we need to prove that x plus zero equals zero plus x.
+
+33
+00:10:47.800 --> 00:11:01.160
+Because here, the property is just, here we're doing induction and y, and when we instantiate y with zero, then that's what we get.
+
+34
+00:11:01.160 --> 00:11:08.160
+So to proceed with that proof, we'll need to get to do some lemmas, to think of some lemmas.
+
+35
+00:11:08.160 --> 00:11:21.830
+So just as a rule of thumb for thinking about lemmas, you should think about, you should, when you and you come up with such lemmas, you should come up with lemmas whose proofs are going to be simpler than what you've currently proven.
+
+36
+00:11:21.830 --> 00:11:32.830
+So you cannot just say, okay, I think of a lemma to do the substitution there, and then let's say, you know, you say, okay, I'm going to assume just the same theorem, for example.
+
+37
+00:11:32.830 --> 00:11:41.830
+Like, if we assume that x plus y equals y plus x, well, we can get it through that, but you didn't make any progress like that. You didn't simplify the task at all.
+
+38
+00:11:43.020 --> 00:11:57.500
+So let's, so, but two lemmas I can think of are, for example, that x plus zero equals x, and lemma two, zero plus x equals x as well.
+
+39
+00:11:57.500 --> 00:12:10.300
+So we can do this, so the proof can be very simple, actually, for the base case. We can just say x plus zero equals x by substituting lemma one.
+
+40
+00:12:10.300 --> 00:12:25.900
+And then from that, and I will use the Isabelle notation here. So here, these dots refer to the right hand side of the previous equality, so we can just say that is equal to zero plus x by substituting lemma two.
+
+41
+00:12:25.900 --> 00:12:37.790
+And then we can say, finally, x plus zero equals zero plus x. So we're done with the base case. Then we have the step case.
+
+42
+00:12:37.790 --> 00:13:04.320
+And remember, in that step case, we need to prove that the property, that if we have the property, let me just write it again once more, if we have the property for some n, then we have it, then we, sorry, then the step case is to show the formula.
+
+43
+00:13:04.320 --> 00:13:22.850
+If we had a property for some n, then we can show it holds n plus one. Okay. And this is what we call the induction hypothesis.
+
+44
+00:13:22.850 --> 00:13:38.510
+So you assume that you have a property for n. So here in our case, assume, we assume, okay, what are the assumptions that we have? So we assume that we have the property for n, which means that we assume the induction hypothesis.
+
+45
+00:13:38.510 --> 00:13:47.640
+So that would, that would be that you have x plus y equals, let's say, y plus x, but you can replace the y here by any other name if you want.
+
+46
+00:13:47.640 --> 00:13:58.570
+But I'm just using the same name as in the theorem statement. And the goal is, so we have only one assumption, which is induction hypothesis. And the goal is, which is the second goal.
+
+47
+00:13:58.570 --> 00:14:17.790
+Remember that that was the first goal up there. And the goal is to show that x plus successor of y equals successor of y plus x. Okay.
+
+48
+00:14:17.790 --> 00:14:30.040
+And then we can do that proof again by substitution, the same methods or any of the methods that we have learned, right? Like we've learned forward reasoning and substitution, at least.
+
+49
+00:14:30.040 --> 00:14:49.950
+So, yeah, but, but usually the hint kind of is that forward reasoning and backward reasoning are used to, when you, when you want to apply or when you want to use facts that have assumptions.
+
+50
+00:14:49.950 --> 00:15:00.240
+But here, the only fact that we're going to apply is the induction hypothesis and some other lemmas and they're all just equality. So they're all substitutions. So what is a proof strategy for this one?
+
+51
+00:15:00.240 --> 00:15:16.720
+So we, a good strategy would be to get the successor of y outside here and the successor of y outside there and then flip this y and x and x and then you have two, two sides that are exactly the same, right?
+
+52
+00:15:16.720 --> 00:15:26.720
+So we can get the successor of y outside to be, to be, okay, let me just write the lemma explicitly. So we can just say we have a lemma here.
+
+53
+00:15:26.720 --> 00:15:45.120
+I'll just call this lemma three that for any a and b, a plus the successor of b equals the successor of a plus b.
+
+54
+00:15:45.120 --> 00:16:03.280
+Okay, so we can use this to do the first step and use, and then we use the induction hypothesis to flip the x and y and then we use the third lemma to, to, to, which I, which I, or the fourth lemma, which I still didn't write to, to get back the successor in on the right hand side.
+
+55
+00:16:03.280 --> 00:16:15.540
+So let's, let's do this step by step. So we want, so the first substitution we do is x plus successor of y equals successor of x plus y.
+
+56
+00:16:15.540 --> 00:16:28.390
+Okay. And that is by substituting lemma three, right? And then step number two, as I was saying, we then want to flip the x and y there.
+
+57
+00:16:28.390 --> 00:16:37.390
+So we want to have the y before the x and then we can use that. We can do that, remember, with the induction hypothesis, because this is a fact that you can always use in your, in your induction proof, right?
+
+58
+00:16:37.390 --> 00:16:53.520
+So we can say then that the left hand side, the right hand side of the previous equality is the same as suck of y plus x. This is by substituting again the induction hypothesis.
+
+59
+00:16:53.520 --> 00:17:05.380
+Okay. And now the last step, we want to get this successor to be successor of y. And then we have, so then we have our entire goal.
+
+60
+00:17:05.380 --> 00:17:11.610
+So we need to assume another lemma that says, remember that substitution happens from left to right.
+
+61
+00:17:11.610 --> 00:17:27.640
+So if we just say, if we want to prove that the right hand side of equality or step number two equals successor of y plus x, we want the lemma that says you can do that.
+
+62
+00:17:27.640 --> 00:17:39.100
+So here we have a lemma that says you can, so the first lemma, the third one, of the second argument and make it successor of the whole thing.
+
+63
+00:17:39.100 --> 00:18:03.800
+We want the successor of the first argument, okay? So we can just say a lemma, for example, we say a lemma that says, okay, the successor of the first argument plus the second argument, the successor of a plus the second argument equals the successor of both added together, right?
+
+64
+00:18:03.800 --> 00:18:17.140
+So that's the fourth lemma, so we can just do that and then say by substitution, by substituting lemma four, right?
+
+65
+00:18:17.140 --> 00:18:29.260
+So lemma four will then rewrite that right hand side of that equality, and then we will have two sides of inequality that are the same.
+
+66
+00:18:29.260 --> 00:18:55.090
+And then lastly, we can say, finally, we have x plus successor of y equals successor of y plus x, which is the goal, so basically the first left hand side and the last right hand side, and that's all what we want.

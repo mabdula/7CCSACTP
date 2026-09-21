@@ -1,0 +1,231 @@
+1
+00:00:01,200 --> 00:00:16,360
+Hello, everyone. I hope that you're all well. And today, I'm going to start giving you the videos for the second week of our theorem proving content for the form verification module.
+
+2
+00:00:16,360 --> 00:00:21,550
+So just a quick recap of what we did previously, but in a more brief way.
+
+3
+00:00:21,550 --> 00:01:07,010
+So in last week, during the last week, what we did was firstly introduced introduction to Isabelle's interface and that included how to write terms and theorem statements.
+
+4
+00:01:07,010 --> 00:01:44,870
+And then I did a reminder of basic proof or reasoning styles. This included forward reasoning, backward reasoning, induction, substitution, and case analysis.
+
+5
+00:01:44,870 --> 00:02:00,650
+And we did that both in the paper and in Isabelle.
+
+6
+00:02:00,650 --> 00:02:32,590
+So in this video, what I'll be doing is the following. I will discuss with you how to define recursive functions on lists.
+
+7
+00:02:32,590 --> 00:02:43,890
+This will be, as usual, divided into two parts. First part is theory and then in Isabelle.
+
+8
+00:02:43,890 --> 00:03:17,390
+So intuition, as usual. For example, if you recall that the list datatype that I discussed with you previously was like this.
+
+9
+00:03:17,390 --> 00:03:43,180
+So a list is either empty, nil, or also you can write it as that in an orientation, or it is a cons of another list x's.
+
+10
+00:03:43,180 --> 00:04:07,460
+So a list, I'll just call that. So let me just give these things names. So a list x's is either nil or like, or defined like that, or cons of an element with another list.
+
+11
+00:04:07,460 --> 00:04:19,520
+So an element x appended with another list x's prime. So, for example, we can have a list that is empty or another list that is a.
+
+12
+00:04:19,520 --> 00:04:26,520
+So this also has the notation. Let me just clearly write the notation or just write the notation between parentheses like that.
+
+13
+00:04:26,520 --> 00:04:41,550
+So here cons, so that is denoted from now on like that with the hash. So another list can be, for example, a cons with the empty list, which is written as a.
+
+14
+00:04:41,550 --> 00:05:09,700
+Another list can be also written a, b, c, which is a cons b, cons c, cons the empty list. I'm just trying to make some space there.
+
+15
+00:05:09,700 --> 00:05:17,980
+So that's the datatype that we have. Now, a lot of functions can be represented.
+
+16
+00:05:17,980 --> 00:05:29,820
+Okay, before I go into functions, I can just give you an example of an interesting list. So, for example, if you have, let's say, a sequence, an array, you can represent it as a list.
+
+17
+00:05:29,820 --> 00:05:48,060
+So the lists are used to represent an array. So that's an obvious thing. Just like the example above there.
+
+18
+00:05:48,060 --> 00:06:09,260
+Also, you can use it to represent a mapping. So, for example, if I want to represent and so this is also like this is known as association list.
+
+19
+00:06:09,260 --> 00:06:35,180
+So, for instance, if I want to every person to their age, I can say the following. So you have these elements of the list.
+
+20
+00:06:35,180 --> 00:06:42,180
+This can have any type. So this could be like a natural number, but it can also be a pair. And in the case of an association list, it's a pair.
+
+21
+00:06:42,180 --> 00:07:03,180
+So you can say, for example, person Bob has age 23 and then person Alice has age 34, etc. So that's another use of lists.
+
+22
+00:07:04,730 --> 00:07:42,870
+But in our case, in the case that we're interested in here, lists always finite. That is to say, any list is finite applications of cons.
+
+23
+00:07:43,870 --> 00:07:56,020
+So it has to be like a list of X's. So we just have X1, cons X2, cons Xn, cons the empty list.
+
+24
+00:07:56,020 --> 00:08:17,810
+So there has to be some n like that. So now let's quickly go to the next thing, which is functions on lists.
+
+25
+00:08:17,810 --> 00:08:39,660
+So an example function on list that is there are many, there are many functions list. So again, what is the intuition behind that?
+
+26
+00:08:39,660 --> 00:08:57,540
+So these are an example is a function that adds the sum of elements in the list. So I will just use the notation of addition that is normal to the summation of elements in X's or the maximum element of X's.
+
+27
+00:08:57,540 --> 00:09:20,430
+And there are also other functions like, for example, map. So this function takes another function as an argument and the list and then returns to you the elements returns a list.
+
+28
+00:09:20,430 --> 00:09:47,040
+X has the same where list whose members are X's with F applied to them. These are all example functions.
+
+29
+00:09:47,040 --> 00:10:02,650
+So so you can map. So, for example, here, this mapping function can be, let's say, so map, for example, if I map every element in a list to, let's say, its successor.
+
+30
+00:10:02,650 --> 00:10:17,760
+So you have a function here that takes an X and gives you a successor of X, or you can write it even better than that. You can just write map successor applied, let's say, to on this list.
+
+31
+00:10:17,760 --> 00:10:30,720
+One, two, three, that would return to you two, three, four, because this is the successor of everything. Okay, so that's the so there are many kinds of functions like that.
+
+32
+00:10:30,720 --> 00:10:43,740
+There's also, you know, you can also define define median of X's, etc. You can imagine, I guess, many functions on lists.
+
+33
+00:10:43,740 --> 00:11:15,960
+So, very important crucial for functional programming. Okay, so now, okay, so now we're done with with with intuition, right?
+
+34
+00:11:15,960 --> 00:11:51,510
+So let's take actual examples of recursive functions on lists. Okay, so one example is, for example, the sum, how can we represent sum?
+
+35
+00:11:51,510 --> 00:12:15,800
+So when you write the recursive function, you write like f is recursive in lists, in a list, if given in f is a recursive function in lists in general, or taking lists.
+
+36
+00:12:15,800 --> 00:13:03,010
+If given a list, f can be evaluated in terms of a part of that tail of that list. So basically f, f calls itself. So let's try a few examples here of recursive functions on lists, and then I'll show you how to do them as well.
+
+37
+00:13:03,010 --> 00:13:17,610
+So this is the sum. Okay, so sum. So when you write recursive functions, you have to do the following you have to, you have to cover all possible cases of the list.
+
+38
+00:13:17,610 --> 00:13:35,950
+So if you remember, we said that a list is either nil or a cons. So it's either nil, empty, or not empty. And not empty means that it's an element appended to another list.
+
+39
+00:13:35,950 --> 00:13:44,950
+And that other list can also be empty or not empty, etc. And you have like any list can be made of a finite sequence of these kinds of operations, okay?
+
+40
+00:13:44,950 --> 00:14:36,730
+So if you want to, a recursive function has to consider all possible, like a recursive function, a fully defined recursive function, or a well-defined, not a well-defined, but a fully defined recursive function should cover values of the input.
+
+41
+00:14:36,730 --> 00:14:57,820
+So, for example, here, so let's say, let's say, so for sum, let's say, so sum, we have to define it. Sum should take a list of polynomial type lists and returns to you a natural number, right?
+
+42
+00:14:57,820 --> 00:15:08,820
+Sorry, not a polynomial, it should take a list of natural numbers, for example, or a list of numbers, but the same. And then it returns to you a natural number. So that's the signature, right?
+
+43
+00:15:08,820 --> 00:15:24,000
+So this is the signature of the function. Its actual definition is as follows. So we, as I said, we have to consider all cases. So sum of an empty list is zero.
+
+44
+00:15:24,000 --> 00:15:40,340
+And sum of a list that is not empty, so a list is, that is an x appended to another list, x's, that should be simply x plus the sum of x's.
+
+45
+00:15:42,820 --> 00:16:08,830
+And let's give an example here of how this function would be evaluated. Sum of 0, 1, 3, for example, would be equal to sum to, just following the definition.
+
+46
+00:16:08,830 --> 00:16:22,180
+So here, this is a non-empty list. So we go to that case, and then that case would return the first element, 0 plus sum of 1 and 3.
+
+47
+00:16:22,180 --> 00:16:37,420
+And that in turn is also non-empty, so that would return 0 plus 1 plus sum of 3. And that also, that also is non-empty.
+
+48
+00:16:37,420 --> 00:16:59,300
+So we'll go again to the second case, so 0 plus sum plus 3 plus sum of empty. And then that last one is the first case, so it would return a 0.
+
+49
+00:16:59,300 --> 00:17:13,990
+So then you would have a 0 plus 1 plus 3 plus 0, which is exactly what's expected, which would then be evaluated by evaluating the plus.
+
+50
+00:17:13,990 --> 00:17:25,160
+So that's an example of a function that unlists. Another example would be, for example, appending.
+
+51
+00:17:25,160 --> 00:17:49,260
+So if you have append, and let me just clarify that a little bit, so that should not be its own thing. So append, that's a function that takes a list, takes two lists and returns a list which is appended, which is the appending of the two first lists.
+
+52
+00:17:49,260 --> 00:18:03,260
+So a list and a second list, and returns a third list. So how do we write append? So again, recursively. So it should take two arguments, and we can define it recursively only in one argument.
+
+53
+00:18:03,260 --> 00:18:40,090
+So for example, here we say append element, empty, y's should be equal to y's, because it takes two lists, x's and y's, and it's only recursive on x's, and append x cons x's, y's equals x cons append x's and y's.
+
+54
+00:18:40,090 --> 00:19:02,890
+Again, evaluating that would be, for example, append of one, two, three, let's just do a shorter one so that it's easier, append of one, two, and three should return the following.
+
+55
+00:19:02,890 --> 00:19:13,950
+So the first call would be in the second case, because the first argument is not empty, so we go there, which means that we can take the first element x and append it outside.
+
+56
+00:19:13,950 --> 00:20:08,810
+And then call the function on the rest of the rest of the first argument. So let's do that. So that would be one cons append and three, and then again, just to clarify that a bit, this is going to be equal, sorry, this is going to be equal to one appended to append the empty list, and the thing with the list having three in it.
+
+57
+00:20:08,810 --> 00:20:36,750
+And that should be one appended to two, appended to, so this case will go to the first case in the recursion, so if we change just the second argument, which is the singleton list three, appended to three, which is the same as writing one, two, three in our notation.
+
+58
+00:20:36,750 --> 00:20:46,420
+Okay, so those are two examples of appending. Now I will show you in Isabelle how to write recursive functions in lists.

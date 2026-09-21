@@ -1,0 +1,87 @@
+1
+00:00:00,880 --> 00:00:10,390
+Hello everyone, so this is, in this video I will just show you a quick demo of how to write recursive functions for algebraic datatypes.
+
+2
+00:00:10,390 --> 00:00:22,730
+Perhaps I would start with the trees, so let me say, so what did we do? We did two functions, right?
+
+3
+00:00:22,730 --> 00:00:44,710
+And the first function was the tree set, right? So fun tree set. And that function, we did it, so it takes a tree, right?
+
+4
+00:00:44,710 --> 00:01:07,570
+Alpha tree and gives you an alpha set, and it goes as follows. So again, it's very similar to what we wrote on the virtual blackboard.
+
+5
+00:01:07,570 --> 00:01:30,230
+So you have a case for leaves, right? And that should be empty. And then the case for trees, so you have left, r, a, and r.
+
+6
+00:01:30,230 --> 00:01:55,530
+And then in this case, what you return is the set of L union, set A union at tree, set r.
+
+7
+00:01:55,530 --> 00:02:05,700
+So here, I mean, there is a tiny bit of a difference where I'm just using that singleton set instead of insertion, but you can also just as well do that.
+
+8
+00:02:12,500 --> 00:02:26,880
+So now let's try and evaluate that tree for the term that we had there. So I will just, instead of copying this and pasting it, I will just start, like I will define this as a, I will define a constant here.
+
+9
+00:02:26,880 --> 00:02:51,020
+So let's say definition, say this tree example equals where tree e, g. So here, because I don't want to copy this all the time, so I will just define it like that.
+
+10
+00:02:51,020 --> 00:03:02,140
+So in order for us to try this function tree set, let us try it on that tree example. So remember, this was the evaluation function, so value and then tree set.
+
+11
+00:03:02,140 --> 00:03:16,870
+Let me try it here on the tree example. So as you can see, we have the list one, two, three. And of course, it shouldn't change the order based because let's just try it that way.
+
+12
+00:03:16,870 --> 00:03:28,100
+For example, we have one, one, three, and then let's see what happened. We have one and three, and then let's say we have four, so that then we should have one, three, four, et cetera.
+
+13
+00:03:28,100 --> 00:03:41,100
+So as you can see, it works as expected. I also want to note that if you recall, in order for the value function, in order for a function to be evaluated, you have to have a datatype that is acceptable.
+
+14
+00:03:41,100 --> 00:03:54,420
+And the most notable one is natural numbers and then all datatypes that are built recursively on natural numbers. So trees of natural numbers, lists of natural numbers, et cetera.
+
+15
+00:03:54,420 --> 00:04:31,280
+So here, that's one way to do it. Another function was, maybe I'll just do it from scratch, the function was the in order, so in order traversal of a tree, that function takes a tree and gives you a list.
+
+16
+00:04:31,280 --> 00:04:53,160
+So you have in order, again, you have to do all the cases. Leave, that should be the empty list. I also want to note something here. I'm using the standard visible list, not the list that I defined here.
+
+17
+00:04:53,160 --> 00:05:17,540
+So that's the leaf, then in order of node and L A R is going to be in order L A newton and then in order R.
+
+18
+00:05:17,540 --> 00:05:40,660
+So again, that's the function there. So let's try to evaluate it on the tree example that we had. So in order, so now we have one for three, right? Because as we said, we go to the left most and then to the parent and then to the right hand side of child of the parent and then to the parent of the parent, et cetera.
+
+19
+00:05:40,660 --> 00:06:12,810
+So let's try and add more leaves, maybe perhaps here we can have a node that has two and leave. In this case, what do we have? So that evaluation is added the two in the correct order, so it went from the left most child to the parent to the right to the right sub child of the parent and then the parent doesn't have a right sub child here.
+
+20
+00:06:14,480 --> 00:06:45,750
+And then and then to the parent of the parent and then to the right sub child of the parent. So it goes from the left most to the right most. So let's see the value. Let me just see one, one, two, four, three. Yeah. So that's basically how you write recursive functions for trees and then for lists.
+
+21
+00:06:45,750 --> 00:07:00,010
+I mean, we have done many of those and I guess I just, I think the right thing for you to do is to just play around with the, with this on your own and write fun, fun functional programs. Yeah.
+
+22
+00:07:00,010 --> 00:07:14,310
+So I guess that's all. So, yeah, I'll talk to you in the next video about how to prove properties about those functions by induction. So I hope you enjoy that.

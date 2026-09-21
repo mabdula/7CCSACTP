@@ -1,0 +1,499 @@
+1
+00:00:01,100 --> 00:00:07,180
+Okay, so now we did that on pen and paper, so on the board. So let's do that in Isabelle.
+
+2
+00:00:07,500 --> 00:00:15,860
+So in Isabelle, I started a theory called induction, just as usual.
+
+3
+00:00:15,860 --> 00:00:21,380
+I call the theory by the name of the topic that we're trying to cover in it. So here in this case, it's called induction.
+
+4
+00:00:22,050 --> 00:00:27,130
+Because obviously we want to cover induction. So now what is the lemma that we want to prove? We want to prove that
+
+5
+00:00:27,130 --> 00:00:38,200
+any, so for any x plus y, we have that x plus y equal, we have for any x and y, we have that x plus y equals y plus x, right?
+
+6
+00:00:40,150 --> 00:00:48,310
+And then we want to fix the num, the types to be natural numbers. You remember, because as I said, addition and everything, addition and all
+
+7
+00:00:48,310 --> 00:00:59,970
+operations and numbers here are, are overloaded. So they can be for numbers or integers or other things.
+
+8
+00:01:01,130 --> 00:01:11,750
+So we have lemma x, that's what we want to prove. So the first step is to do it, to do it, to tell Isabelle that we want to do induction.
+
+9
+00:01:11,750 --> 00:01:22,100
+So we say prove by induction on y, right? So that gives us the two, two goals that I was discussing there.
+
+10
+00:01:22,100 --> 00:01:27,580
+So this is the base case and this is the step case. But we want to structure a proof in the same way we had it on the blackboard.
+
+11
+00:01:27,940 --> 00:01:34,460
+So usually when you do that induction, Isabelle gives you this suggested proof completion.
+
+12
+00:01:34,820 --> 00:01:41,660
+So it gives you, so it gives you two cases, basically, this case zero, where you have to prove the base case.
+
+13
+00:01:41,660 --> 00:01:52,630
+So you have a goal here. Here, instead of the goal being called thesis, it's called case. So the goal here is that the base case.
+
+14
+00:01:52,630 --> 00:01:58,070
+And the second one, the goal here is that and assumes the induction hypothesis is this one.
+
+15
+00:01:58,910 --> 00:02:10,940
+So let's go and try to prove the base case. So the base case, we said we needed, let's go back quickly to the board again to see where the lemmas that we needed for the base case.
+
+16
+00:02:11,770 --> 00:02:27,160
+So the first lemma was, so lemma one, x plus zero equals x. So we want to find the lemma that says that.
+
+17
+00:02:27,160 --> 00:02:30,760
+So let's try and do the same thing that we did before.
+
+18
+00:02:30,760 --> 00:02:39,840
+So we want x plus zero equals x. So add zero, right?
+
+19
+00:02:39,840 --> 00:03:12,780
+OK, so that's the first lemma that we will use. So we say in our proof, we say have x plus zero equals x by or applying substitution.
+
+20
+00:03:13,100 --> 00:03:18,210
+Add zero, right? Which is the lemma that we wanted.
+
+21
+00:03:18,210 --> 00:03:21,690
+Then now we have x equals x. And remember what I told you about that.
+
+22
+00:03:21,690 --> 00:03:27,930
+You can always close these kinds of obligations, proof goals with the double dots.
+
+23
+00:03:27,930 --> 00:03:31,970
+So when we apply the substitution, we have a new goal, which is x equals x.
+
+24
+00:03:31,970 --> 00:03:38,030
+And then we just do the double dot and then it's closed.
+
+25
+00:03:38,030 --> 00:03:55,640
+And then I'm going to do the other step, which is x equals zero plus x to have to apply.
+
+26
+00:03:55,640 --> 00:03:59,560
+So in this case, I would just not assume that the lemma.
+
+27
+00:03:59,560 --> 00:04:08,180
+Sorry, I will not search for the lemma. I'll just assume that to show you again to remind you that we can use sorry always.
+
+28
+00:04:08,180 --> 00:04:14,940
+This one I will just call left, because when you're trying to prove something, you can always assume the lemmas that you need by sorry.
+
+29
+00:04:14,940 --> 00:04:21,780
+So here I would just do that. So I would say zero plus x equals x, that's left.
+
+30
+00:04:21,780 --> 00:04:28,610
+And then I will do sorry. And of course, I will fix the types in order for it to make sense.
+
+31
+00:04:28,610 --> 00:04:34,860
+OK, so here you have an example, of course, automatically found actual lemmas.
+
+32
+00:04:34,860 --> 00:04:39,910
+But I'm just going to assume it with sorry to show you how you do top down proofs.
+
+33
+00:04:39,910 --> 00:04:47,850
+So we do we say apply substitution and zero left.
+
+34
+00:04:47,850 --> 00:04:54,040
+And then again, you have that kind of the goal, the goal becomes x equals x.
+
+35
+00:04:54,040 --> 00:05:05,650
+And then and then finally, we say finally showcase.
+
+36
+00:05:05,650 --> 00:05:13,250
+Finally, we have that the left hands, the first left hand side is equal to the last right hand side.
+
+37
+00:05:13,250 --> 00:05:20,850
+And then I would say a lot. I'm sorry. No, not a lot.
+
+38
+00:05:20,850 --> 00:05:23,090
+Here we have here. What we what do we have as a goal?
+
+39
+00:05:23,090 --> 00:05:27,730
+We have as a goal something and we have we have an assumption, the same thing.
+
+40
+00:05:27,730 --> 00:05:40,050
+If you remember, if you remember that these kinds of obligations, if you have if you have an assumption, something and and as your goal, the same thing, you can close them with just the dot.
+
+41
+00:05:40,050 --> 00:05:46,450
+OK, so that's for the first case, the second, the second case, you have an induction hypothesis.
+
+42
+00:05:46,450 --> 00:05:52,020
+So the induction hypothesis is that x plus y equals y plus x.
+
+43
+00:05:52,020 --> 00:05:54,460
+So how do we actually use that induction hypothesis?
+
+44
+00:05:54,460 --> 00:05:58,540
+So this is going to be we need again a substitution.
+
+45
+00:05:58,540 --> 00:06:06,950
+So we have that I will start from the left hand side of the goal of the entire goal.
+
+46
+00:06:06,950 --> 00:06:17,030
+So it's this one and then proceed by substituting.
+
+47
+00:06:17,030 --> 00:06:21,430
+So what do we need? So we need a limit that says, again, that gets the suck out.
+
+48
+00:06:21,430 --> 00:06:31,180
+So if you remember, I'll just call that, let's say, suck and the second argument.
+
+49
+00:06:31,180 --> 00:06:46,650
+So two. So this limit should say x plus suck y equals suck of x plus y.
+
+50
+00:06:46,650 --> 00:06:56,860
+And again, I'll assume that now without proving it just to get to see if the proof works or no in the top and the top down approach for proving the theorem.
+
+51
+00:06:56,860 --> 00:07:05,780
+So here you have from that substitution, you can prove that successor x plus suck y equals suck of x plus y.
+
+52
+00:07:05,780 --> 00:07:15,420
+And then we get that by substituting suck add.
+
+53
+00:07:15,420 --> 00:07:26,790
+And then you have that confusion.
+
+54
+00:07:26,790 --> 00:07:35,340
+And then we say also have now we want to get the right hand side and and and use the induction hypothesis.
+
+55
+00:07:35,340 --> 00:07:50,240
+If you remember to substitute it and flip the x and the y. So we say the right hand side of the previous equality equals suck of y plus x.
+
+56
+00:07:50,240 --> 00:07:53,240
+That should be my substitution of what.
+
+57
+00:07:53,240 --> 00:07:56,640
+So here the name of the induction, what is the name of the induction hypothesis?
+
+58
+00:07:56,640 --> 00:07:59,560
+We don't like I didn't tell you what the name of the induction hypothesis is.
+
+59
+00:07:59,560 --> 00:08:07,600
+Although like when you do this, when when we did the proof induction, it gave you two cases, case zero, which which was this.
+
+60
+00:08:07,600 --> 00:08:17,210
+So you have so here, which is that sorry here in this case zero.
+
+61
+00:08:17,210 --> 00:08:19,770
+So you want to prove that x plus zero equals zero plus x. Right.
+
+62
+00:08:19,770 --> 00:08:21,450
+I didn't give you any assumptions.
+
+63
+00:08:21,450 --> 00:08:34,180
+And case the case, the other case, which is the step case, you have you have it gives you this induction hypothesis and it asks you to prove.
+
+64
+00:08:34,180 --> 00:08:36,060
+I mean, we have added some things in the middle.
+
+65
+00:08:36,060 --> 00:08:44,830
+That's why it's not as clear, but you can ask it to prove that x plus y equals x.
+
+66
+00:08:44,830 --> 00:08:46,230
+So here that's the conclusion.
+
+67
+00:08:46,230 --> 00:08:54,300
+And that is the assumption.
+
+68
+00:08:54,300 --> 00:08:56,180
+So so so we need to.
+
+69
+00:08:56,180 --> 00:08:58,820
+But I didn't tell you what is the name of the induction hypothesis.
+
+70
+00:08:58,820 --> 00:09:05,840
+So the name of the induction hypothesis in this case, it is suck the IH, for example.
+
+71
+00:09:05,840 --> 00:09:11,080
+So that is so let me let me just show you what that theorem you can refer to it in many in many ways.
+
+72
+00:09:11,080 --> 00:09:14,600
+So the first way you can refer to the natural hypothesis, you can just say suck IH.
+
+73
+00:09:14,600 --> 00:09:19,000
+Right. So that is the theorem. Remember, this is how we see theorems.
+
+74
+00:09:19,000 --> 00:09:23,720
+But you can also always use copy and paste it basically.
+
+75
+00:09:23,720 --> 00:09:25,720
+So you can always have this.
+
+76
+00:09:25,720 --> 00:09:27,080
+So here notice what I'm doing.
+
+77
+00:09:27,080 --> 00:09:33,720
+I'm doing a quotation mark, a double quotation mark, and then pressing the auto completion.
+
+78
+00:09:33,720 --> 00:09:43,740
+And then you hear you can use something called cartouche to literally refer to whatever fact you you want without having without remembering its name.
+
+79
+00:09:43,740 --> 00:09:48,460
+So, for example, in our case, this would be x plus y equals y plus x.
+
+80
+00:09:48,460 --> 00:09:52,420
+And then it's it it knows what fact we're referring to.
+
+81
+00:09:52,420 --> 00:10:10,260
+So you can also use that as a substitution and then you have the same result.
+
+82
+00:10:10,260 --> 00:10:22,240
+But I will just use the name because it's clear what it's clear what what it makes it clear what we're using to substitute.
+
+83
+00:10:22,240 --> 00:10:30,380
+OK. And then now we have the last step, which is getting the suck again, but to the first argument.
+
+84
+00:10:30,380 --> 00:10:36,460
+So this one, let's just try and search for it this time instead of assuming it.
+
+85
+00:10:36,460 --> 00:11:01,120
+So find theorems suck of a and plus plus b equals suck of a plus b.
+
+86
+00:11:01,120 --> 00:11:04,340
+And we didn't find anything.
+
+87
+00:11:04,340 --> 00:11:10,740
+But let's just maybe reverse that.
+
+88
+00:11:10,740 --> 00:11:20,460
+Where's the direction? Yes, we already found it without having because remember like this find theorems technique.
+
+89
+00:11:21,410 --> 00:11:29,380
+You always you use it to look like if you write any term in it, it will match all the terms that have that term.
+
+90
+00:11:29,380 --> 00:11:31,660
+You don't have to write the whole thing. Just a part of it.
+
+91
+00:11:31,660 --> 00:11:35,900
+So here I'm writing just suck a plus b and give you all theorems that have a plus b.
+
+92
+00:11:35,900 --> 00:11:38,740
+So these are these include the one that we want.
+
+93
+00:11:38,740 --> 00:11:43,580
+So at suck here, this is the one that I'm going to choose.
+
+94
+00:11:43,580 --> 00:11:56,890
+So let's just see that theorem. So it says suck m plus plus n equals suck of the whole thing.
+
+95
+00:11:56,890 --> 00:12:04,570
+And remember, this is the precedence of plus is is the precedence of suck is higher than the person of plus.
+
+96
+00:12:04,570 --> 00:12:09,610
+So this reads as parentheses around the suck and write.
+
+97
+00:12:09,610 --> 00:12:13,110
+So we hear here we would have suck.
+
+98
+00:12:13,110 --> 00:12:20,560
+He would have that the right hand side of the previous equality equals suck.
+
+99
+00:12:20,640 --> 00:12:22,960
+Why last X. Right.
+
+100
+00:12:22,960 --> 00:12:32,090
+And we do that by substituting was it called again.
+
+101
+00:12:32,090 --> 00:12:36,950
+It's called that suck. Right.
+
+102
+00:12:36,950 --> 00:12:39,350
+And that's it for the school.
+
+103
+00:12:39,350 --> 00:12:41,510
+And that's it for this last step.
+
+104
+00:12:41,510 --> 00:12:50,410
+And then we do that again. Finally, finally, which which which ends our proof here.
+
+105
+00:12:50,410 --> 00:12:57,540
+So finally, we just say x plus y equals y plus x.
+
+106
+00:12:57,540 --> 00:12:59,220
+So let me just recap here.
+
+107
+00:12:59,220 --> 00:13:03,860
+We did we did a proof by induction and natural number and then it gave us two cases.
+
+108
+00:13:03,860 --> 00:13:05,940
+It gives two cases, a base case and a subcase.
+
+109
+00:13:05,940 --> 00:13:08,460
+The base case is with zero and it doesn't have any assumptions.
+
+110
+00:13:08,460 --> 00:13:13,580
+The subcase is with x like you have an assumption, the national hypothesis.
+
+111
+00:13:13,580 --> 00:13:16,300
+So in our case, that was x plus y and what was x.
+
+112
+00:13:16,300 --> 00:13:34,660
+And you want to show that the theorem holds for x plus y and y plus x, which is the same as saying x plus one and y plus one side of Isabelle.
+
+113
+00:13:34,660 --> 00:13:37,940
+So that's all I think.
+
+114
+00:13:37,940 --> 00:13:40,980
+And yeah, so that's all for induction.
+
+115
+00:13:40,980 --> 00:13:43,220
+I hope you've enjoyed it.
+
+116
+00:13:43,220 --> 00:13:49,220
+So maybe let me just write a few notes in the notebook in the board as we usually do.
+
+117
+00:13:49,220 --> 00:13:54,060
+Sometimes I find that things are not worthy after doing it in Isabelle.
+
+118
+00:13:54,060 --> 00:14:06,340
+So let's just write a few notes here.
+
+119
+00:14:06,340 --> 00:14:13,420
+So notes because I forgot to say that earlier.
+
+120
+00:14:13,420 --> 00:14:23,140
+I mean, I told it to you in one of the other videos in Isabelle.
+
+121
+00:14:23,140 --> 00:14:36,820
+Suck x is roughly the same thing as x plus one for natural numbers for four nets.
+
+122
+00:14:36,820 --> 00:14:41,780
+That's one thing.
+
+123
+00:14:41,780 --> 00:14:43,900
+That's basically, I think, all of it.
+
+124
+00:14:43,900 --> 00:14:45,980
+So, yeah, I hope you enjoyed it.
+
+125
+00:14:45,980 --> 00:14:46,540
+Thank you very much.

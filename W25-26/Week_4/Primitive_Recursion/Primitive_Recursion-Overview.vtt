@@ -1,0 +1,58 @@
+WEBVTT
+
+
+1
+00:00:00.690 --> 00:00:09.940
+Hello, everyone. Welcome to this video. Before I go into this video, I'd just like to remind you of the context.
+
+2
+00:00:09.940 --> 00:00:14.940
+It's a bit boring, but this time I copied already the context, so it should be a bit faster.
+
+3
+00:00:14.940 --> 00:00:18.940
+So, previously, we did an introduction to the inter business interface,
+
+4
+00:00:18.940 --> 00:00:24.940
+and I showed you the basic methods of doing reasoning for the backward and substitution and induction of natural numbers.
+
+5
+00:00:24.940 --> 00:00:27.940
+And then I discussed with you how to deal with lists last week.
+
+6
+00:00:27.940 --> 00:00:31.940
+So, this was, I discussed recursive functions on lists and how we define them,
+
+7
+00:00:31.940 --> 00:00:34.940
+and then how we do proofs by structural induction on lists.
+
+8
+00:00:34.940 --> 00:00:39.870
+And then, in the last video, which is the first video for this week,
+
+9
+00:00:39.870 --> 00:00:44.870
+I discussed with the algebraic datatypes, how to define datatypes like natural numbers, lists, and trees,
+
+10
+00:00:44.870 --> 00:00:47.870
+which are the most interesting ones, trees.
+
+11
+00:00:47.870 --> 00:01:17.120
+So, in this video, what I'll be doing is recursion algebraic datatypes,
+
+12
+00:01:17.120 --> 00:01:21.120
+particularly, in fact, I should call it primitive recursion.
+
+13
+00:01:21.120 --> 00:01:26.720
+So, that's a proper terminology.
+
+14
+00:01:26.720 --> 00:01:32.910
+And, okay.

@@ -1,0 +1,62 @@
+WEBVTT
+
+
+1
+00:00:01.810 --> 00:00:21.200
+So, as usual, I will discuss some intuition and then go do it a bit more formally on the board here and then we will try and do it in Isabelle.
+
+2
+00:00:21.200 --> 00:01:04.020
+Okay, so what's the intuition? So, we call lists, okay? What, for a list that we had, any list can be represented as a finite number of applications of cons, right?
+
+3
+00:01:04.020 --> 00:01:22.900
+So, any list can be represented as X1 cons, X2 cons, X3 cons until we have Xn and then an empty list, right?
+
+4
+00:01:22.900 --> 00:01:48.010
+Now, what was the intuition of that? You can, the intuition of that was that, no, what was the intuition of that? What was the brief way to state that or what was the brief way of our exploiting this fact?
+
+5
+00:01:48.010 --> 00:02:43.820
+We could exploit that by, what's the relevance of that fact, okay? So, the relevance of that, this was relevant because we could define recursive functions on lists by considering only two cases.
+
+6
+00:02:44.820 --> 00:03:09.820
+Or patterns and I wanted to keep notice of the term patterns because that's the right word, right? So, the first case was nil, right? You know, like that and the same case was cons, X, X's, you know, like that. Okay? Okay.
+
+7
+00:03:09.820 --> 00:03:30.610
+So, now let me just go back upward one, one step. So, what am I saying here? I'm trying to tell you, to remind you of lists and how we approach lists to define recursive functions on them.
+
+8
+00:03:30.610 --> 00:04:26.080
+But what does that have to do with datatypes, okay? So, a datatype definition basically summarizes the intuition, or not summarizes, I would say encapsulates rather, encapsulates the, no, I will change that again, sorry about that.
+
+9
+00:04:26.080 --> 00:05:12.660
+So, to say formally encapsulates the intuition stated earlier. That is to say, what are the possible patterns so that you can do recursion on them, okay? For a certain datatype, what are the possible patterns?
+
+10
+00:05:12.660 --> 00:06:03.030
+And also, it gives you an indication and an indication of how the recursion, the recursion would be structured or how the recursive calls would, indication of how the recursive calls, the recursive calls on that datatype progress or procedure, right?
+
+11
+00:06:03.030 --> 00:06:24.500
+So, for example, if we have a list, we can see it graphically, right? By saying, for example, if you have a list, one, two, three, and then you call something recursively on that list, you can draw it graphically like that, okay?
+
+12
+00:06:24.500 --> 00:06:40.870
+One, two, three, and then you have the empty case ordered, right? Or you can just standardize that and just draw it like that because this is the empty list, right?
+
+13
+00:06:40.870 --> 00:06:55.980
+So, you call, you go on one and then call it for two and then three and then back from the empty to three and from three to two and from two to one, okay?
+
+14
+00:06:55.980 --> 00:07:34.300
+So, now, okay, so now we're done with lists. So, the same, like, let me just quickly cover natural numbers, naturals, right? So, no, well, before I go to, no, I'll just talk quickly about naturals and then the patterns for naturals, the pattern was that every natural number is either zero or a successor
+
+15
+00:07:34.300 --> 00:07:37.540
+of some other natural number, right?

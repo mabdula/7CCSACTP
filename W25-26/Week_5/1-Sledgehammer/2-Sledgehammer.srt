@@ -1,0 +1,119 @@
+1
+00:00:00,560 --> 00:00:15,420
+So the first and older and actually very successful and impactful way of doing AI-assisted theorem proving is Sledgehammer, so-called Sledgehammer.
+
+2
+00:00:15,420 --> 00:00:28,970
+So Sledgehammer was developed in 2010 by Larry Paulson and Jasmin Blanchette, both are two of the core Isabelle developers in 2010.
+
+3
+00:00:28,970 --> 00:00:34,970
+And it basically bridges interactive theorem provers like Isabelle with external automated theorem provers.
+
+4
+00:00:34,970 --> 00:00:38,970
+So these are called SMT solvers for instance, so first order logic solvers.
+
+5
+00:00:38,970 --> 00:00:46,510
+I mean, we don't even need to go into what type of external theorem provers are used.
+
+6
+00:00:46,510 --> 00:00:51,150
+It's all what you need to know is really the general architecture.
+
+7
+00:00:51,150 --> 00:00:55,250
+So what happens here is that we have a goal that we want to prove in Isabelle.
+
+8
+00:00:55,250 --> 00:01:09,730
+And the system, the Sledgehammer, the way it works is that it selects some existing facts using a basic machine learning filter.
+
+9
+00:01:09,730 --> 00:01:16,730
+So that, for example, if you want to prove something about lists, if you want to prove something about filters on lists,
+
+10
+00:01:16,730 --> 00:01:23,730
+then it chooses all the lemmas that are relevant that seem related to filters on lists.
+
+11
+00:01:23,730 --> 00:01:32,860
+So lemmas that take filter and lemmas that take maybe concatenation and filter and mapping and filter and so forth.
+
+12
+00:01:32,860 --> 00:01:34,860
+So that's the first step.
+
+13
+00:01:34,860 --> 00:01:42,050
+And then after it gets all those theorems, all those facts about lists and filters or the relevant facts,
+
+14
+00:01:42,050 --> 00:01:50,460
+it moves, it passes them along with the goal that you want to prove to an external automated theorem prover, ATP.
+
+15
+00:01:50,460 --> 00:01:59,460
+And that external theorem prover will try to prove your goal using the facts that were selected by this machine learning based filter.
+
+16
+00:01:59,460 --> 00:02:07,460
+And then afterwards, after the fact, after the external theorem prover finish, if it is successful,
+
+17
+00:02:09,040 --> 00:02:13,040
+it gives you, okay, this is my proof. And these are actually the lemmas that I needed.
+
+18
+00:02:13,040 --> 00:02:17,040
+I didn't need all the facts that you filtered. I only needed some minimal lemmas.
+
+19
+00:02:17,040 --> 00:02:25,040
+And then the proof from that external theorem prover is again reconstructed inside Isabelle,
+
+20
+00:02:25,040 --> 00:02:30,040
+because Isabelle actually does not trust external theorem provers because they might have bugs in them.
+
+21
+00:02:30,040 --> 00:02:36,040
+So what we do, so basically the process is you want to prove an Isabelle sub-goal, use Sledgehammer.
+
+22
+00:02:36,040 --> 00:02:43,040
+How does Sledgehammer work? Use machine learning to set up some facts that seem relevant to proving this goal,
+
+23
+00:02:43,040 --> 00:02:47,040
+then sends those facts along with the goal to an external theorem prover.
+
+24
+00:02:47,040 --> 00:02:53,040
+And then if the external theorem prover succeeds, we take its proof and try to redo it again inside Isabelle
+
+25
+00:02:53,040 --> 00:02:56,040
+so that it becomes an Isabelle proof rather than external theorem prover's proof.
+
+26
+00:02:56,040 --> 00:03:13,140
+And this approach really has a great advantage, which is that it blends the best of both worlds.
+
+27
+00:03:13,140 --> 00:03:18,140
+So you have the efficiency of all these external theorem provers, which could solve goals
+
+28
+00:03:18,140 --> 00:03:24,140
+that cannot be solved by O2 or fast-force or same for any of the internal methods.
+
+29
+00:03:24,140 --> 00:03:28,140
+But at the same time, you still have the trustworthiness of Isabelle's kernel.
+
+30
+00:03:28,140 --> 00:03:38,580
+And I will just do a very short demo for you as to how to use Sledgehammer to prove a goal.

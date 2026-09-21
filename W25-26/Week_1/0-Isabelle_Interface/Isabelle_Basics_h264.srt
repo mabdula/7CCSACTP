@@ -1,0 +1,1423 @@
+1
+00:00:01,100 --> 00:00:11,170
+Hello everyone. In this video I will do a basic introduction to the interactive theorem prover, Isabelle, HOL to you.
+
+2
+00:00:11,170 --> 00:00:16,170
+This will be our main theorem prover that we'll be using over the next three lectures.
+
+3
+00:00:16,170 --> 00:00:24,230
+So I hope you would follow with what I will say today here.
+
+4
+00:00:24,230 --> 00:00:34,160
+And if you have any questions, please ask me right away on the forum or on the or my email or in my office hours.
+
+5
+00:00:34,160 --> 00:00:46,120
+So first of all, let me just say so. So today we're introducing Isabelle.
+
+6
+00:00:46,120 --> 00:00:57,820
+OK, so before I before I do much much much else, I would like to first to make sure that you have all downloaded Isabelle.
+
+7
+00:00:57,820 --> 00:01:03,820
+So there is a link on Keats that has the website where you can download Isabelle from.
+
+8
+00:01:03,820 --> 00:01:13,820
+So please download pause this video and download Isabelle and open it in the way that is shown right there.
+
+9
+00:01:13,820 --> 00:01:17,820
+So you have to open an empty file called introduction of theory.
+
+10
+00:01:17,820 --> 00:01:26,820
+So introduction of theory and then just create that file with whatever tool you want to create files with and then open it like that.
+
+11
+00:01:27,950 --> 00:01:34,950
+And then once you have that done, please continue your video so that you can go on with the introduction.
+
+12
+00:01:34,950 --> 00:01:42,940
+OK, so now back to the introduction.
+
+13
+00:01:42,940 --> 00:01:54,890
+So Isabelle/HOL uses a logic called higher-order logic, as I stated in my first video.
+
+14
+00:01:54,890 --> 00:01:59,890
+And what that logic is about what that is about is two things very informally.
+
+15
+00:01:59,890 --> 00:02:13,780
+It's basically a logic where you have quantifiers like for all there exists, disjunction, conjunction, implication, et cetera.
+
+16
+00:02:13,780 --> 00:02:17,780
+And I will introduce all of these connectives, of course.
+
+17
+00:02:17,780 --> 00:02:24,160
+And the second thing is that it's also a functional programming language.
+
+18
+00:02:24,160 --> 00:02:36,120
+And I will also introduce you to the necessary concepts related to functional programming for using Isabelle in our module here.
+
+19
+00:02:36,120 --> 00:02:43,280
+But that's basically informally what it is. So it's a logic and a functional programming and it basically allows you to do the following.
+
+20
+00:02:43,280 --> 00:03:01,850
+So it has implementations that allow you. So like the very basic features of Isabelle/HOL, it allows you to define datatypes and it allows you to define functions.
+
+21
+00:03:01,850 --> 00:03:12,400
+Right. And this can be recursive or non recursive functions.
+
+22
+00:03:12,400 --> 00:03:30,040
+And they're both based on functional programming. So when you want to say functions here, it's functional programming, really.
+
+23
+00:03:30,040 --> 00:04:00,500
+It allows you to state logical properties of functions.
+
+24
+00:04:00,500 --> 00:04:07,790
+And this is what makes it the improver, right? You can state logical properties of functions.
+
+25
+00:04:07,790 --> 00:04:13,010
+You can state them. But and you can also more importantly prove them.
+
+26
+00:04:13,010 --> 00:04:21,300
+So, for example, you can you can define some function and just call it, you know, F.
+
+27
+00:04:21,300 --> 00:04:36,370
+And then say, for example, F for for any X or any input X, F of X is, say, less than 10.
+
+28
+00:04:36,370 --> 00:04:42,370
+And then you can prove that property. You can specify properties like that and prove them in Isabelle/HOL.
+
+29
+00:04:42,370 --> 00:04:52,370
+Or you can say, for example, if you have F of X and then you have also another thing that's called G of X, you can say F of X is smaller than or equal to G of X.
+
+30
+00:04:54,230 --> 00:05:02,260
+So that's basically what makes it the theorem prover that you can write functions in it and prove properties of those functions.
+
+31
+00:05:02,260 --> 00:05:15,090
+OK. So before I go before I show you how to do any of this, how to define datatypes, functions, logical properties of those functions, approve them.
+
+32
+00:05:15,090 --> 00:05:21,090
+I would like to remind you of concepts of functional programming.
+
+33
+00:05:21,090 --> 00:05:29,260
+So let me just function programming concepts.
+
+34
+00:05:29,260 --> 00:05:43,850
+Just call that. So I will hear just informally remind you of some concepts that you should have seen in the practical experiences of programming.
+
+35
+00:05:43,850 --> 00:05:48,880
+But I will remind you here of them still. So functional programming concepts.
+
+36
+00:05:48,880 --> 00:05:55,880
+And I will do that very informally. So the first concept I want you to remember is that is a notational concept.
+
+37
+00:05:55,880 --> 00:06:01,880
+OK, so that's called carrying a function. So it's just the way we write functions is the way we write.
+
+38
+00:06:01,880 --> 00:06:07,880
+We pass. We write. We do. Well, it's a way we denote passing certain arguments to functions.
+
+39
+00:06:07,880 --> 00:06:23,540
+OK. So, for example, in a in a math textbook, OK, so a function takes two arguments.
+
+40
+00:06:23,540 --> 00:06:25,540
+You would you would write it like this. You would write it.
+
+41
+00:06:25,540 --> 00:06:34,660
+You'd write it G, for example, of X and Y because you turn the two arguments into a pair like that or a tuple.
+
+42
+00:06:34,660 --> 00:06:43,660
+If it takes three arguments, let's say H, then it will be G of H of X, Y and Z, H of X, Y and Z.
+
+43
+00:06:43,660 --> 00:06:52,720
+OK, in the current versions of those functions is as follows.
+
+44
+00:06:52,720 --> 00:07:08,280
+So, for example, instead of writing this like that, you would write G of X and Y. Right.
+
+45
+00:07:08,280 --> 00:07:14,280
+Instead of writing that, you would write H of X, Y and Z.
+
+46
+00:07:14,280 --> 00:07:19,700
+So that's just annotation. And it's very convenient when you're doing functional programming.
+
+47
+00:07:19,700 --> 00:07:25,050
+And I will explain why we're doing things in Isabelle. Why is that convenient?
+
+48
+00:07:25,050 --> 00:07:31,050
+But I just want you to to take note of this notation. Right. Remember this notation.
+
+49
+00:07:31,050 --> 00:07:45,980
+The second point I want to informally introduce to you that was also that is also related to functional programming is is.
+
+50
+00:07:45,980 --> 00:07:55,600
+Lambda expressions, if you recall. So here, so Lambda expressions.
+
+51
+00:07:55,600 --> 00:08:13,900
+So, again, this is another notation. Right. So, for example, in a maths textbook, what you would write, for example,
+
+52
+00:08:13,900 --> 00:08:17,900
+if I want to write a function that adds two numbers, I would write it like this.
+
+53
+00:08:17,900 --> 00:08:27,410
+So I would say F of X and Y equals or not add, but let's say adds twice the first argument and to the third to the second argument.
+
+54
+00:08:27,410 --> 00:08:33,530
+So you'd say F of X and Y equals two X plus Y. Okay.
+
+55
+00:08:33,530 --> 00:08:40,530
+In as a Lambda expression, you would do it the following way. As a current Lambda expression, you do it the following way.
+
+56
+00:08:40,850 --> 00:08:53,180
+So you would say F. Well, let's say, yeah, I'll just start with these two arguments.
+
+57
+00:08:53,180 --> 00:09:11,130
+So I would say F of F equals F equals a Lambda expression that takes an X and a Y and returns two X plus Y.
+
+58
+00:09:11,130 --> 00:09:17,420
+So what is the meaning of that Lambda expression? It's it's it is just a function.
+
+59
+00:09:17,420 --> 00:09:27,500
+It basically is the same as above there. So you would if I say, for example, F of X and Y or let's say let's say we apply this function.
+
+60
+00:09:27,500 --> 00:09:36,870
+Let's say we apply the above function there, the function above there to two arguments, A and B. Right.
+
+61
+00:09:36,870 --> 00:09:42,860
+So what if we say if I'll just call the second one F prime.
+
+62
+00:09:42,860 --> 00:09:52,250
+So if I apply the first one to A and B, so this would be would return to us to A plus B.
+
+63
+00:09:52,250 --> 00:10:01,740
+If I apply the second function to two arguments, also A and B, it would return the same thing.
+
+64
+00:10:01,740 --> 00:10:13,840
+So to turn to A plus B. But if I apply the current function to just one argument, A like this, it would return actually another function.
+
+65
+00:10:13,840 --> 00:10:33,840
+OK, so we return Lambda Y to A plus B. So here notice that that that argument A only got all the instantiated over access in that Lambda expression.
+
+66
+00:10:35,960 --> 00:10:40,060
+So that's the second thing that I want you to remember informally.
+
+67
+00:10:40,060 --> 00:10:46,060
+And it's just a concept that you should have studied while in practical experiences of programming.
+
+68
+00:10:46,060 --> 00:10:49,060
+But if you also don't understand it or if you have any questions about it, let me know.
+
+69
+00:10:49,060 --> 00:11:00,170
+But I'm sure I will have more than enough opportunities to clarify that later when we're using it in Isabelle.
+
+70
+00:11:00,170 --> 00:11:06,170
+So we did carrying and we did Lambda expressions.
+
+71
+00:11:06,170 --> 00:11:20,520
+The third thing is so-called polymorphic types.
+
+72
+00:11:20,520 --> 00:11:41,650
+So, for example, if I just tell you that if I want to say, let's say a function takes, let's say, OK, I want to say a function F takes a real number.
+
+73
+00:11:41,650 --> 00:11:54,700
+A real number and returns another real number.
+
+74
+00:11:54,700 --> 00:12:00,770
+OK, so you would write it like this, right? F real to real.
+
+75
+00:12:00,770 --> 00:12:08,850
+If I want to say that F takes a list of real numbers and returns a real number, let's say the maximum real number out of those.
+
+76
+00:12:08,850 --> 00:12:18,800
+So I would say F takes a real list and returns a real.
+
+77
+00:12:18,800 --> 00:12:21,800
+OK, so that's nothing polymorphic.
+
+78
+00:12:21,800 --> 00:12:34,240
+If I want to do that as a polymorphic type, so we would, for example, we would say F takes, let's say, a list.
+
+79
+00:12:34,240 --> 00:12:38,370
+OK, but the polymorphism here means the following.
+
+80
+00:12:38,370 --> 00:12:42,370
+That list can have any types of elements.
+
+81
+00:12:42,370 --> 00:12:49,430
+So if I want to say it takes a list of some type, like whose elements are of some type, this can be instantiated with reals.
+
+82
+00:12:50,910 --> 00:12:58,980
+This type variable A here can be instantiated with reals or with nets or with ints, et cetera.
+
+83
+00:12:58,980 --> 00:13:04,980
+So this is very similar to templates, let's say, in object-oriented programming.
+
+84
+00:13:04,980 --> 00:13:17,980
+So if I say F takes an alpha list or an A list and returns an A, that means that we have defined an entire class of functions that takes different kinds of As
+
+85
+00:13:18,980 --> 00:13:31,250
+and returns lists whose elements are of type A for any type A that you can instantiate there and returns one element out of that list.
+
+86
+00:13:31,250 --> 00:13:42,050
+So those are three concepts that I wanted to remind you of before we go in actually discussing how to do things in Isabelle.
+
+87
+00:13:42,050 --> 00:13:50,210
+So now that we have done that, let me try and write with you some terms in Isabelle.
+
+88
+00:13:51,210 --> 00:14:02,940
+So let me just say, so today, right now, I will introduce you to three things in Isabelle.
+
+89
+00:14:04,060 --> 00:14:33,810
+So terms, which is the basic entity of things in Isabelle, basically, that is equivalent to, sorry about that.
+
+90
+00:14:33,810 --> 00:14:39,700
+So that is, terms are equivalent to objects, for example, in object-oriented programming.
+
+91
+00:14:39,700 --> 00:14:47,250
+So they're the basic type of element that you can express.
+
+92
+00:14:47,250 --> 00:14:50,250
+So, for example, this includes numbers.
+
+93
+00:14:50,250 --> 00:15:03,230
+This includes all functions or lists or trees, et cetera.
+
+94
+00:15:03,230 --> 00:15:06,230
+Everything in Isabelle is a term, basically.
+
+95
+00:15:06,230 --> 00:15:21,780
+So I want to introduce you to terms and also want to introduce you to how you type, annotate terms in Isabelle.
+
+96
+00:15:21,780 --> 00:15:40,130
+And lastly, I would like to introduce you to how you write, how we specify properties of terms or logical properties of terms.
+
+97
+00:15:40,130 --> 00:15:44,130
+So these are properties that we basically prove, right?
+
+98
+00:15:44,130 --> 00:15:52,270
+Specify logical properties of terms. Let me just get that clearer.
+
+99
+00:15:52,270 --> 00:16:04,260
+Okay, so now let's go to Isabelle to try and represent those three things.
+
+100
+00:16:04,260 --> 00:16:20,750
+Okay, so first, let's try and go back to the Isabelle theory that we opened and initialize it correctly.
+
+101
+00:16:22,740 --> 00:16:26,740
+So I would just, so this file is called Introduction.
+
+102
+00:16:26,740 --> 00:16:32,740
+And in Isabelle, if you have a theory file that's called X, then you have to call the theory in it X.
+
+103
+00:16:32,740 --> 00:16:36,740
+So I will just call this theory Introduction.
+
+104
+00:16:36,740 --> 00:16:39,740
+So this means that basically this module is called Introduction.
+
+105
+00:16:39,740 --> 00:16:51,320
+So theory here is equivalent to, let's say, a file that has a programming in CEO in Haskell or whatever.
+
+106
+00:16:52,480 --> 00:16:57,480
+So here you say, here Introduction imports main, for example.
+
+107
+00:16:57,480 --> 00:17:01,930
+So then begin, then end.
+
+108
+00:17:01,930 --> 00:17:16,020
+So here main is the main, so main is, it's very similar to the way you import modules in other programming languages or in other systems.
+
+109
+00:17:17,020 --> 00:17:23,020
+And main is the most basic one. It has natural numbers, it has lists, it has many implementations of things.
+
+110
+00:17:23,020 --> 00:17:29,690
+So let me write down, for example, a term for you.
+
+111
+00:17:29,690 --> 00:17:35,690
+Okay, so like a term here, for example, the most basic term in Isabelle is true.
+
+112
+00:17:35,690 --> 00:17:49,260
+Okay, so we have, so these are true and false are both terms of type bool.
+
+113
+00:17:49,260 --> 00:17:58,350
+So we have, these are well defined. So as you can see here, if I say term true, that means that Isabelle understands that this is true and it's defined as a bool.
+
+114
+00:17:58,350 --> 00:18:06,660
+We can also write term false and the same, it's also identified as a bool.
+
+115
+00:18:06,660 --> 00:18:11,660
+So before I continue here, I want to tell you one thing. Please try everything that I'm doing in Isabelle with me.
+
+116
+00:18:11,660 --> 00:18:17,660
+And later on when I'm doing exercises, then I want to actually pause the video and try to do them on your own before I do them.
+
+117
+00:18:17,660 --> 00:18:24,790
+So another kind of term is, so these are Boolean terms, and then we have also, as I said earlier, numbers.
+
+118
+00:18:24,790 --> 00:18:30,660
+So let's say zero, for example, we have a term called zero in Isabelle.
+
+119
+00:18:30,660 --> 00:18:38,660
+But as you can see here, zero, Isabelle doesn't know what its type is, and that's because we have overloading.
+
+120
+00:18:38,660 --> 00:18:55,090
+So let me just go back to the blackboard and say, so here we have Boolean objects and we have numbers as I said there.
+
+121
+00:18:55,090 --> 00:19:05,300
+So for example, zero, one, et cetera, but these are all overloaded.
+
+122
+00:19:05,300 --> 00:19:17,780
+They can mean the zero that is a natural number, they can mean the zero that is an integer number or a rational number, et cetera.
+
+123
+00:19:17,780 --> 00:19:27,850
+So in order for us to let Isabelle know what zero we're referring to, for example, for our zero example, we have to tell it which one we're referring to.
+
+124
+00:19:27,850 --> 00:19:32,850
+So this is the first type of annotation we do together, right?
+
+125
+00:19:32,850 --> 00:19:36,850
+So you have to say zero is an add, so now Isabelle knows that this is an add.
+
+126
+00:19:36,850 --> 00:19:40,850
+You can also say zero is an int, then Isabelle knows that this zero is an integer.
+
+127
+00:19:40,850 --> 00:19:48,850
+So natural numbers are numbers going from zero to plus infinity, integers are going from minus infinity to plus infinity.
+
+128
+00:19:48,850 --> 00:20:02,770
+So that's another kind of object, another kind of objects that I wanted to discuss with you, as shown here.
+
+129
+00:20:02,770 --> 00:20:08,770
+So now we have done numbers, we need to still do functions, okay?
+
+130
+00:20:08,770 --> 00:20:12,770
+So Isabelle has a lot of predefined functions.
+
+131
+00:20:12,770 --> 00:20:27,260
+So for example, you can say term plus, you have to write the plus in this notation.
+
+132
+00:20:27,260 --> 00:20:46,440
+Again, addition, I'm going back to the blackboard, addition here, as you can see, it's all type variables of polymorphic types, alphas, and that's because, again, addition is also overloaded.
+
+133
+00:20:46,440 --> 00:21:01,840
+So we have like plus, minus, product, all of these are also overloaded between the different kinds of natural numbers.
+
+134
+00:21:01,840 --> 00:21:16,030
+So if you ever use these numbers, if you ever refer to these functions, unless Isabelle on its own can know the type, and I will tell you how, you have to annotate the function.
+
+135
+00:21:16,030 --> 00:21:28,500
+So here, for example, we say plus the function that takes a net, and the second net, and returns a third natural number, okay?
+
+136
+00:21:28,500 --> 00:21:33,500
+So instead of the alpha, alpha, or AAA, you still know this is the one for nets.
+
+137
+00:21:33,500 --> 00:21:48,500
+For example, you cannot say it takes a natural number, and a second natural number, and returns an int, because if you remember, the overloaded one has all arguments of the first two, which are its arguments, are of type alpha,
+
+138
+00:21:48,500 --> 00:21:53,500
+and the third one, which is the return type, is of type the same type, okay?
+
+139
+00:21:53,500 --> 00:22:02,500
+So now that we have reached this part, I would like to go back to the blackboard and just show you how you do type annotations.
+
+140
+00:22:03,540 --> 00:22:11,370
+So if we have a function that, so I said here type annotate terms.
+
+141
+00:22:11,370 --> 00:22:16,100
+So for example, you can annotate an object.
+
+142
+00:22:16,100 --> 00:22:21,100
+An object can be a bool, for example, right?
+
+143
+00:22:21,100 --> 00:22:25,230
+Okay, let me just write that a bit more formally.
+
+144
+00:22:25,230 --> 00:22:44,430
+So a valid type in Isabelle, something that has a valid type, is either a bool, or a net, or an int, or some other base type.
+
+145
+00:22:44,430 --> 00:22:49,430
+These are called those base types. These are predefined types in Isabelle.
+
+146
+00:22:49,430 --> 00:23:02,170
+But it can also be a polymorphic type, like the alphas and the betas that we saw now, or yamas, etc.
+
+147
+00:23:02,170 --> 00:23:07,250
+These are polymorphic types, okay?
+
+148
+00:23:07,250 --> 00:23:11,540
+But this doesn't cover functions, which we just did for the addition, for example.
+
+149
+00:23:12,540 --> 00:23:16,540
+So another thing that we have is a function type, okay?
+
+150
+00:23:16,540 --> 00:23:26,950
+So a valid Isabelle type can also be a function type, and we write that like this.
+
+151
+00:23:26,950 --> 00:23:40,340
+So here we, this T maps, this is like a T, something that takes a T and returns another type, a valid type T.
+
+152
+00:23:40,340 --> 00:23:44,340
+So it takes a valid type T and returns another valid type T. So this is like a function.
+
+153
+00:23:44,340 --> 00:23:47,340
+And as an example of that, let me just show you.
+
+154
+00:23:47,340 --> 00:23:52,460
+So example of a function type annotation.
+
+155
+00:23:52,460 --> 00:24:06,460
+For example, if I say, if I have a function that takes, as I showed you earlier, if we have this function there that takes a real and returns a real, the way we would write this in Isabelle, it would be like this.
+
+156
+00:24:06,460 --> 00:24:14,340
+Or if it takes a net and returns a net, it's the same.
+
+157
+00:24:14,340 --> 00:24:16,780
+But I will just focus on nets here.
+
+158
+00:24:16,780 --> 00:24:18,780
+Takes a net and returns a net.
+
+159
+00:24:18,780 --> 00:24:21,780
+That's the way you say that this function takes a net.
+
+160
+00:24:21,780 --> 00:24:25,780
+So how about if you have a function that takes two arguments, how do you write it?
+
+161
+00:24:25,780 --> 00:24:40,740
+So if it takes two arguments, and those arguments are carried, so like this one here, then this f prime, I would say that it takes a natural number,
+
+162
+00:24:40,740 --> 00:24:46,740
+as a first argument, because remember, you can apply it to just one argument, and then you will return still a function.
+
+163
+00:24:46,740 --> 00:24:53,000
+So you can say it takes a natural number and the second natural number and returns a net.
+
+164
+00:24:53,000 --> 00:25:02,000
+So the way you read that type annotation is that even if you give it just one natural number, it gives you a function that takes a net and returns a net like this.
+
+165
+00:25:02,000 --> 00:25:08,000
+So here you have an f prime of a and b. If you apply it to a, then you will return a function that takes only one argument, y.
+
+166
+00:25:08,000 --> 00:25:12,060
+Sorry, and this should have been y.
+
+167
+00:25:12,060 --> 00:25:23,810
+So that's the way to write types in Isabelle as well, so type annotations for functions.
+
+168
+00:25:23,810 --> 00:25:29,220
+So going back to our slide, we can use that here.
+
+169
+00:25:29,220 --> 00:25:41,350
+So, for example, here we say that this function add takes a natural number and a second natural number and returns a natural number, which you can read it as follows.
+
+170
+00:25:41,350 --> 00:25:53,340
+It takes a natural number and then returns a function that takes a natural number and returns a natural number, and then you give it a second natural number, and then you just get that natural number.
+
+171
+00:25:53,340 --> 00:25:59,140
+Lastly, let me have a few more.
+
+172
+00:25:59,140 --> 00:26:16,300
+We have also, if you recall, we talked about Isabelle, you would say t times t, so a valid type can be a product of two valid types.
+
+173
+00:26:16,300 --> 00:26:41,840
+So that's a product. And, for example, you can just, for example, here, if we talk about the type of this function there, it also takes two natural numbers and returns a third natural number, f, this one.
+
+174
+00:26:41,840 --> 00:27:00,660
+So this one, but it doesn't take the functions carry, it takes them as a product. So you would write it that f, you write its number, its type as something that takes a product, an add, multiplied by an add, and returns an add.
+
+175
+00:27:00,660 --> 00:27:06,560
+So, for example, in Isabelle, let me go back to Isabelle again.
+
+176
+00:27:06,560 --> 00:27:21,550
+So if I want to say that something is a product, so the way you write it, okay, so first of all, I can just say, I can just say x, and that x, just any x, and that x is a product, you can just give it any type.
+
+177
+00:27:21,550 --> 00:27:33,090
+So I can say, for example, it's a natural, times a natural number, so that's a product of two natural numbers, okay?
+
+178
+00:27:33,090 --> 00:27:41,280
+You can also say, for example, a natural integer, you know, it can be any kind of pair, right?
+
+179
+00:27:41,280 --> 00:27:55,370
+So that's for products. So we can also define functions, we in Isabelle already have functions that deal with pairs.
+
+180
+00:27:55,370 --> 00:28:19,960
+So let me just go back to the board again. So, for example, we have the function first, okay?
+
+181
+00:28:19,960 --> 00:28:34,700
+So this takes a pair of type alpha and beta, and returns the first element, so I want you to pause and try and guess what it would return, okay?
+
+182
+00:28:34,700 --> 00:28:39,700
+So it would return, actually, something of type alpha, and we have second as well.
+
+183
+00:28:39,700 --> 00:28:59,220
+It takes, again, an alpha and a beta pair, and returns a beta. So this is, for example, going back to Isabelle and showing you, we actually have this function, so we have here first.
+
+184
+00:28:59,220 --> 00:29:06,220
+So here, again, it can recognize that this is a function that takes that pair and returns an alpha.
+
+185
+00:29:06,220 --> 00:29:14,640
+But again, as you can see, it's an alpha times beta, and returns alpha, which means that this is a polymorphic function, so it can take pairs of any types.
+
+186
+00:29:14,640 --> 00:29:29,540
+So let's say we can instantiate it, for example, by saying, okay, it takes a natural number, let's say, an integer, and returns, it has to return then a natural number,
+
+187
+00:29:29,540 --> 00:29:37,660
+or it has to return an integer, because it returns a type of the first element of the pair, so it has to return a natural number, and the same for second.
+
+188
+00:29:37,660 --> 00:29:58,660
+So here, we have second, int, turns an int. So we have here those two functions.
+
+189
+00:29:58,660 --> 00:30:15,940
+And then there is also, like, the last two types I want to discuss with you are, so a valid type T, so let me just go back to the blackboard, sorry.
+
+190
+00:30:15,940 --> 00:30:35,690
+So a valid type T can be also a T list, so this basically means that it's a list of elements of type T, or a T set, or any other user-defined types.
+
+191
+00:30:35,690 --> 00:30:44,690
+And we will discuss that later in later videos, what are the user-defined types, but let's just now give examples of the list and of the set.
+
+192
+00:30:44,690 --> 00:30:57,190
+So in Isabelle, for example, we can write down a list of elements with the following notation, so we can write A, B, and C.
+
+193
+00:30:57,190 --> 00:31:08,860
+So this is a list of elements, all of type alpha, and that's because we didn't say what is an A, but we can, for example, make it an alpha list, either by, sorry, we can make it a natural number list,
+
+194
+00:31:08,860 --> 00:31:22,860
+a natural number list, for example, either by saying that A is an at, and then in this case Isabelle can use this type inference algorithm to realise that the whole list is of type nat, because one of its elements is of type nat.
+
+195
+00:31:22,860 --> 00:31:34,180
+Or we can use also int, but again, we have an int list, but you cannot use, for example, int and nat, because the list is of type alpha list.
+
+196
+00:31:34,180 --> 00:31:41,180
+So everything in the list has to be of the same type, although it's polymorphic, but it has to be the same type A.
+
+197
+00:31:41,180 --> 00:31:53,450
+So that's one thing. We have also functions defined for lists, so let's go back to the blackboard.
+
+198
+00:31:53,450 --> 00:32:17,510
+So here, for example, we have functions like append, for example, so a function that depends to lists, and let's say, and the function that takes the head of a list and the function that presents to you the tail of the list.
+
+199
+00:32:17,510 --> 00:32:24,280
+So these are also functions that are defined, and I will show you them in Isabelle now.
+
+200
+00:32:24,280 --> 00:32:36,790
+So let's say the term append. So this is a function that's called append. As you can see, the notation for it is that, which is what I wrote. It's the at symbol.
+
+201
+00:32:36,790 --> 00:32:44,790
+It takes an alpha list and another alpha list, and it turns an alpha list that is the combination, that is the appending of both.
+
+202
+00:32:44,790 --> 00:32:58,910
+Again, you can instantiate it by saying, for example, that it takes an at list and an at list and turns an at list.
+
+203
+00:32:58,910 --> 00:33:18,690
+So now we have instantiated it. For example, you can apply it to the list that we stated earlier at A and B and C, and then you have, and then it returns to your list.
+
+204
+00:33:18,690 --> 00:33:24,820
+But if you apply to one list, then it needs a second list and returns the appending of both lists.
+
+205
+00:33:24,820 --> 00:33:38,330
+But here, if you notice, we actually don't know, this doesn't evaluate the function. It just tells you that append, A, B, and C, or you can write it in this notation, which is the infix notation for it.
+
+206
+00:33:38,330 --> 00:33:47,320
+It just tells you that this term is of type alpha list, but it doesn't tell you what the value of the term is. And I will talk to you about that in a second.
+
+207
+00:33:47,320 --> 00:34:00,090
+Similarly, we have also the functions head and tail. So, for example, it's called headHD, so it takes an alpha list and returns to alpha, which is the first element of the list.
+
+208
+00:34:00,090 --> 00:34:18,920
+So you can give it also the same A and B, and then now we have that it's alpha and tail as well. So it takes an alpha and a beta and returns everything in the list, except for the first element.
+
+209
+00:34:18,920 --> 00:34:28,370
+But it's not called tail, actually. So notice also in Isabelle, in the interface, blue constants, like blue things like that, are undefined.
+
+210
+00:34:28,370 --> 00:34:32,880
+It has to be black. If you were talking about the predefined function, it has to be black.
+
+211
+00:34:32,880 --> 00:35:01,830
+So let me just write that on the board here. So note, blue terms are undefined.
+
+212
+00:35:01,830 --> 00:35:20,650
+So that's something that you need to recall. Now let's write it in the correct way. So just one second.
+
+213
+00:35:20,650 --> 00:35:35,380
+So now it's black, as you can see. So it's written as TL. So those are some basic functions for lists.
+
+214
+00:35:35,380 --> 00:35:50,810
+Now, we said we also discussed sets, which is the last predefined type in Isabelle that we just discussed today.
+
+215
+00:35:50,810 --> 00:35:59,990
+So the notation for writing lists in Isabelle is as follows. So it's a term. Sorry, sets is as follows.
+
+216
+00:35:59,990 --> 00:36:09,600
+So this is, for example, the empty set. Also, for the lists, I forgot to tell you, I mean, the empty list is just written like that.
+
+217
+00:36:09,600 --> 00:36:16,980
+So this is the empty set, for example, if I want to say of just one element A, then you have here an alpha set.
+
+218
+00:36:16,980 --> 00:36:23,980
+As you can see, it's polymorphic again. It's not defined. But if you want to make it a clearly defined type, then you could say NAT.
+
+219
+00:36:23,980 --> 00:36:39,690
+If A is NAT, then it knows that this is a NAT set. And for sets, we have the normal, what you would expect,
+
+220
+00:36:39,690 --> 00:36:50,460
+the types that you would, the functions that you would expect for sets. So, for example, we have union.
+
+221
+00:36:50,460 --> 00:36:55,460
+So it takes an alpha set and another alpha set and returns an alpha set. And this is the notation for it.
+
+222
+00:36:55,460 --> 00:37:08,130
+The infix notation is union. So, for example, you can say term S union T, that's given those two sets.
+
+223
+00:37:08,130 --> 00:37:14,220
+It's an alpha set where you can also write it without the infix notation. So you can write it like this.
+
+224
+00:37:14,220 --> 00:37:32,740
+So this is the same as S union S and T. And the same for intersection. We have term intersection, but it's called inter.
+
+225
+00:37:32,740 --> 00:37:41,460
+And the way you would write it with an infix notation is also, so by the way, this is something I didn't tell you.
+
+226
+00:37:41,460 --> 00:37:46,530
+So you write the backslash and, for example, inter and then you will find that the intersection symbol came up.
+
+227
+00:37:46,530 --> 00:37:50,530
+And also you can write the backslash and the union, then you will find that the symbol came up.
+
+228
+00:37:50,530 --> 00:37:53,530
+So that's how you come up with these different notations.
+
+229
+00:37:53,530 --> 00:37:59,530
+But if you want to actually properly see them, you can click on any of the functions to see if there is another notation for it.
+
+230
+00:37:59,530 --> 00:38:02,530
+So, for example, here I click on union with control. So you control click.
+
+231
+00:38:02,530 --> 00:38:18,360
+And then you see the definition and then it tells you the infix notation for it is that.
+
+232
+00:38:18,360 --> 00:38:37,490
+So you can do the same with intersection and that's the notation.
+
+233
+00:38:37,490 --> 00:38:41,490
+And then if you want to go back to the previous file, you can press on this.
+
+234
+00:38:41,490 --> 00:38:46,000
+If you want to go to the definition of head, the same you have.
+
+235
+00:38:46,000 --> 00:38:49,000
+But that's a bit complicated. I will go into that later on.
+
+236
+00:38:49,000 --> 00:39:02,410
+OK, but in any case, so now I showed you the basics of the terms and how you how you write them in Isabelle.
+
+237
+00:39:02,410 --> 00:39:11,410
+OK, basic terms. OK, so the second thing we discussed also was type annotation and how you annotate the terms with types.
+
+238
+00:39:11,410 --> 00:39:19,240
+But I actually didn't tell you. I didn't show you what the different types, how the different types are defined.
+
+239
+00:39:19,240 --> 00:39:27,360
+So let me go back to the to the blackboard again quickly.
+
+240
+00:39:27,360 --> 00:39:31,580
+So now we have we have done we have done this.
+
+241
+00:39:31,580 --> 00:39:36,710
+We have done the terms and we have done the how to type annotate terms.
+
+242
+00:39:36,710 --> 00:39:45,930
+But before I go into specifying logical properties of terms, I want to still show you how different datatypes are defined.
+
+243
+00:39:45,930 --> 00:39:53,220
+So, for example, so so so let's say, for example, natural numbers.
+
+244
+00:39:53,220 --> 00:39:56,220
+So how what how are actually natural numbers defined in Isabelle.
+
+245
+00:39:56,220 --> 00:40:05,380
+So this is very important. So a natural number in Isabelle can either be a natural number.
+
+246
+00:40:05,380 --> 00:40:17,480
+I will just write it informally and then I'll move that. I'll just move this to the next page or write it in this page in a second.
+
+247
+00:40:17,480 --> 00:40:48,540
+So informally, natural numbers in Isabelle are either a zero or something other than a zero.
+
+248
+00:40:48,540 --> 00:40:56,240
+What is something other than a zero? It should be a successor of another natural number n.
+
+249
+00:40:56,240 --> 00:41:12,880
+So a successor of some or suck of a, for example, where a is another natural number.
+
+250
+00:41:12,880 --> 00:41:23,890
+So let me just take you to the to the physical definition of natural numbers so I can show you that as well.
+
+251
+00:41:24,620 --> 00:41:32,690
+So here we have Nats, for example. So you can click on the datatype again with control, hover around it and click.
+
+252
+00:41:32,690 --> 00:41:41,940
+And well, not that file, but this time it doesn't work for some reason. The definition, I clicked on something else.
+
+253
+00:41:41,940 --> 00:41:54,060
+So the natural number is OK. No. So if you want to see the type of the natural number.
+
+254
+00:41:54,060 --> 00:42:02,850
+How can we do that? So we can do that not by clicking on the type, because actually this is a defining a very complicated way there.
+
+255
+00:42:02,850 --> 00:42:21,150
+But I can just show you that, for example, again, term zero zero is, as I said, is is is overloaded, but we can say that.
+
+256
+00:42:21,150 --> 00:42:29,080
+OK. And then we can also say the successor of zero. So that is another natural number.
+
+257
+00:42:29,080 --> 00:42:37,630
+So here we have a term successor of zero. So that's equivalent to one.
+
+258
+00:42:37,630 --> 00:42:50,190
+Well, that means one. And then term successor of successor of zero. And then that's equivalent to.
+
+259
+00:42:50,190 --> 00:42:54,190
+So that's that's how natural numbers are actually defined in Isabelle.
+
+260
+00:42:54,190 --> 00:43:00,190
+And then we have the notation that I showed you above there, which is, for example, here.
+
+261
+00:43:00,190 --> 00:43:09,730
+We can just write one. So that's the notation for suck zero.
+
+262
+00:43:09,730 --> 00:43:24,940
+So but the real definition of natural numbers in Isabelle is zero or suck. Another important datatype in Isabelle, which is built in, is lists.
+
+263
+00:43:24,940 --> 00:43:36,620
+So let me just go back to the blackboard. So write down how natural numbers are defined.
+
+264
+00:43:37,620 --> 00:43:44,100
+So so so natural number. Yeah, we already wrote that. So then lists as well.
+
+265
+00:43:44,100 --> 00:44:05,840
+So lists are either are either empty lists, OK, denoted by that, as I showed you earlier, or they are so or they're not empty.
+
+266
+00:44:05,840 --> 00:44:30,630
+And in this case, what that means is that the list is an attending, which we call cons of some some something, some element A to another list or some element X, let's say to a list X's.
+
+267
+00:44:30,630 --> 00:44:49,400
+OK, so that's that's again the two possible cases for a list. So and for example, in Isabelle, when we write when we wrote A, B and C, the list A, B and C, this is actually annotation for cons.
+
+268
+00:44:50,880 --> 00:45:13,660
+A cons B cons C and sorry, cons C and then this one takes an empty list. So cons C appends C to add C to the empty list and then you add B to the list that has C and the empty list and then you add A to the to the resulting list.
+
+269
+00:45:16,390 --> 00:45:38,400
+So let's let's go back to the to the visible here to just show you that this should show you an empty list.
+
+270
+00:45:38,400 --> 00:45:54,880
+So this is an empty list, as I said, or you can have also, for example, cons A and empty list, as I mentioned there and that and we have a notation for cons there, which is the same as.
+
+271
+00:45:54,880 --> 00:46:03,740
+So instead of saying cons A empty, you can just say A hash empty. This means A cons empty list.
+
+272
+00:46:03,740 --> 00:46:16,340
+And then you can have like if you want to write A, B and C, the list A, B and C that we wrote up there, you can just write it like this, A, B and C and the empty list.
+
+273
+00:46:16,340 --> 00:46:19,340
+So that's exactly the same list as what we had up there.
+
+274
+00:46:22,510 --> 00:46:37,020
+So that also is the other thing that I wanted to discuss about these types. So those two fundamental types, natural numbers and natural numbers and lists.
+
+275
+00:46:39,080 --> 00:47:18,180
+So now that we're done with with with natural numbers and lists, let me show you the third thing, which we were supposed to discuss, which is how how to specify logical properties of terms.
+
+276
+00:47:18,180 --> 00:47:23,270
+All right. So before I do that, let me just tell you what that means.
+
+277
+00:47:23,270 --> 00:47:31,560
+Basically, this is the whole point of a theorem prover is that you can write a logical property of some term and then prove it or disprove it.
+
+278
+00:47:31,560 --> 00:47:38,010
+So what does that mean? So, for example, if we have what is a logical property?
+
+279
+00:47:38,010 --> 00:47:49,670
+So a logical property of a term is is basically something of it's of always of type bool.
+
+280
+00:47:49,670 --> 00:48:05,620
+So any any term of type bool is a logical property. Right. So, for example, if I say true, that's that that is because it's the type of type bool.
+
+281
+00:48:05,620 --> 00:48:15,860
+Then that is a logical property. If I say true and false, that's also a logical property, but it doesn't it never holds. Right.
+
+282
+00:48:15,860 --> 00:48:24,310
+So that these are the predefined things. But you can also, for example, say, for example, use equality.
+
+283
+00:48:24,310 --> 00:48:38,480
+So you can say, for example, a given list, for example, you can say A and B is not equal to C.
+
+284
+00:48:38,480 --> 00:48:45,480
+And this will always hold as well, because you have a list of two elements in the list of one element and there's no way those two lists can be equal.
+
+285
+00:48:47,540 --> 00:49:05,980
+And then you also have, for example, that another logical property that says A equals B implies that, for example, the list that has a single element A is the same as the list that has a single element B.
+
+286
+00:49:05,980 --> 00:49:15,260
+OK, so this is as well another logical property. So. So. So. So.
+
+287
+00:49:15,260 --> 00:49:23,780
+And we can also have used defined logical properties. But for now, I will just again. Sorry. And I will just remove that.
+
+288
+00:49:23,780 --> 00:49:28,780
+So here we're just using that like the pen paper annotation. I still didn't show you how to write logical properties.
+
+289
+00:49:28,780 --> 00:49:37,780
+OK, so so here, for example, if I say equals B equals B, this implies A equal the list has only A is the same as it has only B.
+
+290
+00:49:37,780 --> 00:49:52,010
+OK, so you can have logical properties defined in terms of these in terms of these logical connectives.
+
+291
+00:49:52,010 --> 00:49:59,100
+So let's see how we can write some logical properties in Isabelle about the terms that we have discussed.
+
+292
+00:49:59,100 --> 00:50:05,740
+So so and then we can we can we can write we can show how to write theorem statements later on.
+
+293
+00:50:05,740 --> 00:50:17,540
+So theorem statements after we show after we we do some logical properties first.
+
+294
+00:50:17,540 --> 00:50:29,880
+OK, so a term so a term of type rule, as I said, is a logical property. So what like what, for example, so I can say term A equals B.
+
+295
+00:50:29,880 --> 00:50:40,450
+OK, so that is a logical property because we have equality defined or term A is not equal to B.
+
+296
+00:50:40,450 --> 00:50:50,020
+That's another logical property or term A and B. So the way we write and is the following.
+
+297
+00:50:50,020 --> 00:51:03,040
+So so you do firstly a slash and the backslash and then it comes up and then you can say also term A or B.
+
+298
+00:51:03,040 --> 00:51:16,620
+That's also another logical property. Right. So that's this is the way this is how we would write logic.
+
+299
+00:51:16,620 --> 00:51:21,620
+These kind of logical properties using logical the connectives of higher-order logic.
+
+300
+00:51:21,620 --> 00:51:30,620
+You can also use implication and the way you do that, you can say A and then dash dash and then greater than and then the implication symbol comes up.
+
+301
+00:51:30,620 --> 00:51:36,650
+So this is and I want you to note that this is the HOL implication.
+
+302
+00:51:36,650 --> 00:51:43,810
+OK, so this is different from another kind of implication implication that I will show you.
+
+303
+00:51:43,810 --> 00:51:59,770
+So, for example, the one that thing that I showed you on the blackboard, which is a you can also have A equals B implies A, the list, the singleton list that has A equals the singleton list.
+
+304
+00:51:59,770 --> 00:52:06,920
+It has B. That's also, as you can see, a logical property there.
+
+305
+00:52:06,920 --> 00:52:14,850
+So and multiple logical properties of that sort. OK, so going back to the blackboard.
+
+306
+00:52:14,850 --> 00:52:22,190
+What is now we have the last thing, which is how to write theorem statements.
+
+307
+00:52:22,190 --> 00:52:34,750
+So let me just take that from here so that we can start and slightly clear each part of the board.
+
+308
+00:52:34,750 --> 00:52:48,800
+OK, so theorem statements. So if you remember from from the logic course, like from, for example, the elementary logic in its applications,
+
+309
+00:52:48,800 --> 00:53:02,380
+one way to write in a formal setting, in a formal proof, the way you write, for example, that if we have if we have A, then B holds.
+
+310
+00:53:02,380 --> 00:53:09,380
+Right. So that would or if you have A and B as assumptions, then B holds, you can write it like that.
+
+311
+00:53:09,380 --> 00:53:21,410
+Then C holds, sorry. Then we can write it like that. Right. That's in general in in that's a generalisation for for sequence calculus or natural deduction.
+
+312
+00:53:21,410 --> 00:53:27,660
+If you, for example, have X and Y, then Z holds. That's also another way to write it.
+
+313
+00:53:27,660 --> 00:53:41,970
+If you, for example, have let's say X implies Y and you have X, then let's say we say Y holds.
+
+314
+00:53:41,970 --> 00:53:54,130
+That is modus ponens. So that's so this is like so that so this is the way this is what we're trying to model in Isabelle.
+
+315
+00:53:54,130 --> 00:54:03,130
+We're trying to model theorems of that type of the type that you should have studied in or that you would have studied in in any course where you study formal logic.
+
+316
+00:54:03,130 --> 00:54:11,130
+So let let me show you how to write the notation. So let's take this theorem, for example, OK, so the way you model this in Isabelle.
+
+317
+00:54:11,130 --> 00:54:25,740
+So in Isabelle, the way you model this is the following. OK, if I want to say if I have a and B, then I can derive C for some A, B and C.
+
+318
+00:54:25,740 --> 00:54:36,180
+You write it as follows. You say lemma and then quote A and then implication.
+
+319
+00:54:36,180 --> 00:54:43,180
+But with a double line. So if you have A and I have a B, then that implies C.
+
+320
+00:54:43,180 --> 00:54:52,210
+OK, so you notice that this is a different kind of implication than that one, which is the one that I also used in the example that I showed you.
+
+321
+00:54:52,210 --> 00:54:58,210
+So here we have. So for example, we write A. If we have A and B, then we can see that that's the way you write in Isabelle.
+
+322
+00:54:58,210 --> 00:55:07,230
+You can also write. You can also write, for example, the same thing. You can write it with a different notation.
+
+323
+00:55:07,230 --> 00:55:19,120
+So you can say A and B and the square bracket and bold square bracket implies C. So this is the same way.
+
+324
+00:55:19,120 --> 00:55:26,250
+This is both of those are the same are the same are saying the same thing as that up there.
+
+325
+00:55:26,250 --> 00:55:40,110
+Right. So let's try and write these theorem statements and in Isabelle Hall like theorem statements that just represent these three terms that we just that represent these three specifications that I showed you just here.
+
+326
+00:55:40,110 --> 00:55:51,070
+So, OK, so so the first one was I'll just write it, write it here as a common.
+
+327
+00:55:51,070 --> 00:55:59,070
+So the way you write comments in Isabelle Hall is by by these parentheses and then asterisks.
+
+328
+00:55:59,070 --> 00:56:14,080
+So, for example, if I want to say A and B entails C or you can derive A and B from C, you can derive C from A and B.
+
+329
+00:56:14,080 --> 00:56:20,300
+Then the way you write them is that you say lemma A imply and look here how I'm writing.
+
+330
+00:56:20,300 --> 00:56:30,370
+Look at the difference between this implication, which is the implication of the the meta-logic or the meta language.
+
+331
+00:56:30,370 --> 00:56:35,370
+That implication, which is the implication of HOL, which is the object logic.
+
+332
+00:56:35,370 --> 00:56:54,090
+So you don't need to know the difference between that two. But let me just label that back there and just see that I'm sure you will not forget it.
+
+333
+00:56:54,090 --> 00:57:16,060
+So this is this is the meta the meta-logic implication.
+
+334
+00:57:16,060 --> 00:57:26,760
+And this is the object logic implication.
+
+335
+00:57:26,760 --> 00:57:31,760
+You don't need to understand fully the meaning of that.
+
+336
+00:57:31,760 --> 00:57:49,570
+I don't think it's very relevant, but but but you just need to know that if you want to model a specification like the one that I showed you there on the blackboard, how can you model it in Isabelle?
+
+337
+00:57:49,570 --> 00:58:06,770
+And that's the main concern here. So if you want to say that you can derive C from A and B, then you can just write this.
+
+338
+00:58:06,770 --> 00:58:12,820
+So here we have that theorem statement.
+
+339
+00:58:12,820 --> 00:58:24,640
+Then you can write sorry, for example, if you don't want to prove something, if you are if you write a specification, but you don't know if it's true yet, then you can just say sorry.
+
+340
+00:58:24,640 --> 00:58:58,250
+Another another specification that we might want to write from the board as well is, for example, if A sorry, if X implies Y, if I have that and I have X, then I can derive Y.
+
+341
+00:58:58,250 --> 00:59:14,790
+Okay, so this is modus ponens. Then the way you write that is the following. You just say lemma and X implies Y.
+
+342
+00:59:14,790 --> 00:59:27,920
+So note that this is again the implication of the H-O-L, which is the object logic, which is different from what you use to model the set of premises behind the derivation rule here.
+
+343
+00:59:27,920 --> 00:59:38,720
+So here each one of those commas is represented with a double with a bold implication and this one is represented with a single line implication.
+
+344
+00:59:38,720 --> 00:59:51,060
+So if I have X implies Y and if I have and also if I have X, then from that I can derive Y. And again, you can just sorry that.
+
+345
+00:59:51,060 --> 01:00:38,080
+So this is that one. This is this here. So let me just go back to the blackboard. So just to note, sorry, can be used to prove lemma that you don't know how to actually prove.
+
+346
+01:00:38,080 --> 01:00:53,080
+So it doesn't really prove it. You don't know how to prove, but you want to. Let's say you want to use it somewhere else. You can just you can use that as a way to do top down proofs where you can just try out different lemmas and see how what helps you prove what you want to prove.
+
+347
+01:00:53,080 --> 01:01:12,620
+And then you can actually prove it instead of using sorry to prove. So this is primarily useful for doing top down.
+
+348
+01:01:12,620 --> 01:01:25,700
+Okay, so now I'm done with this. I'm done with this video. So in this video, what we did was the following.
+
+349
+01:01:25,700 --> 01:01:38,700
+I firstly introduce you to what Isabelle is and some functional programming concepts that we that I would like to remind that I liked to remind you of.
+
+350
+01:01:38,700 --> 01:01:54,860
+And then these included carrying and lambda expressions and polymorphic types. And also, and then I took you through a quick Isabelle tour where we would where I would show you how to represent different
+
+351
+01:01:54,860 --> 01:02:08,620
+constructs in Isabelle. So, for example, I showed you how to represent terms and terms and how to undertake terms with types.
+
+352
+01:02:08,620 --> 01:02:19,710
+And that and also I showed you the different types of things. So function types, products and lists and sets, which are all predefined types.
+
+353
+01:02:19,710 --> 01:02:32,710
+And I showed you that, for example, a natural number is only a zero or a successor of another natural number and then a list in either an empty list or cons of some element to another list.
+
+354
+01:02:32,710 --> 01:02:44,740
+And lastly, I showed you how to specify logical properties of terms. So in order for us to do that, we basically a logical property is a term of type bool.
+
+355
+01:02:44,740 --> 01:02:54,740
+So it's a type bool. So true is a logical property, true enforces logical property, etc. And I showed you that there is a how to model theorems in Isabelle.
+
+356
+01:02:54,740 --> 01:03:15,860
+So you use the lemma command to represent that. And now in the coming video, I will show you how.

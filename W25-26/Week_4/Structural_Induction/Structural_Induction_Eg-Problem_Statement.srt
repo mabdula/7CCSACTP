@@ -1,0 +1,55 @@
+1
+00:00:00,940 --> 00:00:05,500
+Hello, everyone. So in this video, I'll be doing just an example of mathematical induction trees.
+
+2
+00:00:06,480 --> 00:00:21,040
+So recall, so let's firstly recall the following. Recall the following three functions, right?
+
+3
+00:00:21,040 --> 00:00:48,080
+So the function list set, which takes a list and gives you a set and that was defined recursively
+
+4
+00:00:48,080 --> 00:01:01,580
+as follows. So list set takes an empty list and returns the empty set. And list set for the second
+
+5
+00:01:01,580 --> 00:01:20,800
+equation takes an empty list and returns to you the set that has x and list set x's. And recall also
+
+6
+00:01:20,800 --> 00:01:33,100
+another function that does the same thing for trees. So tree set, right? Where tree set of a leaf
+
+7
+00:01:34,700 --> 00:02:16,980
+is the empty list and tree of an empty tree. So Node, L, A, R equals insert A in tree set, L union set.
+
+8
+00:02:19,010 --> 00:02:33,330
+Okay, let's call that, clarify the handwriting a bit. Lastly, recall the in-order traversal function
+
+9
+00:02:33,330 --> 00:02:54,830
+for trees. So it's called in-order and it takes a tree and returns a list. In-order was for an
+
+10
+00:02:54,830 --> 00:03:16,320
+empty tree gives you an empty list. And for a non-empty tree, it gives you that list. So in-order
+
+11
+00:03:16,400 --> 00:03:27,040
+traversal of the left subtree and then the root and the in-order traversal of the right.
+
+12
+00:03:28,860 --> 00:03:46,080
+So this is, remember these functions. Now we want to prove the following. We want to show that
+
+13
+00:03:46,940 --> 00:04:02,700
+list set of the in-order traversal of a given tree for any tree is the same as the tree
+
+14
+00:04:02,700 --> 00:04:12,820
+set of tree. So we basically want to show that in-order traversal doesn't lose any tree elements.

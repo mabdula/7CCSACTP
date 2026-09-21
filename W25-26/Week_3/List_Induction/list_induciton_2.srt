@@ -1,0 +1,495 @@
+1
+00:00:00,750 --> 00:00:12,860
+So now let's do another example of list induction, of proving things with induction lists,
+
+2
+00:00:12,860 --> 00:00:19,980
+structural induction lists. So suppose, remember the function maximum, so I will rewrite it here again,
+
+3
+00:00:19,980 --> 00:00:32,500
+so maxlist, so it just returns the maximum element in the list recursively, so maximum of zero,
+
+4
+00:00:32,500 --> 00:00:46,980
+but maximum empty was that, and the maximum of a non-empty list was that, if you recall,
+
+5
+00:00:46,980 --> 00:00:55,900
+this function gives you the maximum of two natural numbers, so maxlist, so let me just
+
+6
+00:00:56,860 --> 00:01:28,800
+properly size that, so it is a recursive function, so a bit better, so consider a function, this function,
+
+7
+00:01:28,800 --> 00:01:50,140
+prove that, before we prove anything else, consider another function, also consider
+
+8
+00:01:55,060 --> 00:02:07,650
+the function listset or setlist, so this function returns the set of elements in the list, so
+
+9
+00:02:07,730 --> 00:02:29,710
+we'll just denote with that empty set, and the set of an empty list is insertion of x in list set of x's,
+
+10
+00:02:30,700 --> 00:02:54,480
+so here, note that insert, the function insert adds an element given list, okay,
+
+11
+00:02:57,140 --> 00:03:16,260
+now we want to prove the following, we want to prove that, if x is in list set of x's,
+
+12
+00:03:18,160 --> 00:03:34,110
+then we have that x is smaller than or equal maxlist of x's, okay, so that's a slightly different proof,
+
+13
+00:03:34,110 --> 00:03:41,520
+because here we have an assumption that implies something, so that means that we're going to have
+
+14
+00:03:41,520 --> 00:03:47,040
+a lot of forward reasoning, plus the step case will be a bit trickier than usual, because we'll have
+
+15
+00:03:47,040 --> 00:03:58,670
+more than just a lot of other assumptions, so the proof is by induction on x's, okay,
+
+16
+00:04:00,080 --> 00:04:16,750
+so remember we had that notation for the induction principle on lists, so if you have to prove any
+
+17
+00:04:16,830 --> 00:04:21,470
+property for any list x's, then you have to prove that property for the empty list,
+
+18
+00:04:21,470 --> 00:04:25,630
+you have to prove that property for in that way, you have to prove sure that if you have the
+
+19
+00:04:25,630 --> 00:04:31,950
+property holding for a list y's, then it also holds for that y's ending with any element y, okay,
+
+20
+00:04:33,010 --> 00:04:43,020
+so here, what is the property that we have? The property is this and that, so the property is
+
+21
+00:04:43,020 --> 00:04:49,100
+basically the x is in list x's implies that x is smaller than or equal maxlist, it's not just
+
+22
+00:04:49,100 --> 00:04:55,340
+that, what we want to prove is the whole thing, so the base case, we show that, so let me just
+
+23
+00:04:57,550 --> 00:05:19,150
+write a note here, so note the property is both the assumption, is not both, I would just say is
+
+24
+00:05:20,190 --> 00:05:29,280
+rather that is that the assumption implies the conclusion, not just the conclusion,
+
+25
+00:05:32,510 --> 00:05:51,200
+not just the conclusion, okay, a side note, we have two cases as usual in the base case,
+
+26
+00:05:51,200 --> 00:05:54,960
+so what is the base case? This time the base case without assumptions, so the assumption is
+
+27
+00:05:55,520 --> 00:06:19,790
+the premises are the following, that x is in this set of empty and the goal is
+
+28
+00:06:21,520 --> 00:06:32,830
+that x is smaller than or equal maxlist empty, okay, so the proof is simple, because
+
+29
+00:06:34,750 --> 00:06:47,040
+we firstly know that maxlist empty is going to be zero, okay, but there's no way, there's nothing,
+
+30
+00:06:48,080 --> 00:06:52,400
+we don't know anything about x, so we don't know whether x is actually zero, no, because the only
+
+31
+00:06:52,400 --> 00:06:59,090
+case in which x is more than or equal to zero is that x itself is zero, so we can't approach a proof
+
+32
+00:06:59,090 --> 00:07:12,020
+like that only, so let me just write that, so this should be by maxlist simps, in particular
+
+33
+00:07:12,020 --> 00:07:17,900
+this is as far as from that equation, the first equation that defines maxlist, okay, so
+
+34
+00:07:18,300 --> 00:07:25,570
+however, we know one thing that can help us through this, which is that x is in
+
+35
+00:07:27,730 --> 00:07:35,460
+list set empty, what does that mean? What that means is the following, so two,
+
+36
+00:07:36,180 --> 00:07:45,540
+like step number two doesn't have to do step number one from, we know that x is in the empty set,
+
+37
+00:07:46,910 --> 00:08:03,250
+okay, that's from the assumption, the base case assumption, but also another lemma,
+
+38
+00:08:04,420 --> 00:08:09,220
+which we don't have, which we need to find still, but that lemma basically says that
+
+39
+00:08:12,990 --> 00:08:22,990
+nothing can be in the empty list, right, so from base case assumption and, sorry, no, no,
+
+40
+00:08:22,990 --> 00:08:30,910
+from base case assumption, that's still, this lemma is used in next step, so from base case
+
+41
+00:08:30,910 --> 00:08:36,580
+assumption, so from the base case assumption we know that x is in the list set of empty list,
+
+42
+00:08:36,580 --> 00:09:02,560
+which means x is in the empty list, so base case assumption and substitution list set of empty,
+
+43
+00:09:03,840 --> 00:09:17,010
+sorry, list set simps, so now from this lemma number one, that nothing is in the empty set,
+
+44
+00:09:17,010 --> 00:09:23,870
+we can conclude that, we can basically conclude that a contradiction falls, so because we know
+
+45
+00:09:23,870 --> 00:09:31,460
+that nothing is in the empty set and we know that x is in the empty set here, then if something and
+
+46
+00:09:31,460 --> 00:09:44,290
+its own opposite are true, then we have a contradiction and we can then prove that,
+
+47
+00:09:46,450 --> 00:09:54,580
+we can basically prove anything from a contradiction by another law that says
+
+48
+00:09:55,300 --> 00:10:05,730
+false implies any property, so then we have, we can then just simply say that
+
+49
+00:10:08,510 --> 00:10:28,080
+x is smaller than equal max list empty set that's using lemma two and forward reasoning
+
+50
+00:10:28,880 --> 00:10:33,680
+with step number three and then here actually step number three, I didn't say what it falls from,
+
+51
+00:10:33,680 --> 00:10:45,010
+what it falls from, this follows from step number two and lemma one, maybe I'll just write lemma
+
+52
+00:10:45,010 --> 00:10:56,510
+three as well, lemma three says that if you have p and you have not p, the negation of p,
+
+53
+00:10:58,130 --> 00:11:19,760
+then you can get a false, okay, so that's for that, let me just write this with the usual notation,
+
+54
+00:11:19,760 --> 00:11:31,890
+our usual notation, so if you have p and not p, then you can get false, okay, so that's
+
+55
+00:11:33,570 --> 00:11:40,590
+then using step number two, lemma one and lemma three, where lemma three is, let me just write it
+
+56
+00:11:40,670 --> 00:11:49,040
+more precisely, so lemma three is instantiated with, assumptions of lemma three are instantiated with
+
+57
+00:11:52,880 --> 00:12:02,750
+two, step number two and lemma one, so that's forward reasoning, then we have the step case,
+
+58
+00:12:21,740 --> 00:12:25,500
+okay, and then the step case, let's go back to the theorem statement to just see what the
+
+59
+00:12:25,500 --> 00:12:29,580
+step case is going to be about, the step case is going to be about,
+
+60
+00:12:30,300 --> 00:12:37,540
+or even let's go back one slide, one page, so here the step case is the following,
+
+61
+00:12:37,540 --> 00:12:43,940
+if you have the property for y's, then you have the property holding for y's and then you can show
+
+62
+00:12:43,940 --> 00:12:49,700
+that the property holds for y's with any other element cons to the front of that y's, okay,
+
+63
+00:12:49,700 --> 00:12:57,970
+so here the property is that implication, right, so basically what we, the induction hypothesis will
+
+64
+00:12:57,970 --> 00:13:08,990
+be that implication, so an induction hypothesis will be just the implication for y's and or some x's,
+
+65
+00:13:08,990 --> 00:13:16,590
+if it doesn't matter the name, and the go and end, let me just show you, so what are we assuming the
+
+66
+00:13:16,590 --> 00:13:25,890
+assumptions? Firstly, the first assumption is the induction hypothesis, okay, what is induction
+
+67
+00:13:25,890 --> 00:13:40,300
+hypothesis is that x is in list set of y's, okay, implies that x is more than equal max list of y's,
+
+68
+00:13:48,050 --> 00:13:55,570
+the goal again is the property but applies to any y, a constant with the given y's, so the goal
+
+69
+00:13:55,570 --> 00:14:20,530
+basically is x is in list set y and y's implies x more than equal max list y and y's, let me just
+
+70
+00:14:20,530 --> 00:14:35,060
+move that a bit, so let's here y's and y's, okay, so as you can see here, the goal is actually has
+
+71
+00:14:35,060 --> 00:14:40,580
+something, implies something else, so what we can do is the following, you can, instead of doing that,
+
+72
+00:14:40,580 --> 00:14:46,420
+we can move, we can move that assumption, that assumption of the goal just with the other
+
+73
+00:14:46,420 --> 00:14:59,680
+assumptions, can make our lives easier, okay, so I'll just move that, so instead of this,
+
+74
+00:15:03,840 --> 00:15:11,860
+I'll just delete it like that instead, delete this, so the assumptions, the first assumption
+
+75
+00:15:11,860 --> 00:15:32,780
+is induction hypothesis and the second assumption, I'll just call it the premise, is that, okay,
+
+76
+00:15:32,780 --> 00:15:45,420
+so these are the assumptions, so premise, we only have one premise and the goal is that,
+
+77
+00:15:49,710 --> 00:15:54,670
+so what we did, all what I did is just moving, like splitting the property because it has an
+
+78
+00:15:54,670 --> 00:15:58,510
+assumption and a conclusion, the assumption going to the assumptions and the conclusion going to the
+
+79
+00:15:58,510 --> 00:16:11,740
+goal, okay, so now we can again proceed with our proof, so let's try that, so how do we prove that,
+
+80
+00:16:11,740 --> 00:16:21,460
+actually, we have, we can prove that, okay, we can prove that by case distinction,
+
+81
+00:16:22,370 --> 00:16:54,000
+so we either have that x is, have that x, yeah, one second, yeah, so we can just prove our lemma by
+
+82
+00:16:54,160 --> 00:17:00,240
+case splitting, okay, so we have that either x is the same as y, okay, because we have, we assume that x
+
+83
+00:17:00,240 --> 00:17:06,960
+is in the list set of y comes y, by definition of this set, we must have a lemma that says that x
+
+84
+00:17:06,960 --> 00:17:19,420
+will be equal to y or x is in this set of y's, so let's do the following then, firstly,
+
+85
+00:17:20,640 --> 00:17:34,640
+like do the proof by cases, so proof by cases on x equals y, right, so case one, x equals y,
+
+86
+00:17:36,050 --> 00:17:50,240
+so the first step will be the following, so if x equals y, that means that, that means that
+
+87
+00:17:50,960 --> 00:18:04,110
+we want to prove that basically y is smaller than max list y comes y's, right, because we
+
+88
+00:18:04,110 --> 00:18:12,000
+instantiated this, like we would then substitute y with x given the case assumption, so we want
+
+89
+00:18:12,000 --> 00:18:17,040
+to prove that, so how can we show that, so we must have a lemma about max, so we must have a lemma
+
+90
+00:18:19,730 --> 00:18:31,170
+that says that x, so lemma, I don't remember the number, I'll just say 1 for now, so lemma 1 here
+
+91
+00:18:32,180 --> 00:18:44,340
+should say that x is less than or equal to max list of x comes x's, or let me just change the
+
+92
+00:18:44,340 --> 00:18:51,680
+symbols so that's clear, I'm talking about arbitrary symbols there, so a is less than or equal to max
+
+93
+00:18:53,010 --> 00:19:05,740
+list of a comes a's, okay, so that should follow then, so that's in this, what we want here is that
+
+94
+00:19:05,740 --> 00:19:21,460
+it should follow from lemma 1, and then 2, we have x is smaller than max list y,
+
+95
+00:19:23,500 --> 00:19:38,450
+as y's, by substituting this assumption, right, this case assumption, okay, it's case 2,
+
+96
+00:19:39,090 --> 00:19:46,430
+so that does it for this one, it's a case 2, x is not equal to y, so how does that proof go?
+
+97
+00:19:47,620 --> 00:19:54,110
+The proof is different, so if x is not equal to y, remember I said, I said we need the dilemma about
+
+98
+00:19:56,340 --> 00:20:10,060
+the fact that if x is in list set y and y's, y comes y's, then we have that x is going to be other
+
+99
+00:20:10,060 --> 00:20:33,580
+equal to y or in y's, so let me just say that, if a is in list set b and b's, let's say
+
+100
+00:20:40,990 --> 00:20:59,900
+that implies that either a equal b or a is in list set of b's, right, so that's the
+
+101
+00:21:01,620 --> 00:21:17,360
+that's the same lemma, so from that we have that x is in list set y's, where do we have that from?
+
+102
+00:21:19,860 --> 00:21:35,920
+Case assumption and lemma 2, okay, I'm not really going through the low level reasoning,
+
+103
+00:21:35,920 --> 00:21:39,280
+as in I'm not saying whether that's forward or backward reasoning, because we need,
+
+104
+00:21:39,280 --> 00:21:43,920
+like in order for us to really properly do this lemma at the lowest level of detail,
+
+105
+00:21:43,920 --> 00:21:48,720
+and we need to come up with lemmas about this junction, I won't do that, but because it's clear,
+
+106
+00:21:50,190 --> 00:21:57,020
+so now, okay, we know that x is in list set of y's, this is the other case, then from that we
+
+107
+00:21:57,020 --> 00:22:05,470
+can apply the induction hypothesis, we know that x is, we know that because x is in list set of y's,
+
+108
+00:22:05,470 --> 00:22:09,390
+we can just use the induction hypothesis to get that by forward reasoning, so let's do that,
+
+109
+00:22:10,140 --> 00:22:28,990
+so from that we know that x is smaller than or equal max list of y's, that's from the induction
+
+110
+00:22:28,990 --> 00:22:39,890
+hypothesis with its assumption, essentially with one, right, so that that's forward reasoning,
+
+111
+00:22:39,890 --> 00:22:43,490
+that's a regular forward reasoning step, okay, now we still need to show that x is less than
+
+112
+00:22:43,490 --> 00:22:49,950
+max list of y times y's, remember that's our goal, so how can we show that? We need another lemma
+
+113
+00:22:51,150 --> 00:22:57,710
+that says, so what would this lemma be called, so let's just call this lemma 3 then,
+
+114
+00:23:06,050 --> 00:23:31,170
+so that lemma would say max list of a's smaller than max list of a comes a's, okay, so from that
+
+115
+00:23:35,570 --> 00:23:45,180
+so from that lemma we can conclude that x is smaller than equal max list, sorry not x,
+
+116
+00:23:47,070 --> 00:24:01,250
+we know we can, from that lemma we can conclude that max list of y's is smaller than max list y
+
+117
+00:24:01,250 --> 00:24:11,460
+comes y's, that's using lemma 3, then the last step will depends on, will depend on a
+
+118
+00:24:11,460 --> 00:24:18,180
+simple property which is transitivity of smaller than or equal, so if a is smaller than or equal to b
+
+119
+00:24:18,740 --> 00:24:24,820
+and b smaller than or equal to c then we know that a is more than or equal to c,
+
+120
+00:24:25,540 --> 00:24:35,660
+so if we apply lemma 4, so we can get x is smaller than less than max list,
+
+121
+00:24:38,690 --> 00:24:56,880
+give a bit of space there, max list of y comes y's, how? Using lemma 4 of 2 and 3,
+
+122
+00:24:57,520 --> 00:25:00,960
+forward reasoning and that basically is our goal, so that finishes our proof
+
+123
+00:25:02,990 --> 00:25:10,190
+and that's all for this induction, so please try to do these two proofs on your own,
+
+124
+00:25:11,420 --> 00:25:23,390
+just two proofs on your own and then let's discuss them in the large group tutorial.

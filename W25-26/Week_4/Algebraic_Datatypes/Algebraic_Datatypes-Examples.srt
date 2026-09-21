@@ -1,0 +1,195 @@
+1
+00:00:00,000 --> 00:00:47,880
+Now, let's be a bit more formal. So formally, how do we represent the fact that a list is either nil or comes an element and another list?
+
+2
+00:00:47,880 --> 00:01:05,300
+Okay, so formally, how do we say that? We say that as follows. So we say datatype a list, okay, well, alpha list. And that means that this is a list whose elements are all of type A.
+
+3
+00:01:07,800 --> 00:01:35,260
+That is either going to be nil or it's going to be comes of an element of type alpha, comes of an A with, this is, but just put it in the quotation, with another A list, right?
+
+4
+00:01:35,260 --> 00:01:51,840
+So that's how we say that a list is either nil or it's always either nil or comes of an element to another list. And for NATs, how will we represent that?
+
+5
+00:01:51,840 --> 00:02:28,540
+We would say datatype NAT equals zero or suck of a NAT. You notice the pattern here? We don't here have an alpha because NATs don't have any content, don't have any element in them, okay?
+
+6
+00:02:28,540 --> 00:02:47,750
+So now, that's basically, these are basically datatypes. So let's go to an example of a datatype. As usual, we do an example of another datatype other than NATs and lists.
+
+7
+00:02:47,750 --> 00:03:14,270
+So let's talk about binary trees, okay? So what is a binary tree? So a binary tree is a structure that we're basically, okay, what is intuitively a binary tree? It's a structure that looks like this.
+
+8
+00:03:14,270 --> 00:03:38,470
+So you have nodes. So a node has two children. That's why it's called binary tree. And every two children have another two children. And a child can be either a leaf or another node, right?
+
+9
+00:03:38,470 --> 00:03:56,620
+So for example, here, we have that, that's the root. We call it, for example, this can be a binary tree that has natural numbers. So we have one, two, four, five, six, for instance.
+
+10
+00:03:56,620 --> 00:04:08,380
+And then this is a binary tree. And these are leaves, right? So that's a binary tree. So that's an example binary tree. So how can we represent a binary tree as a datatype?
+
+11
+00:04:08,380 --> 00:04:21,940
+So pause this video and try to do it on your own for a bit. And then we can, and then I will show you, okay? So a datatype, tree datatype.
+
+12
+00:04:21,940 --> 00:04:35,840
+So again, we're going to have the content of type alpha, not necessarily natural, like lists. So how can we define an alpha tree? We can define it to be two kinds of nodes.
+
+13
+00:04:35,840 --> 00:04:51,940
+So either a leaf or a node with content. So that node with content will be, will either have, will have a first child, right?
+
+14
+00:04:51,940 --> 00:04:58,100
+And a content in the second child. So I can just represent it. So if a child is a tree, right?
+
+15
+00:04:58,100 --> 00:05:21,180
+And the second, the second element is just the content of the node and the third element here is going to be another tree, which is the right tree, right?
+
+16
+00:05:21,180 --> 00:05:49,060
+Let me just copy that because that's important. Just want to make sure that this is very clear. So it's either a leaf or that, okay? So that's how we represent it.
+
+17
+00:05:49,060 --> 00:05:57,450
+So now, remember that now let's see how would a tree term look like? How would a tree look like given this representation?
+
+18
+00:05:57,450 --> 00:06:13,890
+So we said that, for example, for lists, if we define lists like that to be an alpha list, be either a nil or a cons of an element and another list, then all lists would look like, would look like this.
+
+19
+00:06:13,890 --> 00:06:22,920
+So X1 cons X2 cons X3, et cetera. And for example, for natural numbers, we said that a natural number is either a zero or successor of another natural number.
+
+20
+00:06:22,920 --> 00:06:30,180
+Then all natural numbers would either look, would look like, I'll just write them. So it would look like this.
+
+21
+00:06:30,180 --> 00:06:48,700
+For example, suck, suck, successor of zero. Okay. Then given that, how would a tree look like? How would all trees look like?
+
+22
+00:06:48,700 --> 00:07:00,530
+Okay. This should precisely represent this specific tree, right? How would a tree look like?
+
+23
+00:07:00,530 --> 00:07:11,530
+So first, before I do that, actually, I would like to just add some terms. So I would call, I want us to just remember that this is called a constructor, and this is called a constructor.
+
+24
+00:07:11,530 --> 00:07:30,970
+So for lists, a list has two constructors, right? Either nil, constructor number one, or cons, which is constructor, the same for nets.
+
+25
+00:07:30,970 --> 00:07:47,840
+This is constructor one, constructor, okay? And then the same for the tree. It has also two constructors, okay?
+
+26
+00:07:47,840 --> 00:08:00,060
+So how would any tree look like in terms of those constructors? So it's easier to just do it for this example. So the example that we have there would be the following, okay?
+
+27
+00:08:00,060 --> 00:08:12,050
+So we have one, right? One has two, one is not a loop, so that's why it would get the constructor node, right?
+
+28
+00:08:12,050 --> 00:08:20,500
+Node what? It would have like a left tree, sub-tree, and the right sub-tree, and then here we have a one, right?
+
+29
+00:08:20,500 --> 00:08:30,610
+And the left sub-tree is another node, right? It's not a leaf. And then we'd have also a left sub-tree.
+
+30
+00:08:30,610 --> 00:08:48,560
+So maybe I would just use nd instead of node, just to save space, or even n. So this tree with the root here is one, and it has two sub-trees, because it's not a leaf, right?
+
+31
+00:08:48,560 --> 00:09:11,530
+So I'll just say this, okay? So this is the first sub-tree, and this is the second sub-tree. The first sub-tree, which is this one, has a root of, again, it's not a leaf, so it has a root of two, right?
+
+32
+00:09:12,530 --> 00:09:32,530
+And then has two sub-trees, right? And then here, the right, let's just do that, finish the left side, and then we'll just say those have two leaves as children, four and five here.
+
+33
+00:09:32,530 --> 00:09:46,740
+So this one would have, maybe let me zoom in, so we'd have another node, right? The left sub-tree of two is another node, which has a leaf.
+
+34
+00:09:46,740 --> 00:10:01,920
+So just call this L as its sub-tree, and four and another leaf as its sub-tree. And then this one will be the same, but five, and L, five, L, right?
+
+35
+00:10:03,500 --> 00:10:22,060
+Then the right sub-tree will have a node, and the right sub-tree, which is this one, have a node, and a six, because the element is six, and then it has two sub-trees, which are both leaves, so L, L.
+
+36
+00:10:22,060 --> 00:11:12,110
+So let's try and make this a bit clearer, given that the space allocation is not very good. So here we have, so that is how the tree looks, maybe let me just remove these things a bit down, yeah.
+
+37
+00:11:12,110 --> 00:11:19,980
+So that's how the tree would look like as a term, right? So that's the algebraic representation of a tree.
+
+38
+00:11:19,980 --> 00:11:28,010
+So that's equivalent to the algebraic representation of a list, or an algebraic representation of natural numbers, or algebraic representation of anything, okay?
+
+39
+00:11:28,010 --> 00:11:53,810
+So perhaps let's just do another example of another kind of binary tree. So let's have a binary tree that has, let's have another example of a binary tree, only where the binary tree looks like this.
+
+40
+00:11:53,810 --> 00:12:18,180
+So binary tree number two, where you have, where instead of having the elements in the middle, you have the elements of that other type only in the leaves.
+
+41
+00:12:18,180 --> 00:12:30,740
+So you have the tree looks like that. So instead of like the one up there, we just have a tree like this, like that, like that, like that.
+
+42
+00:12:30,740 --> 00:12:46,340
+So it would be like a six, and so that would be, they'll be representing this part, and then you represent the one, for example.
+
+43
+00:12:46,340 --> 00:13:04,780
+I mean, I will not try, I will not try to keep the order. So we still have one, two, three, one, two, four, and five. So, for example, let's say we have four, two, five, and one, okay?
+
+44
+00:13:04,780 --> 00:13:22,340
+So how can we represent a tree datatype that has its elements only in the leaves like that? So it doesn't have internal nodes structures, but instead it has the nodes, the data stored in the leaves.
+
+45
+00:13:22,340 --> 00:13:32,410
+So that will be represented. I would like firstly for you to pause the video for a bit, and then try to think about it.
+
+46
+00:13:33,410 --> 00:13:59,780
+Okay, so now we'll start. Okay, so datatype. Again, it should be tree, right? But instead of having a leaf as its first constructor, and then the second constructor is a node which takes a tree, first tree, a left subtree, and the second tree, which is the right subtree.
+
+47
+00:14:08,020 --> 00:14:19,110
+Instead of doing that, no, we have the content only in the leaves. So what that means is that we're going to have every leaf will take an A, right?
+
+48
+00:14:19,110 --> 00:14:32,170
+And then the nodes will not take an A as their content. So you have a leaf that has an element, and the nodes don't have elements, they just have subtrees.
+
+49
+00:14:32,170 --> 00:14:43,130
+The elements are all stored in the leaves. Okay, so that's a second datatype. And now let's go to the Isabelle examples.

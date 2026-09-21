@@ -1,0 +1,59 @@
+1
+00:00:02,290 --> 00:00:30,450
+Hello everyone, so now let's try to do the, let's try to see how to use sledgehammer. So I'll do the very short examples, two examples that are both proofs from the last few weeks, so the first one is from week two, where we try to prove that x plus y times a plus b equals a times x plus a times y plus b times x plus b times y,
+
+2
+00:00:30,450 --> 00:00:58,180
+and x is an actual number. So if you remember, we did this proof in a very detailed way, in an equational way, we said, okay, we firstly applied that lemma by unfolding it using that lemma and then that and then that and so forth. What I'm going to be doing now is to try and do all this proof in one go with sledgehammer, just to show you how it works.
+
+3
+00:00:58,180 --> 00:01:13,180
+Because the real workflow of people who use sledgehammer, or people who use Isabelle involved using sledgehammer right away for theorems like that. And as you can see, the sledgehammer here proposed like a few methods to solve it, maybe this one.
+
+4
+00:01:13,180 --> 00:01:27,890
+So this is a method call. So method is an automated theorem prover that you give it a bunch of lemmas and then it tries to prove the goal, if you give it a bunch of lemmas, but usually it's unusable on its own.
+
+5
+00:01:27,890 --> 00:01:43,080
+It's very difficult to use it on your own without sledgehammer, because it's hard to find out which lemmas you put there, but if you use sledgehammer, it succeeds, as I said, using the relevance filter to find out which lemmas to add there
+
+6
+00:01:43,080 --> 00:01:50,080
+and add them and then give them to the method call. So that, as you can see here, so it took us like one second.
+
+7
+00:01:50,080 --> 00:02:15,410
+And people do that usually with proofs that they're trying to do in Isabelle. The other thing is from week three, if you remember we had this, we wanted to show that the reverse
+
+8
+00:02:15,410 --> 00:02:32,900
+of something, appended of something starting with an anti-accumulator is the same, and then appended something else is the same as the reverse of X starting with Y as an accumulator.
+
+9
+00:02:32,900 --> 00:02:46,800
+So in any case, the proof here was a number of lemmas and lists that we had to prove. So let me just try and redo it with you from scratch.
+
+10
+00:02:47,340 --> 00:03:03,620
+And we see, so we did the proof by induction on Xs and arbitrary Ys as last time. And then here, so here I will just do that case. Maybe you can do it by auto, but you can also try to do the first case.
+
+11
+00:03:03,620 --> 00:03:19,060
+In this case, with sledgehammer and T, it shouldn't be able to solve it naturally, but let's just do it here. So I thought you can do it by auto or fast forward.
+
+12
+00:03:19,060 --> 00:03:46,070
+The second thing is the sub-case. And again here, I will try to do sledgehammer to solve it. And there you go. Sledgehammer found a proof by Mettis. Again, it found lots of the relevant lemmas and then gave them to Mettis and then Mettis can prove the theorem on the second case on its own.
+
+13
+00:03:46,070 --> 00:04:03,390
+If we, however, try to do the whole thing with sledgehammer, it fails, because sledgehammer is, unless you have a lemma corresponding to this one exactly, it fails to do proofs by induction, because induction is well beyond the abilities of sledgehammer.
+
+14
+00:04:03,390 --> 00:04:13,780
+And induction is something that you will find that can be done with EC, so here sledgehammer has no proof on it. So it doesn't know how to do inductions on its own, and it needs human guidance for that.
+
+15
+00:04:13,780 --> 00:04:28,780
+Or, I will show you the second part of this lecture, or this week, we can do it also then, and the lemmas are very good at induction, because they can mimic humans. So that's the sledgehammer demo for today.

@@ -1,0 +1,291 @@
+1
+00:00:01,100 --> 00:00:07,580
+So now let's start. I'm using Isabelle as a demo, as a quick demo of recursion on lists.
+
+2
+00:00:07,580 --> 00:00:15,390
+So I will just, I did the same thing. So I will say theory, list, recursion, and then that
+
+3
+00:00:16,510 --> 00:00:27,170
+imports, main, begin, end. And I'll just do the same two examples that I did there
+
+4
+00:00:33,060 --> 00:00:47,780
+on pen and paper to show you, okay? So the first function was sum.
+
+5
+00:00:48,260 --> 00:00:53,940
+So append function sum. So the way you write functions, recursive functions in Isabelle,
+
+6
+00:00:54,500 --> 00:01:01,620
+the easiest way to do that is by doing this fun command, right? So sum and then the signature.
+
+7
+00:01:02,820 --> 00:01:17,860
+And then we'll just do an add list and returns an add. So sum of the empty list equals zero.
+
+8
+00:01:21,040 --> 00:01:34,370
+And sum of the non-empty list equals the first element plus sum of the rest of that list, okay?
+
+9
+00:01:34,370 --> 00:01:38,530
+So as you can see here, let me just say a few points. So Isabelle actually was able to show
+
+10
+00:01:38,530 --> 00:01:51,440
+that this function terminates. And when it did show that it did show that it terminates,
+
+11
+00:01:51,440 --> 00:01:57,860
+it produced two theorems that you can use improves again later on. So those theorems are,
+
+12
+00:01:57,860 --> 00:02:03,220
+for any recursive function, you have these functions, simps. So for example, in our case here, it's
+
+13
+00:02:03,220 --> 00:02:10,500
+sum. So sum.simps. So these are the two theorems that you can use to prove thanks about sum, okay?
+
+14
+00:02:12,580 --> 00:02:18,820
+Also, there is another important tool in Isabelle, which is value. So this value command
+
+15
+00:02:18,820 --> 00:02:22,500
+helps you to evaluate any function program that you write, any executable function program
+
+16
+00:02:22,500 --> 00:02:28,620
+that you write in Isabelle. So for example, here, if I write sum of one, two, and three,
+
+17
+00:02:29,260 --> 00:02:37,730
+this is six. So it evaluated it. Two, then we have three there. So that's also an important
+
+18
+00:02:37,730 --> 00:02:54,990
+thing that I wanted to say. So also, before I finish that, these functions are shown to be
+
+19
+00:02:54,990 --> 00:03:03,010
+terminated based on the fact that in every recursive call, you call that same function
+
+20
+00:03:03,010 --> 00:03:08,700
+on a smaller argument. So here, you call it, if, for example, you call sum on a smaller argument,
+
+21
+00:03:08,700 --> 00:03:13,420
+x. So smaller in any sense that you define. You basically have to define in your head,
+
+22
+00:03:13,420 --> 00:03:17,580
+have to define some notion of measure of how big your argument is, and then that measure has
+
+23
+00:03:17,580 --> 00:03:22,860
+to be decreasing with every recursive call. So for example, if you take the length as the measure,
+
+24
+00:03:22,860 --> 00:03:30,380
+then here, the length of the recursive call is one minus the length of the previous call.
+
+25
+00:03:30,380 --> 00:03:43,310
+So let's do another function. So the other one was append, right? So I'll just do append,
+
+26
+00:03:45,390 --> 00:03:56,290
+and that should take any list and any other list and return a list of the same type. And then I
+
+27
+00:03:56,290 --> 00:04:03,870
+say append, for example, we said that it would be recursive on the first argument. So if the
+
+28
+00:04:03,870 --> 00:04:18,990
+first argument is empty, then it should just return the second argument. And is non-empty,
+
+29
+00:04:21,180 --> 00:04:34,640
+then append it to the list that results from appending the rest of x's with y's.
+
+30
+00:04:35,360 --> 00:04:46,020
+That's, again, a recursive function. And again, it reduced append simps. And you can also evaluate it.
+
+31
+00:04:46,660 --> 00:04:57,250
+So let's say append to empty lists. So here, we cannot evaluate it. Why? Because
+
+32
+00:04:57,250 --> 00:05:18,160
+evaluation only happens to types whose elements are finite in size. So here, we don't know what
+
+33
+00:05:18,160 --> 00:05:25,040
+the type alpha is, because as we wrote here, this is an alpha. So we don't know what kind
+
+34
+00:05:25,040 --> 00:05:36,460
+of lists those are. If we change this to an add, then it terminates. And then it evaluates it and
+
+35
+00:05:36,460 --> 00:05:45,170
+shows you that it's an empty list. An alternative thing is to just say evaluate it on a list,
+
+36
+00:05:45,810 --> 00:05:50,930
+but then you say what is the type of the list. Then again, that also gives you the empty list.
+
+37
+00:05:50,930 --> 00:05:58,130
+And then, for example, if I just say 1, 2, then you have a list of 1, 2. And then here,
+
+38
+00:05:58,130 --> 00:06:02,690
+the second list has 34. Then it's like that. But if you have a 3 and 4, then it's also like that.
+
+39
+00:06:03,330 --> 00:06:14,380
+So it works as expected. So let me just do another function. Let's say maximum. So maximum in a list.
+
+40
+00:06:16,060 --> 00:06:20,940
+So that, again, I'll just do it for natural numbers. So you can take a natural number list
+
+41
+00:06:20,940 --> 00:06:28,510
+and return an add. And that's an interesting function, because for the empty case,
+
+42
+00:06:29,230 --> 00:06:36,510
+you're basically returning an arbitrary maximum, right? So I would just say the maximum of the
+
+43
+00:06:36,510 --> 00:06:43,660
+empty one is 0, because that's going to be smaller than any maximum of any other list.
+
+44
+00:06:44,530 --> 00:06:58,160
+And then for the non-empty case, I'm going to return the following. And let me just show you
+
+45
+00:06:58,160 --> 00:07:13,070
+that as well. Easable. How to do that? So maximum empty list is the following. So if x is greater
+
+46
+00:07:13,070 --> 00:07:43,340
+than or equal max list of x's, then we return x. Otherwise, we return max list x's. So that's one
+
+47
+00:07:43,340 --> 00:07:50,780
+way to define it. But there's also another function. So there's also another function in
+
+48
+00:07:50,780 --> 00:07:58,450
+Isabelle. Let me just show you an alternative definition. So here, I'll just call this max
+
+49
+00:07:58,450 --> 00:08:03,810
+list prime. And then, so in Isabelle, there is a function. Let me just show you how you
+
+50
+00:08:03,810 --> 00:08:08,210
+search for functions as well. So I want to search for a function that computes a maximum of two
+
+51
+00:08:08,210 --> 00:08:20,190
+given natural numbers. So I would say instead of find theorems, I would say find theorems.
+
+52
+00:08:20,910 --> 00:08:25,950
+And then I will try and guess what theorem would this function satisfy. And based on that,
+
+53
+00:08:25,950 --> 00:08:30,910
+I will get the theorems that have similar functions or a function that computes the max.
+
+54
+00:08:30,910 --> 00:08:35,390
+And then I can use that. So for example, we can say, okay, we want the function f,
+
+55
+00:08:36,030 --> 00:08:45,170
+such that if you give it two arguments, x and y, it has to be greater than x, and it also has to be
+
+56
+00:08:45,170 --> 00:08:49,600
+greater than y. So let's see. So we already have found that. And then you can keep
+
+57
+00:08:51,120 --> 00:08:56,080
+refining these search queries. So here, for example, this is the function that satisfies
+
+58
+00:08:56,080 --> 00:09:08,260
+what we want. So it's called max with a small m. So as you can see, so max is bigger than a.
+
+59
+00:09:08,260 --> 00:09:14,660
+And let me just make sure that it's also bigger than b. So we also say that. And then it's the
+
+60
+00:09:14,660 --> 00:09:21,420
+same. It returns the same thing. So max. So instead of saying if and else, this if and else big
+
+61
+00:09:22,380 --> 00:09:38,590
+thing, we just return max of x and max list of x's. Yeah, sorry, that should be a prime
+
+62
+00:09:39,920 --> 00:09:49,020
+because that's an alternative definition. And another way also to define max,
+
+63
+00:09:49,020 --> 00:09:52,380
+I'm trying to introduce you to as many as much as a validation as possible.
+
+64
+00:09:53,340 --> 00:10:02,910
+Maybe not this one. Another thing, another interesting construct in Isabelle that's relevant
+
+65
+00:10:02,990 --> 00:10:20,880
+here is the let construct. So instead of if and else, you just say let
+
+66
+00:10:25,870 --> 00:10:40,210
+just call this m equals, this is the recursive calls. I'll just say let m equals max list of
+
+67
+00:10:40,210 --> 00:10:54,110
+x's. Instead of calling max list twice, you just say if x is greater than or equal to m, then x
+
+68
+00:10:54,110 --> 00:11:05,230
+else return the same m. Okay, so that makes the code a bit cleaner than the first variant.
+
+69
+00:11:06,430 --> 00:11:16,540
+So let's try and evaluate max list. So let's say max list of one, two, three. So here we have three
+
+70
+00:11:17,900 --> 00:11:26,180
+and then four in the beginning and four in the middle and five next to the four. So then as
+
+71
+00:11:26,180 --> 00:11:37,300
+you can see, it works. And again, max simps are basically the definition, max list simps
+
+72
+00:11:38,940 --> 00:11:43,020
+are basically the definition of the equation, the equations that define max. And you can use
+
+73
+00:11:43,020 --> 00:11:48,140
+those to define, to prove theorems are max, which is what I will discuss in the next video.

@@ -1,0 +1,358 @@
+WEBVTT
+
+
+1
+00:00:01.170 --> 00:00:44.100
+So let's do a trick here function, which is, this is the following. So let's talk about in-order traversal of trees, right? So what's that? So for this example that we have there, an in-order traversal is the following. So just go there. So you go, you firstly, the in-order traversal
+
+2
+00:00:44.100 --> 00:01:18.340
+of this one would be, firstly, the left, the leftmost child of all the tree, and then its parent, and then the leftmost child of the other sub-tree of the parent, which here is just going to be six. But if you had like six, and then something else, then it's going to be that something else, and then we go like this. And then you go up another level, and then it's nine.
+
+3
+00:01:18.420 --> 00:01:40.660
+And then the leftmost child of the sub-tree of nine, which is going to be this one, then its parent, and then again, the leftmost child or the leftmost leaf in the right sub-tree of that parent. So it would be 17 here, and then that's it.
+
+4
+00:01:40.660 --> 00:02:48.730
+So an in-order traversal of this tree would be 1, 3, 6, 9, 11. Basically, and the intuition is basically, if that tree is a binary search tree, the in-order traversal is the sorted list of elements in the tree.
+
+5
+00:02:48.730 --> 00:03:44.580
+What is a binary search tree? I assume that you know that, but I would just say it. And the binary search tree is a tree where every node is greater than all nodes in its tree.
+
+6
+00:03:44.580 --> 00:04:10.770
+It's left sub-tree, and every node is strictly smaller than all nodes in its right sub-tree. So that's basically the in-order traversal. So how do we define a function that does that recursively? So let's do that again.
+
+7
+00:04:10.770 --> 00:04:34.360
+So in-order, again, it's going to be a recursive function of binary trees, so it should cover the same two cases. So in-order of leaf, and in-order of the non-leaf case, node A and R.
+
+8
+00:04:34.360 --> 00:04:55.820
+So in this case, we have the anti-list. As you remember, the tree returns a list, the functions are returned a list, and the non-antit B for the non-antit tree case will return another list, and that list should be the...
+
+9
+00:04:55.820 --> 00:05:10.810
+If you remember, we go to the direction of the recursion code as follows. You go to the leftmost sub-child, and then to the parent, and the leftmost sub-child of the parent, which uses that.
+
+10
+00:05:10.810 --> 00:05:16.810
+And then to the parent, and the leftmost sub-child, and then to the parent, and the leftmost sub-child.
+
+11
+00:05:16.810 --> 00:05:18.810
+So how would that work here?
+
+12
+00:05:19.410 --> 00:05:26.830
+Recursively the way we would represent that is simply so you would say in order of L
+
+13
+00:05:28.460 --> 00:05:31.180
+appended with just the parent and
+
+14
+00:05:32.070 --> 00:05:34.470
+then in order of
+
+15
+00:05:35.110 --> 00:05:38.950
+R and then this one will keep going to the left
+
+16
+00:05:39.670 --> 00:05:45.950
+Most and then back up and then to the right and then then this one also go to the left most and then
+
+17
+00:05:46.190 --> 00:05:48.190
+So to get if we give us the correct
+
+18
+00:05:49.550 --> 00:05:55.080
+List so let's try and see that from how that function would actually
+
+19
+00:05:56.620 --> 00:06:00.110
+Deal with the stream we have there, right? So
+
+20
+00:06:01.550 --> 00:06:07.390
+If we would evaluate that function, right? So in order of
+
+21
+00:06:15.410 --> 00:06:19.360
+What was the tree again? So
+
+22
+00:06:20.440 --> 00:06:24.500
+In order I will just copy it
+
+23
+00:06:24.500 --> 00:06:58.650
+So in order traversal of that tree that we have there is going to be the same as in
+
+24
+00:07:01.860 --> 00:07:06.340
+Order of the left sub tree, which is 3
+
+25
+00:07:07.230 --> 00:07:08.430
+1
+
+26
+00:07:08.430 --> 00:07:10.890
+6
+
+27
+00:07:10.890 --> 00:07:16.240
+appended to the singleton list which is 9 of the parent and then
+
+28
+00:07:17.340 --> 00:07:22.380
+appended to in order of the right sub tree, which is
+
+29
+00:07:23.100 --> 00:07:25.340
+15
+
+30
+00:07:25.340 --> 00:07:27.380
+11
+
+31
+00:07:27.380 --> 00:07:33.090
+17 and the reason we did that was because okay, this is a non empty tree
+
+32
+00:07:33.330 --> 00:07:38.770
+So what that what that did to us is that it took us in this equation and then the equation we just are
+
+33
+00:07:39.490 --> 00:07:43.570
+Lined the following the equation. So here we have in order of the left and then the parent and then
+
+34
+00:07:44.610 --> 00:07:50.360
+The right so we have an order left parent and then right and then we keep recursive we doing that
+
+35
+00:07:50.440 --> 00:07:52.440
+So I'll just do it a few more times
+
+36
+00:07:53.180 --> 00:07:59.180
+That would give us and then we evaluate this one this term
+
+37
+00:08:02.020 --> 00:08:04.860
+So have an order of
+
+38
+00:08:11.170 --> 00:08:19.220
+One and two leaves as children prove that right thing
+
+39
+00:08:25.780 --> 00:08:31.530
+ended with a singleton list has three appended with in
+
+40
+00:08:32.450 --> 00:08:35.140
+order of
+
+41
+00:08:35.140 --> 00:08:40.650
+Tree that has just six and all of that is appended with nine
+
+42
+00:08:41.250 --> 00:08:45.340
+Which is appended with in order of
+
+43
+00:08:48.860 --> 00:08:55.260
+13
+
+44
+00:08:55.260 --> 00:08:57.540
+again, where would that take us?
+
+45
+00:08:59.340 --> 00:09:06.300
+So let's just do this one. So again here we going to so the first time we evaluated this
+
+46
+00:09:06.460 --> 00:09:10.620
+then now I'm going to evaluate that so we have here in order of
+
+47
+00:09:17.640 --> 00:09:20.970
+Leaf I'll just write the leaf like that
+
+48
+00:09:22.300 --> 00:09:23.580
+appended with
+
+49
+00:09:23.580 --> 00:09:30.300
+one and then appended with in order of another leaf
+
+50
+00:09:31.620 --> 00:09:38.370
+Then that's appended with three and that's appended with in order
+
+51
+00:09:40.280 --> 00:09:42.490
+six
+
+52
+00:09:42.490 --> 00:09:44.760
+Okay
+
+53
+00:09:44.760 --> 00:09:48.260
+The whole thing is appended with
+
+54
+00:09:51.350 --> 00:10:00.160
+With that okay, and then I will now evaluate this one
+
+55
+00:10:00.620 --> 00:10:05.320
+So maybe let me just write that one. So that's a bit clearer. So that is
+
+56
+00:10:09.680 --> 00:10:12.510
+Appended with nine
+
+57
+00:10:13.230 --> 00:10:15.510
+appended with in order of
+
+58
+00:10:17.810 --> 00:10:19.480
+13
+
+59
+00:10:19.480 --> 00:10:21.420
+11
+
+60
+00:10:21.420 --> 00:10:29.060
+17 so then they in order of that. This is going to give us the empty list and then
+
+61
+00:10:30.160 --> 00:10:31.560
+appended with
+
+62
+00:10:31.560 --> 00:10:34.870
+one and then
+
+63
+00:10:35.430 --> 00:10:40.440
+I'll just evaluate this as well. So this will be an empty list and then
+
+64
+00:10:40.960 --> 00:10:42.430
+appended with
+
+65
+00:10:42.430 --> 00:10:44.000
+three
+
+66
+00:10:44.000 --> 00:10:46.930
+appended with so as you can see
+
+67
+00:10:47.810 --> 00:11:07.670
+How the list synthesis is taking place here. So let me just prove that so
+
+68
+00:11:08.750 --> 00:11:14.430
+Then we're going to do that and then this is going to like this will evaluate to just one
+
+69
+00:11:14.630 --> 00:11:21.100
+Because you're pending one with two empty lists and then you have three and then you have the rest. So
+
+70
+00:11:22.260 --> 00:11:27.180
+Just go back. So here that's the correct order because you have one and then three and then six and then nine
+
+71
+00:11:27.660 --> 00:11:32.420
+So now basically is how you will
+
+72
+00:11:33.800 --> 00:11:36.410
+Proceed with that. So
+
+73
+00:11:37.450 --> 00:11:46.300
+Perhaps I'm going to do a few more steps. So here we have three and then
+
+74
+00:11:47.740 --> 00:11:51.650
+So now we're done with this, you know, we evaluate this this one
+
+75
+00:11:52.170 --> 00:11:54.170
+so in order of
+
+76
+00:11:55.990 --> 00:12:12.440
+leaf in order of leaf and then nine in
+
+77
+00:12:15.260 --> 00:12:18.530
+order of
+
+78
+00:12:18.530 --> 00:12:20.690
+13 11
+
+79
+00:12:20.930 --> 00:12:23.700
+17 and that would give us
+
+80
+00:12:24.420 --> 00:12:27.230
+one
+
+81
+00:12:27.230 --> 00:12:29.280
+three
+
+82
+00:12:29.280 --> 00:12:38.400
+Appended with six with the rest. So perhaps as an exercise
+
+83
+00:12:40.580 --> 00:12:43.280
+finish this
+
+84
+00:12:43.480 --> 00:12:53.650
+G on your own. So now
+
+85
+00:12:54.930 --> 00:12:58.710
+That's basically how we define
+
+86
+00:12:58.710 --> 00:13:09.860
+Functions of arbitrary types, of course, you know, you can do the same for the leaves the the tree that has its content in the leaves
+
+87
+00:13:09.860 --> 00:13:11.860
+So now let's go to an Isabelle
+
+88
+00:13:12.780 --> 00:13:15.140
+demo of how to define recursive functions on
+
+89
+00:13:16.540 --> 00:13:18.540
+These algebraic other types

@@ -1,0 +1,406 @@
+WEBVTT
+
+
+1
+00:00:00.270 --> 00:00:14.100
+Okay, so let me start firstly with, as usual, an intuition. So before I do that, let me just
+
+2
+00:00:14.100 --> 00:00:24.940
+give you a brief summary, or not a brief description of what that is about. So that, for example,
+
+3
+00:00:25.100 --> 00:00:47.340
+we want to prove, for example, how to prove properties, recursive functions on trees.
+
+4
+00:00:48.470 --> 00:00:52.230
+That's an example, because trees are the datatype example that we have done
+
+5
+00:00:53.430 --> 00:01:11.050
+until now. So the intuition, recall that for natural numbers, or not, let me just,
+
+6
+00:01:13.380 --> 00:01:19.540
+yeah, the same natural, I'll do it for natural numbers for now, but the same for lists.
+
+7
+00:01:20.120 --> 00:01:29.300
+For natural numbers to prove, maybe I'll do it for lists instead, because they are
+
+8
+00:01:30.870 --> 00:01:34.950
+datastructure, more similar in datastructure, but it's the same idea as natural numbers.
+
+9
+00:01:34.950 --> 00:01:55.960
+So recall that for lists, to prove that, to prove that a property p holds for all lists,
+
+10
+00:01:59.300 --> 00:02:11.880
+we did the following, or we needed, not we did the following, but we needed to prove two things,
+
+11
+00:02:12.440 --> 00:02:42.340
+or two goals, right? So the goal number zero, the base case, that is to say the property holds for
+
+12
+00:02:42.340 --> 00:03:10.300
+number zero, and goal number one, the step case, and that was to show that property holds,
+
+13
+00:03:15.190 --> 00:03:56.200
+sorry, that to show that the property holds for a list x's, then for arbitrary additional
+
+14
+00:03:59.210 --> 00:04:21.450
+element x property, we have that the property holds for x comes x's, so x added to x's.
+
+15
+00:04:22.330 --> 00:04:37.140
+So what did that mean? What that meant is that this, like roughly, this gives us algorithm,
+
+16
+00:04:39.850 --> 00:04:45.530
+not the two, like if you have the two theorems, the base case and the step case,
+
+17
+00:04:45.530 --> 00:05:17.290
+they give us an algorithm to show that property holds for any given list, like any given list,
+
+18
+00:05:17.290 --> 00:05:30.250
+for example, the list is called x1, like if this has x1, x2, comes xn, comes the empty list,
+
+19
+00:05:30.250 --> 00:05:35.290
+then we can show that the property given, can hold for this list, how? We can firstly show
+
+20
+00:05:36.010 --> 00:06:01.640
+step one, show, step zero, show the property, then using the using base case, and then step one,
+
+21
+00:06:05.060 --> 00:06:32.010
+show p of xn comes the empty list, using the step case, and then step two, it holds for xn
+
+22
+00:06:34.520 --> 00:06:56.870
+minus one, xn comes the empty list, again, using the step case, and then you can show it in
+
+23
+00:06:56.870 --> 00:07:15.740
+n steps, right? So show the property holds for x1, comes x2, comes xn, comes the empty list,
+
+24
+00:07:17.610 --> 00:07:35.850
+using the step case again. Okay, so what does that tell us? It tells us that mathematical induction
+
+25
+00:07:37.720 --> 00:07:41.720
+can, like, we use mathematical induction to get, to come up with proofs
+
+26
+00:07:44.360 --> 00:07:56.250
+for properties of algebraic datatypes, that the property holds for any
+
+27
+00:07:57.050 --> 00:08:05.800
+object or term of a certain algebraic datatype, and using this algorithm. So you prove the step
+
+28
+00:08:05.800 --> 00:08:09.160
+case and the base case, and this basically gives you an algorithm to show that the property holds
+
+29
+00:08:09.160 --> 00:08:17.260
+for anything that has the type list, for example, in our case, right? So it gives us this algorithm,
+
+30
+00:08:17.260 --> 00:08:45.690
+and crucially, it depends on the finiteness of the given element, or like a given type,
+
+31
+00:08:45.690 --> 00:08:55.160
+the elements of the given type, right? Every element has to be constructed using a finite number
+
+32
+00:08:55.160 --> 00:09:22.380
+of applications of cons, right? So now, the same was for initial numbers. Any number is a finite
+
+33
+00:09:26.700 --> 00:09:42.920
+application of suck, right? And then because of that, because of that, you can always
+
+34
+00:09:43.560 --> 00:09:52.410
+derive the property for any natural number, right? So now, let's go to trees, right?
+
+35
+00:09:55.220 --> 00:10:18.500
+So the intuition for trees. So how does that intuition transfer to trees?
+
+36
+00:10:18.740 --> 00:11:00.260
+Okay, so remember, we said that for lists, you can always use the base case to prove
+
+37
+00:11:01.270 --> 00:11:07.030
+that the property holds for the anti-list, and then you can go up one element at a time,
+
+38
+00:11:07.830 --> 00:11:16.980
+show that the property holds the list, which is extended by every element. So
+
+39
+00:11:18.280 --> 00:11:26.090
+every single element, you go through the list from the start of it, and then show that the property
+
+40
+00:11:26.090 --> 00:11:33.430
+holds here using the base case, and then you show that it holds for this list using the step case,
+
+41
+00:11:35.610 --> 00:11:40.840
+and then you show that it holds for this using the step case again, and using what you have shown
+
+42
+00:11:40.840 --> 00:12:06.580
+previously, and then so on and so forth. So you keep showing that it holds for more and more
+
+43
+00:12:06.580 --> 00:12:14.760
+of the list, right? So how would that translate to a tree? So a tree looks like that, right? So
+
+44
+00:12:15.640 --> 00:12:26.260
+for example, so you have, let me just show you, maybe let me just here draw that as the base,
+
+45
+00:12:26.260 --> 00:12:30.100
+so I'll just use that similar as the base. So here for a tree, it looks like that, right?
+
+46
+00:12:30.900 --> 00:12:57.500
+So a tree is like this, for example, a binary tree. That's an example binary tree. Okay,
+
+47
+00:12:57.500 --> 00:13:04.620
+so how would that translate? So if we want to move that intuition there to the binary tree,
+
+48
+00:13:04.620 --> 00:13:10.060
+what we would do is the following. We would have, we hope to prove, like our induction proof would
+
+49
+00:13:10.060 --> 00:13:18.650
+give us that the property holds for all the empty case, but so the base, sorry, like the base case
+
+50
+00:13:18.650 --> 00:13:24.860
+of the induction proof would give us that the property holds for all, for the, for the,
+
+51
+00:13:26.780 --> 00:13:31.660
+for the empty, for the, for the entry tree, right? For all the entities, like in the same way,
+
+52
+00:13:31.660 --> 00:13:37.300
+give it, give it to us here for, for the empty list. Do you want to give, do you want to have
+
+53
+00:13:37.300 --> 00:13:41.380
+that for the base case, from the base case? We want to have that the property holds from the
+
+54
+00:13:41.380 --> 00:13:45.620
+base case, from all of these base cases, and then the stat cases would allow us to combine
+
+55
+00:13:46.870 --> 00:13:51.030
+all, all components. Like, for example, would allow us to combine this,
+
+56
+00:13:51.030 --> 00:13:56.100
+that the property holds for that and that and then deduce that it holds for the whole tree.
+
+57
+00:13:56.820 --> 00:14:01.940
+And then the property holds for that and that, and then deduce that it holds for the whole,
+
+58
+00:14:01.940 --> 00:14:07.460
+this whole tree, and then that it, and then in order for you to show that it holds
+
+59
+00:14:07.460 --> 00:14:12.100
+for this tree, you need to show that first it holds for this base case and base case and then that
+
+60
+00:14:12.100 --> 00:14:23.860
+and then up, right? So you basically want to show that p holds here with the base case and base case
+
+61
+00:14:24.420 --> 00:14:37.000
+and with the base case, for example, and then use, okay, and then use the the holes for this base
+
+62
+00:14:37.080 --> 00:14:43.340
+case and then use the tools for this base case and that base case to show that it holds for
+
+63
+00:14:47.210 --> 00:15:00.740
+this tree using the step case, right? And then use the tools for this sub tree and that sub tree,
+
+64
+00:15:00.740 --> 00:15:13.370
+which is a leaf, to show that it holds for this tree again using the step case. And then
+
+65
+00:15:13.450 --> 00:15:20.280
+you chose that it holds for this base and this base, this with the base.
+
+66
+00:15:22.180 --> 00:15:32.570
+We need to do it a little bit more and then for this base and then show that it holds for this
+
+67
+00:15:34.310 --> 00:15:43.100
+tree using the step and then not only show that it holds for the whole tree, you have to repeat the
+
+68
+00:15:43.100 --> 00:15:50.860
+process for the right sub tree again and then let it and then show that that it holds for the whole
+
+69
+00:15:51.860 --> 00:15:57.820
+step, right? So that basically is the intuition of mathematical induction for trees. Like we want to
+
+70
+00:15:57.820 --> 00:16:03.420
+create, like we want to prove some things that give us an algorithm to prove that the property
+
+71
+00:16:03.420 --> 00:16:11.940
+holds for any given tree, right? So that is, how can we do that? So we have the first goal,
+
+72
+00:16:11.940 --> 00:16:35.130
+as I said, we need to prove it for all bases. So, goal zero, prove, goal zero, prove that property
+
+73
+00:16:38.940 --> 00:17:22.570
+holds any leaf and goal one, the property, prove that if we have the property any
+
+74
+00:17:25.260 --> 00:17:37.270
+tree one and tree two, so we have the property for T one and for T twos, then we can show
+
+75
+00:18:00.820 --> 00:18:23.340
+it holds for the tree constructed by adding the node X as parent to the two trees where X is
+
+76
+00:18:24.980 --> 00:18:36.570
+an arbitrary node, okay? So that's the intuition of proving things with mathematical induction
+
+77
+00:18:36.570 --> 00:18:44.780
+on trees, right? So you have that's the base case and that is the step case. So let me just write that
+
+78
+00:18:49.340 --> 00:18:55.420
+and then those would give you, those would both give you like the algorithm that we're
+
+79
+00:18:55.420 --> 00:19:00.380
+hoping for, right? Like you can use the base case to prove that the property holds for all leaves
+
+80
+00:19:00.380 --> 00:19:07.110
+and then you can combine all of these proofs using the step cases to go up the levels of the tree.
+
+81
+00:19:09.290 --> 00:19:33.990
+So now a bit more formally, the induction principle is let's just recall that for lists
+
+82
+00:19:38.090 --> 00:19:49.260
+the induction principle, instruction induction principle on lists was that if you prove it
+
+83
+00:19:49.980 --> 00:19:54.140
+for the empty list, if you can prove that empty property for the empty list and you can prove it
+
+84
+00:19:54.140 --> 00:20:08.340
+for any, if you have any, and if you prove it, if you can prove it that for any X
+
+85
+00:20:10.840 --> 00:20:19.380
+and Xs, if the property holds for Xs, so if you know that the property holds for Xs, then
+
+86
+00:20:19.380 --> 00:20:26.340
+you know that the property holds for the list made by Xs, X funds Xs. If you know those two
+
+87
+00:20:26.340 --> 00:20:29.380
+things, if you can prove those two things, then you can prove that the property holds for
+
+88
+00:20:30.730 --> 00:20:45.990
+any Xs, right? That was the induction principle for the tree, for the lists, for trees and for
+
+89
+00:20:45.990 --> 00:20:59.700
+nets, that was P of zero and show you that if for any n, sorry, if you have P of zero
+
+90
+00:20:59.700 --> 00:21:03.700
+and you can, if you can show that for any n, if you have that the property holds for n,
+
+91
+00:21:04.730 --> 00:21:09.930
+you can show, you can derive from that that the property holds for n plus one or suck n,
+
+92
+00:21:11.580 --> 00:21:28.920
+then the property holds for any n, right? So for trees, the induction principle is different,
+
+93
+00:21:28.920 --> 00:21:32.680
+it's, I mean, same but different. So if you can show that the property holds for a leaf
+
+94
+00:21:33.500 --> 00:21:37.740
+and if you can show that the property that for any, this time it's not just one,
+
+95
+00:21:38.760 --> 00:21:46.890
+like here we had just one Xs, one list and one number because every number is constructed in
+
+96
+00:21:46.890 --> 00:21:51.050
+terms of one number but for trees, we have every tree constructed in terms of two trees.
+
+97
+00:21:51.930 --> 00:22:04.180
+So for because of that, we can say that for any X, T1, T2, if you have the property holds for T1
+
+98
+00:22:05.510 --> 00:22:16.440
+and you have that the property holds for T2, then you can show that the property holds for
+
+99
+00:22:17.240 --> 00:22:27.100
+the node constructed by T1, X and T2. If you can show that, then you have that the property holds
+
+100
+00:22:27.100 --> 00:22:36.900
+for any tree. So it's basically the idea of mathematical induction on trees, right? So now
+
+101
+00:22:36.900 --> 00:22:47.240
+let's do an example of a proof using mathematical induction on trees.

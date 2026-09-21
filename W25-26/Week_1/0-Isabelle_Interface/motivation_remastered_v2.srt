@@ -1,0 +1,731 @@
+1
+00:00:04,340 --> 00:00:11,540
+Hello, everyone. Welcome to the Computer-assisted theorem proving module. In this module, we'll
+
+2
+00:00:11,540 --> 00:00:19,570
+be mainly focusing on specific methods for proving theorems using computers, and that is called
+
+3
+00:00:19,570 --> 00:00:30,040
+interactive improving. And we will cover many, many parts of that. So in this video, I will
+
+4
+00:00:30,040 --> 00:00:34,320
+just introduce the topic to you. So I will try and give you a brief introduction of what
+
+5
+00:00:34,320 --> 00:00:41,300
+is interactive theorem proving, what are we doing over the next 10 weeks to study that topic,
+
+6
+00:00:41,300 --> 00:00:49,360
+and what do I expect you to already know. I will briefly discuss what concepts and techniques
+
+7
+00:00:49,360 --> 00:00:54,640
+I actually already know from previous modules, but I'll also briefly introduce different concepts
+
+8
+00:00:54,640 --> 00:00:59,870
+through the different weeks. So I make sure that you are refreshed, but I assume that you
+
+9
+00:00:59,870 --> 00:01:04,670
+have some background here. And lastly, I will organize some organizational notes regarding
+
+10
+00:01:04,670 --> 00:01:11,660
+this module and the coursework. So before I talk about interactive theorem, I want to
+
+11
+00:01:11,660 --> 00:01:20,850
+recap with you the concept of formal proof. So recall, like I wanted to recall with me
+
+12
+00:01:20,850 --> 00:01:27,900
+the following Aristotelian syllogism. So if we assume that all men are mortal and Aristotle is
+
+13
+00:01:27,980 --> 00:01:35,760
+a man, and Aristotle is a mortal, we can then conclude from one and two and the modus ponens
+
+14
+00:01:38,000 --> 00:01:45,170
+logical rule that Aristotle is also mortal. I hope we all agree that this is an unambiguously
+
+15
+00:01:45,170 --> 00:01:52,000
+correct proof. So what is that? What is a formal proof? So basically a formal proof,
+
+16
+00:01:52,000 --> 00:02:01,890
+formal mathematical proof is one where is a mathematical proof that is unambiguously
+
+17
+00:02:03,570 --> 00:02:09,090
+clear and unambiguously correct as the syllogism that I just told you. So there is no doubt about
+
+18
+00:02:09,090 --> 00:02:15,250
+any gaps in the proof. So the goal here is to construct formal proofs of correctness
+
+19
+00:02:15,250 --> 00:02:20,610
+for mathematical theorems and for algorithm systems. So basically we want to construct proofs
+
+20
+00:02:20,690 --> 00:02:25,490
+at the same level of correctness as this Aristotelian syllogism, but for real,
+
+21
+00:02:27,660 --> 00:02:36,450
+for interesting mathematical theorems or for interesting computer systems. So why is that
+
+22
+00:02:36,450 --> 00:02:40,770
+interesting? It's because basically formal proofs are the closest thing to objectively
+
+23
+00:02:40,770 --> 00:02:46,990
+and unambiguously correct proofs. And by that I mean the same level that we have seen with
+
+24
+00:02:46,990 --> 00:02:52,190
+that syllogism. So if you want to make that a bit more precise, what I mean by that is
+
+25
+00:02:52,190 --> 00:03:00,670
+that we want definitions and theorem statements, whose meaning and well formness are unambiguously
+
+26
+00:03:00,670 --> 00:03:09,970
+correct. And the proofs also have to be correct. And what that means is that the proofs have
+
+27
+00:03:09,970 --> 00:03:14,530
+to be performed with respect to precisely and concisely stated mathematical axioms.
+
+28
+00:03:15,280 --> 00:03:19,040
+And everything, you derive everything or all the mathematical proofs from those
+
+29
+00:03:21,460 --> 00:03:30,910
+precise and concise set of mathematical axioms. So in order for us to do that, we have to write
+
+30
+00:03:30,910 --> 00:03:35,950
+proofs and definitions in a formal language whose meaning is defined by a set of axioms.
+
+31
+00:03:35,950 --> 00:03:40,750
+Like for example, there are many types of axioms, like for example in your temporal logic.
+
+32
+00:03:42,190 --> 00:03:46,030
+For those of you who did the formal verification module with Hannah Schockler,
+
+33
+00:03:46,030 --> 00:03:51,650
+you will have seen what in general logic is. But there are also other types of axioms that
+
+34
+00:03:51,650 --> 00:03:57,490
+are more general and cover more things. Like for example, Zemirofrankel set theory. So this is a
+
+35
+00:03:57,490 --> 00:04:03,010
+set of axioms that you can use to build the entirety of mathematics. And there are many other
+
+36
+00:04:03,010 --> 00:04:08,850
+types of such axioms. And in this module, we primarily focus on higher order logic as a
+
+37
+00:04:08,850 --> 00:04:18,130
+set of axioms for proving mathematics. So the initial reason to bother with formal proofs
+
+38
+00:04:18,770 --> 00:04:27,460
+which is still very, very relevant until now is to, was like the initial reason was to
+
+39
+00:04:27,460 --> 00:04:33,940
+so-called formalize mathematics. And the first person to try and do that in fact was Euclid in
+
+40
+00:04:33,940 --> 00:04:41,410
+his Euclid's Elements book. And then later on, more than 100 years ago, Rosson Whitehead also
+
+41
+00:04:41,410 --> 00:04:47,010
+tried to do that. And what that means is they tried to reach formal proofs in the sense that
+
+42
+00:04:47,010 --> 00:04:52,050
+I just described in the previous slide, but for mathematics in general, or for summaries
+
+43
+00:04:52,050 --> 00:04:59,140
+of mathematics. Like for example, Euclid did it just for geometry. But historically, this
+
+44
+00:04:59,140 --> 00:05:07,120
+has been impossible because constructing a formal proof which is as unambiguous and as correct as
+
+45
+00:05:08,400 --> 00:05:13,440
+the Aristotelian syllogism, but for a real mathematical theorem is completely infeasible
+
+46
+00:05:13,440 --> 00:05:23,520
+to do it by hand. However, in the later part of the 20th century, electronic computers were
+
+47
+00:05:23,520 --> 00:05:28,800
+invented and this made it actually possible for us to construct formal mathematical proofs.
+
+48
+00:05:28,800 --> 00:05:36,480
+So there is a number of examples of interesting formal mathematical proofs that were constructed
+
+49
+00:05:36,480 --> 00:05:47,730
+by computers in the second half of the 20th century. And in this approach where you use an
+
+50
+00:05:47,730 --> 00:05:57,710
+electronic computer to generate the formal proofs, the idea is a somewhat straightforward idea. So you
+
+51
+00:05:57,710 --> 00:06:01,630
+have a very simple computer program to check every step in the proof, and then you have another
+
+52
+00:06:01,630 --> 00:06:06,670
+program to construct all the steps of the proof. So you have two computer programs, one to construct
+
+53
+00:06:06,670 --> 00:06:10,750
+the proof and another one to check the proof. And the program that checks the proof is called
+
+54
+00:06:10,750 --> 00:06:18,740
+the logical kernel, and the correctness of the whole formal proof would depend only on
+
+55
+00:06:18,740 --> 00:06:23,980
+the correctness of the logical kernel, which is the program that checks the proof.
+
+56
+00:06:27,330 --> 00:06:32,210
+And because the logical kernel is usually very simple, we can have high trust in the correctness
+
+57
+00:06:32,210 --> 00:06:44,830
+of the proofs. So now let's be a bit more practical. What is interactively improving?
+
+58
+00:06:46,190 --> 00:06:50,430
+So interactively improving is done using tools called interactively
+
+59
+00:06:50,430 --> 00:06:56,910
+improvers or proof-assistance. What are those? These are basically mechanized
+
+60
+00:06:57,550 --> 00:07:02,910
+or machine-based mathematical systems in which one specifies definitions and statements and proofs
+
+61
+00:07:02,910 --> 00:07:07,710
+in a formal language. And then the interactively improver makes sure that the proof only follows
+
+62
+00:07:07,710 --> 00:07:12,110
+from a specific set of actions. In our case, we will use the interactively improver,
+
+63
+00:07:12,110 --> 00:07:19,040
+Isabelle Hall. An example proof in that system is shown in the slide right in front of you.
+
+64
+00:07:19,040 --> 00:07:27,410
+So here we're proving that the square root of root is an irrational number. As shown here,
+
+65
+00:07:27,410 --> 00:07:38,700
+the user writes down the theorem in formal syntax of Isabelle, and then the user enters
+
+66
+00:07:38,700 --> 00:07:45,900
+high-level steps of the proof. And for example, you assume that you say, okay, let x is to be
+
+67
+00:07:45,900 --> 00:07:50,460
+the square root of two, and we assume that x is rational. And then we do a few steps,
+
+68
+00:07:50,460 --> 00:07:59,280
+and then we derive from that a contradiction. So this is a proof of irrationality of square root
+
+69
+00:07:59,280 --> 00:08:10,540
+of two. In mathematics, using interactively improvers, many, many formal proofs were
+
+70
+00:08:10,540 --> 00:08:14,700
+developed, especially in the last few years, and I would say why in a few slides.
+
+71
+00:08:16,050 --> 00:08:22,690
+So like the most recent and most interesting formal project is trying to generate a formal
+
+72
+00:08:22,850 --> 00:08:26,530
+mathematical proof from Fermat's last theorem. So this is currently an active project by Kevin
+
+73
+00:08:26,530 --> 00:08:32,130
+Buzzer Imperial College, but there are many other examples that I've seen here. But the
+
+74
+00:08:32,130 --> 00:08:39,440
+point of this slide is to say that interactively improvers are really becoming a practical way to
+
+75
+00:08:39,440 --> 00:08:44,750
+generate formal proofs, even for serious mathematical theorems. In computer science,
+
+76
+00:08:45,470 --> 00:08:52,190
+which I assume will be the interest of a majority of you, formal proof is used for
+
+77
+00:08:52,190 --> 00:09:00,940
+formal verification. So basically, we have a computer system, and so we write, we try to
+
+78
+00:09:00,940 --> 00:09:04,460
+describe that system in a language that's understood by an interactively improver,
+
+79
+00:09:04,460 --> 00:09:07,820
+and we try to describe its properties also that we want to verify. For example,
+
+80
+00:09:08,620 --> 00:09:20,050
+sorting algorithm sorts, or a search algorithm returns an element that finds whatever you're
+
+81
+00:09:20,050 --> 00:09:25,330
+searching for if it's in the database, something like that. So you specify a system and its
+
+82
+00:09:25,330 --> 00:09:32,180
+desired property is in a formal language. And this was also used to do a lot of landmark
+
+83
+00:09:35,010 --> 00:09:38,850
+verifications of computer systems. So interactively improvers were used to verify an entire
+
+84
+00:09:38,850 --> 00:09:45,780
+opening system kernel. Two compilers, and most recently, they've been adopted by industry very
+
+85
+00:09:45,780 --> 00:09:53,300
+heavily. So AWS used the improver Isabelle that we're studying here to formally verify
+
+86
+00:09:53,300 --> 00:09:59,860
+the mitral hypervisor, which is basically the hypervisor that AWS uses for all of its
+
+87
+00:09:59,860 --> 00:10:08,380
+virtual machines. And also Apple has used Isabelle to verify all of its cryptographic algorithms that
+
+88
+00:10:08,380 --> 00:10:13,740
+run on all the phones and on all the computers. So these are hyperlinks, you can actually check
+
+89
+00:10:13,740 --> 00:10:23,740
+the blog posts on both on Apple's website and on AWS website to see the scale of what you can
+
+90
+00:10:23,740 --> 00:10:33,860
+achieve using interactively improvers to verify real world systems. Now I talked about electronic
+
+91
+00:10:33,860 --> 00:10:38,580
+computers being invented, and that's already causing phone proofs to become practical. But in
+
+92
+00:10:38,580 --> 00:10:45,940
+the last few years, large language models, or foundation models in general, have even
+
+93
+00:10:46,900 --> 00:10:54,980
+made the use of interactively improvers even more practical. And in fact, they multiplied
+
+94
+00:10:55,780 --> 00:11:02,660
+the productivity of a user with the improver by an order of magnitude almost. We can now
+
+95
+00:11:02,660 --> 00:11:09,420
+automate so many parts of the process that it is very practical to verify
+
+96
+00:11:10,300 --> 00:11:16,380
+very large systems that would have been impossible two years ago.
+
+97
+00:11:17,260 --> 00:11:26,130
+So in fact, it's not, and in fact, LLMs did not only make the improving more feasible, but also
+
+98
+00:11:26,850 --> 00:11:32,690
+the improvers are making it possible for LLMs to learn mathematics because they can be used to
+
+99
+00:11:32,690 --> 00:11:40,420
+provide feedback for the LLM so that the LLM verifies its mathematical reasoning.
+
+100
+00:11:40,420 --> 00:11:44,020
+So if you have an LLM that's trying to prove a mathematical theorem, it can try to
+
+101
+00:11:44,660 --> 00:11:48,500
+give its proof to a theorem prover, interactively improver like Isabelle or something else,
+
+102
+00:11:49,220 --> 00:11:54,740
+and then it gets feedback from that theorem prover on whether its approach is correct or not.
+
+103
+00:11:54,740 --> 00:11:59,220
+And using that, the abilities of LLMs to do mathematics had dramatically improved
+
+104
+00:11:59,220 --> 00:12:07,300
+in the recent years. They have in fact achieved the International Math Olympiad
+
+105
+00:12:07,300 --> 00:12:14,430
+gold level performance, which was, which two years ago would have sounded like a complete,
+
+106
+00:12:15,500 --> 00:12:22,180
+a completely impossible goal. So now with LLMs and AI,
+
+107
+00:12:22,180 --> 00:12:26,020
+it's actually improving, is becoming a very practical tool that is used by a lot of
+
+108
+00:12:26,020 --> 00:12:30,500
+people in the industry. So, and a lot of mathematicians also, and a lot of computer
+
+109
+00:12:30,500 --> 00:12:36,720
+scientists in the research. So it's really, it's really a very practical tool at this point.
+
+110
+00:12:38,500 --> 00:12:46,960
+So my own research, I'm doing, I'm also using and developing and improving tools
+
+111
+00:12:48,320 --> 00:12:53,520
+within the ecosystem as well for my own research. So I primarily work on verifying algorithms for
+
+112
+00:12:54,320 --> 00:12:59,920
+verifying, formally verifying algorithms for AI. So this means that I build algorithms for AI and
+
+113
+00:12:59,920 --> 00:13:09,040
+then prove them correct using a theorem prover. I also sometimes do use them to just formalize
+
+114
+00:13:09,040 --> 00:13:14,080
+pure mathematical theorems or theorems from theorems from computer science,
+
+115
+00:13:14,080 --> 00:13:21,630
+for example, complexity theory. And more recently, I've been interested in AI for mathematics and
+
+116
+00:13:22,190 --> 00:13:30,990
+in basically developing AI based methods or LLM based methods to improve the practice of
+
+117
+00:13:30,990 --> 00:13:37,470
+fear improving using Isabelle or other interest improvers. And in fact, I have, if that
+
+118
+00:13:37,470 --> 00:13:45,230
+interests any of you, I have many dissertation topics for you, whether you do, if you want
+
+119
+00:13:45,870 --> 00:13:50,430
+like a master's project or a final year project, or if you want to do a summer internship or
+
+120
+00:13:50,430 --> 00:13:56,750
+something like that, I have or even a PhD, I have lots of project ideas. So if that topic,
+
+121
+00:13:56,750 --> 00:14:03,280
+that general topic interests you, please come and talk to me. So now let's talk about the actual
+
+122
+00:14:03,920 --> 00:14:11,680
+module structure and that we're going to do this this year. So we have a 10 week lecture period.
+
+123
+00:14:14,050 --> 00:14:18,450
+In the first five weeks, we'll be talking mainly about the foundations of fear improve,
+
+124
+00:14:18,450 --> 00:14:22,210
+interaction improving. So I'll be like introducing you to the basic syntax of the
+
+125
+00:14:22,210 --> 00:14:29,490
+theorem prover Isabelle, some basic proof concepts, and some basic, like, like, for example, mathematical
+
+126
+00:14:29,490 --> 00:14:36,860
+induction on numbers or other things. And I will then talk to you about ways Isabelle has
+
+127
+00:14:40,510 --> 00:14:45,150
+to automate proofs in order for you to not actually write all the steps to the proof
+
+128
+00:14:45,150 --> 00:14:49,790
+yourself. So Isabelle has automation itself. And then in the fifth week, I will talk
+
+129
+00:14:49,950 --> 00:14:56,880
+about to you about the more recent most recent advances and methods in integrating large language
+
+130
+00:14:56,880 --> 00:15:00,240
+models with Isabelle so that you can actually use that large language model to do a genetic
+
+131
+00:15:00,240 --> 00:15:06,720
+theorem proving, where you where you asked them where you asked them, we can do things
+
+132
+00:15:06,720 --> 00:15:11,200
+ranging from very simple things like asking the LLM, what is this syntax error explained to me
+
+133
+00:15:11,200 --> 00:15:15,120
+all the way up to tell it telling it to prove a very big theorem on its own.
+
+134
+00:15:16,670 --> 00:15:22,830
+So then in weeks from six to 10, we will actually talk about state of the art applications of
+
+135
+00:15:22,830 --> 00:15:30,980
+theorem provers within without AI in the areas of computer science and also in areas of
+
+136
+00:15:30,980 --> 00:15:36,770
+formal education. And sometimes we might also touch on mathematics. So basically,
+
+137
+00:15:36,770 --> 00:15:41,250
+the first half is basic is foundations, the second half of the module will be applications
+
+138
+00:15:41,410 --> 00:15:48,080
+improving that are all interesting, like that are advanced enough to be interesting.
+
+139
+00:15:50,880 --> 00:15:54,800
+So, as I told you, I expect you to have some background knowledge. This includes
+
+140
+00:15:54,800 --> 00:15:58,800
+mathematical induction, I expect you to know about that first order logic and how to formulate
+
+141
+00:15:58,800 --> 00:16:05,150
+statements in first order logic and basic functional programming. And as you would have done,
+
+142
+00:16:05,950 --> 00:16:07,710
+you would have had you have been exposed to these
+
+143
+00:16:07,870 --> 00:16:15,470
+concepts, whether it is in the foundations of computing modules, or programming,
+
+144
+00:16:18,480 --> 00:16:26,400
+for example, functional programming, you will have been exposed to it in the programming
+
+145
+00:16:26,400 --> 00:16:33,860
+practice and experiences module. But in any case, I will refresh these concepts with you as we build,
+
+146
+00:16:33,860 --> 00:16:41,580
+as we go through the through the module. So now let's go to the organizational points
+
+147
+00:16:41,580 --> 00:16:46,940
+of this module. So we will use the theorem prover is able whole, as I said, all these are hyperlinks,
+
+148
+00:16:46,940 --> 00:16:52,880
+so you can see what we're talking about, but they're also on keys. And, and on the course
+
+149
+00:16:52,880 --> 00:16:59,760
+website. So the so we use it is about the improver. And that, in order for you to ask
+
+150
+00:16:59,760 --> 00:17:05,120
+questions, you can ask them either on the key forum, or on the Isabelle zero community,
+
+151
+00:17:05,120 --> 00:17:09,440
+and I have added a link to that as well. This is like a very friendly community, please go
+
+152
+00:17:09,440 --> 00:17:14,080
+and ask people their questions about Isabelle that you have, especially if you're interested in if
+
+153
+00:17:14,080 --> 00:17:19,860
+you find this area interesting to go for, like, look, look, and you want to do further studies in
+
+154
+00:17:19,860 --> 00:17:24,820
+it, use the Isabelle zero as soon as possible, because an important thing is to get to know
+
+155
+00:17:24,820 --> 00:17:36,850
+the community. And we'll also use books. So there are three books or three documents that I
+
+156
+00:17:36,850 --> 00:17:41,170
+recommend you read them, not the whole thing, of course, like for every week, I'm saying what are
+
+157
+00:17:41,170 --> 00:17:50,700
+the obligatory reading, but in general, here, here, in this module, I'm expecting like, like,
+
+158
+00:17:50,700 --> 00:17:55,820
+there are there's obligatory reading. So like, for every week, there are some sections or some
+
+159
+00:17:55,820 --> 00:17:59,420
+chapters that you have to read from the in these books. So the books are all available online,
+
+160
+00:17:59,420 --> 00:18:05,570
+and these will be written on the keys in the course website as well. And the assessment will
+
+161
+00:18:05,570 --> 00:18:15,580
+be a formal, formal proof project, and an exam, it will be paper based. So so the coursework is
+
+162
+00:18:15,580 --> 00:18:27,300
+a practical part, and basically, the exam is a written part. Lastly, I want to discuss with you
+
+163
+00:18:29,460 --> 00:18:36,000
+the AI policy for this module. So during the group, it was large and small, I would
+
+164
+00:18:36,000 --> 00:18:45,520
+encourage you to not use LLMs, except in weeks one to four, I would encourage you to not use LLMs
+
+165
+00:18:45,520 --> 00:18:52,880
+except to just explain, to get an explanation of what an error is, a specific error. For example,
+
+166
+00:18:52,880 --> 00:18:58,450
+when you're trying to do something in Isabelle, you write something, then you get a syntax error,
+
+167
+00:18:59,470 --> 00:19:03,710
+and then you don't know what that means, or what that error means, then you copy and paste the
+
+168
+00:19:03,710 --> 00:19:08,510
+error to a web interface of an LLM, and then it tells you this error means so and so. This is how
+
+169
+00:19:08,510 --> 00:19:12,190
+you fix it. That's encouraged, like I would like you to do that, because that will accelerate your
+
+170
+00:19:12,190 --> 00:19:17,070
+learning. But I don't want you to do to have an AI system, solve the exercises that we're doing
+
+171
+00:19:17,070 --> 00:19:21,230
+in the large group or the small group tutorials, because this way, you will not learn the basics.
+
+172
+00:19:21,230 --> 00:19:25,790
+And if you don't learn the basics, you will not be able to use AI for doing more fun things.
+
+173
+00:19:27,020 --> 00:19:31,740
+And then week five onwards, during the larger group, small group tutorials, you can use AI
+
+174
+00:19:31,740 --> 00:19:39,170
+for more than just syntax error explanation. You can use it also to explain more mathematical
+
+175
+00:19:39,170 --> 00:19:43,890
+concepts, like mathematical concepts or mathematical proofs, or how to approach a problem
+
+176
+00:19:43,890 --> 00:19:51,170
+at a higher level than just syntax errors. For the coursework, there will be an AI policy
+
+177
+00:19:51,170 --> 00:19:55,250
+that will be part of the coursework, so please wait until then, and then you will see it.
+
+178
+00:19:56,270 --> 00:20:06,110
+And lastly, I would like to remind you that the exam will be 50% of the marks in this module,
+
+179
+00:20:06,110 --> 00:20:13,170
+and will be purely paper-based. So if you try to use AI for doing everything during these weeks,
+
+180
+00:20:16,430 --> 00:20:18,990
+my guess is that you will find it very hard to pass the exam.
+
+181
+00:20:18,990 --> 00:20:22,510
+So you need to actually understand the concepts yourself, because this will be paper-based.
+
+182
+00:20:24,080 --> 00:20:32,910
+That's all, and I hope you enjoy the course, and I'm looking forward to see you in the first group
+
+183
+00:20:32,910 --> 00:20:41,870
+tutorial.

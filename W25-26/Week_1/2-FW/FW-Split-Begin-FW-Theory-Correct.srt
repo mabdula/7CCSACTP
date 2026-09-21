@@ -1,0 +1,335 @@
+1
+00:00:00,000 --> 00:00:24,910
+So let me just firstly introduce you to what I mean by that. So logical reason. In Isabelle, there is
+
+2
+00:00:26,980 --> 00:00:36,300
+a way to use existing lemmas to prove current specifications that you want to prove.
+
+3
+00:00:36,300 --> 00:00:40,540
+So let me just give you an informal example to motivate that. So suppose
+
+4
+00:00:40,540 --> 00:01:11,980
+suppose we want to prove that, let's say that given p, we can derive q. And suppose that we have a lemma
+
+5
+00:01:13,780 --> 00:01:31,630
+that says given, let's say, r, we can have p. And suppose that we have another lemma that says that
+
+6
+00:01:31,630 --> 00:01:40,900
+we can always derive r without any assumptions. Then we can prove this theorem in a forward way
+
+7
+00:01:42,180 --> 00:01:54,110
+in the following as follows. So I will just apply modus ponens here. So
+
+8
+00:01:55,390 --> 00:02:03,710
+informally, we can say that I will just call this 1 and this 2 and this 3. Second, I will just say
+
+9
+00:02:04,110 --> 00:02:20,060
+from 1, sorry, no, sorry. So 1, what we want to prove is 1. So we can just start like we just,
+
+10
+00:02:20,060 --> 00:02:26,540
+I'll just start from this one, that one, and then we want to derive this one. So we want to say,
+
+11
+00:02:27,340 --> 00:02:33,900
+we want to prove that p, we can derive q from p. So how can we do that? We can also say
+
+12
+00:02:34,460 --> 00:03:05,150
+from 1, we know we deduce that if we can show that r holds, then we can show that q holds.
+
+13
+00:03:06,420 --> 00:03:13,860
+Why is that? Because r says if we have, because 1 says if we have r, then we can derive p.
+
+14
+00:03:14,580 --> 00:03:23,860
+And our goal is if we have p, then we can derive q. So this has, so using 1, we can transform our
+
+15
+00:03:23,860 --> 00:03:32,820
+goal instead of being p, instead of deriving q from p, we can, we transform it to a new goal, which is
+
+16
+00:03:34,700 --> 00:03:47,900
+r, like we can derive q from r. So that was goal 1, and then now that's goal number 2 after using
+
+17
+00:03:47,900 --> 00:04:05,040
+this fact. Now we can then transform that goal again by saying, okay, so if we can, if we can,
+
+18
+00:04:05,040 --> 00:04:36,080
+if we show r, then we can derive q. And we have, we know that we have r. So in this video,
+
+19
+00:04:36,080 --> 00:04:46,860
+let me show you the first type of logical reasoning, which is forward and backward reasoning,
+
+20
+00:04:46,860 --> 00:04:55,570
+as shown here in this slide. So let me just show the first type of thing. So logical reasoning
+
+21
+00:04:55,650 --> 00:05:08,210
+forward and backward, all right? So let's, let me just give you an informal example to
+
+22
+00:05:09,410 --> 00:05:15,630
+motivate that. Suppose we want to prove the following. We want to show that if we have
+
+23
+00:05:15,630 --> 00:05:26,500
+that p implies q, and we have that q implies r, and we have that r does not hold, we want to show
+
+24
+00:05:26,500 --> 00:05:37,390
+that from this we can derive that p does not hold, okay? So informally, what we can, like the way you
+
+25
+00:05:37,390 --> 00:05:45,020
+can argue that is that saying, okay, if p holds, then q holds, and if q holds, then r holds,
+
+26
+00:05:45,020 --> 00:05:49,500
+but r doesn't hold, that means that q doesn't hold, that means that p doesn't hold, so this means
+
+27
+00:05:49,500 --> 00:05:59,140
+that we can derive not p from this, okay? But how can we prove that using forward and backward
+
+28
+00:05:59,220 --> 00:06:05,060
+reasoning? So we can do the following informal proof, and then I will show you how to do it in
+
+29
+00:06:05,060 --> 00:06:12,180
+Isabelle, that will be the structure. So firstly, we can, from the assumption, we know that not r holds,
+
+30
+00:06:12,180 --> 00:06:20,060
+okay? That's from the assumption, and also from the assumption we know that
+
+31
+00:06:21,180 --> 00:06:43,970
+q implies r, right? That's also from the assumption. Okay, from that we want to derive
+
+32
+00:06:43,970 --> 00:07:07,300
+that not q. Recall we have this law that is called implication introduction, okay? So it's a lemma,
+
+33
+00:07:07,300 --> 00:07:12,500
+kind of, right? I mean, in Isabelle, it would be a lemma, and I will show you how. So that law would
+
+34
+00:07:12,500 --> 00:07:20,500
+say, so this, it's usually written like that, so this would be a lemma. We need this lemma.
+
+35
+00:07:20,500 --> 00:07:34,430
+We need a lemma that basically says that if you have, if you have some q, then you can always
+
+36
+00:07:39,470 --> 00:07:45,390
+derive from that p implies q for anything. So if you have q, then p implies q is always
+
+37
+00:07:45,470 --> 00:07:52,210
+reliable. And what is the rationale behind that? It's the following, okay? So here,
+
+38
+00:07:52,210 --> 00:08:00,850
+this is any predicate p, and any predicate q, and any predicate p. These are not related
+
+39
+00:08:00,850 --> 00:08:08,180
+to this one, so maybe I should just do it, like, modify the lemma slightly with x and y. So,
+
+40
+00:08:09,140 --> 00:08:20,990
+no. If you have x, then you can always from that derive that some y implies x, right? Because you
+
+41
+00:08:20,990 --> 00:08:27,950
+already know that x holds. So in our case, we can, okay, we can use that lemma, right,
+
+42
+00:08:27,950 --> 00:08:35,470
+to derive the following from, to derive the following from step number one here. So we can
+
+43
+00:08:35,470 --> 00:08:49,730
+derive, we can derive from that that q implies not r, and this one, this is from one, and from
+
+44
+00:08:49,730 --> 00:09:01,410
+this lemma called implication introduction. And here, this logical step is a forward reasoning
+
+45
+00:09:01,410 --> 00:09:13,660
+step. Why? Because you have, you already have some, you have proved some fact, which is here,
+
+46
+00:09:13,660 --> 00:09:19,500
+is fact number one, and you have a lemma, and that lemma has an assumption. And then you
+
+47
+00:09:20,530 --> 00:09:24,050
+instantiate the assumption of the lemma with the fact that you have proved and get,
+
+48
+00:09:24,610 --> 00:09:31,010
+in return, the conclusion of that lemma. So let me just explain that a bit in more details.
+
+49
+00:09:31,650 --> 00:09:50,420
+So why is this a forward reasoning? That's because, or how is this a forward reasoning
+
+50
+00:09:50,420 --> 00:09:55,860
+rather? Not why is this? So how is this forward reasoning step? How is this a forward reasoning
+
+51
+00:09:55,860 --> 00:10:09,070
+step? That's because we have implication introduction, and that lemma which, and that lemma has an
+
+52
+00:10:09,070 --> 00:10:21,150
+assumption, and from that lemma, when we instantiate, and we instantiated that assumption,
+
+53
+00:10:21,150 --> 00:10:42,770
+we instantiated the assumption of that lemma with another fact that we have proved,
+
+54
+00:10:45,390 --> 00:11:06,880
+which is fact number one, namely fact number one. So that's what it means to a forward reasoning.
+
+55
+00:11:07,760 --> 00:11:19,660
+And in Isabelle, the notation of having, of representing forward reasoning is as follows.
+
+56
+00:11:19,660 --> 00:11:31,170
+So in Isabelle, the notation of represent forward reasoning can be done as follows.
+
+57
+00:11:32,690 --> 00:11:42,560
+If you have two facts, f1 and f2, and you want, let me just write that a bit more clearly,
+
+58
+00:11:42,640 --> 00:11:54,320
+if you have two facts, f1 and f2, and you want to instantiate an assumption of f2 with f1,
+
+59
+00:11:54,320 --> 00:12:08,210
+the way you write that in Isabelle is like this, f2 of f1. And that, in our case, for example,
+
+60
+00:12:08,210 --> 00:12:34,930
+here f2 would be, in our example, f2 is implication introduction, and f1 is fact one. So this is a step
+
+61
+00:12:34,930 --> 00:12:47,540
+of forward reasoning. So that's number, that's proof step number three. And then in step number
+
+62
+00:12:47,540 --> 00:12:59,390
+four in our proof, we can derive that Q does not already, if you have, if you remember, there is
+
+63
+00:12:59,390 --> 00:13:07,630
+also another theorem, like another theorem that says, like, or, you know, maybe you don't remember
+
+64
+00:13:07,630 --> 00:13:11,790
+that, but I'll just introduce it to you. It's a theorem that's called negation introduction.
+
+65
+00:13:12,350 --> 00:13:21,470
+And that theorem says that if you, if you, if you have, if Q, if you have, okay, I'll just use X and Y,
+
+66
+00:13:21,470 --> 00:13:27,150
+so make sure that this is not confused with the symbols we have in our lemma. So if you have,
+
+67
+00:13:28,030 --> 00:13:40,350
+for example, X implies Y, and X implies not Y, then you know for sure that X does not hold,
+
+68
+00:13:41,310 --> 00:13:47,940
+because it's impossible that X holds and, you know, because if X does hold, then you have Y and not Y
+
+69
+00:13:47,940 --> 00:13:53,810
+holding at the same time. So this is another lemma called negation introduction. So from that,
+
+70
+00:13:53,810 --> 00:14:05,300
+so we can derive number four, step number four here from, from step number two and three,
+
+71
+00:14:06,020 --> 00:14:12,460
+and negation introduction will again forward reasoning from two, three, and negation introduction.
+
+72
+00:14:15,100 --> 00:14:20,860
+Forward reasoning. So we instantiated, for example, this assumption with, with two,
+
+73
+00:14:20,860 --> 00:14:28,820
+and this assumption with three. So like in Isabelle, the notation here would be negation introduction
+
+74
+00:14:28,820 --> 00:14:35,970
+of two and three. So you're instantiating both assumptions. So now we have derived not Q,
+
+75
+00:14:36,610 --> 00:14:45,310
+and then we can do the same again to derive not P. So from not Q we can derive
+
+76
+00:14:47,360 --> 00:14:56,100
+that, we can derive, let me just see that. So we have not Q, then we can derive also that
+
+77
+00:14:56,910 --> 00:15:11,140
+P implies not Q. This is from four and implication introduction, which is this lemma down there.
+
+78
+00:15:11,140 --> 00:15:15,540
+Let me just use the laser to point properly to it. So if you remember it, this lemma,
+
+79
+00:15:15,540 --> 00:15:21,940
+so we use this lemma and this fact to derive that again with forward reasoning.
+
+80
+00:15:23,490 --> 00:15:35,170
+And then we just do number six, step number six, where we use the assumption, this assumption there,
+
+81
+00:15:36,430 --> 00:15:47,440
+and that step to derive that P does not hold. So we use, so we have not P from
+
+82
+00:15:51,150 --> 00:16:04,620
+assumption and step number five and negation introduction. And again, this is
+
+83
+00:16:04,620 --> 00:16:07,900
+all of these steps of forward reasoning. And then we have our goal proof.
+
+84
+00:16:07,900 --> 00:16:18,160
+All right. So that's, that's forward reasoning.

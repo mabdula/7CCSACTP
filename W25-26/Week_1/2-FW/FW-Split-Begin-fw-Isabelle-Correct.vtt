@@ -1,0 +1,194 @@
+WEBVTT
+
+
+1
+00:00:00.340 --> 00:00:11.600
+So now let's try and do, um, um, um, to formalize that proof that we did on pen and paper in Isabelle.
+
+2
+00:00:11.600 --> 00:00:18.000
+So I have now a theory, a theory file called fw. So you just prepare it in the same way we did the theory file in the last time.
+
+3
+00:00:18.000 --> 00:00:31.960
+So the first step to do that is, um, firstly, we state the lemmas. Okay, so I would firstly assume that we have these lemmas in the way I do it in my actual work,
+
+4
+00:00:31.960 --> 00:00:41.160
+where when I need a lemma, I just assume I have it and don't prove it, and then do the upper level proof first, the high level proof first, and then prove it later on.
+
+5
+00:00:41.160 --> 00:01:00.740
+So I will just assume that we have firstly, um, implication, introduction. So this is a lemma that says, um, if you have x, then from that you can prove that x implies y.
+
+6
+00:01:00.940 --> 00:01:07.020
+Okay, and remember, remember the difference between this implication and that implication.
+
+7
+00:01:07.020 --> 00:01:13.620
+This one is, um, indicates, is the meta of the meta-logic.
+
+8
+00:01:13.620 --> 00:01:31.690
+And on pen and paper, what it really indicates is the, is the turnstile. Okay, and this other implication indicates the implication of the object logic, which is what you would write in pen and paper as an actual implication.
+
+9
+00:01:32.780 --> 00:01:43.300
+So here we have that, and then, um, let me just, before I actually write the other lemma, um, let me just show you.
+
+10
+00:01:43.300 --> 00:01:53.740
+So we have implication, introduction. Okay, so this is the, this is the lemma that we have obtained by doing that thing, which is not a proof.
+
+11
+00:01:53.740 --> 00:02:06.490
+I'm sorry, yeah, this is actually, it said it's on the counter example because it's not a, not the correct way.
+
+12
+00:02:06.490 --> 00:02:11.490
+So actually the correct way is that you have, from any x you can derive that y implies x.
+
+13
+00:02:14.360 --> 00:02:26.570
+So here, if you say, if you saw, like, like, for example, if I write any, anything that's wrong or nonsensical, it will, um, it will tell you that there is a counter example like this one.
+
+14
+00:02:26.570 --> 00:02:33.570
+So I wrote this one in the incorrect way, and then it told you auto-quick check, counter counter example, so we can just do it that way instead.
+
+15
+00:02:33.570 --> 00:02:45.840
+Um, and now we have that, that's the lemma that we can use, and then we can instantiate the x with any fact that we have proved, because x is of type Boolean.
+
+16
+00:02:46.840 --> 00:03:00.420
+And then you will get y implies x, and then you can instantiate that y with any other proposition that you want.
+
+17
+00:03:00.420 --> 00:03:08.740
+So let's, let's do that. Let's do the forward reasoning. But before that, I just want to write the other lemma, which is negation, introduction.
+
+18
+00:03:08.740 --> 00:03:39.700
+So that, lemma, the way you write that one is, um, how we did it, how did you do it, so x, if you have x implies y, x implies not y, then from those of those two things that you can conclude that x does not hold.
+
+19
+00:03:39.700 --> 00:03:43.700
+Okay, let's see, there are no counter examples, okay, that were found.
+
+20
+00:03:45.440 --> 00:04:10.490
+So now we can check the theorem, how it looks like, so negation intro. Again, you have that, you have a theorem with two assumptions, you can instantiate that with an implication, if you have a fact that is an implication, and you instantiate that with an implication, and then you'll get the negation of x.
+
+21
+00:04:10.490 --> 00:04:53.280
+Okay, so here, of course, I didn't say that, but this is the name of the lemma, right? So let's now write the actual theorem that we want to prove, which is p, if you have p implies q, and if you have q implies r, and you have not r, then from that you can get not p.
+
+22
+00:04:54.280 --> 00:05:10.910
+Okay, so now I will do the proof in the forward reasoning way, so this is the way you can write that lemma, but in order for you to be able to refer to the different assumptions separately, an alternative way to write the same lemma is the following.
+
+23
+00:05:10.910 --> 00:05:23.730
+You say assumes p implies q, you have all your assumptions written like that, just show you, shows your conclusion.
+
+24
+00:05:23.730 --> 00:05:42.620
+So now, we can access these different assumptions, give them names, for example, if you want, so I'll call that assumption one, and that's that one, and assumption two, that's another one.
+
+25
+00:05:43.620 --> 00:06:13.760
+And assumption three, that's another one. Okay, and then you can perform the proof as follows. So how do you perform a proof? So you open something called a proof block, which is this one, you start it by proof, and then dash, and then you basically, it's as if you have opened a notebook, and then you can write your proof in that notebook, or in that blackboard, whatever.
+
+26
+00:06:13.760 --> 00:06:34.950
+So how did our original proof proceed? So the original proof proceeded as follows. So the first step is we say that we have an assumption that not r holds, and that q implies r also holds from the assumption, so the way you do that in Isabelle is as follows.
+
+27
+00:06:34.950 --> 00:07:04.970
+So we say have one, this is fact number one, not r, and you have that, you can say, so we say that from the assumption, so you can say this in a different way, so you can say, for example, from using assumption one, no, that's not assumption one, sorry, using assumption three.
+
+28
+00:07:04.970 --> 00:07:20.770
+Yeah, so then if you want to obtain a fact, and you already have that fact proved, you can already just do the following, you can just say using assumption three, and then dot.
+
+29
+00:07:20.770 --> 00:08:06.200
+So let me just write that on the board there, so that it is clear to you as a note. So notes in Isabelle, if we want to obtain a fact p, and we already have proved, we have p already from somewhere else, we have proved somewhere else, we just write the following.
+
+30
+00:08:06.200 --> 00:08:45.330
+Have p using p and then dot, okay, so that dot does this, does the job for us here. So just get a bit smaller, so you can write more notes, okay, and then again, from the second, from the, from another assumption, we can obtain that q implies r, and they'll call that fact.
+
+31
+00:08:45.330 --> 00:09:08.610
+So here we say q implies r using assumption two, and then again dot, okay, then we have facts two and one and two now, and then we want to obtain fact number three, so this, so let's just write down that fact.
+
+32
+00:09:08.610 --> 00:09:28.640
+So fact number three is going to be q implies not r, and that we should get it by forward reasoning from implication introduction and fact number one. So this would, we would do it like this.
+
+33
+00:09:30.060 --> 00:09:56.360
+Fact number one, okay, so now we have, we have, so here, this is actually the proof state. So we now, but what we want to show is q implies not r, which is the current, doesn't have to do with the name of the fact here.
+
+34
+00:09:56.360 --> 00:10:16.840
+So we can just call this for example, and still this will be just go number one, because you can sometimes have more than one goal. So we want to prove q implies not r from using for all question mark, why implies not r.
+
+35
+00:10:16.840 --> 00:10:51.630
+And remember, as I told you earlier, let me just write this also in a note that the question mark variable is quantification. So let's just write that note number B in Isabelle, question mark x is roughly equivalent to for all x.
+
+36
+00:10:51.630 --> 00:11:10.240
+So quantification over all x, so you can instantiate that x with anything that you that fits the type. So here in our case, this y is Boolean. So it would be instantiated with q, right? And the way we do that is again by the dot.
+
+37
+00:11:10.240 --> 00:11:22.870
+So the dot does this work for us as well. So, so the dot can, in fact, if you have, if you want to grow a fact and you have a quantified version of that fact, if it's universally quantified, then you can just use the dot.
+
+38
+00:11:22.870 --> 00:11:57.250
+That's number, that's another thing we have there. And then we had fact number four, I'll just call this three again. I have no fact number four is not q. And that should follow from negation introduction.
+
+39
+00:11:57.250 --> 00:12:12.980
+Let's call it just negation intro, applied to which assumptions were they, assumptions, no, apply to step number two and three. So fact number two and fact number three.
+
+40
+00:12:12.980 --> 00:12:27.540
+So then we have, again, this is the proof states, want to prove not q, and you're already using not q. So you can just use the dot. And then finally, I'll just say five.
+
+41
+00:12:27.540 --> 00:12:48.220
+So we want to, we want, we have from the assumption that he implies not, not, not from the assumption that this is from assumption number four and introduction, implication introduction.
+
+42
+00:12:48.220 --> 00:13:11.250
+So, negation introduction of four, and that's, again, the same situation. So you have something, the goal here, and that's what you're using to prove that goal. And then if they match, then you can just use the dot.
+
+43
+00:13:11.250 --> 00:13:36.160
+And then lastly, we want to show that not p holds. So that should hold from negation introduction with, supplied with two facts. The first fact is fact number five, right?
+
+44
+00:13:37.160 --> 00:13:54.420
+And the second fact is assumption number one. That makes sense? No, it doesn't make sense, because actually, this is also important. When you're doing forward reasoning like that, and you want to instantiate the assumptions of a given theorem with facts that you have proved.
+
+45
+00:13:54.420 --> 00:14:07.420
+So here, here we have the theorem is this one, and those are the things that we want to do with. So the first assumption here has not has x implies y, and we're trying to to instantiate here with p implies not q.
+
+46
+00:14:07.420 --> 00:14:18.580
+Note that that, in fact, it should be the other way around. So p implies q should be inserted there because you don't have any negation here in this way. It has to, it has to pattern match. Exactly.
+
+47
+00:14:19.580 --> 00:14:39.700
+So here, instead of that, if we split the order of the assumptions, then it works. And that basically is our goal. So the way we say qed here is instead of saying, instead of doing the tick that we did on the paper, we just say show p.
+
+48
+00:14:39.700 --> 00:15:12.140
+We can also say show p says, and then you're done. Okay, so that's our first usable proof. So, and we showed here how to do forward reasoning. So, in the next part, I will do the proof by substitution and then backward reasoning. I will do it in the end.

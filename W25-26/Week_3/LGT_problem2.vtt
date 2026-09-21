@@ -1,0 +1,1630 @@
+WEBVTT
+
+
+1
+00:00:02.220 --> 00:00:10.320
+Hello everyone. Today we'll solve the last question of the sheet that we didn't get to solve in large group tutorial.
+
+2
+00:00:10.320 --> 00:00:17.320
+So starting with the question, we want to do a tail recursive implementation of the function reverse.
+
+3
+00:00:17.320 --> 00:00:28.930
+So the first thing to do here is to see the default visible reverse function, which is what we can do by doing this.
+
+4
+00:00:28.930 --> 00:00:33.120
+So here we can see the original one, so you have the defining equations of it.
+
+5
+00:00:33.120 --> 00:00:40.120
+So it's a reverse of an empty list, then an empty list, then reverse of an empty list is going to be that.
+
+6
+00:00:40.120 --> 00:00:46.120
+So you take the first element and then you append it to the end of the list, and this is the append.
+
+7
+00:00:46.120 --> 00:00:54.760
+So the recursive function, if an auto recursive call does not call anything after itself.
+
+8
+00:00:56.340 --> 00:01:08.140
+So, for instance, the implementation of reversing Isabelle is not a tail recursive because we call reverse on the rest of the list,
+
+9
+00:01:08.140 --> 00:01:17.140
+and then we call append. So this is the last call, there is a call of something else after itself in the recursive call.
+
+10
+00:01:19.580 --> 00:01:32.020
+So we want to write an alternative definition. So here we would use reverse tail recursive,
+
+11
+00:01:32.020 --> 00:01:58.390
+and we want to take a list and return to us a list, and we want that to recursive, take something, and then...
+
+12
+00:01:58.390 --> 00:02:04.900
+So this is the signature function. So how can it be tail recursive?
+
+13
+00:02:04.900 --> 00:02:11.310
+So the way tail recursion is done, in general, is by using an accumulator argument.
+
+14
+00:02:11.310 --> 00:02:17.700
+So in fact, we can define an auxiliary function, which is an actual tail recursive function,
+
+15
+00:02:17.700 --> 00:02:22.700
+and then TR of TR will be defined in terms of this first function.
+
+16
+00:02:22.700 --> 00:02:28.820
+So this is, I will just call this auxiliary and then auxiliary, and this takes an accumulator.
+
+17
+00:02:28.820 --> 00:02:37.820
+So usually when you want to do something as a tail recursive function, you would give it a second argument,
+
+18
+00:02:37.820 --> 00:02:45.690
+an accumulator, that has the result of the computation until now.
+
+19
+00:02:45.690 --> 00:02:51.200
+So here I'm just calling this argument ACK, for example, right?
+
+20
+00:02:51.200 --> 00:02:56.000
+So the function here will define it to be recursive on the first argument,
+
+21
+00:02:56.000 --> 00:03:18.830
+so the usual template, which is one case for the empty case and one for the non-empty list case.
+
+22
+00:03:18.830 --> 00:03:25.900
+So for an empty list, all what we do is we execute an accumulator, which is the result of the computation until now.
+
+23
+00:03:25.900 --> 00:03:29.900
+For an empty list, we call the function recursively, right?
+
+24
+00:03:29.900 --> 00:03:44.310
+We will change the accumulator so that it has the result of the computation until now, right?
+
+25
+00:03:44.310 --> 00:03:50.590
+So if we give this function, if we change the accumulator by adding x, for example, like this,
+
+26
+00:03:50.590 --> 00:03:53.590
+let's test what that would return to us.
+
+27
+00:03:53.590 --> 00:04:13.710
+So let me see, value, rev, tr auxiliary, and then we give it the empty accumulator.
+
+28
+00:04:13.710 --> 00:04:15.710
+So this actually doesn't reverse anything, right?
+
+29
+00:04:15.710 --> 00:04:20.710
+So what we need to do, in fact, is to put this on the front of the list,
+
+30
+00:04:20.710 --> 00:04:28.420
+and then the next element of x's will be put on the front of that.
+
+31
+00:04:28.420 --> 00:04:33.420
+So here, if you try to actually run it, you'll see that this is how it reverses,
+
+32
+00:04:33.420 --> 00:04:39.420
+because you put the first element in the front, and then the one after it before the first,
+
+33
+00:04:39.420 --> 00:04:43.420
+to the second before the first, and then the third before the second, and so on.
+
+34
+00:04:43.420 --> 00:04:45.420
+So that reverses the list.
+
+35
+00:04:45.420 --> 00:04:48.700
+So that is the auxiliary function.
+
+36
+00:04:48.700 --> 00:04:54.920
+And then, if you want to reverse some given function, all we do is just,
+
+37
+00:04:54.920 --> 00:05:02.110
+we call reverse the recursive auxiliary with that and the empty accumulator, right?
+
+38
+00:05:02.110 --> 00:05:07.200
+Okay, so what do we want to show for this function?
+
+39
+00:05:07.200 --> 00:05:15.550
+We want to show that reverse the recursive x's equals reverse x's, okay?
+
+40
+00:05:15.550 --> 00:05:21.840
+So let's, first of all, if you have defined the function in terms of another function,
+
+41
+00:05:21.840 --> 00:05:29.100
+you have to prove whatever you want to prove in terms of the lowest level function.
+
+42
+00:05:29.100 --> 00:05:32.190
+So here, in this case, it's auxiliary function.
+
+43
+00:05:32.190 --> 00:05:38.260
+So we have to prove that first, and then prove the lemma of the function
+
+44
+00:05:38.260 --> 00:05:41.260
+that is defined in terms of reverse the recursive auxiliary.
+
+45
+00:05:41.260 --> 00:05:49.540
+So as we have always discussed, if you have a function that is recursive in terms of lists,
+
+46
+00:05:49.540 --> 00:06:01.820
+we can prove that it's something about it by induction on the list,
+
+47
+00:06:01.820 --> 00:06:06.940
+which is the recursive argument for the function.
+
+48
+00:06:06.940 --> 00:06:08.940
+So here, we have two cases, right?
+
+49
+00:06:08.940 --> 00:06:11.940
+So the empty case, so is that here.
+
+50
+00:06:11.940 --> 00:06:19.940
+So we'll do it with information, but as you can see,
+
+51
+00:06:19.940 --> 00:06:26.860
+the empty case, you can, of course, do it by just substituting both definitions.
+
+52
+00:06:26.860 --> 00:06:31.900
+And the step case, so let's see it, which is usually the more interesting case.
+
+53
+00:06:31.900 --> 00:06:42.670
+Here we have, we want to prove the theorem, but for A appended to x's, right?
+
+54
+00:06:42.670 --> 00:06:46.670
+And the induction hypothesis is the same theorem, but A appended to x,
+
+55
+00:06:46.670 --> 00:06:48.670
+but only just for x's, right?
+
+56
+00:06:48.670 --> 00:06:54.110
+So this is how it looks.
+
+57
+00:06:54.110 --> 00:07:03.160
+So now, this is induction hypothesis, and this is the goal that we want.
+
+58
+00:07:03.160 --> 00:07:05.320
+So how can we prove that?
+
+59
+00:07:05.320 --> 00:07:09.580
+So let me just show the induction hypothesis.
+
+60
+00:07:09.580 --> 00:07:24.410
+So we have this, and we have that, and we want to rewrite this
+
+61
+00:07:24.410 --> 00:07:28.180
+so that the induction hypothesis is usable.
+
+62
+00:07:28.180 --> 00:07:31.180
+So in order for us to rewrite this, we would do the obvious thing.
+
+63
+00:07:31.180 --> 00:07:35.180
+We would substitute the definition of reverse the recursive auxiliary
+
+64
+00:07:35.180 --> 00:07:40.580
+and get the A into the accumulator.
+
+65
+00:07:42.320 --> 00:07:52.240
+So we can do this manually.
+
+66
+00:07:52.240 --> 00:08:05.900
+So first of all, I'm going to say add this equals xA, right?
+
+67
+00:08:05.900 --> 00:08:17.790
+Apply substitution, reverse the recursive auxiliary.
+
+68
+00:08:17.790 --> 00:08:26.460
+Okay, so that's the first thing we prove.
+
+69
+00:08:26.460 --> 00:08:30.460
+But now, okay, does this match the induction hypothesis?
+
+70
+00:08:30.460 --> 00:08:34.990
+So look at the induction hypothesis here, and look at what we have.
+
+71
+00:08:34.990 --> 00:08:40.990
+So for the induction hypothesis, we can only substitute
+
+72
+00:08:40.990 --> 00:08:47.020
+reverse the recursive auxiliary of x's, which matches the first part
+
+73
+00:08:47.020 --> 00:08:55.660
+of our current state, of the right-hand side of this new statement I proved.
+
+74
+00:08:55.660 --> 00:08:58.660
+But it can only apply if the list is empty.
+
+75
+00:08:58.660 --> 00:09:00.660
+Here we have a list that is not empty.
+
+76
+00:09:00.660 --> 00:09:05.660
+So this is a typical case of an induction hypothesis that is too weak.
+
+77
+00:09:05.660 --> 00:09:08.140
+So how can we fix that?
+
+78
+00:09:08.140 --> 00:09:11.140
+We can fix that by strengthening the induction hypothesis,
+
+79
+00:09:11.140 --> 00:09:15.040
+or in other words, generalizing the theorem, right?
+
+80
+00:09:15.040 --> 00:09:21.040
+So instead of saying reverse x's and an empty accumulator,
+
+81
+00:09:21.040 --> 00:09:24.230
+we'll just say a general accumulator, right?
+
+82
+00:09:24.230 --> 00:09:35.570
+And that general accumulator would then allow us to substitute
+
+83
+00:09:35.570 --> 00:09:40.820
+that general accumulator with this singleton list A, right?
+
+84
+00:09:40.820 --> 00:09:46.820
+But first, the base case broke because, in fact, this doesn't hold as it is, right?
+
+85
+00:09:46.820 --> 00:09:51.950
+The only way for you to get this to work, actually,
+
+86
+00:09:51.950 --> 00:09:57.950
+is by saying that it is the same as reverse x's.
+
+87
+00:09:57.950 --> 00:10:07.500
+We append it to the accumulator that way, and so we append it.
+
+88
+00:10:07.500 --> 00:10:11.500
+So we put that accumulator in the end of this reverse x's.
+
+89
+00:10:11.500 --> 00:10:16.140
+But let's see, maybe the statement is wrong,
+
+90
+00:10:16.140 --> 00:10:18.140
+and we'll discover that part during the proof.
+
+91
+00:10:18.140 --> 00:10:26.180
+So now the induction hypothesis has an accumulator, right?
+
+92
+00:10:26.180 --> 00:10:30.660
+And then we can try to substitute to say that this,
+
+93
+00:10:30.660 --> 00:10:33.660
+to use our induction hypothesis, so we can say
+
+94
+00:10:33.660 --> 00:10:42.770
+have this thing equals reverse x's
+
+95
+00:10:42.770 --> 00:10:46.770
+and append it with a singleton list, which is the accumulator, right?
+
+96
+00:10:46.770 --> 00:10:58.530
+So let us try to substitute the induction hypothesis,
+
+97
+00:10:58.530 --> 00:10:59.980
+and it doesn't work.
+
+98
+00:10:59.980 --> 00:11:03.980
+And in fact, it doesn't work because we have a specific accumulator, right?
+
+99
+00:11:03.980 --> 00:11:05.980
+We are fixing an accumulator.
+
+100
+00:11:05.980 --> 00:11:08.980
+We need to say for any accumulator, this is the case.
+
+101
+00:11:08.980 --> 00:11:14.100
+Because remember, when you have a free variable,
+
+102
+00:11:14.100 --> 00:11:18.960
+like this accumulator, ACC here, outside of the theorem,
+
+103
+00:11:18.960 --> 00:11:20.960
+this is a universally quantified variable.
+
+104
+00:11:20.960 --> 00:11:23.960
+But inside of your proof, this is a fixed variable, right?
+
+105
+00:11:23.960 --> 00:11:27.700
+So now we have a universally quantified variable
+
+106
+00:11:27.700 --> 00:11:29.700
+outside of the theorem and inside of the theorem.
+
+107
+00:11:29.700 --> 00:11:34.700
+So now, in fact, it does work because Isabelle is able to say,
+
+108
+00:11:34.700 --> 00:11:40.700
+okay, I will just match this singleton list A
+
+109
+00:11:40.700 --> 00:11:43.700
+with that accumulator that is universally quantified.
+
+110
+00:11:43.700 --> 00:11:47.430
+And as you can see here, we have this question mark.
+
+111
+00:11:47.430 --> 00:11:51.430
+And now we have that.
+
+112
+00:11:51.430 --> 00:11:58.840
+So we can use our shorthand notation, which is that.
+
+113
+00:11:58.840 --> 00:12:04.280
+And say also this equals dot dot that.
+
+114
+00:12:04.280 --> 00:12:11.490
+Oh, sorry.
+
+115
+00:12:11.490 --> 00:12:13.970
+I can do it only in the second one.
+
+116
+00:12:13.970 --> 00:12:18.310
+Okay, let's just, I'm just doing manually first.
+
+117
+00:12:18.310 --> 00:12:20.310
+Okay, now we have this.
+
+118
+00:12:22.340 --> 00:12:24.340
+What is our goal?
+
+119
+00:12:24.340 --> 00:12:31.700
+Our goal is to show that, given a specific accumulator ACC,
+
+120
+00:12:31.700 --> 00:12:34.800
+which here has the orange color,
+
+121
+00:12:34.800 --> 00:12:38.800
+the reverse, the reverse auxiliary of A cons Xs
+
+122
+00:12:38.800 --> 00:12:42.800
+is the same as reverse, the normal reverse of A cons Xs
+
+123
+00:12:42.800 --> 00:12:47.090
+with, appended to those here, through that cumulative, right?
+
+124
+00:12:47.090 --> 00:12:50.530
+So let's have that.
+
+125
+00:12:50.530 --> 00:12:55.590
+So we need to actually change our left-hand side
+
+126
+00:12:55.590 --> 00:13:00.750
+to talk about the fixed accumulator, the orange accumulator, right?
+
+127
+00:13:00.750 --> 00:13:18.210
+So here we have that, and then to here we have A cons
+
+128
+00:13:18.210 --> 00:13:21.460
+that accumulator, right?
+
+129
+00:13:21.460 --> 00:13:26.460
+That's the definition of reversed, like this TR auxiliary.
+
+130
+00:13:26.460 --> 00:13:28.460
+Look here again, you can take an X
+
+131
+00:13:28.460 --> 00:13:31.560
+and then put it at the front of the accumulator.
+
+132
+00:13:31.560 --> 00:13:35.560
+So that's what I did there, just to define the definition.
+
+133
+00:13:35.560 --> 00:13:38.560
+And then instead of talking about the singleton list A,
+
+134
+00:13:38.560 --> 00:13:42.750
+we're talking about a list that has more
+
+135
+00:13:42.750 --> 00:13:44.750
+than just a singleton list.
+
+136
+00:13:44.750 --> 00:13:49.820
+So here we have this, and then we append that
+
+137
+00:13:49.820 --> 00:13:59.640
+to A cons ACC, because, okay, so now we want it,
+
+138
+00:13:59.640 --> 00:14:00.640
+again, to apply the induction hypothesis,
+
+139
+00:14:00.640 --> 00:14:02.640
+and what does induction hypothesis say?
+
+140
+00:14:02.640 --> 00:14:06.640
+The induction hypothesis says, reverse TR auxiliary,
+
+141
+00:14:06.640 --> 00:14:08.640
+Xs of any accumulator is the same as reverse Xs
+
+142
+00:14:08.640 --> 00:14:10.640
+and any accumulator, right?
+
+143
+00:14:10.640 --> 00:14:12.640
+And here I just, we match this,
+
+144
+00:14:12.640 --> 00:14:14.640
+or either I was able to match this
+
+145
+00:14:14.640 --> 00:14:16.640
+with this entire list, right?
+
+146
+00:14:16.640 --> 00:14:18.640
+So now we did that translation.
+
+147
+00:14:18.640 --> 00:14:20.640
+So remember, the goal of proof by induction
+
+148
+00:14:20.640 --> 00:14:22.640
+is always to apply the induction hypothesis.
+
+149
+00:14:22.640 --> 00:14:24.640
+So here the induction hypothesis is an equality,
+
+150
+00:14:24.640 --> 00:14:25.640
+so we always want to substitute it,
+
+151
+00:14:25.640 --> 00:14:28.640
+and we always keep trying to substitute it until we can.
+
+152
+00:14:28.640 --> 00:14:30.770
+So here we were able to substitute it,
+
+153
+00:14:30.770 --> 00:14:33.900
+and we started from the left-hand side of the goal,
+
+154
+00:14:33.900 --> 00:14:35.900
+and we're trying to reach the right-hand side.
+
+155
+00:14:35.900 --> 00:14:43.520
+And then the next step is, okay, we want to take this
+
+156
+00:14:43.520 --> 00:14:53.710
+and go one more time.
+
+157
+00:14:53.710 --> 00:14:55.710
+How can we do that?
+
+158
+00:14:55.710 --> 00:14:58.710
+So what is the right-hand, what is the goal actually?
+
+159
+00:14:58.710 --> 00:15:00.870
+Now, so let's see the goal.
+
+160
+00:15:00.870 --> 00:15:06.030
+So the goal is to say that this left-hand side,
+
+161
+00:15:06.030 --> 00:15:10.030
+which is the beginning, equals reverse that way,
+
+162
+00:15:10.030 --> 00:15:16.440
+not reverse, of a const x is appended to accumulator.
+
+163
+00:15:16.440 --> 00:15:19.440
+So we want to basically say that this is equals
+
+164
+00:15:19.440 --> 00:15:28.540
+to a x's appended with the accumulator, right?
+
+165
+00:15:28.540 --> 00:15:31.830
+So what kind of theorem can we use there?
+
+166
+00:15:31.830 --> 00:15:33.830
+So we need the theorem that says
+
+167
+00:15:33.830 --> 00:15:46.020
+that x's reverse of some list appended to another list,
+
+168
+00:15:46.020 --> 00:15:51.290
+you can take something from that appended list
+
+169
+00:15:51.290 --> 00:15:53.290
+and put it into the front of the argument to reverse.
+
+170
+00:15:53.290 --> 00:15:56.350
+So here we want to take the a, for example,
+
+171
+00:15:56.350 --> 00:15:59.350
+but we want to take something,
+
+172
+00:15:59.350 --> 00:16:03.660
+we want to take any,
+
+173
+00:16:03.660 --> 00:16:06.950
+we probably want something more general than that.
+
+174
+00:16:06.950 --> 00:16:12.450
+So let's just write the lemma to just explain.
+
+175
+00:16:12.450 --> 00:16:15.450
+So we want to basically have something like reverse
+
+176
+00:16:15.450 --> 00:16:25.260
+that says reverse x's appended with some list,
+
+177
+00:16:25.260 --> 00:16:40.880
+y's equals reverse a with x's appended with y's.
+
+178
+00:16:40.880 --> 00:16:42.880
+So that's what we want to find.
+
+179
+00:16:42.880 --> 00:16:44.880
+So let's try and see if there's something like this
+
+180
+00:16:44.880 --> 00:17:03.070
+in our library.
+
+181
+00:17:03.070 --> 00:17:08.140
+Okay, there's nothing that is exactly like this.
+
+182
+00:17:08.140 --> 00:17:10.140
+So we probably need something more general.
+
+183
+00:17:10.140 --> 00:17:13.140
+So in fact, we can also say that,
+
+184
+00:17:13.140 --> 00:17:15.140
+so here I'm coming up with these things,
+
+185
+00:17:15.140 --> 00:17:18.140
+but this usually probably doesn't be used to this,
+
+186
+00:17:18.140 --> 00:17:21.140
+but you usually would spend some time thinking
+
+187
+00:17:21.140 --> 00:17:25.140
+about a more general version until you find it,
+
+188
+00:17:25.140 --> 00:17:28.140
+until you're able to guess the version.
+
+189
+00:17:28.140 --> 00:17:30.140
+So here, for example, I would say, okay,
+
+190
+00:17:30.140 --> 00:17:33.140
+if we have a z instead instead of the x's,
+
+191
+00:17:33.140 --> 00:17:43.420
+let's see if we have this.
+
+192
+00:17:43.420 --> 00:17:45.420
+Yeah, this also is not there.
+
+193
+00:17:45.420 --> 00:17:47.420
+So let me see if auto can do it for us.
+
+194
+00:17:47.420 --> 00:17:49.420
+Yeah, auto can do it.
+
+195
+00:17:49.420 --> 00:17:51.420
+So there must be something that implies this,
+
+196
+00:17:51.420 --> 00:17:53.420
+but I don't know what it is.
+
+197
+00:17:53.420 --> 00:18:00.260
+But you basically would keep...
+
+198
+00:18:00.260 --> 00:18:02.420
+So there's this hole actually.
+
+199
+00:18:02.420 --> 00:18:07.790
+So if you have an x's like this,
+
+200
+00:18:07.790 --> 00:18:13.180
+appended to that.
+
+201
+00:18:13.180 --> 00:18:24.980
+Yeah, I think we will have to reverse this.
+
+202
+00:18:24.980 --> 00:18:42.900
+So what is the limit if auto used to prove this?
+
+203
+00:18:42.900 --> 00:18:51.180
+Oh yeah, so auto probably just...
+
+204
+00:18:51.180 --> 00:18:52.180
+Now I understand.
+
+205
+00:18:52.180 --> 00:19:00.200
+Auto can get this actually by just substituting
+
+206
+00:19:00.200 --> 00:19:07.080
+the definition of reverse, the defining equations of reverse.
+
+207
+00:19:07.080 --> 00:19:11.080
+So look here, so if we substitute this,
+
+208
+00:19:11.080 --> 00:19:16.780
+reverse a const x's and do that,
+
+209
+00:19:16.780 --> 00:19:18.780
+it will give us...
+
+210
+00:19:18.780 --> 00:19:21.780
+It will put this a in the end, right?
+
+211
+00:19:21.780 --> 00:19:26.320
+And then, so let's just do that.
+
+212
+00:19:26.320 --> 00:19:27.320
+That's the first step.
+
+213
+00:19:27.320 --> 00:19:44.020
+So this is equal to a,
+
+214
+00:19:44.020 --> 00:19:57.010
+which was rewrite the...
+
+215
+00:19:57.010 --> 00:20:03.560
+No, sorry, I'm going in reverse here.
+
+216
+00:20:03.560 --> 00:20:06.560
+So here, I'm going in reverse.
+
+217
+00:20:06.560 --> 00:20:09.580
+Let me just...
+
+218
+00:20:09.580 --> 00:20:11.580
+Yeah, so here I want to...
+
+219
+00:20:11.580 --> 00:20:12.580
+Okay, I'm going in reverse.
+
+220
+00:20:12.580 --> 00:20:16.580
+So here we have the result of reverse a hash x's
+
+221
+00:20:16.580 --> 00:20:20.860
+already simplified to the most simple form,
+
+222
+00:20:20.860 --> 00:20:22.860
+which is the a is completely extracted outside
+
+223
+00:20:22.860 --> 00:20:24.860
+and then added to the ACC.
+
+224
+00:20:24.860 --> 00:20:28.430
+So I want to firstly show that this is the same as that.
+
+225
+00:20:28.430 --> 00:20:35.090
+And this is...
+
+226
+00:20:35.090 --> 00:20:40.300
+This should follow from the associativity of append
+
+227
+00:20:40.300 --> 00:20:43.930
+because...
+
+228
+00:20:43.930 --> 00:20:46.930
+Okay, let's just do this even in a more elementary way.
+
+229
+00:20:46.930 --> 00:20:50.060
+So we have reverse x's like that.
+
+230
+00:20:50.060 --> 00:20:58.110
+And then we just say this is...
+
+231
+00:20:58.110 --> 00:21:01.110
+So what I'm doing here is just showing that a const accumulator
+
+232
+00:21:01.110 --> 00:21:03.110
+is the same as the singleton list a,
+
+233
+00:21:03.110 --> 00:21:05.110
+appended accumulator, right?
+
+234
+00:21:05.110 --> 00:21:07.720
+This is a very simple step.
+
+235
+00:21:07.720 --> 00:21:18.750
+It should follow from a theorem that talks about
+
+236
+00:21:18.750 --> 00:21:25.180
+appending a singleton any list.
+
+237
+00:21:25.180 --> 00:21:27.180
+So it should be...
+
+238
+00:21:27.180 --> 00:21:41.140
+Yeah, it should...
+
+239
+00:21:41.140 --> 00:21:42.140
+No, it's not that.
+
+240
+00:21:42.140 --> 00:21:43.140
+It's not that.
+
+241
+00:21:43.140 --> 00:21:46.140
+It should follow from the definition of append also.
+
+242
+00:21:46.140 --> 00:21:50.140
+So substitution append since...
+
+243
+00:21:50.140 --> 00:21:53.740
+So here we have a const empty list
+
+244
+00:21:53.740 --> 00:21:57.740
+and appended...
+
+245
+00:21:57.740 --> 00:22:02.000
+So this appended
+
+246
+00:22:02.000 --> 00:22:07.960
+with accumulator is the same as
+
+247
+00:22:07.960 --> 00:22:12.280
+a const the empty list appended with accumulator.
+
+248
+00:22:12.280 --> 00:22:19.370
+And then we want to say that
+
+249
+00:22:19.370 --> 00:22:21.370
+okay, the empty list appended with accumulator
+
+250
+00:22:21.370 --> 00:22:24.530
+is going to be the same as the accumulator.
+
+251
+00:22:24.530 --> 00:22:29.360
+So if we apply again this substitution,
+
+252
+00:22:29.360 --> 00:22:37.380
+we have...
+
+253
+00:22:37.380 --> 00:22:39.930
+So the second substitution is actually...
+
+254
+00:22:39.930 --> 00:22:41.930
+The second defining equation of append.
+
+255
+00:22:41.930 --> 00:22:45.090
+So let's just see append simps.
+
+256
+00:22:45.090 --> 00:22:47.700
+We'll see what we're doing here.
+
+257
+00:22:47.700 --> 00:22:50.340
+So append simps is...
+
+258
+00:22:50.340 --> 00:22:52.340
+So for the empty list, appending an empty list
+
+259
+00:22:52.340 --> 00:22:54.340
+with something is the same as the list.
+
+260
+00:22:54.340 --> 00:22:59.430
+And appending a list const like x const something
+
+261
+00:22:59.430 --> 00:23:03.460
+is going to be x const that thing
+
+262
+00:23:03.460 --> 00:23:05.460
+appended to the other list.
+
+263
+00:23:05.460 --> 00:23:07.460
+So here, look at how the parentheses are.
+
+264
+00:23:07.460 --> 00:23:09.460
+Like here, if you want to read this right-hand side,
+
+265
+00:23:09.460 --> 00:23:11.460
+you should put a left bracket here
+
+266
+00:23:11.460 --> 00:23:13.660
+and a right bracket here, right?
+
+267
+00:23:13.660 --> 00:23:14.850
+Okay.
+
+268
+00:23:14.850 --> 00:23:17.360
+So that's the first step.
+
+269
+00:23:17.360 --> 00:23:23.720
+And then we want to say...
+
+270
+00:23:23.720 --> 00:23:26.720
+Okay, I want to restart from the right-hand side here.
+
+271
+00:23:26.720 --> 00:23:35.150
+From...
+
+272
+00:23:35.150 --> 00:23:40.170
+And then say...
+
+273
+00:23:40.170 --> 00:23:43.300
+I want to say that this is the same.
+
+274
+00:23:43.300 --> 00:23:48.440
+All I'm doing here is just
+
+275
+00:23:48.440 --> 00:23:50.440
+rearranging the parentheses.
+
+276
+00:23:50.440 --> 00:23:53.440
+And this is only the associativity of append.
+
+277
+00:23:53.440 --> 00:23:58.660
+They can look for that, but it's the same
+
+278
+00:23:58.660 --> 00:24:00.660
+as looking of anything else, okay?
+
+279
+00:24:00.660 --> 00:24:03.660
+And then lastly, we want to say that
+
+280
+00:24:03.660 --> 00:24:06.870
+this is...
+
+281
+00:24:06.870 --> 00:24:13.210
+This is exactly the same as
+
+282
+00:24:13.210 --> 00:24:22.900
+reverse a on x's.
+
+283
+00:24:22.900 --> 00:24:27.190
+That just follows from reverse definition.
+
+284
+00:24:27.190 --> 00:24:29.190
+Or reverse simps, right?
+
+285
+00:24:29.190 --> 00:24:30.380
+Remember that?
+
+286
+00:24:30.380 --> 00:24:32.380
+So here we have that definition.
+
+287
+00:24:32.380 --> 00:24:34.380
+So this is the same as that.
+
+288
+00:24:34.380 --> 00:24:37.380
+So if we substitute the definition,
+
+289
+00:24:37.380 --> 00:24:48.860
+second equation definition,
+
+290
+00:24:48.860 --> 00:24:51.860
+we rewrite this,
+
+291
+00:24:51.860 --> 00:24:53.860
+and it will match exactly the left-hand side.
+
+292
+00:24:53.860 --> 00:24:59.200
+And lastly, okay,
+
+293
+00:24:59.200 --> 00:25:01.200
+so now we have done basically the proof.
+
+294
+00:25:01.200 --> 00:25:02.200
+So this is the left-hand side
+
+295
+00:25:02.200 --> 00:25:03.200
+and this is the right-hand side.
+
+296
+00:25:03.200 --> 00:25:05.200
+So I can just call these theorems
+
+297
+00:25:05.200 --> 00:25:12.620
+1, 2, 3, etc.
+
+298
+00:25:12.620 --> 00:25:16.390
+And then substitute all of them in the goal.
+
+299
+00:25:16.390 --> 00:25:18.390
+Or the right way to do this,
+
+300
+00:25:18.390 --> 00:25:20.390
+the shorthand way in Isabelle to do this
+
+301
+00:25:20.390 --> 00:25:22.390
+is to actually tell Isabelle that
+
+302
+00:25:22.390 --> 00:25:26.390
+this is a chain of equalities that I have been intended.
+
+303
+00:25:26.390 --> 00:25:28.620
+So you can just say this is equal to that.
+
+304
+00:25:28.620 --> 00:25:33.860
+And also have...
+
+305
+00:25:33.860 --> 00:25:39.590
+So here you keep carrying with you the right-hand sides.
+
+306
+00:25:39.590 --> 00:25:44.230
+Actually, the first one has to be written, of course, fully,
+
+307
+00:25:44.230 --> 00:25:47.230
+because you have to write every term at least once.
+
+308
+00:25:47.230 --> 00:25:49.230
+So you write this into that
+
+309
+00:25:49.230 --> 00:25:51.230
+and then I want to rewrite that again.
+
+310
+00:25:51.230 --> 00:25:52.230
+So we just write the dots here
+
+311
+00:25:52.230 --> 00:25:54.230
+and then it knows that we refer to the left-hand side
+
+312
+00:25:54.230 --> 00:25:58.260
+of the previous equation and so on and so forth.
+
+313
+00:25:58.260 --> 00:26:01.260
+So this removes all the redundancies that we have.
+
+314
+00:26:01.260 --> 00:26:12.000
+We have that as well.
+
+315
+00:26:12.000 --> 00:26:18.690
+And then also have...
+
+316
+00:26:18.690 --> 00:26:26.980
+So no, so this is actually finally had the goal,
+
+317
+00:26:26.980 --> 00:26:30.300
+which is just that the left-hand side
+
+318
+00:26:30.300 --> 00:26:35.190
+is the same as the right-hand side.
+
+319
+00:26:35.190 --> 00:26:41.460
+So let's say we have that.
+
+320
+00:26:41.460 --> 00:26:52.040
+It's just a dot because the previous chain of equations,
+
+321
+00:26:52.040 --> 00:26:54.040
+like Isabelle automatically says,
+
+322
+00:26:54.040 --> 00:26:57.040
+like contracts all the intermediate steps
+
+323
+00:26:57.040 --> 00:26:59.040
+and as long as you're adding these equations,
+
+324
+00:26:59.040 --> 00:27:01.070
+then when you say finally,
+
+325
+00:27:01.070 --> 00:27:03.070
+it just concludes that you may...
+
+326
+00:27:03.070 --> 00:27:06.070
+It gives you the theorem that the fact that this
+
+327
+00:27:06.070 --> 00:27:08.070
+is equal to the left-hand side of the first
+
+328
+00:27:08.070 --> 00:27:10.070
+equality is the same as the right-hand side
+
+329
+00:27:10.070 --> 00:27:11.070
+of the last equality.
+
+330
+00:27:11.070 --> 00:27:12.460
+So that's...
+
+331
+00:27:12.460 --> 00:27:13.460
+So we have the...
+
+332
+00:27:13.460 --> 00:27:14.460
+From that, we have this.
+
+333
+00:27:14.460 --> 00:27:18.620
+And then I can just call this one
+
+334
+00:27:18.620 --> 00:27:23.130
+and then say using one, we have the case
+
+335
+00:27:23.130 --> 00:27:25.130
+or we can also just...
+
+336
+00:27:25.130 --> 00:27:27.130
+Instead of calling this a name,
+
+337
+00:27:27.130 --> 00:27:30.130
+you can just say then showcase
+
+338
+00:27:30.130 --> 00:27:33.190
+and then it's the same exactly as saying using one
+
+339
+00:27:33.190 --> 00:27:35.190
+and see it's the same as using...
+
+340
+00:27:35.190 --> 00:27:37.190
+Calling this as a name and then using it here.
+
+341
+00:27:37.190 --> 00:27:43.980
+Okay, so that's the first lemma.
+
+342
+00:27:43.980 --> 00:27:45.980
+And then now this lemma.
+
+343
+00:27:45.980 --> 00:27:49.530
+So here I'm going to do, in fact,
+
+344
+00:27:49.530 --> 00:27:53.530
+an applause script directly at the proof of the theorem.
+
+345
+00:27:53.530 --> 00:27:56.980
+So I'll just call this reverse,
+
+346
+00:27:56.980 --> 00:28:01.860
+you know, auxiliary, reverse.
+
+347
+00:28:01.860 --> 00:28:07.040
+So the recursive is the other one.
+
+348
+00:28:07.040 --> 00:28:08.620
+And then...
+
+349
+00:28:08.620 --> 00:28:14.330
+Sorry.
+
+350
+00:28:14.330 --> 00:28:22.340
+And then you say using this
+
+351
+00:28:22.340 --> 00:28:25.550
+and then you say by auto,
+
+352
+00:28:25.550 --> 00:28:27.550
+it doesn't work.
+
+353
+00:28:27.550 --> 00:28:29.550
+Why is it not working?
+
+354
+00:28:29.550 --> 00:28:38.070
+So let me just unfold the definition
+
+355
+00:28:38.070 --> 00:28:47.250
+of inverse PR,
+
+356
+00:28:47.250 --> 00:28:50.920
+so reverse auxiliary equals access.
+
+357
+00:28:50.920 --> 00:28:52.920
+And then we have this theorem.
+
+358
+00:28:52.920 --> 00:28:55.920
+So we just want to instantiate the accumulator
+
+359
+00:28:55.920 --> 00:28:57.920
+with the empty list.
+
+360
+00:28:57.920 --> 00:29:05.030
+So I would just say apply,
+
+361
+00:29:05.030 --> 00:29:08.500
+substitute by that.
+
+362
+00:29:08.500 --> 00:29:11.690
+And then we have reverse access.
+
+363
+00:29:11.690 --> 00:29:14.690
+Appended with empty list is the same as reverse access.
+
+364
+00:29:14.690 --> 00:29:19.010
+And then there is a lemma, I think.
+
+365
+00:29:19.010 --> 00:29:20.620
+Try to find it.
+
+366
+00:29:20.620 --> 00:29:27.460
+Appended with the empty list is the same as itself.
+
+367
+00:29:27.460 --> 00:29:31.420
+So I would just say append nil to what is called.
+
+368
+00:29:31.420 --> 00:29:36.110
+So here we can say apply,
+
+369
+00:29:36.110 --> 00:29:41.800
+substitution, append.
+
+370
+00:29:41.800 --> 00:29:45.150
+And we're done.
+
+371
+00:29:45.150 --> 00:29:50.110
+So here, first of all,
+
+372
+00:29:50.110 --> 00:29:52.180
+how can we use auto to do this?
+
+373
+00:29:52.180 --> 00:29:55.040
+So we need...
+
+374
+00:29:55.040 --> 00:29:56.040
+We can just...
+
+375
+00:29:56.040 --> 00:30:00.740
+Okay, I'll just apply and say apply auto
+
+376
+00:30:00.740 --> 00:30:02.740
+and see what it tells us.
+
+377
+00:30:02.740 --> 00:30:04.740
+So it actually gave us this.
+
+378
+00:30:04.740 --> 00:30:07.740
+So we still have to prove that reverse-circuit
+
+379
+00:30:07.740 --> 00:30:10.800
+is an auxiliary, access, empty is the same as that
+
+380
+00:30:10.800 --> 00:30:12.800
+because it doesn't know
+
+381
+00:30:12.800 --> 00:30:16.090
+that we have proved this lemma there.
+
+382
+00:30:16.090 --> 00:30:19.660
+So we can give this lemma to auto
+
+383
+00:30:19.660 --> 00:30:21.660
+as a substitution rule,
+
+384
+00:30:21.660 --> 00:30:23.660
+because we're using it for substitution
+
+385
+00:30:23.660 --> 00:30:26.430
+in our manual proof.
+
+386
+00:30:26.430 --> 00:30:31.360
+So we can give this lemma to auto
+
+387
+00:30:31.360 --> 00:30:35.540
+here, and that finishes the goal.
+
+388
+00:30:35.540 --> 00:30:37.540
+Why didn't we need to give it
+
+389
+00:30:37.540 --> 00:30:39.540
+this lemma and that lemma as well?
+
+390
+00:30:39.540 --> 00:30:41.540
+Well, because those are the two lemmas.
+
+391
+00:30:41.540 --> 00:30:43.540
+This one is registered with auto
+
+392
+00:30:43.540 --> 00:30:45.540
+because this is the definition of the function
+
+393
+00:30:45.540 --> 00:30:47.540
+and definitions of these recursive functions
+
+394
+00:30:47.540 --> 00:30:49.540
+which are defined using the command fund.
+
+395
+00:30:49.540 --> 00:30:51.540
+Always registered with auto as simplification rules
+
+396
+00:30:51.540 --> 00:30:52.540
+or substitution rules.
+
+397
+00:30:52.540 --> 00:30:56.540
+And this one is added to it in the Isabelle Library.
+
+398
+00:30:56.540 --> 00:30:58.540
+So we can go there.
+
+399
+00:30:58.540 --> 00:31:01.240
+Well, actually, this one is not,
+
+400
+00:31:01.240 --> 00:31:05.240
+but probably another one with the same name is added
+
+401
+00:31:05.240 --> 00:31:08.400
+to the Isabelle...
+
+402
+00:31:08.400 --> 00:31:09.400
+to the auto...
+
+403
+00:31:09.400 --> 00:31:12.400
+to the substitution theorems that auto knows, right?
+
+404
+00:31:12.400 --> 00:31:15.690
+And then we have just buy auto
+
+405
+00:31:15.690 --> 00:31:16.690
+and the proof is done.
+
+406
+00:31:16.690 --> 00:31:17.880
+So that's all.
+
+407
+00:31:17.880 --> 00:31:19.880
+Thank you for listening.

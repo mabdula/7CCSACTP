@@ -1,0 +1,94 @@
+WEBVTT
+
+
+1
+00:00:01.300 --> 00:00:12.460
+So, let's now define these datatypes in Isabelle as a demo again. So, I will start with the natural numbers.
+
+2
+00:00:12.460 --> 00:00:20.460
+I will just say a datatype. The notation here is very similar to what I used in the virtual backboard.
+
+3
+00:00:20.460 --> 00:00:33.870
+So, a natural number is either a zero, which is the first constructor, or a successor, which is the second constructor, and that takes another natural number, right?
+
+4
+00:00:33.870 --> 00:00:55.720
+So, then now we have a term. So, for example, a zero can be represented like that. A two can be represented like that, and so on and so forth.
+
+5
+00:00:55.720 --> 00:01:08.450
+A second datatype is lists, which we discussed also. So, this is a list that takes an A, alpha. It has two constructors as well.
+
+6
+00:01:08.450 --> 00:01:20.250
+So, either nil or successor. I will just call this cons, but just double S so that we don't confuse it with the list that is defined by default in Isabelle.
+
+7
+00:01:20.250 --> 00:01:35.350
+Isabelle, again, takes an element and another list. And again, if you want to represent a list that is an empty list, then we just say nil.
+
+8
+00:01:35.350 --> 00:01:52.300
+I will just call this also nil with a double L so that it's not confused with the nil, which is defined by default in Isabelle, and then a list that has, for example, two and three in it.
+
+9
+00:01:52.300 --> 00:02:16.590
+So, I will just say cons, and that's cons three, which is consed with the empty list.
+
+10
+00:02:16.590 --> 00:02:28.660
+So, as you can see here, that is the algebraic representation of the alpha list of two elements. Now, let's do the tree, which we did.
+
+11
+00:02:28.660 --> 00:02:48.970
+So, an alpha tree, again, is either a leaf or an internal node that has a left subtree and an element content and a right subtree.
+
+12
+00:02:48.970 --> 00:03:13.100
+And to represent, for example, our example tree from the virtual blackboard, to represent that algebraically here, we just say it's going to be a bit of work, but maybe I'll just represent a tree that has just as root one and two children, two and three.
+
+13
+00:03:13.100 --> 00:03:29.720
+So, I'll just say two nodes, okay, as root is one, okay, and two subtrees, the left one has two in it, so node again, okay?
+
+14
+00:03:29.720 --> 00:03:46.990
+So, the first one has two here, and that doesn't have any children, because it only has one, two and three.
+
+15
+00:03:46.990 --> 00:04:04.700
+The other node, the other subtree has three in it, and so that's a algebraic representation of such a tree.
+
+16
+00:04:04.700 --> 00:04:31.770
+The other tree that we did was, let's copy this one, the other tree is just tree prime, and I will just give it firstly a prime constructor.
+
+17
+00:04:31.770 --> 00:04:44.150
+This is the tree that has all of the data in the leaves. So, here, the leaf takes an element, and the internal node doesn't have content.
+
+18
+00:04:44.150 --> 00:05:03.810
+And then again, we want to represent a tree that has one, two, three in this format, in this new, in this new formalism, we say a node, and then we have, it has two subtrees, for example.
+
+19
+00:05:03.810 --> 00:05:29.550
+And then the first subtree is also a node that has two, one as its children and their leaves, but we need to write each one of them as a leaf.
+
+20
+00:05:29.550 --> 00:05:45.260
+And the second subtree just as a leaf with three. So, I think I made a mistake with that, because we're not priming, we're not doing prime.
+
+21
+00:05:45.260 --> 00:06:09.620
+And now, yeah, because we forgot to add a prime there, so that's all for defining datatypes.
+
+22
+00:06:09.620 --> 00:06:20.620
+Now, in the next video, we'll be talking about how to prove properties about functions that take these arbitrary algebraic datatypes.
+
+23
+00:06:20.620 --> 00:06:22.820
+So, talk to you there.

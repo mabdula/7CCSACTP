@@ -1,0 +1,262 @@
+WEBVTT
+
+
+1
+00:00:00.590 --> 00:00:07.100
+So, as usual, I have a theory file called this induction. I will start a new theory in it.
+
+2
+00:00:07.700 --> 00:00:24.100
+Okay, and
+
+3
+00:00:24.100 --> 00:00:30.540
+if you remember, we had the file, the list, the appending function implemented on our own, but there's also
+
+4
+00:00:31.800 --> 00:00:34.140
+an append
+
+5
+00:00:34.140 --> 00:00:35.380
+function in Isabelle.
+
+6
+00:00:35.380 --> 00:00:39.820
+So this is, these are simps, and as you remember, I told you this is the notation for it.
+
+7
+00:00:39.820 --> 00:00:43.340
+So I'm just going to prove the theorem, the associativity theorem, for that
+
+8
+00:00:44.100 --> 00:00:49.580
+version of the pants, okay? I mean, we already have that theorem in the library, but I will just prove it here, just to show you
+
+9
+00:00:54.010 --> 00:01:00.410
+how to do induction on lists. So we have, so what do we, what did we prove? We had
+
+10
+00:01:02.870 --> 00:01:08.200
+we had associativity, so we did X's, Y's,
+
+11
+00:01:10.200 --> 00:01:12.670
+Z's
+
+12
+00:01:12.670 --> 00:01:16.340
+equals
+
+13
+00:01:16.340 --> 00:01:17.840
+X's,
+
+14
+00:01:17.840 --> 00:01:19.920
+Y's,
+
+15
+00:01:19.920 --> 00:01:21.040
+Z's.
+
+16
+00:01:21.040 --> 00:01:32.130
+Okay, so I will do a proof, as I said, by induction on X's, and then we get
+
+17
+00:01:32.930 --> 00:01:38.140
+the same thing as last time. So we get a proof, a template suggestion.
+
+18
+00:01:38.660 --> 00:01:42.650
+So the base case, if you remember, what was it? So
+
+19
+00:01:43.690 --> 00:01:48.050
+our goal is to prove that this is equal to that. This is the base case, the first case.
+
+20
+00:01:48.050 --> 00:01:51.270
+So I will just take the left-hand side and start our
+
+21
+00:01:56.020 --> 00:02:02.100
+transformation. So that should be equal to I appended with Z's,
+
+22
+00:02:02.660 --> 00:02:09.780
+and I'm going to use the appendsimps, which are the theorems that define, that have the equations defining what append is.
+
+23
+00:02:09.780 --> 00:02:12.260
+So this is the empty case, and this is the other case.
+
+24
+00:02:13.300 --> 00:02:26.090
+So let me do that. Apply substitution appendsimps, so we already
+
+25
+00:02:27.450 --> 00:02:31.370
+have that. Okay, so we have the first equation, and then
+
+26
+00:02:32.360 --> 00:02:41.450
+from that we say also have that this is equal
+
+27
+00:02:43.020 --> 00:02:56.040
+to, again, I'm going to apply appendsimps, but this time it's going to apply,
+
+28
+00:02:57.000 --> 00:03:02.230
+so the first time appendsimps apply to that application,
+
+29
+00:03:03.110 --> 00:03:08.790
+that call of appends, or that instance of appends use.
+
+30
+00:03:09.430 --> 00:03:13.990
+And then here, if we apply it, it will apply it to this one. Why? Because
+
+31
+00:03:15.750 --> 00:03:24.180
+these rules are only, they only rewrite exactly that. If they look for that pattern or that pattern,
+
+32
+00:03:24.740 --> 00:03:29.860
+and rewrite it. The only occurrence of either one of those patterns on the left-hand side
+
+33
+00:03:29.860 --> 00:03:53.940
+is this one. So we apply subs again, appendsimps, and then finally you can say show case
+
+34
+00:03:58.340 --> 00:04:05.290
+by dot. Okay, and then the second case, we're going to have the step case. So we have the
+
+35
+00:04:05.290 --> 00:04:12.200
+induction hypothesis, so x as it was on the blackboard, and then all what I will do is
+
+36
+00:04:12.200 --> 00:04:17.560
+copy the left-hand side of the goal. So I have to move the case here to see what the actual
+
+37
+00:04:17.560 --> 00:04:21.800
+goal is. So that's our goal. So copy the left-hand side and start our transformations.
+
+38
+00:04:22.120 --> 00:04:36.810
+So have that equals what we said last time. What's that? So before I actually do that,
+
+39
+00:04:36.810 --> 00:04:44.280
+let me just show you. So the step case here, let me just show you that a bit slowly maybe.
+
+40
+00:04:44.280 --> 00:04:51.940
+So the step case here has two things. So you have using this, this induction hypothesis,
+
+41
+00:04:51.940 --> 00:04:55.140
+these are our assumptions, and this is our goal in it. So as you can see,
+
+42
+00:04:55.860 --> 00:05:03.060
+in our pen and paper proof, the induction hypothesis, the step case has an x
+
+43
+00:05:04.780 --> 00:05:08.780
+and then appended to an x's or constant to an x's. But here we have an a, but we can change that
+
+44
+00:05:09.340 --> 00:05:17.030
+by just changing this. So then you have the same thing matching to our pen and paper proof,
+
+45
+00:05:17.030 --> 00:05:24.790
+or blackboard proof. So you have an x constant x's and then appended to y's, appended to z's.
+
+46
+00:05:25.860 --> 00:06:00.580
+Okay, so let's do the proof. So we have, so copy the, you know, the parentheses belong like that
+
+47
+00:06:00.580 --> 00:06:05.700
+because that's, so we have, we moved this just outside there, this x just outside there. So
+
+48
+00:06:06.500 --> 00:06:14.020
+it should be appended or a constant to the result of the appending of both of those x's and y's.
+
+49
+00:06:16.230 --> 00:06:48.360
+So yeah, that, so yes, that is exactly what we want. So then we apply a substitution again,
+
+50
+00:06:49.000 --> 00:07:07.220
+appendSims, we have what we want, and then we say again, also have, so this time,
+
+51
+00:07:07.220 --> 00:07:13.320
+so what was the transformation this time? We again want to get this x outside by applying the
+
+52
+00:07:13.320 --> 00:07:32.970
+appendSims to this invocation of append to the middle one. So let's copy that. So this time it's
+
+53
+00:07:32.970 --> 00:07:56.220
+completely outside because we applied it to this invocation of append. So then we can apply here
+
+54
+00:07:57.510 --> 00:08:06.740
+the induction hypothesis. So we say x comes with that whole thing. So instead of that,
+
+55
+00:08:06.820 --> 00:08:29.670
+it would just be x's and y's appended to z's. Again, appendSims, no, sorry, my induction hypothesis.
+
+56
+00:08:29.670 --> 00:08:33.270
+So remember when we did the induction hypothesis, when we did the induction for
+
+57
+00:08:33.830 --> 00:08:40.870
+numbers, the induction hypothesis was called suck.ih here, it's called cons.ih. So it comes from that.
+
+58
+00:08:42.390 --> 00:08:46.550
+This induction hypothesis, we apply it here, and then the substitution gives us what we want,
+
+59
+00:08:47.510 --> 00:08:58.150
+and then we close that, and then we do the last transformation, which is
+
+60
+00:08:59.610 --> 00:09:07.080
+the right-hand side of our initial goal. So let's just go up there and see what the goal was.
+
+61
+00:09:10.150 --> 00:09:18.870
+So it's not that one, no. Let me just, in order for us to see the goal, we have to go to this
+
+62
+00:09:19.590 --> 00:09:27.590
+case, yep, to this final thing, the whole case here. That's the right-hand side,
+
+63
+00:09:27.590 --> 00:09:36.580
+and then we, the last step in our proof, also have that equals to this, and then again, that
+
+64
+00:09:37.300 --> 00:09:57.700
+we have that from appendSims, and then we say, as usual, finally showcase by that. So that's
+
+65
+00:09:57.700 --> 00:10:02.340
+the proof. That's the first, our first proof by induction on the list, on lists.

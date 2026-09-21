@@ -1,0 +1,391 @@
+1
+00:00:01,780 --> 00:00:11,220
+Hello again, everyone. In this video, okay, so let me just very quickly, as usual, recap the previous video.
+
+2
+00:00:11,220 --> 00:00:34,530
+In the previous video, or previous videos, what we did was introduction to recursion on lists, okay?
+
+3
+00:00:34,530 --> 00:00:43,570
+I won't repeat that again here, but you can, but basically, like I would just say them in one sentence,
+
+4
+00:00:43,570 --> 00:01:05,540
+so intro to Isabelle plus reasoning approaches revision, okay?
+
+5
+00:01:05,540 --> 00:01:27,280
+In this current video, I will be doing recursion on lists, okay?
+
+6
+00:01:27,280 --> 00:01:34,760
+So basically, proving properties about functions on lists, or proving properties about functions on lists,
+
+7
+00:01:34,760 --> 00:01:41,760
+by using a mathematical recursion, but instead of recursion on numbers, like what we did previously, we here we do it on lists.
+
+8
+00:01:41,760 --> 00:01:43,760
+So let me just give the intuition again.
+
+9
+00:01:43,760 --> 00:02:09,910
+So recall, not recursion, sorry, mathematical induction on lists, induction on lists, also known as structural induction, okay?
+
+10
+00:02:09,910 --> 00:02:25,590
+So recall induction numbers, natural numbers in particular.
+
+11
+00:02:25,590 --> 00:02:28,720
+So what was the intuition, right?
+
+12
+00:02:28,720 --> 00:02:31,720
+So let me just put that in a proper section.
+
+13
+00:02:31,720 --> 00:02:44,630
+So recall induction of numbers.
+
+14
+00:02:44,630 --> 00:02:47,530
+What did that mean?
+
+15
+00:02:47,530 --> 00:03:08,790
+To prove something holds all numbers, we prove one.
+
+16
+00:03:08,790 --> 00:03:15,060
+It holds for zero.
+
+17
+00:03:15,060 --> 00:03:22,640
+So if I just, let me just make that clear, yeah, it holds for zero.
+
+18
+00:03:22,640 --> 00:03:52,220
+And if it holds for a number n, then we can show it holds a number n plus one, okay?
+
+19
+00:03:52,220 --> 00:03:54,220
+So let's clarify a few things here.
+
+20
+00:03:54,220 --> 00:04:30,510
+So that was, we call that the base case, and we call that the induction hypothesis, okay?
+
+21
+00:04:30,510 --> 00:04:33,510
+Just, that's all a revision.
+
+22
+00:04:33,510 --> 00:04:40,210
+So now, let's do the same thing.
+
+23
+00:04:40,210 --> 00:04:42,210
+Let's do that a bit more formally.
+
+24
+00:04:42,210 --> 00:04:50,100
+So a bit more formally, or not, before we go to anything formal, let's just recall what that meant.
+
+25
+00:04:50,100 --> 00:04:52,230
+Why was that?
+
+26
+00:04:52,230 --> 00:04:57,900
+What was, what did induction mean?
+
+27
+00:04:57,900 --> 00:05:01,380
+Or basically, not what did induction mean.
+
+28
+00:05:01,380 --> 00:05:08,570
+Why did proving those two things, why did proving those two goals mean that the property holds for any n?
+
+29
+00:05:08,570 --> 00:05:31,990
+So why does proving those two goals mean that property holds for any n?
+
+30
+00:05:31,990 --> 00:05:44,850
+Intuition was that if we, like, if we prove the, if we prove, if we do this proof by mathematical induction,
+
+31
+00:05:44,850 --> 00:05:48,850
+by mathematical induction and prove the base case and the step case, we can do the following.
+
+32
+00:05:48,850 --> 00:05:53,850
+For any given n, we have basically an algorithm for n, we can prove the following.
+
+33
+00:05:53,850 --> 00:06:12,760
+So for any n, we show that, that first, from the base case, we show that p holds for zero,
+
+34
+00:06:12,760 --> 00:06:16,760
+and from the step case, we apply it once, and we get p holds for one,
+
+35
+00:06:16,760 --> 00:06:23,690
+and then p holds for, the property holds for two until we reach n.
+
+36
+00:06:23,690 --> 00:06:36,020
+So here, this is the base, and then for each one of those, we use the step case until we reach n.
+
+37
+00:06:36,020 --> 00:06:54,070
+So now, we do that a bit more formally, so, or not, still not very formally, but slightly more formally.
+
+38
+00:06:54,070 --> 00:07:22,140
+This works because any net is made of finite locations of suck, or additions of one.
+
+39
+00:07:22,140 --> 00:07:37,120
+So that's why you can, you have a finite number of these jumps, and accordingly, you can, you can use the proof that you did here
+
+40
+00:07:37,120 --> 00:07:43,120
+for induction to prove that the property holds for any n given n in a finite amount of time.
+
+41
+00:07:43,120 --> 00:07:52,310
+So now, the analogy for lists.
+
+42
+00:07:52,310 --> 00:08:07,910
+So we have, or for finite lists, let's be more precise, so that this is clear,
+
+43
+00:08:07,910 --> 00:08:45,460
+we have that any list can be constructed a finite number of cons operator, that operation, that is to say,
+
+44
+00:08:45,460 --> 00:08:57,780
+any list will be x1, cons x2, cons xn, cons the empty list.
+
+45
+00:08:57,780 --> 00:09:13,690
+So from that, the analogy, from this, we can get an analogous induction principle, or way of mathematical induction, we can as follows.
+
+46
+00:09:13,690 --> 00:09:33,970
+So to prove a property holds for any list x's, we have to do, we have two goals.
+
+47
+00:09:33,970 --> 00:10:13,580
+The first goal is to show the property holds the empty list, and the second goal, if the property holds for a given list x's,
+
+48
+00:10:13,580 --> 00:10:33,700
+then we can show it holds x, cons x's for any given x.
+
+49
+00:10:33,700 --> 00:10:45,590
+So if you have a property for x's, that holds for x's, then you can show that for any given x, you can show that the property holds for x, cons x's.
+
+50
+00:10:46,590 --> 00:11:01,420
+So that basically is the foundations of that. So let me just write that in a briefer way, actually, because I think it will be useful for us later on.
+
+51
+00:11:01,420 --> 00:11:20,790
+So let me just try before I go into an example, as usual, I'll just write one more thing, which is the formal induction principle.
+
+52
+00:11:20,790 --> 00:11:39,470
+So for natural numbers, that statement here, that is an induction principle, basically tells you what does it mean to do and mathematical induction on numbers.
+
+53
+00:11:39,470 --> 00:11:52,560
+So that can be formally represented as follows, or just a new notation. So if you want to prove that a property holds for any n, then you can do that if you prove two things.
+
+54
+00:11:52,560 --> 00:12:16,540
+If you first know that the property holds for zero, and if you can show that for any x, or let me just write it normally, that for any, I'm sorry, if you can show that if the property holds for an m,
+
+55
+00:12:16,540 --> 00:12:28,300
+for example, I'll just use a different number there. If I have the property holding for m, then I can show that it holds for m plus one.
+
+56
+00:12:28,300 --> 00:12:43,220
+And this is the induction hypothesis, and this is base case, and this is step case.
+
+57
+00:12:43,470 --> 00:13:06,860
+For lists, the notation is different. So the same idea is there. So if you want to show that some property holds for any list x's, you can show that you can firstly show that it holds for the empty list, and then show that for any x, if you can, if you,
+
+58
+00:13:06,860 --> 00:13:32,420
+I'm sorry, show that if you have the property for any, let's say, list y's, then you can construct or show that the property holds for y's with another element y, an arbitrary element y, an arbitrary element y added to the front of the list y's.
+
+59
+00:13:32,420 --> 00:13:44,690
+So here, again, this is the step case, and this is the base case, and this is induction hypothesis.
+
+60
+00:13:44,690 --> 00:14:03,380
+So now, let's do an example. So an example of proof by mathematical induction lists. So let's do the following.
+
+61
+00:14:03,380 --> 00:14:22,060
+So prove, remember the function append that we have done earlier. So let's prove that append is associative.
+
+62
+00:14:22,060 --> 00:14:38,300
+So first of all, let me remind you of append. So consider the function append, which takes two lists and gives you the list, the list as follows.
+
+63
+00:14:38,300 --> 00:15:06,800
+So it's defined as follows. So append is defined recursively of the empty list, and y's equals y's and append of x and x's and y's equals x appended to append of x's and y's.
+
+64
+00:15:06,800 --> 00:15:19,350
+OK, so that was append. So consider that function, right? Let's prove that it's associative. So what does that mean? Prove that.
+
+65
+00:15:19,350 --> 00:15:39,880
+OK, first, before I say that as well, let's just let x's and y's denote that we are pending x's and y's, so that's easier for us.
+
+66
+00:15:39,880 --> 00:15:54,130
+Also, this is the Isabelle notation for append. Appended is associative. What does that mean?
+
+67
+00:15:54,130 --> 00:16:23,410
+What that means is that x's appended with y's, appended with z's equals x's appended with y's, appended with z's, but with a different arrangement of the parentheses.
+
+68
+00:16:23,410 --> 00:16:34,950
+And let me just slowly or quickly describe what that means. So here in this case, what you do is the following. You first evaluate that and that appending.
+
+69
+00:16:34,950 --> 00:16:39,950
+So you're given two lists, you append the first two first, and then the result, you append it to the last. That's the meaning of this.
+
+70
+00:16:39,950 --> 00:16:58,800
+The meaning of that is that you first append the first, the meaning of the right hand side is that you first append that based on the order of parentheses.
+
+71
+00:16:58,800 --> 00:17:04,800
+So you first append the y's and z's, and the thing that comes out of that, you append it to x's. So this is associativity.
+
+72
+00:17:06,220 --> 00:17:33,780
+So IE is associated. So the proof is by induction, as you might have expected, on a list, and I'll just choose x's.
+
+73
+00:17:33,780 --> 00:18:23,860
+So proof by induction and x's. So the base case where x's is empty, the goal is to show that empty appended with y's, appended with z's is the same as empty appended with y's, appended with z's, but with this arrangement.
+
+74
+00:18:24,860 --> 00:18:36,080
+So that is going to be simple, because we simply will start with the left hand side, and do substitutions, because it's an equality here.
+
+75
+00:18:36,080 --> 00:18:59,840
+So empty at y's at z's equals y's appended with z's by substituting the first equation there, and that will be, remember when you define something like that, we just call it appendSimps.
+
+76
+00:18:59,840 --> 00:19:33,680
+So I'll just also use that here, so by substituting appendSimps, and then I'll just show that this is equal to the right hand side, y's and z's, by again, the same, by substituting appendSimps.
+
+77
+00:19:33,680 --> 00:19:59,440
+So that is the base case. In the step case, as usual, we have two things. Firstly, this is when we have assumptions. So assumptions, what is our assumption here? It's just the only assumption that we have here is the induction hypothesis.
+
+78
+00:19:59,440 --> 00:20:23,310
+So what does that mean? What does that say? It says that we already know that x is appended with y's, appended with z's, equals x is appended with y's, appended with z's, but with the different arrangement of the parentheses.
+
+79
+00:20:23,310 --> 00:20:45,720
+And the goal is to show that x comes x's, notice how I'm putting the parentheses, because I don't want this x to be misinterpreted to be appended to the result of x's and y's appended together.
+
+80
+00:20:45,720 --> 00:21:12,620
+So here we just have the step case, so we have x appended with x's, and then appended with y's, and then appended with z's, equals x appended with x's, appended with y's, appended with z's like that.
+
+81
+00:21:12,620 --> 00:21:37,910
+So how do we prove that? So let's start again some substitutions and see where it takes us. So if we start from the left hand side, and then so if we do a substitution of the left hand side, we have that this is going to take us to the left hand side.
+
+82
+00:21:37,910 --> 00:22:00,080
+This is going to take us to the second equation there, because this is an empty list as an argument to this first append. So we can unfold the append seams on that call to append outside, so you'd have x appended with x's and z's and y's, so just like this.
+
+83
+00:22:00,080 --> 00:22:28,910
+And then let's see, maybe let's just plan it all now, so you do that, and then you have x outside there, and then you would use the induction, no not yet, and then you would need to still get x one more time outside, right, by substituting again the definition of append,
+
+84
+00:22:28,910 --> 00:22:49,390
+but this time is not for this call of append, it's for this one, so you'd have x outside once and then twice, and then you can do the induction hypothesis. So let's just try and do it, because it will be easier if you just see how it is, instead of saying it theoretically like that.
+
+85
+00:22:49,390 --> 00:23:24,070
+So we start with the left hand side as usual, so we have x and x's and y's and z's, so that would be equal to x appended with x's and y's, and the whole thing would be appended with z's.
+
+86
+00:23:24,070 --> 00:23:35,580
+So that's, like I'm not going to write what the rule is, because all of them is just simply append seams, by substituting append seams.
+
+87
+00:23:35,580 --> 00:23:55,400
+But I will just mark where we're substituting it, so here we're doing this one, and then the next application of append seams will be substituting the definition with this one, so here we have that whole list as an argument,
+
+88
+00:23:55,400 --> 00:24:23,300
+and that second list is the argument, and then you have here x appended to that first argument, so you can also take the x outside another time. So you have x appended with x's and y's, and the whole thing is appended with z's, again by the simps, and that would give us this.
+
+89
+00:24:23,300 --> 00:24:39,340
+Okay, now we can use the induction hypothesis, right, because this, our second argument of cons, this here, starting with x's, ending with z's, matches exactly that.
+
+90
+00:24:39,340 --> 00:24:56,680
+So if we just replace this with that, we will have exactly our right hand side, so let's do that. So by the induction hypothesis, so let me just write this by append simps.
+
+91
+00:24:56,680 --> 00:25:27,680
+Okay, and then here we have by the induction hypothesis, we would have x cons, x's, okay, this would be by the induction, and what does that mean? We still have one more step.
+
+92
+00:25:27,680 --> 00:25:39,220
+We still want to get this x in parenthesis with this x's, because that's exactly our goal. Let me just search for our goal. That is the goal there, right?
+
+93
+00:25:39,220 --> 00:26:02,370
+But we can do that again by applying append simps to this application of append, right, because you apply it the other way around.
+
+94
+00:26:02,370 --> 00:26:23,010
+So here you know that the append function, given x cons with the x's, you take the x outside and then you append the two remaining lists, but you can also apply the substitution within the other way around.
+
+95
+00:26:23,010 --> 00:26:33,010
+And if you have x outside and then appending two lists, you can take that x inside and cons it with the first list. So that's what I did there by applying it to this append.
+
+96
+00:26:33,010 --> 00:27:09,200
+So here we can say that x's, cons y's, appends y, appends z, by append simps. Okay, and that proves our goal. So we have done here three steps of rewriting.
+
+97
+00:27:09,200 --> 00:28:22,280
+So let's just clear this space a bit. Okay, I hope that clears the space a bit, but in any case, that's our goal. So it's a bit, it's messing up a bit, but it's, so that's our goal.
+
+98
+00:28:22,280 --> 00:28:28,280
+So now, as usual, I will do that in Isabelle as a demo.

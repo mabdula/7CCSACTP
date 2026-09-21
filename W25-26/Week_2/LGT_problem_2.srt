@@ -1,0 +1,751 @@
+1
+00:00:01,710 --> 00:00:15,260
+Hello, everyone. Today, I'll be solving with you the second question of sheet. I didn't
+
+2
+00:00:15,260 --> 00:00:20,460
+get to fully write the solution. I had a few sorrys in the solution during the tutorial,
+
+3
+00:00:20,460 --> 00:00:39,820
+so I will present the big proof. So we want to prove that multiplication is monotonic,
+
+4
+00:00:39,820 --> 00:01:06,190
+so that if a is equal to b, it's u, that, and d. So as I suggested in the tutorial,
+
+5
+00:01:06,190 --> 00:01:33,300
+we didn't have the type. That's why induction is not working. Now we have the type induction
+
+6
+00:01:33,300 --> 00:01:44,210
+works. So we have the base case where d is 0, and we have the step case. We have an induction
+
+7
+00:01:44,210 --> 00:01:49,090
+hypothesis. We have the same theorem statement applying for d, and you want to prove the
+
+8
+00:01:49,090 --> 00:01:55,090
+conclusion for d plus 1. And we have the two assumptions from our theorem statement applying
+
+9
+00:01:55,090 --> 00:02:05,040
+here to the successor of d. All right, so to finish the proof of the base case,
+
+10
+00:02:05,040 --> 00:02:15,950
+let me start with that one. So what is the base case? The base case is you have a smaller than
+
+11
+00:02:15,950 --> 00:02:20,590
+equal to b, c smaller than equal to 0, and I want to prove that. So the informal proof idea
+
+12
+00:02:20,590 --> 00:02:27,070
+would be, okay, if c is less than or equal to 0, then we can get that c is 0. And if c is 0,
+
+13
+00:02:27,630 --> 00:02:39,820
+then we know that a times c is 0, and b times, sorry, a times c is 0, and we know that 0 is
+
+14
+00:02:39,820 --> 00:02:45,980
+less than or equal to anything, so that would finish our proof. So let's try and do it that way.
+
+15
+00:02:47,710 --> 00:03:24,620
+So firstly, I'll just, as I said, conclude that c is 0. If something is smaller than or equal to 0,
+
+16
+00:03:24,620 --> 00:03:40,000
+then that thing is 0. So let's search for that. So we'll search for 0 that this x. So do we have
+
+17
+00:03:40,000 --> 00:04:07,220
+any theorems that are saying that? Are the results, for example? Is someone where, yeah,
+
+18
+00:04:07,300 --> 00:04:10,420
+so here, for example, this is exactly what we want. So we have an assumption that something
+
+19
+00:04:10,420 --> 00:04:16,400
+is less than or equal to 0, and from that, we conclude that that same variable is 0.
+
+20
+00:04:16,400 --> 00:04:26,640
+So I will take that theorem. So I have uploaded a proof on Keats, but I'm going to, perhaps,
+
+21
+00:04:26,640 --> 00:04:33,330
+do some slightly different steps here just to show you the range of possibilities. So here,
+
+22
+00:04:34,610 --> 00:04:37,970
+in the proof there, I did it with forward reasoning here. I'm doing it with backward
+
+23
+00:04:37,970 --> 00:04:43,970
+reasoning, for example. So here, we have a rule. So we go from the conclusion to the assumption,
+
+24
+00:04:43,970 --> 00:04:48,930
+and then we want to show that c is less than or equal to 0. So we can get that. I will just
+
+25
+00:04:48,930 --> 00:04:54,590
+call these assumptions, I'll call the base case assumptions or premises. I'll just call,
+
+26
+00:04:54,590 --> 00:05:05,870
+I'll get the many names. So I'll just call the base case. The base case assumptions are
+
+27
+00:05:05,870 --> 00:05:11,010
+two assumptions of our theorem, but one of them is for d equals 0. So I'll just take the second
+
+28
+00:05:11,010 --> 00:05:22,860
+one of those assumptions, and that precisely proves our goal. Second one, so you have this one,
+
+29
+00:05:22,860 --> 00:05:30,110
+we're using this one, and then we want to prove that one. So that's the first step.
+
+30
+00:05:32,050 --> 00:05:46,210
+The second step is to show that a times c is 0 because c is 0 itself. So let's find the theorem
+
+31
+00:05:46,210 --> 00:05:58,640
+that says that. If something is multiplied by 0, that thing equals 0. So that is called this.
+
+32
+00:05:59,280 --> 00:06:24,340
+So I'll just say from, so let me just 0. We'll do two substitutions first. I will substitute
+
+33
+00:06:26,740 --> 00:06:32,180
+this equation, equation number one, equality number one. So that would make a times 0,
+
+34
+00:06:33,140 --> 00:06:38,900
+0 for the 0, which is the value of the group. And then I will do a substitution with the theorem
+
+35
+00:06:38,900 --> 00:06:43,940
+that we have found out, and then we have that 0 equals 0. And we of course know that this is
+
+36
+00:06:43,940 --> 00:06:48,940
+trivially true, so we do two dots because this is an equality, and then we have proved it.
+
+37
+00:06:48,940 --> 00:06:52,220
+Now the last theorem we want to, the last thing we want to find out is that
+
+38
+00:06:53,010 --> 00:07:05,660
+a theorem that says that 0 is less than or equal to anything, right? And that is
+
+39
+00:07:05,660 --> 00:07:12,320
+precisely the theorem that we want. So here from that theorem, we want to conclude that
+
+40
+00:07:14,130 --> 00:07:21,200
+a times c is smaller than or equal to b times d. So let me just go here. So first of all,
+
+41
+00:07:22,370 --> 00:07:39,340
+I will substitute this value for a times c that I found out, that I just showed. And then now we have
+
+42
+00:07:47,740 --> 00:07:55,150
+a goal that says 0 is more than or equal to b less than b multiplied by 0. And that holds,
+
+43
+00:07:55,150 --> 00:08:02,030
+because we found that this theorem earlier, which says that 0 is more than or equal to anything.
+
+44
+00:08:02,030 --> 00:08:11,220
+And then if I just do a dot, Isabelle will be able to map this a to b times 0. And that
+
+45
+00:08:11,220 --> 00:08:24,830
+finishes the base case. The step case is slightly more that much, not very involved.
+
+46
+00:08:26,460 --> 00:08:36,130
+So to prove the step case, as I said in the tutorial, we do the following. We do it by
+
+47
+00:08:36,130 --> 00:08:46,800
+considering cases on the value of c. So we consider the case where the value of c equals
+
+48
+00:08:46,800 --> 00:08:57,390
+successor of d. And we consider the case where it's not equal to it. So if it is equal to d,
+
+49
+00:08:57,950 --> 00:09:08,180
+equals successor of d, then we have a separate proof for that case. And for the other case,
+
+50
+00:09:08,180 --> 00:09:25,020
+we also have a separate proof. So let me start with this case for that one. So we basically want
+
+51
+00:09:25,020 --> 00:09:38,340
+to show, here we want to show that a times c is more than or equal to b times successor of d.
+
+52
+00:09:38,340 --> 00:09:42,980
+So what I will do is the following. I'll substitute the value of c from the case
+
+53
+00:09:42,980 --> 00:09:52,260
+assumption that we have. So we have that c equals d. We assume that. So I'll substitute
+
+54
+00:09:52,260 --> 00:10:18,590
+that here. And then we have this. And we have this. And the second step, the next step, is to
+
+55
+00:10:18,590 --> 00:10:25,390
+show that this is less than or equal to that. From our assumptions, I will call this step case.
+
+56
+00:10:29,340 --> 00:10:33,020
+From the second assumption of the step case, we know that a is more than or equal to b.
+
+57
+00:10:33,020 --> 00:10:40,180
+If a is more than or equal to b, we know that a times sum anything will be more than
+
+58
+00:10:40,180 --> 00:10:46,130
+equal to b times anything. So we want to find a theorem that says that if we multiply two numbers,
+
+59
+00:10:49,870 --> 00:10:58,370
+if we have two numbers, let's say x and y, and we know that x is smaller than or equal to y,
+
+60
+00:10:59,250 --> 00:11:07,150
+and we also know that if we know that x is smaller than or equal to y, then we know that
+
+61
+00:11:07,150 --> 00:11:15,280
+x multiplied by something, some constant c, is going to be smaller than or equal to y multiplied
+
+62
+00:11:19,070 --> 00:11:24,510
+for any constant, of course. And that theorem we already have it. So we have here i is more than
+
+63
+00:11:24,510 --> 00:11:30,030
+or equal to j. That implies that i multiplied by any k is smaller than or equal to j multiplied by any k.
+
+64
+00:11:30,030 --> 00:11:42,910
+So that theorem is called nat dot mult l e mono. So let me just get that theorem there.
+
+65
+00:11:43,870 --> 00:11:59,620
+And the assumption that we want to use is step case case. So then now we have a theorem,
+
+66
+00:11:59,620 --> 00:12:03,330
+we have a fact, and we have something that we want to prove in the theorem,
+
+67
+00:12:04,420 --> 00:12:11,790
+and that thing that we want to prove is only an instantiation of the fact. So that finished
+
+68
+00:12:11,790 --> 00:12:17,620
+the first case where c is successively. The second case, which is more complicated,
+
+69
+00:12:18,580 --> 00:12:28,100
+we assume that c is not equal to successor of d. So from that we know,
+
+70
+00:12:29,940 --> 00:12:34,900
+so that tells us a few things. First of all, if c is not equal to d,
+
+71
+00:12:35,780 --> 00:12:40,420
+is not equal to the successor of d, then we have one fact. We know from that that
+
+72
+00:12:42,930 --> 00:12:50,830
+c is either smaller, is either greater than or equal, strictly greater than the successor of d,
+
+73
+00:12:50,910 --> 00:12:59,790
+because it's not equal to it, or the other possibility is that it is strictly smaller
+
+74
+00:12:59,790 --> 00:13:07,020
+than the successor of d. So we want to prove that. So we want to find a fact that says that if some
+
+75
+00:13:07,020 --> 00:13:18,750
+numbers are not equal, then the first number is strictly smaller than the second number
+
+76
+00:13:18,750 --> 00:13:34,270
+or the other round. So let me look up a theorem that says, okay, something is not equal. If
+
+77
+00:13:34,270 --> 00:13:45,810
+something else is strictly smaller than the same thing, one of them is strictly smaller.
+
+78
+00:13:45,810 --> 00:14:04,670
+So let's see what theorems we have there that talk about that. Yes. So this one shows what we want.
+
+79
+00:14:05,230 --> 00:14:15,500
+So this says that whenever you have two numbers not equal, you can substitute that term
+
+80
+00:14:16,700 --> 00:14:21,980
+with saying that the first number is strictly smaller or the second number is strictly smaller
+
+81
+00:14:21,980 --> 00:14:30,560
+than the other one. So let me use that theorem. So how can we use this theorem? So now this is
+
+82
+00:14:30,560 --> 00:14:35,650
+a substitution. So this is because this is an equality, this is not an implication,
+
+83
+00:14:35,650 --> 00:14:44,260
+you can only use that substitution, right? So we want to prove this and we already have that.
+
+84
+00:14:44,260 --> 00:14:49,940
+So how can we do it? We can substitute from the right to the left. So in order for you to use
+
+85
+00:14:49,940 --> 00:14:55,460
+a substitution from the right to the left, you add this word after the substitution rule
+
+86
+00:14:55,460 --> 00:15:00,930
+that you have. You add symmetric and that will reverse the direction of the equality.
+
+87
+00:15:00,930 --> 00:15:05,090
+So now you have the left hand side is that and the right hand side is that. And why did I do that?
+
+88
+00:15:05,090 --> 00:15:10,930
+It's because substitution only works from the left to the right. So now we'll apply
+
+89
+00:15:11,810 --> 00:15:24,350
+the substitution. It turned our goal into this, like it turned from this disjunction into this,
+
+90
+00:15:24,350 --> 00:15:30,190
+into the fact that C is not equal to D. Now we have in our case assumption that C is not equal
+
+91
+00:15:30,270 --> 00:15:42,540
+to D. But so let me just get it here using C not equal successor of D. So now we have this
+
+92
+00:15:43,680 --> 00:15:50,540
+and we want to show that. But I will try and use the dot, but it will not work. You know why?
+
+93
+00:15:50,540 --> 00:15:56,380
+Because the qualities are in the wrong directions. This is C is not equal to
+
+94
+00:15:56,380 --> 00:16:05,700
+suck D and suck D is not equal to C. So you can again reverse the direction of this inequality
+
+95
+00:16:06,900 --> 00:16:13,700
+by using symmetric again, the same keyword. So now we have suck D is not equal to C as your fact,
+
+96
+00:16:13,700 --> 00:16:18,340
+because we changed the order in which we flipped the equality in the fact.
+
+97
+00:16:19,570 --> 00:16:26,290
+And that's what we want to prove. So it works with the dot because they are exactly the same
+
+98
+00:16:26,690 --> 00:16:46,610
+thing. Okay. That's the first step. Now, okay, if I know that, and like now that I know that both
+
+99
+00:16:46,610 --> 00:16:54,160
+of those are, so one of those two cases is true, that adds some information to us. But in fact,
+
+100
+00:16:54,160 --> 00:17:06,370
+we also know something else, which is that C is strictly smaller than successor of D. Why is that?
+
+101
+00:17:06,370 --> 00:17:15,810
+Because from our assumptions in the step case, so the second, the third assumption here,
+
+102
+00:17:15,810 --> 00:17:18,530
+so you have the induction hypothesis first assumption, the second assumption, the second
+
+103
+00:17:18,530 --> 00:17:24,130
+assumption here says that it's smaller than equal to suck D. So B is strictly bigger than
+
+104
+00:17:24,130 --> 00:17:30,610
+successor of D. So we want to derive that it's indeed strictly smaller than successor of D.
+
+105
+00:17:31,170 --> 00:17:42,000
+So we want to find a theorem that says, so we want to, we want to firstly show that it's
+
+106
+00:17:42,000 --> 00:17:54,540
+like from this assumption of the step case, that it is indeed not the case that C is strictly greater
+
+107
+00:17:54,540 --> 00:18:05,520
+than the successor of D. We want to find a theorem basically that says that if something
+
+108
+00:18:06,160 --> 00:18:23,020
+is smaller than or equal, A is smaller than or equal to B, then we know that B is not smaller
+
+109
+00:18:23,020 --> 00:18:33,790
+than or equal to A. That theorem, for example, here, I'll just use this one. So this one
+
+110
+00:18:33,790 --> 00:18:40,340
+assumes if you know that X is smaller than or equal to Y, then you know that X cannot be
+
+111
+00:18:40,340 --> 00:19:03,680
+strictly smaller than Y. Take that theorem of step case. So now we, the step case three,
+
+112
+00:19:03,680 --> 00:19:12,370
+that assumption was the one that says that C is smaller than equal to D. So we can also prove
+
+113
+00:19:12,750 --> 00:19:30,800
+this. This is just forward reasoning. Now the third step would be to conclude, okay, now we
+
+114
+00:19:30,800 --> 00:19:37,200
+have that we have two facts that this or that C is strictly greater than the successor of D
+
+115
+00:19:37,200 --> 00:19:44,320
+or C is strictly smaller than successor of D. That, and we know that C is not strictly greater than
+
+116
+00:19:44,320 --> 00:19:49,360
+successor of D, that from those facts we should be able to conclude that C is strictly smaller
+
+117
+00:19:49,360 --> 00:19:54,180
+than successor of D. So how can we do that? We again need to find a theorem that says that
+
+118
+00:19:55,170 --> 00:20:12,180
+that basically says that if you have A, so what exactly do we have? We have A or B, let's say,
+
+119
+00:20:13,550 --> 00:20:19,790
+and so we have, that's the A and that's the B, and we have the negation of the A,
+
+120
+00:20:19,790 --> 00:20:47,540
+and we want to conclude that the B holds for that. So the negation, we want to conclude
+
+121
+00:20:48,100 --> 00:20:54,050
+that B is true for that, right? So let me just try and see if I can find it like this,
+
+122
+00:20:54,050 --> 00:21:01,860
+otherwise I will find, okay, so this is too difficult to find, so we'll just say,
+
+123
+00:21:02,580 --> 00:21:13,380
+okay, let's just write it B, so we want to put from that A, that B holds. Okay, so we found
+
+124
+00:21:13,380 --> 00:21:21,070
+exactly what we want, so we have some, for any P in Q, if P or Q hold, then we know that not P is
+
+125
+00:21:22,030 --> 00:21:45,810
+not P, then we can conclude that from that Q. Let me just take that, conclude that C is more than
+
+126
+00:21:45,810 --> 00:21:53,680
+equals, strictly smaller than successor of D using this theorem. That theorem has two assumptions,
+
+127
+00:21:53,680 --> 00:22:00,960
+the first assumption is the disjunction, so we can do it this way, and the second assumption is
+
+128
+00:22:01,730 --> 00:22:07,570
+that which we just have here, and then that gives us exactly the conclusion that we want,
+
+129
+00:22:09,170 --> 00:22:25,220
+so here we use a dot, then now the next step is to say, so recall,
+
+130
+00:22:27,410 --> 00:22:30,850
+so when you have a proof of a mathematical induction, what do we actually want?
+
+131
+00:22:30,850 --> 00:22:35,890
+Like the goal is to apply the induction hypothesis as a state in the large group tutorial, so
+
+132
+00:22:37,040 --> 00:22:42,720
+the induction hypothesis has in its assumption, in order for us to use the induction hypothesis
+
+133
+00:22:42,720 --> 00:22:47,600
+here, we have to have, we have to satisfy this assumption and that assumption. The second
+
+134
+00:22:47,600 --> 00:22:54,560
+assumption is that C is more than equal to D, which that should hold in our case now,
+
+135
+00:22:54,560 --> 00:22:58,240
+because we know that C is strictly smaller than D, so if it's strictly smaller than D,
+
+136
+00:22:58,240 --> 00:23:09,390
+then we know that it's smaller than equal to D. So from that we can, so we want to conclude,
+
+137
+00:23:09,470 --> 00:23:16,370
+we want to conclude that we are equal to D, so that we can use the induction hypothesis,
+
+138
+00:23:16,370 --> 00:23:27,120
+so now we want to find a theorem that says that if A is smaller than or equal, strictly smaller
+
+139
+00:23:27,120 --> 00:23:39,500
+than the successor of B, then that A is smaller than or equal to B. So do we have anything like
+
+140
+00:23:39,500 --> 00:23:53,900
+that in the right direction? Yeah, we have this one, we can use this, we have this one,
+
+141
+00:23:53,900 --> 00:23:59,780
+so we can use this. So this one is a substitution, it's gone because it's an equality, as you can see
+
+142
+00:23:59,780 --> 00:24:06,180
+here, it's not an implication, but you can use it. So we want to, so we have this as our goal,
+
+143
+00:24:06,180 --> 00:24:11,300
+I want to transform it into that, and then that we already have from fact number three.
+
+144
+00:24:11,300 --> 00:24:17,860
+So how can we do a substitution from right to left? As I stated earlier, we use symmetric,
+
+145
+00:24:17,860 --> 00:24:25,890
+and that will reverse the direction of the substitution, and then we can just say apply
+
+146
+00:24:26,450 --> 00:24:37,100
+substitution this rule, and then we have this, C is strictly smaller than successor of B,
+
+147
+00:24:37,100 --> 00:24:46,850
+and then you say using three, because that fact we have it already. Okay, so now we have this,
+
+148
+00:24:46,850 --> 00:24:51,540
+so the last step is to apply the induction hypothesis. So how do we apply the induction
+
+149
+00:24:51,540 --> 00:24:58,640
+hypothesis? So what do we want from the induction hypothesis? Let's just see.
+
+150
+00:24:59,280 --> 00:25:05,120
+So induction hypothesis can tell us that we can conclude from it that A times C is more than equal
+
+151
+00:25:05,120 --> 00:25:10,960
+to B times D, and then from that we know that A times C will also be smaller than equal to
+
+152
+00:25:10,960 --> 00:25:23,490
+B times successor of B. So let us firstly conclude that A times C is smaller than or equal to B
+
+153
+00:25:23,490 --> 00:25:38,300
+times D. So I would just say, so suck the IH, which we have renamed all of our
+
+154
+00:25:41,340 --> 00:25:45,420
+step-case assumptions, induction hypothesis and the two other assumptions, step-case.
+
+155
+00:25:45,420 --> 00:25:53,020
+So step-case of one now is induction hypothesis, and now we need two assumptions for it. The first
+
+156
+00:25:53,020 --> 00:26:00,450
+one is that A is smaller than or equal to B, and forward reasoning here, so that is assumption,
+
+157
+00:26:02,700 --> 00:26:11,250
+that is step-case assumption number two. The second thing, which is that C is smaller than
+
+158
+00:26:11,250 --> 00:26:15,170
+or equal to B, we have already proved it in step number four, and now we have our required
+
+159
+00:26:15,170 --> 00:26:25,940
+conclusion. And now the last step is to show that A times C is smaller than or equal to
+
+160
+00:26:25,940 --> 00:26:47,090
+B times successor of B. So here this is what we want, this is the goal that we want,
+
+161
+00:26:47,090 --> 00:26:54,270
+and now we want to find a theorem that says that if A is smaller than or equal to B,
+
+162
+00:26:55,200 --> 00:27:14,900
+then A, anything smaller than or equal to the line by that very same x, and that is called
+
+163
+00:27:14,900 --> 00:27:24,380
+less than or equal to 1. So here I will just this time do backward reasoning just to show you it.
+
+164
+00:27:29,170 --> 00:27:39,090
+So we need, we fact firstly need to show that B times, this is to show that B times D is smaller
+
+165
+00:27:39,090 --> 00:27:52,190
+than or equal to B times successor of D. Here we have the x as the first argument,
+
+166
+00:27:54,020 --> 00:28:05,820
+A is like an argument, because the x is, and the x and x here replaces the B,
+
+167
+00:28:07,140 --> 00:28:17,650
+and the A is the D, and the B is the successor of D. So we now need to show that D is smaller than
+
+168
+00:28:17,650 --> 00:28:25,410
+or equal to the successor of D. So how can we show that? So let's just show that on its own.
+
+169
+00:28:35,280 --> 00:28:45,230
+So let's just find theorems. A theorem says something, anything is smaller than or equal
+
+170
+00:28:45,230 --> 00:28:50,830
+to the successor of itself. Okay, we don't have that. We probably have something that says it's
+
+171
+00:28:50,830 --> 00:29:01,180
+strictly smaller, and that's the right one, yeah. From that we can in fact try to conclude that D
+
+172
+00:29:01,180 --> 00:29:14,400
+is smaller than the successor of D, and then from that we can conclude that D
+
+173
+00:29:15,200 --> 00:29:21,140
+is smaller than or equal to the successor of D, and for that we want a theorem that says if something
+
+174
+00:29:21,140 --> 00:29:54,690
+is smaller, something else, then it's the first theorem. So using that, six, this fact number
+
+175
+00:29:54,690 --> 00:30:09,280
+eight, we have it using seven. Okay, and now we have that B is more than equal to,
+
+176
+00:30:09,840 --> 00:30:16,320
+B times D is more than equal to B times successor of D, and at the same time we have
+
+177
+00:30:16,320 --> 00:30:22,560
+A times C is more than equal to B times D. So from those two facts we want to conclude that
+
+178
+00:30:27,380 --> 00:30:51,300
+the final, the thesis, which is our final conclusion, we want something, we want a theorem
+
+179
+00:30:51,300 --> 00:31:06,960
+basically that says that if X is smaller than equal to Y, and Y is smaller than equal to Z,
+
+180
+00:31:06,960 --> 00:31:21,600
+then from that we can conclude that smaller than or equal to Z. All right, and why do I do that?
+
+181
+00:31:21,600 --> 00:31:27,200
+Why do I want that? Because here the X is going to be B times D, and sorry, the X is going to be
+
+182
+00:31:27,440 --> 00:31:34,980
+A times C, and the Y is going to be B times D, and the Z is going to be B times successor of D.
+
+183
+00:31:36,190 --> 00:31:55,500
+So do we have any theorem that has that? So we have write it this way so that we narrow down a bit
+
+184
+00:31:55,500 --> 00:32:03,980
+the results. Yeah, okay, so we have the transitivity, and this is precisely what we need. So then we
+
+185
+00:32:03,980 --> 00:32:16,300
+can say using that theorem of, so what was the first fact? I think it was five, which is the result of
+
+186
+00:32:16,300 --> 00:32:28,740
+applying the induction hypothesis of five and eight. Right, and that precisely gives us, and basically
+
+187
+00:32:28,740 --> 00:32:35,300
+that's all. Thank you very much for watching this. I hope it's easier now that we have the
+
+188
+00:32:35,300 --> 00:32:38,020
+video here, which is a bit slower than the tutorial.

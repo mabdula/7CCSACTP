@@ -1,0 +1,166 @@
+WEBVTT
+
+
+1
+00:00:02.220 --> 00:00:19.800
+Hello everyone. So that's, I will now do a demo of how you can use a coding agent connected to Isabelle via MCP to basically help you with theorem proving.
+
+2
+00:00:19.800 --> 00:00:31.570
+So I'll show you a few, basically you can ask it any question and it will try to answer. So what I'll be doing is I'll show you how to,
+
+3
+00:00:31.570 --> 00:00:45.620
+the steps of the process. So first of all, I want you to, I want you to install PDA MCP as like, if you want to install it, look into the exercise sheet in the first section.
+
+4
+00:00:45.620 --> 00:00:50.620
+There are instructions on how to install it. I mean, it's just a link to the GitHub repository. The GitHub repository has,
+
+5
+00:00:51.620 --> 00:01:03.490
+has a readme file describing how to install it, how to install the PDA MCP and how to connect it to coding agents.
+
+6
+00:01:03.490 --> 00:01:11.490
+In this instance, I connected it to open code and I'll be using a free model so you can all repeat this demo without having to have any subscription necessarily.
+
+7
+00:01:13.060 --> 00:01:28.380
+And so, and I will assume that you have already called these instructions, instructions that will now start the demo.
+
+8
+00:01:28.380 --> 00:01:37.930
+Okay. So you would start PDA MCP by just going to the Isabelle binary and then saying PDA underscore MCP.
+
+9
+00:01:37.930 --> 00:01:45.930
+So here I'm assuming, as I said, you built PDA MCP following the readme file, you connected it to Isabelle by ending it as a component.
+
+10
+00:01:45.930 --> 00:02:01.520
+And now you can just run it as if it's an Isabelle tool. So PDA MCP. And then when you do that, when you do that, it just tells you, you know, that it started or is starting.
+
+11
+00:02:01.520 --> 00:02:13.840
+Okay. It started. Okay. So now it says now PDA MCP started. Okay. And then now I will start in your open code.
+
+12
+00:02:13.840 --> 00:02:25.850
+So open code is a coding agent that any one of you can simply download and install on your machines.
+
+13
+00:02:25.850 --> 00:02:40.870
+Okay. And then I have this the same demo from the same theory file that I was that I used for demonstrating sledgehammer.
+
+14
+00:02:40.870 --> 00:02:55.030
+I will use it again here to demonstrate how you can use LLMs with improving. So first of all, if you want to make sure that open code is connected to Isabelle, you do this slash MCPs.
+
+15
+00:02:55.030 --> 00:03:02.030
+And then you see what are the MCPs that you have. So here you have Isabelle PDA MCP and you say it's connected. Okay, good.
+
+16
+00:03:02.030 --> 00:03:07.540
+So this is one thing that's done. So we know now that it works, but then we can ask it also.
+
+17
+00:03:07.540 --> 00:03:14.540
+So I'll just choose. You can choose a free model. So you can just say free and then it will give you a few free models.
+
+18
+00:03:14.540 --> 00:03:29.270
+So I'll just say just one that's called Big Pickle, but there are many other free models that you can access without the subscription.
+
+19
+00:03:29.270 --> 00:04:08.060
+So a second. So then what we have here is we I will ask the PDA will ask open code. Are you going to get to Isabelle just to make sure are you connected to either to the Isabelle MCP just to make sure that it's connected.
+
+20
+00:04:08.060 --> 00:04:15.420
+And then we can start by asking questions about about what about the theory file that we want to work on.
+
+21
+00:04:15.420 --> 00:04:29.410
+So let's see visible MCP. Yes, I'm connected. Okay, so the first thing. Okay, so remember this theorem last time, like in week two, we did it by writing between some equation reasoning.
+
+22
+00:04:29.410 --> 00:04:34.410
+And then in the last demo, I did it with sledgehammer and just asked what's the proof for that and then it found the proof.
+
+23
+00:04:34.410 --> 00:04:44.780
+So now I want to like just show you how to deal with how to how to use how to use AI just to improve.
+
+24
+00:04:44.780 --> 00:05:03.100
+So, for example, I will say, okay, so let me just let me just make let me just destroy this theorem by saying Y X.
+
+25
+00:05:03.100 --> 00:05:25.780
+Okay, so this now we have a syntax error, this one, but say you don't understand what that syntax error is. So I will just copy that name and then ask it and ask what is the syntax error in line.
+
+26
+00:05:25.780 --> 00:05:43.100
+I'll just say in the name of the lemma. Right. And then let's see, it should give us some sort of explanation. Yeah.
+
+27
+00:05:43.100 --> 00:06:02.570
+Yeah, the file. There is no syntax error in this table. The only one is our sorry markers. Okay, so it's so we have to save actually this is one thing that I remembered, you have to actually save in order for for for for this MCP server to see.
+
+28
+00:06:02.570 --> 00:06:44.140
+We saved. So now after we saved, yeah, it seems okay, I wanted to read the file because it seems like it didn't it didn't synchronize.
+
+29
+00:06:44.140 --> 00:06:56.140
+Yeah, the syntax error online. So, so, so, so, as you can see, with AI, I mean, because this is a three week model. So you really have to handle it even with simple things like telling it to read the file and so forth.
+
+30
+00:06:57.140 --> 00:07:12.290
+So it's not so you don't have really any like other things can go wrong just because you're depending on on the language model here. So here, for example, as you see, didn't refresh the file until I told it to read it, even though I saved it already.
+
+31
+00:07:12.290 --> 00:07:28.450
+And then it says, okay, the syntax error is online six. It says this. So basically, it says, okay, notice that we introduced this X here. So it says, why X does the syntax error because why is being applied to argument X as if I, why we're a function, but why is not the function.
+
+32
+00:07:28.450 --> 00:07:37.090
+There is a missing. So, so it says that there has to be like some sort of class here or something like that.
+
+33
+00:07:37.090 --> 00:08:04.860
+Okay, so now we turned it X plus Y plus X times this equals that. So now, okay, so now let's ask it. Okay, so what is, okay, and then I fixed the error. Does the current statement hold?
+
+34
+00:08:04.860 --> 00:08:36.660
+Okay, let's see. So it will read the file. Hopefully this automatically and then we see. Yeah, so it saw it saw this counter example that we have there found out the counter example that we have there, but it's going to explain it for you.
+
+35
+00:08:36.660 --> 00:08:54.420
+So let me use it manually instead, expanding this, this, and that, and let's just use that right hand side of that to the counter example. So it tells you like this is a counter example.
+
+36
+00:08:54.420 --> 00:09:08.680
+If you set X to one, Y to zero, A to one, B to zero, then the statement will not hold because the left hand side will be two and the right hand side will be one. Okay, so now let's say, okay, let's say, okay, then fix the statement.
+
+37
+00:09:10.030 --> 00:09:37.260
+Let's see to fix it. So it should fix it via, okay, let's just confirm edit only via the MCP, via MCP tools, because we don't want it to edit the file directly.
+
+38
+00:09:38.710 --> 00:09:56.480
+We don't want it to edit file directly. We wanted to just use the MCP tools so that we have a clear interface, a clean interface between the coding model and in disability. So now, okay, it says that the statement now holds and then I'll ask you to prove it statement.
+
+39
+00:09:57.480 --> 00:10:39.740
+Yeah, so it just simply found how you prove it. It's just by a SIM and simple algebra. Okay, algebra SIM. So that's, that's basically the way that like one workflow force to to hand to to use AI, at least for very small formalizations like this one. And then for bigger ones, I will discuss that later on.
+
+40
+00:10:39.740 --> 00:11:55.530
+The next for the next statement. Again, we can do all the things, but but I will just do one thing. I'll just ask you to prove this one because if you remember correctly, I told you that sledgehammer and tools and Isabelle cannot cannot do induction on their own, but the but LMS can do mathematical induction because they can emulate what people do. So let's see if it will prove this. Yeah, so they give this very shortly.
+
+41
+00:11:56.530 --> 00:12:13.140
+And to hear the short proof, really, it just came up with a lemma like this and then prove that lemma in this very concise way by doing an induction and X is in the arbitrary and generalizing or wise and then using that lemma to prove the final one. Okay.

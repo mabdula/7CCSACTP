@@ -1,0 +1,342 @@
+WEBVTT
+
+
+1
+00:00:00.180 --> 00:00:18.470
+In Isabelle, we do that using a method called rule. So it's the first proof method that we
+
+2
+00:00:18.470 --> 00:00:38.490
+learn about. It's called rule. So basically, if we call, so if we just call, so for instance,
+
+3
+00:00:38.490 --> 00:00:50.820
+if we just call q, if we call this lemma one, then we can say, and the goal is p, then we
+
+4
+00:00:50.820 --> 00:01:06.560
+can just say, we can apply the method rule and give it as an argument, lemma one, and then
+
+5
+00:01:06.560 --> 00:01:14.280
+the goal becomes q. So in order for me to clarify that idea, let's try and do the same
+
+6
+00:01:14.280 --> 00:01:39.750
+proof as last time, but with backwards reasoning. So we have that goal again, the same file, sorry,
+
+7
+00:01:39.750 --> 00:02:04.710
+we will just, it's like that, there's something wrong with this C button, yeah, okay, so that's
+
+8
+00:02:04.710 --> 00:02:09.510
+the same lemma. And but instead of starting from the assumptions and reaching the goal,
+
+9
+00:02:09.510 --> 00:02:17.700
+we start from the goal and reach assumptions, how? So let's just say, we basically want
+
+10
+00:02:17.700 --> 00:02:33.100
+to show have not p, then we can just say apply rule. So our goal now is, as you can see, not p,
+
+11
+00:02:33.100 --> 00:02:42.710
+okay, so we can then transform that goal into something else, right, by just tracing the proof
+
+12
+00:02:42.710 --> 00:02:47.650
+that we did up there, but backwards. So what did you do to get that goal? We applied negation
+
+13
+00:02:47.690 --> 00:02:57.630
+introduction, okay, so rule, negation, introduction. So then we have two goals, as you can see, that we
+
+14
+00:02:57.630 --> 00:03:02.710
+need to prove that p implies some y, and p implies the negation of that y. And notice here, this
+
+15
+00:03:02.710 --> 00:03:15.870
+quantification, this is a quantification. So that means that we need to provide the other,
+
+16
+00:03:15.870 --> 00:03:28.920
+we provide rule with those two facts, approve them and then provide them to rule, or there's no way
+
+17
+00:03:28.920 --> 00:03:33.200
+you can prove it, okay, because you're going backwards here. So let's try and derive those
+
+18
+00:03:33.200 --> 00:03:39.200
+rules. I'll just derive them with sorry. So here we have, what did we say? So we needed p implies
+
+19
+00:03:39.200 --> 00:03:54.780
+y, and p implies not y for some y, and for some two y's, okay. So how can we do that? We can do that
+
+20
+00:03:54.780 --> 00:04:02.900
+by, firstly, this is the p implies y, I will just do this with a sorry now. So again, sorry here,
+
+21
+00:04:02.900 --> 00:04:10.110
+you're using it to just basically sketch down your proof, and then we want p implies q, this is
+
+22
+00:04:10.110 --> 00:04:17.730
+going to be assumption number one, okay. So now let's provide rule with those two facts that it needs
+
+23
+00:04:17.730 --> 00:04:25.330
+after it went backwards with, in the proof, all right. So in the proof state. So we provide it,
+
+24
+00:04:25.330 --> 00:04:34.680
+we provide rule with the two facts in the following way. So you say using, we need, I don't remember
+
+25
+00:04:34.800 --> 00:04:40.640
+if it was the negation first, or the other one first. So we needed the negation, I think first,
+
+26
+00:04:40.640 --> 00:04:50.590
+sorry, the p implies q first, and then p implies not q second. So that should be like that. So these
+
+27
+00:04:50.590 --> 00:05:04.510
+are the facts ordered like how rule wants them, and then rule was able to prove the remaining
+
+28
+00:05:04.630 --> 00:05:12.920
+goals with the two facts that we provided. So we tell it using assumption one and five,
+
+29
+00:05:12.920 --> 00:05:19.960
+for example, that's one way to do it. Another way to do it is, for example, by instantiating
+
+30
+00:05:19.960 --> 00:05:37.750
+the assumptions here. So if you remember, okay, let me just go back quickly to the board. So
+
+31
+00:05:37.750 --> 00:05:48.900
+remember here what we said about p, about rule, okay. Rule, if you have a theorem that says,
+
+32
+00:05:48.900 --> 00:05:53.900
+for example, q implies p, and then you have in your goal p, then it transforms the goal into q.
+
+33
+00:05:53.900 --> 00:05:57.820
+But if you apply it to a theorem that doesn't have any assumptions, then you already discharged
+
+34
+00:05:57.820 --> 00:06:09.390
+a goal. So we can turn negation introduction into a theorem without any assumptions by
+
+35
+00:06:09.390 --> 00:06:20.450
+merely giving it, as we did up there, some one as arguments, and assumption five, okay.
+
+36
+00:06:20.450 --> 00:06:34.300
+And then we have it, so let me just take it outside to just see what's, how does it look
+
+37
+00:06:34.300 --> 00:06:38.420
+like. So as you can see here, negation introduction, I wrote the same thing,
+
+38
+00:06:38.420 --> 00:06:48.090
+them negation with the assumptions, then you just have an op-p, otherwise you have the assumptions
+
+39
+00:06:48.090 --> 00:06:55.080
+and negation introduction, okay. So then that's one way, and then we can derive five again in
+
+40
+00:06:55.080 --> 00:07:04.440
+the same way, we just see what we go backwards. So we get, for example, we say, okay, five is an
+
+41
+00:07:04.440 --> 00:07:13.130
+implication, so whenever you have a connective in general, let me just write that, it's a
+
+42
+00:07:13.130 --> 00:07:24.920
+proof style thing, whenever you have, so I will just write some notes there, note, if you have a
+
+43
+00:07:24.920 --> 00:07:55.510
+goal with a connective, you want analyze that goal. So for example, break it down like negation,
+
+44
+00:07:55.510 --> 00:08:01.350
+like negation introduction, then you can just break it down into smaller digestible goals,
+
+45
+00:08:02.070 --> 00:08:10.380
+then you can use, I'll just call that connective, let's say op, then you can always use op
+
+46
+00:08:11.340 --> 00:08:22.220
+introduction, you can come up with a lemma called op introduction and try to use that for analyzing
+
+47
+00:08:22.220 --> 00:08:27.180
+the goal. So now let's go back there, so here we have, this is an implication there and we want
+
+48
+00:08:27.260 --> 00:08:46.420
+to analyze that, so we're going to use that implication introduction, so I will just say
+
+49
+00:08:46.420 --> 00:08:56.520
+use it by rule application introduction and then we can see what kind of goals appear to us and
+
+50
+00:08:56.520 --> 00:09:02.680
+then we can, from that you did use what more things you need. So you need to show that basically
+
+51
+00:09:02.680 --> 00:09:12.600
+not q holds, so you get that, you assume then you have that not q holds and then see later on how
+
+52
+00:09:12.600 --> 00:09:19.080
+can you prove that not q holds, but I will sorry it of course because we're going backwards in
+
+53
+00:09:19.080 --> 00:09:29.610
+this proof. Here I will again do the same thing, so for example, I would say using
+
+54
+00:09:30.410 --> 00:09:35.370
+four, so that should satisfy the only sub-goal that we had or you can also use,
+
+55
+00:09:36.500 --> 00:09:46.900
+you can do the same thing like what I did down there, you can do it that way or you can also just
+
+56
+00:09:46.900 --> 00:09:53.290
+another way to do it, the same from four, that's also the same thing, gives you the same
+
+57
+00:09:58.540 --> 00:10:04.140
+fact with you, so let's just see, so down with the goal, okay so you can have not q
+
+58
+00:10:04.140 --> 00:10:07.500
+which is four and then you want to prove that and then you apply rule implication introduction,
+
+59
+00:10:07.500 --> 00:10:13.340
+that goes one step back and then you're done. You can also do the following which is,
+
+60
+00:10:14.470 --> 00:10:23.020
+okay so now we have that goal, I'm sorry I'll remove like let's say we have, now we apply rule
+
+61
+00:10:23.020 --> 00:10:27.420
+and then that we have that goal and then we can apply rule a second time and they'll go even
+
+62
+00:10:27.420 --> 00:10:33.180
+backward more backward one more time in the goal. Here we're applying it with to a theorem that
+
+63
+00:10:33.180 --> 00:10:36.700
+doesn't have any assumptions which is not q, so then we have nothing remaining to prove
+
+64
+00:10:38.760 --> 00:10:43.400
+and then you can continue, okay so there is one more thing I wanted to say here which is
+
+65
+00:10:43.400 --> 00:10:47.640
+that you can also change the facts instead of saying using four or from four you can also say
+
+66
+00:10:47.640 --> 00:10:53.560
+then have five, so then does the same thing, so then takes the last fact and gives it to the
+
+67
+00:10:53.560 --> 00:11:00.760
+current fact, so you have the same, you have the same goal once you say then you then added four
+
+68
+00:11:00.760 --> 00:11:09.510
+and then add four as a fact and then you want to prove using it that. So I think that
+
+69
+00:11:10.230 --> 00:11:16.470
+like you can continue with the rest of that proof as an exercise on your own and it's just you do
+
+70
+00:11:16.470 --> 00:11:21.510
+the opposite of that proof basically with every step and then you sorry it and then you see how
+
+71
+00:11:21.510 --> 00:11:34.390
+it is. Let me just write some note there, so another note why use backward reasoning?
+
+72
+00:11:39.340 --> 00:11:45.340
+As I said earlier it is the same as forward reasoning right, but the difference is that
+
+73
+00:11:45.340 --> 00:12:02.980
+backwards reasoning allows you to debug the current proof goal. So if you don't know how
+
+74
+00:12:03.060 --> 00:12:07.060
+you can prove the current proof goal you can do backward reasoning and then analyze that goal
+
+75
+00:12:07.060 --> 00:12:10.580
+like for example if you have an implication you can do implication introduction and then see what
+
+76
+00:12:10.580 --> 00:12:14.820
+you need to prove or you can have negation introduction and then you will get two goals
+
+77
+00:12:16.580 --> 00:12:22.100
+like we did there, so it allows you to debug it so it's logically but it is logically the same
+
+78
+00:12:22.100 --> 00:12:26.890
+as forward reasoning there's nothing there's no other kind of logical reasoning in it it's
+
+79
+00:12:26.890 --> 00:12:45.610
+just that direction is different. So useful it's useful for top down development for top
+
+80
+00:12:46.740 --> 00:12:59.190
+down proof development. Okay so those are all the notes that I wanted to say so I think
+
+81
+00:12:59.190 --> 00:13:03.830
+I would recommend that you only if you have a pen and paper proof then you use forward reasoning
+
+82
+00:13:03.830 --> 00:13:07.910
+but if you if that proof for some reason doesn't work then you do the analysis the other way
+
+83
+00:13:07.910 --> 00:13:12.150
+around you do it backwards and then see where your proof breaks by getting the different
+
+84
+00:13:12.150 --> 00:13:19.980
+steps and you'll probably find that like you missed some some simple minute detail in one of the
+
+85
+00:13:19.980 --> 00:13:26.120
+steps. So I guess that's it for backwards

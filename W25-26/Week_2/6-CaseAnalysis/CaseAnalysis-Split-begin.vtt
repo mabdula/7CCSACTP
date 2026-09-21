@@ -1,0 +1,306 @@
+WEBVTT
+
+
+1
+00:00:05.650 --> 00:00:21.940
+Hello, everyone. So now this is the last one of the videos where I'm revising with you or reminding you of different concepts of how to prove theorems.
+
+2
+00:00:21.940 --> 00:00:52.440
+So in previous videos, we did, what did we do? We did, firstly, I showed you Isabelle interface and I showed you how to write theorems and theorem statements, proving.
+
+3
+00:00:52.440 --> 00:01:04.440
+And now we're still in the, I'm still showing you how to do proofs where I'm reminding you basically of things that you should have, you must have seen in previous modules.
+
+4
+00:01:05.440 --> 00:01:29.570
+Where you, where you did the discrete mathematics or mathematical or discrete structures. So I showed you already what we did previously was proved by forward reasoning and backward reasoning and substitution and induction for natural numbers.
+
+5
+00:01:29.570 --> 00:01:49.090
+And in this video, I will show you the last Isabelle command and remind you of the last concept that that is supposed to be in your, that is supposed to be supposed to have already started before, which is proving statements by cases.
+
+6
+00:01:49.090 --> 00:02:04.400
+So like case analysis. Okay, so I won't actually go very deep into this example because it's very similar to induction.
+
+7
+00:02:04.400 --> 00:02:14.620
+The theory behind it is very similar to induction and the practice as well. But I will show you briefly, very briefly, what does what that command says.
+
+8
+00:02:14.620 --> 00:02:27.740
+So firstly, the intuition behind that intuition.
+
+9
+00:02:27.740 --> 00:02:50.300
+We want to prove a property, say for natural numbers for for all natural numbers or all lists, etc.
+
+10
+00:02:50.300 --> 00:03:28.000
+Okay, that's the goal. And we know how to prove the property, different cases differently. So what do I mean by that? So to give you an example.
+
+11
+00:03:28.000 --> 00:03:56.470
+Of what that means. So, for example, in Isabelle, if I, if I, if you remember, I told you the function minus or subtract for natural numbers defined in the following as such that X minus Y equals zero if X is less than or equal to Y.
+
+12
+00:03:56.470 --> 00:04:19.950
+So, for instance, three minus one, that's normal, right? That's going to be two, three minus two, that is going to be one, three minus three, that's going to be zero, four, three minus four, that's also going to be zero.
+
+13
+00:04:19.950 --> 00:05:18.940
+So, in many cases, when we need, okay, because of this, because of this behaviour of minus, a lot of the times when we need to prove something involving minus, something involving minus, we need to do a case split.
+
+14
+00:05:18.940 --> 00:05:53.180
+On whether the first argument is greater than or equal to the second argument or no, because if it's not greater than or equal, then that means that the output of minus is always going to be zero, which will require a different proof strategy than if the output of the minus is what you expect it to be.
+
+15
+00:05:53.180 --> 00:06:05.750
+So, as usual, I will do an example of a proof on the board here and then show you how we do that in Isabelle.
+
+16
+00:06:05.750 --> 00:06:16.780
+So, here we have X, let's say we want to show that for any X, X minus Y is smaller than or equal to X, okay?
+
+17
+00:06:16.780 --> 00:06:38.370
+So, we can do that. So, that's obviously holds, right? But we want to prove that. So, we can prove that by induction on X. So, you have, again, the same thing.
+
+18
+00:06:38.370 --> 00:07:11.210
+Two cases, the first case is the base case where X equals zero. So, that would, how would we prove that? We just say that, like, the goal here, so the goal is that zero minus Y is more than or equal to Y is more than or equal to zero.
+
+19
+00:07:15.630 --> 00:07:40.090
+Okay? So, how do we prove that goal? So, the proof is, I'm going to be the following. So, we say firstly that zero minus Y equals zero, and that should be by definition of minus.
+
+20
+00:07:40.090 --> 00:07:57.620
+In particular, we would not, we would like to have a lemma that says, instead of saying a definition here, I would just say lemma one that we need, which is that zero minus anything equals zero.
+
+21
+00:07:57.620 --> 00:08:07.670
+So, that should be, that lemma should follow from the definition of minus in Isabelle. So, we say by subs lemma one, right?
+
+22
+00:08:07.670 --> 00:08:40.560
+And then lemma two, and then sub two, we just say that zero minus Y, I'm sorry, no, we say lemma two, we have that zero is smaller than or equal to zero, and that should also hold from a lemma that says, like, we can think of a lemma, but that basic, that lemma, we should have a lemma that says anything smaller than or equal to itself.
+
+23
+00:08:40.560 --> 00:08:54.900
+So, we must have that lemma in Isabelle as well. So, any a is smaller than or equal to itself to have zeros, so by lemma two, before reasoning from lemma two.
+
+24
+00:08:54.900 --> 00:09:27.810
+And then, okay, so from that we can say step number three is, we have that zero minus Y, smaller than or equal to zero by substituting step number one into step number two.
+
+25
+00:09:27.810 --> 00:09:39.450
+So, you have, you substitute that here to replace the zero with zero minus one, and then you get exactly what you want. But instead of doing that, we can also do the same thing as we usually did.
+
+26
+00:09:39.450 --> 00:09:55.450
+So, we can say, we can use the dots technique, the three dots technique to have that chain of inequalities here in this case. So, we say zero minus Y equals zero, and then we say three dots smaller than or equal to zero, which is just the right hand side of the last thing.
+
+27
+00:09:55.450 --> 00:10:16.380
+And then we say, finally, zero Y is smaller than or equal to zero, and that's the goal. Step case is more complicated, and this is where we will need the case analysis.
+
+28
+00:10:16.380 --> 00:10:49.130
+So, we have the assumption, you assume the induction hypothesis. So, that would be X minus Y is smaller than or equal to X, and then you want to show the goal is that suck X minus Y is smaller than or equal to suck X.
+
+29
+00:10:49.130 --> 00:11:16.770
+So, again, here we need to do the proof, but as I was mentioning, we need to do a case analysis because of this behaviour of minus. So, we say, for example, we say X minus is smaller than or equal.
+
+30
+00:11:16.770 --> 00:11:36.690
+Okay, no, we need, what do we need to do here? We need to get this successor outside of the whole thing, and then we would have, and then we turn this into successor of X minus Y is smaller than successor of X.
+
+31
+00:11:36.690 --> 00:11:48.690
+And then we must have a lemma that says the successor of anything, if the successor of A is smaller than or equal to the successor of B, then that implies A is more than or equal to B.
+
+32
+00:11:48.690 --> 00:12:11.380
+Okay, so that is the proof idea, but let's now see because it's not, you cannot always get the successor out of the minus because if the problem is the following, like we need a lemma that says successor of X minus Y equals the successor of the whole thing.
+
+33
+00:12:11.380 --> 00:12:28.380
+So, look at the parenthesis here, but that doesn't hold Y, that doesn't hold Y because, for example, if you have X equals one and Y equals three, then you have the successor of one is two, two minus three is zero.
+
+34
+00:12:28.380 --> 00:13:01.670
+But the successor, but and one minus three is also zero and the successor of zero is one. So you have, so if X equals one and Y equals three, the left hand side of this supposed lemma will be one and the right hand, sorry, the left hand side will be zero because of the way minus is defined and the right hand side is going to be, yeah.
+
+35
+00:13:01.670 --> 00:13:25.450
+So instead of that, so this lemma only holds if we assume something, if we assume that successor of X is greater than or equal to Y, then we have that lemma, right?
+
+36
+00:13:25.450 --> 00:13:38.170
+So we have to assume that. On the other hand, we should have another lemma that says if the successor of X, I mean, it should be a bit more general.
+
+37
+00:13:38.170 --> 00:13:55.180
+So we have another lemma that says if X is smaller than or equal, is strictly smaller than Y, maybe I should just remove these X's and Y's so it cannot confuse you.
+
+38
+00:13:55.180 --> 00:14:11.180
+So I'll just say A's and B's everywhere. The successor of A is greater than B, then successor of A minus B equals successor of A minus B.
+
+39
+00:14:11.180 --> 00:14:23.980
+And then here, if you have some A that is smaller than B, then you have that A minus B equals zero always.
+
+40
+00:14:23.980 --> 00:14:59.200
+So how do we go ahead with our proof then? We firstly split the proof in two cases by case analysis on whether successor of X is greater than or equal to Y.
+
+41
+00:14:59.200 --> 00:15:28.960
+So the first case, case one, is greater than or equal to Y. In this case, we can have that successor of X minus Y equals successor of the whole thing parenthesized.
+
+42
+00:15:28.960 --> 00:15:38.910
+And this is going to follow from lemma one with its assumption, instantiated by the case assumption.
+
+43
+00:15:38.910 --> 00:15:47.970
+So look at this assumption there and point to it with the laser. And we can instantiate it with the case assumption there.
+
+44
+00:15:47.970 --> 00:15:59.740
+We can just say, so it's forward reasoning, so basically, of case one assumption.
+
+45
+00:15:59.740 --> 00:16:29.370
+And then we have that. And then from that we have that, from that we can set, from that we have successor of X.
+
+46
+00:16:29.370 --> 00:16:35.370
+From that we have actually, so we can just do the following. We can say, okay, we want to now prove our goal.
+
+47
+00:16:35.370 --> 00:16:56.940
+So we say successor of X minus Y is more than or equal to successor of X, sorry, is more than or equal to successor of X minus Y.
+
+48
+00:16:56.940 --> 00:17:12.650
+Why does that hold? It should hold from the step number one and a third lemma that should say that anything is smaller than or equal to itself, right?
+
+49
+00:17:12.650 --> 00:17:20.870
+Because if you know that this is equal to that, that means that this is also smaller than or equal to that. So a third lemma that says a less than or equal to a.
+
+50
+00:17:20.870 --> 00:17:51.680
+So from one and lemma three should follow. And then we have step number three. We can say that this is the right hand side of the last thing is smaller than or equal to X.
+
+51
+00:17:51.680 --> 00:18:05.110
+Why should that hold? Again, this should be another lemma, which says that a minus.
+
+52
+00:18:05.110 --> 00:18:26.200
+So the last step here in the proof should be that the successor of X minus Y is smaller than or equal than successor of X, right?
+
+53
+00:18:26.200 --> 00:18:48.540
+But why should that hold? We need another lemma that says that if I know that the successor of a is smaller, sorry, if I know that a is smaller than or equal to b,
+
+54
+00:18:48.540 --> 00:18:57.980
+then from that I conclude that the successor of a is smaller than or equal to the successor of b.
+
+55
+00:18:57.980 --> 00:19:16.220
+So from that lemma, so using lemma four, but we need to do forward reasoning to instantiate its assumption, which is a is smaller than or equal to b.
+
+56
+00:19:16.220 --> 00:19:28.420
+And that assumption we can instantiate it with the induction hypothesis. So if we instantiate the a with X minus Y and the b with X, we would get exactly what we want.
+
+57
+00:19:28.420 --> 00:19:37.280
+So we just say forward reasoning here, and that should be under the first case.
+
+58
+00:19:37.280 --> 00:19:49.740
+Then we have the second case, which is the other way around. So if you have successor of X is not greater than or equal to Y.
+
+59
+00:19:49.740 --> 00:20:11.680
+So what does that mean? First of all, we need a lemma that says that if I know that something is not greater than or equal to something else, then that would imply that if I know a is not greater than or equal to b,
+
+60
+00:20:11.680 --> 00:20:23.000
+then I know that a is smaller than b. So that would mean that we can conclude using forward reasoning that the successor of X is smaller, strictly smaller than Y.
+
+61
+00:20:23.000 --> 00:20:39.100
+So that should follow from lemma number five. But recall that this lemma needs an assumption in order for you to get the conclusion, which we want.
+
+62
+00:20:39.100 --> 00:20:48.290
+So if you want, we want to say that assumption was something, and that assumption we can just instantiate it with the case assumption using forward reasoning.
+
+63
+00:20:48.290 --> 00:21:15.550
+So we can say case to sum, right, clearer. And then step number two, okay, we need to show that what was the original goal. We need to show that.
+
+64
+00:21:15.550 --> 00:21:33.500
+Yeah, so the successor of X minus Y is smaller than equal to six of X. So that if we have that, remember, lemma two up there, it says that if a is less than b, a minus b is equal to zero.
+
+65
+00:21:33.500 --> 00:21:55.860
+That would mean that successor of X minus Y equals zero. That should follow from step one.
+
+66
+00:21:55.860 --> 00:22:07.830
+Sorry, this would follow from lemma two. But its assumption is instantiated using forward reasoning with step number one.
+
+67
+00:22:07.830 --> 00:22:21.530
+So basically, take that and just instantiate that assumption. So that step to instantiate that assumption.
+
+68
+00:22:21.530 --> 00:22:35.890
+Okay, so we have that the successor is zero. And then we must have another lemma that says that zero is less than or equal to anything else, right?
+
+69
+00:22:35.890 --> 00:22:51.330
+That's quite obvious, quite an obvious lemma. So from this we have, we can show that, okay, we can say that zero is smaller than equal successor of X.
+
+70
+00:22:51.330 --> 00:23:12.030
+This is from lemma six. So from that, from lemma six, from step number three and step number two, we get that the successor of X minus Y is smaller than the successor of X.
+
+71
+00:23:12.030 --> 00:23:40.930
+So how would we get that? What are the specific steps? We get, we can get that by using, by substituting, so we can say using step number three.
+
+72
+00:23:40.930 --> 00:23:57.620
+So step number three gives us that zero is less than or equal to X. And we can substitute then in that step, we can substitute in it step number two.
+
+73
+00:23:57.620 --> 00:24:13.590
+But there is a nicer way to do that. So we have here that zero is smaller than or equal to X. So that means that, so let me just rewrite that then.
+
+74
+00:24:13.590 --> 00:24:35.980
+So from, how can you rewrite that? Yeah, that's it. So we can say using step number three and then by substituting number two.
+
+75
+00:24:35.980 --> 00:24:45.980
+So step number two, if you substitute it, it will change that into a zero and then you'll have zero smaller than or equal to X as your goal and then you have that already proved in step number three.
+
+76
+00:24:45.980 --> 00:24:48.980
+So that's a typical case of...

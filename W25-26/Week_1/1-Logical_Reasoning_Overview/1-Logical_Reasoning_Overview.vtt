@@ -1,0 +1,106 @@
+WEBVTT
+
+
+1
+00:00:01.620 --> 00:00:08.340
+Hello, everyone. I hope you have watched the last video where I introduced you to Isabelle's interface,
+
+2
+00:00:08.660 --> 00:00:11.460
+basic interface, and how to perform basic tasks in it.
+
+3
+00:00:11.780 --> 00:00:21.330
+So let me first recap what I did in the last video, and then I would start with this video.
+
+4
+00:00:21.570 --> 00:00:24.610
+So what did we do in the last video? What we did was
+
+5
+00:00:26.850 --> 00:00:30.830
+revise,
+
+6
+00:00:30.910 --> 00:00:38.630
+very good, let me just do that again, revise
+
+7
+00:00:40.420 --> 00:00:54.230
+basic functional programming concepts, and that included
+
+8
+00:00:55.430 --> 00:01:01.140
+carrying, which is annotation for writing down functions, and included also
+
+9
+00:01:03.770 --> 00:01:12.420
+lambda expressions, which is a way to write functions as well. And lastly,
+
+10
+00:01:15.430 --> 00:01:16.550
+what we did was
+
+11
+00:01:17.350 --> 00:01:31.750
+polymorphic datatype, polymorphic types, which is a way, which is very similar to
+
+12
+00:01:36.150 --> 00:01:40.150
+templates, for example, in object-oriented programming. So in this
+
+13
+00:01:42.150 --> 00:01:51.340
+story, and what we also did other than that was do an basic Isabelle interface introduction.
+
+14
+00:01:53.140 --> 00:02:14.170
+So what that meant, what that included was to, like, manipulating a theory file, and
+
+15
+00:02:19.160 --> 00:02:41.130
+writing down terms. This included numbers, and included lists, sets, products,
+
+16
+00:02:44.260 --> 00:03:01.020
+tuples, you can also call them tuples if you want, functions, and we also did
+
+17
+00:03:02.900 --> 00:03:13.900
+type annotations for all these terms.
+
+18
+00:03:21.750 --> 00:03:28.550
+Then we also showed the last thing, which was an important component, was
+
+19
+00:03:29.270 --> 00:03:49.770
+how to perform, or how to, not perform, but how to write down a logical specification,
+
+20
+00:03:58.220 --> 00:04:10.950
+and that was just introducing you to the logical connectives, and how do we
+
+21
+00:04:13.450 --> 00:04:39.540
+write theorems in Isabelle. So in this video, I mean, in the next few videos, the next main
+
+22
+00:04:39.540 --> 00:04:48.860
+topic that we will discuss is, the next topic that we will discuss in the next few videos, is
+
+23
+00:04:49.660 --> 00:05:14.120
+how to perform improves in Isabelle. So in this video, I will cover logical reasoning,
+
+24
+00:05:16.260 --> 00:05:28.950
+logical reasoning, both forward and backwards reasoning, and in the next video,
+
+25
+00:05:30.020 --> 00:05:39.690
+next, like, the other two types, the other two types of proofs that we will cover are also
+
+26
+00:05:39.690 --> 00:05:57.430
+proofs by substitution, and mathematical induction on natural numbers, right?

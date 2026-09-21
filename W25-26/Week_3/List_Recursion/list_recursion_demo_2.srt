@@ -1,0 +1,7 @@
+1
+00:00:00,270 --> 00:00:41,190
+Before I finish this video, I would like to just add one note, that I forgot to say in the theoretical part, which is that to guarantee termination, all recursive calls to be done on smaller arguments.
+
+2
+00:00:41,190 --> 00:01:13,400
+That's number one. And number two, only terminating functions will have the simps generated for them. So that's all before I close that.

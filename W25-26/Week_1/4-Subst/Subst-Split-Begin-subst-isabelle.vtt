@@ -1,0 +1,566 @@
+WEBVTT
+
+
+1
+00:00:00.000 --> 00:00:11.020
+So now let's do that in Isabelle. And let me just say, so in Isabelle, so let me just say what we're
+
+2
+00:00:11.020 --> 00:00:29.470
+going to do in Isabelle, okay? So we're going to perform the proof. And this time, instead of
+
+3
+00:00:29.470 --> 00:00:43.700
+guessing the lemmas, I'll show you how we can find the lemmas. So find lemmas that are in Isabelle's
+
+4
+00:00:45.200 --> 00:00:52.110
+library, which is basically what we load when we say imports main, okay? So now let's go to Isabelle.
+
+5
+00:00:57.310 --> 00:01:03.470
+Okay, so we start another theory file quickly. So we just call it, let's say here, subst,
+
+6
+00:01:07.970 --> 00:01:47.140
+import again main, and then save that. We'll just save it, okay? So that's the theorem we have,
+
+7
+00:01:48.020 --> 00:01:53.580
+that's the theory file. Okay, so now let's just start by laying down the theorem that we want. So
+
+8
+00:01:53.580 --> 00:02:32.780
+we want to prove that X plus Y times A plus B equals X times A plus Y times A plus
+
+9
+00:02:34.620 --> 00:02:45.700
+X times B plus Y times B, okay? And then I want, remember we want to, because remember that natural
+
+10
+00:02:45.700 --> 00:02:54.500
+numbers are overloaded, so plus and y, and so numbers and operations and numbers are all overloaded.
+
+11
+00:02:54.500 --> 00:02:58.820
+So here we have this goal, but we don't know what the type is, so we can, you can see the type by
+
+12
+00:02:58.820 --> 00:03:09.140
+hovering over the object, for example, that you want. So C hovering and then doing control,
+
+13
+00:03:09.140 --> 00:03:14.400
+and then you'll see it. Yeah, so here this is a free variable of type A, so it's a polymorphic
+
+14
+00:03:14.400 --> 00:03:20.610
+variable. We want to fix the type, so we can fix that by saying that one of those is a natural
+
+15
+00:03:20.610 --> 00:03:23.890
+number, and then Isabelle will figure out that everything else is a natural number from that.
+
+16
+00:03:23.890 --> 00:03:28.370
+So here we hover around it and press control, and then you see the natural number, okay?
+
+17
+00:03:29.340 --> 00:03:37.070
+So now we have the goal, and we want to prove, we want to do like the three steps that we did on the
+
+18
+00:03:38.270 --> 00:03:59.870
+blackboard, right? So the first step is to do left distributivity. So we want to find a lemma,
+
+19
+00:04:00.590 --> 00:04:03.630
+so let's just do that first. So we want to find a theorem that says,
+
+20
+00:04:04.430 --> 00:04:18.660
+that does the left distributivity, if you recall from the board, right? Let's just go back to
+
+21
+00:04:18.660 --> 00:04:27.300
+the board and see that. So we want that lemma that we used for step number one, which is
+
+22
+00:04:27.860 --> 00:04:33.140
+that x times a plus b equals x times a plus x times b. So we want to find something like that.
+
+23
+00:04:33.140 --> 00:04:39.550
+So how do you find theorems in question? So instead of assuming these lemmas and saying,
+
+24
+00:04:39.550 --> 00:04:42.350
+sorry, what we, I mean, we can, of course, just do that. We can just say,
+
+25
+00:04:43.390 --> 00:05:02.080
+add this crib and then say, okay, x times a plus b equals x times a plus x times b. You can say that
+
+26
+00:05:02.080 --> 00:05:11.360
+and sorry it. And then, of course, you need to fix the types. But since this lemma is proved that
+
+27
+00:05:11.360 --> 00:05:15.280
+I know that for sure, so I would just show you how to find theorems. So how do you find theorems
+
+28
+00:05:15.920 --> 00:05:36.980
+in Isabelle? The way we find theorems in Isabelle in a second, we do it like this. So you say find
+
+29
+00:05:36.980 --> 00:05:48.380
+theorems and then you write the pattern that you're looking for. So in our case, the pattern is
+
+30
+00:05:51.300 --> 00:05:57.300
+x times a plus b. So that can be written like that. You can write it, of course, like
+
+31
+00:05:57.860 --> 00:06:08.400
+like this with the quantifiers. So x times a plus b. So basically, you're writing theorems
+
+32
+00:06:08.400 --> 00:06:13.010
+the same way that you're looking for. And then here we found like a lot of matches.
+
+33
+00:06:13.010 --> 00:06:16.850
+So we want like, for example, distributive distribute left. So that's the theorem that
+
+34
+00:06:16.850 --> 00:06:26.670
+we're looking for. So we can just say theorem distribute left distributivity like that. And
+
+35
+00:06:26.670 --> 00:06:30.430
+yeah, we have that. So we want that theorem. So let's just do the first step of our proof.
+
+36
+00:06:31.280 --> 00:06:44.830
+So let's go back to the blackboard to just remind ourselves. So that step was, yeah, so
+
+37
+00:06:46.990 --> 00:06:53.710
+in order for us to do that proof, we just will do the first step that we did in the board there.
+
+38
+00:06:53.710 --> 00:07:05.780
+So that was copying the left hand side. So we say have one. And then I would just say have
+
+39
+00:07:05.780 --> 00:07:11.140
+one equals undefined, which is just to, undefined is a placeholder of the correct type, just to make
+
+40
+00:07:11.140 --> 00:07:16.640
+sure that copied things correctly. And then I would just say, I removed the type annotation over the x
+
+41
+00:07:16.640 --> 00:07:22.670
+because the x has its type already annotated up there. So and Isabelle knows that because we're in
+
+42
+00:07:22.670 --> 00:07:26.750
+the proof context of that theorem, then all of these constants are the same from the theorem
+
+43
+00:07:26.750 --> 00:07:34.540
+statement. So what's the first step? So in the first step, we said that this x plus y times a
+
+44
+00:07:34.620 --> 00:07:49.780
+plus b equals, again, x plus y times a plus x plus y times e. And that should be done by
+
+45
+00:07:49.780 --> 00:07:57.070
+substitution. So how do we do substitution? So we say apply, subs, and then the theorem. So in our
+
+46
+00:07:57.070 --> 00:08:04.050
+case, it's called the strip left, which we found as I showed you earlier, undefined left. Yeah.
+
+47
+00:08:05.260 --> 00:08:09.260
+So then we have, then we're left with a goal where the left hand side and the right hand side are
+
+48
+00:08:09.260 --> 00:08:14.780
+exactly the same. And then you can close those goals by, if you have, let me just go back to
+
+49
+00:08:14.780 --> 00:08:21.700
+the notebook and just write that as a note so we don't forget it. So Isabelle, let me just write
+
+50
+00:08:21.700 --> 00:08:38.610
+a few notes. So let's find theorems. We have that. Also, a goal of the form x equals x can be
+
+51
+00:08:40.670 --> 00:08:50.660
+proved using two dots. Okay. That's one way to do it. So I'll show you how to do that, Isabelle.
+
+52
+00:08:50.660 --> 00:08:57.890
+Or you can do it. So that's one way. Or you can do it with, so here we have that now. We don't
+
+53
+00:08:57.890 --> 00:09:02.930
+have any goals anymore in that. We just have the main goal of the theorem, but we don't have,
+
+54
+00:09:02.930 --> 00:09:09.490
+but we close this step. Or you can also do it with the backward reasoning. If you recall,
+
+55
+00:09:11.730 --> 00:09:16.530
+we can also do this apply rule. But what's the rule here? We need a theorem that says that
+
+56
+00:09:16.530 --> 00:09:21.570
+everything is equal to itself. That theorem is called Reffel. So then you have, so let me
+
+57
+00:09:21.570 --> 00:09:26.290
+just show you that theorem. So with theorem, Reffel, it says that anything is equal to itself.
+
+58
+00:09:26.290 --> 00:09:30.460
+Any term is equal to itself. So that's what we have there. So we can do it that way,
+
+59
+00:09:30.460 --> 00:09:34.560
+or we can just do it with the two dots, and that's what I will do. Then we can have two.
+
+60
+00:09:38.190 --> 00:09:42.110
+What's the second step? So the second step was taking the right-hand side of the first step
+
+61
+00:09:42.110 --> 00:09:51.200
+and applying right-distributivity. So I will just show you how to find that theorem as well.
+
+62
+00:09:51.200 --> 00:10:03.150
+I mean, it's basically the same, but I'll show you to repeat the procedure. So here,
+
+63
+00:10:03.150 --> 00:10:09.660
+instead of saying x, instead of doing it that way, we do it that way. And then we just find
+
+64
+00:10:13.140 --> 00:10:17.380
+left-distributivity, which will be called, or right-distributivity, sorry. So that's it.
+
+65
+00:10:18.130 --> 00:10:28.660
+It's the one. So we'll copy this name, and let's see what it says. So it says what we
+
+66
+00:10:28.660 --> 00:10:33.940
+expected to say, like what we had in the paper. But instead of copying the right-hand side,
+
+67
+00:10:33.940 --> 00:10:47.100
+what we can do is, okay, of course, we can just copy the right-hand side like this, and then
+
+68
+00:10:51.940 --> 00:11:05.020
+unfolding this here, this x times a and y times a, and then we say apply subs,
+
+69
+00:11:09.780 --> 00:11:20.380
+and then this strip, right? Okay. So again, we have the same thing, and then we have this way.
+
+70
+00:11:20.380 --> 00:11:24.380
+So you can do it that way, but or instead of copying and pasting
+
+71
+00:11:29.260 --> 00:11:33.980
+the right-hand side, you can also do, I'll show you this later, how to do a chain of equations,
+
+72
+00:11:33.980 --> 00:12:03.780
+but let me just finish the proof here. Then we do the third step, and this is how you'd expect
+
+73
+00:12:03.780 --> 00:12:17.120
+it to be. But I want you to note something here. So here, we're applying distributivity,
+
+74
+00:12:19.260 --> 00:12:30.160
+but note that we have to put these parentheses around the result of line distributivity. Why?
+
+75
+00:12:30.160 --> 00:12:48.420
+It's because when we write, let me just do that on the blackboard because it will be easier.
+
+76
+00:12:49.660 --> 00:13:03.020
+So in Isabelle, like another note here, if we write a plus b plus c, let's say,
+
+77
+00:13:03.020 --> 00:13:20.350
+that can read as follows. This reads as a plus b plus c, okay? And what we did up there is that
+
+78
+00:13:20.350 --> 00:13:27.230
+we basically replaced that c with something else with some more complicated term. And then
+
+79
+00:13:27.230 --> 00:13:34.580
+because the term is more complicated, the parentheses will appear, will be visible.
+
+80
+00:13:34.580 --> 00:13:42.910
+So let's go back to the visible. So here, as you can see, then we have the parentheses around that
+
+81
+00:13:43.550 --> 00:13:52.530
+because that is more complicated than that. I think it's not very
+
+82
+00:13:54.220 --> 00:14:03.100
+interesting, theoretically interesting, but it's just a way of, it has to do with the way things
+
+83
+00:14:03.100 --> 00:14:10.560
+are parsed in Isabelle. And so we won't describe much how this is, or why this is like that. So
+
+84
+00:14:11.600 --> 00:14:25.660
+we can just do the same thing. Supply, subst, distrib, write, okay? And then we have the same thing.
+
+85
+00:14:28.300 --> 00:14:38.510
+Okay, and then we do the, all right. So now we have that this is equal to that. We just want
+
+86
+00:14:38.510 --> 00:14:42.030
+to remove these parentheses, and then we would have like a chain of equations, but it's not really
+
+87
+00:14:49.660 --> 00:14:56.510
+just finished that last step. So what do we want here? We want to add associativity, right?
+
+88
+00:14:57.070 --> 00:15:07.360
+Because we want to remove these parentheses from there, and we want to move them in one step.
+
+89
+00:15:07.600 --> 00:15:16.160
+So instead of XA plus YA plus all parenthesized XB plus YB, now we want this parenthesis to be,
+
+90
+00:15:16.160 --> 00:15:19.840
+to go in one step. So we want to look for a theorem that says the following.
+
+91
+00:15:22.380 --> 00:15:26.620
+So we want to say, we want to see something that says, we want to find something that says
+
+92
+00:15:27.500 --> 00:15:58.290
+A plus B plus C equals A plus B plus, and that is called semi-ring normalization rules,
+
+93
+00:15:58.290 --> 00:16:05.140
+but there must be something simpler than that, because it's a simpler name. Let's just fix the
+
+94
+00:16:05.140 --> 00:16:18.830
+types, and then I hope that is fine, what we will know. So I think that, you know, well,
+
+95
+00:16:18.830 --> 00:16:28.660
+okay, let's just copy this one, but that probably should be just the opposite of associativity.
+
+96
+00:16:28.660 --> 00:16:39.470
+So if we do this the other way around like that, this should be associativity. So we want like add
+
+97
+00:16:39.470 --> 00:16:46.060
+associativity, but we want it in the other way around. We want, so we want, remember we have
+
+98
+00:16:46.060 --> 00:16:49.420
+something with parenthesis, and then we will want to translate it to something that doesn't have
+
+99
+00:16:49.420 --> 00:16:57.070
+the parenthesis. So what we can do is, so this is what we have at associativity,
+
+100
+00:16:57.070 --> 00:17:04.300
+then what we need to reverse it by using symmetric. So this would give us the opposite of the rule,
+
+101
+00:17:04.300 --> 00:17:10.380
+which is the right direction. So let me write, let me also write down symmetric on our notes.
+
+102
+00:17:10.380 --> 00:17:46.580
+So if lemma 1 is x equals y, then lemma 1 with symmetric is y equals x. Okay, so now we need to
+
+103
+00:17:46.580 --> 00:17:52.090
+apply that rule again. So we're going, we're going to copy the left-hand side from there,
+
+104
+00:17:55.560 --> 00:18:08.780
+second, sorry, the right-hand side from there. That should be our new left-hand side,
+
+105
+00:18:10.500 --> 00:18:33.860
+and we want to remove these parenthesis. So we can just say by apply subst and asoc symmetric,
+
+106
+00:18:33.860 --> 00:18:37.540
+we have a problem in the theorem, same in the thread, that's why it's red, because there is
+
+107
+00:18:37.540 --> 00:18:43.060
+an error. So we have that, then we have the same thing as usual. Okay, and now we have,
+
+108
+00:18:43.140 --> 00:18:48.980
+okay, so now what do we have? We have a chain of equalities that basically has, says what we want.
+
+109
+00:18:48.980 --> 00:18:57.480
+So we can, so how can we do that? Remember, I told you that you can, these substitutions,
+
+110
+00:18:57.480 --> 00:19:01.880
+you apply them to our goal, and then they keep changing it. So we can just apply these
+
+111
+00:19:01.880 --> 00:19:08.790
+substitutions one after the other to that, to the final goal, and then it will change it
+
+112
+00:19:08.790 --> 00:19:18.810
+in the following way. You can just say show thesis, and then you apply subst one,
+
+113
+00:19:19.820 --> 00:19:34.340
+and then you apply subst two, and then you apply subst three, and then you apply subst four. So these
+
+114
+00:19:34.340 --> 00:19:39.380
+are all the transformations of the goal that we want, and then we have the final goal like that,
+
+115
+00:19:39.460 --> 00:19:43.780
+but the idiomatic way is able to do that is the following. So if you want to have a chain of
+
+116
+00:19:43.780 --> 00:19:48.500
+equalities like that, where you do substitutions or more than substitutions, this is how you do it.
+
+117
+00:19:48.500 --> 00:19:52.820
+So you can just say, okay, this is the first step, but then the second step, instead of saying have
+
+118
+00:19:52.820 --> 00:20:00.420
+two, you say also have, you can call it two as well, but instead of copying the right-hand side,
+
+119
+00:20:00.420 --> 00:20:06.410
+you can do this, and then instead of copying the right-hand side here, you can also do this,
+
+120
+00:20:06.410 --> 00:20:25.560
+the same, you'll have to say also, and then here you can say also as well. So here we're,
+
+121
+00:20:27.130 --> 00:20:29.690
+instead of copying all of these right-hand sides, we're just evolving our
+
+122
+00:20:32.600 --> 00:20:50.260
+chain of equalities, and now we can say finally, we can say finally have thesis, I guess,
+
+123
+00:20:50.820 --> 00:20:57.320
+thesis, which is the goal that we wanted, and then that's exactly what we have, because when you
+
+124
+00:20:59.080 --> 00:21:04.040
+do a chain of equalities like that, and then say finally in the end, what you have is an equality
+
+125
+00:21:04.040 --> 00:21:16.940
+between that, the first left-hand side, and the second, and the last right-hand side.
+
+126
+00:21:21.850 --> 00:21:28.950
+So you can, you can say finally have thesis by thought, because you already, because as I said
+
+127
+00:21:28.950 --> 00:21:34.500
+earlier, when if you have something, if you, if you have something, if you have, let me just
+
+128
+00:21:34.500 --> 00:21:51.210
+write two notes here, right? So two extra notes on Isabelle, first one is on if the goal,
+
+129
+00:21:51.850 --> 00:22:15.020
+I'll just call this Isabelle notes, if the goal is p implies p, so you want to show p and then you have
+
+130
+00:22:15.020 --> 00:22:33.420
+some p in your assumption, then you close it by adult, right? And the second thing is you can use
+
+131
+00:22:38.550 --> 00:22:45.820
+for representing a chain of equalities, you can say x equals let's say y, which is equal to z,
+
+132
+00:22:45.900 --> 00:22:52.700
+which is equal to a, which is equal to b, and then say, and then after you show all of these things
+
+133
+00:22:52.700 --> 00:22:59.690
+by substitutions or other means, you can say finally x equals b, and then you would have,
+
+134
+00:23:00.490 --> 00:23:05.930
+you'd have that, so you'd say have, and also have that, and also have that,
+
+135
+00:23:06.900 --> 00:23:10.340
+and also have that, and then you would have finally had this. So this is also an
+
+136
+00:23:10.340 --> 00:23:23.900
+a geometric way to do. So anyway, let's go back and finish this proof. So, so you say finally have
+
+137
+00:23:23.900 --> 00:23:29.340
+thesis. So thesis here is just, is a variable that basically has that expression in it,
+
+138
+00:23:29.340 --> 00:23:35.420
+stored in it. So, so you can say finally have thesis, or finally, I think show thesis. Yeah,
+
+139
+00:23:35.420 --> 00:23:41.400
+and that's it. So then we were done with that proof. And that's basically one proof by
+
+140
+00:23:41.960 --> 00:23:47.880
+substitution. So I think that's all for substitution. Thank you for listening,
+
+141
+00:23:47.880 --> 00:23:50.920
+and I hope you try it on your own and do it well.

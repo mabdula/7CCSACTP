@@ -1,0 +1,402 @@
+WEBVTT
+
+
+1
+00:00:00.820 --> 00:00:14.420
+Hello, everyone. I hope you're all well. In this video, I will be discussing with you some Isabelle-specific topics.
+
+2
+00:00:14.420 --> 00:00:22.420
+So they are mainly, there won't be much theoretical content. I will just show you more of a longer demo of Isabelle
+
+3
+00:00:22.420 --> 00:00:27.520
+and doing more advanced things than what we have done already in Isabelle.
+
+4
+00:00:27.520 --> 00:00:41.010
+So, but let me just firstly say what I'm going to talk about. So previously, in the previous videos,
+
+5
+00:00:41.010 --> 00:01:12.580
+like very briefly, what we did was basic interface of Isabelle and how to write terms and theorems
+
+6
+00:01:12.580 --> 00:01:27.790
+and then proof techniques, basic proof techniques, and these included forward, backward, substitution,
+
+7
+00:01:27.790 --> 00:01:47.730
+and induction on numbers. And in the last two videos, which is a part of this week, we did lists.
+
+8
+00:01:47.730 --> 00:01:55.010
+What I meant was recursion of a list. How can you define functions that are recursive of a list?
+
+9
+00:01:55.010 --> 00:02:36.860
+And proving using structural induction on lists. So in this video, so we're going to basically discuss automation of proofs in Isabelle.
+
+10
+00:02:36.860 --> 00:02:49.020
+Of course, I'm going to be talking mainly about basic automation.
+
+11
+00:02:49.020 --> 00:03:10.310
+So a lot of you must have been questioning and wondering as to how people have achieved all of these big projects that I told you about
+
+12
+00:03:10.310 --> 00:03:17.570
+using interactive same proofers, given that we do, given that in all the proofs of Isabelle that I showed you,
+
+13
+00:03:17.570 --> 00:03:24.570
+we do very small steps per proof. And if you want to prove anything meaningful, it takes a large number of steps.
+
+14
+00:03:24.570 --> 00:03:31.570
+So in reality, this was just an introduction to you to tell you about different ways of reasoning in Isabelle.
+
+15
+00:03:31.570 --> 00:03:44.230
+But what people actually do is use a lot of automation.
+
+16
+00:03:44.230 --> 00:03:55.230
+And so in Isabelle, the one advantage of that theorem prover is that it has a lot better proof automation techniques, technologies or methods than other proof of the provers like Lean or Coq, for example.
+
+17
+00:03:55.230 --> 00:04:02.900
+And today I will be discussing with you some of those proof automation methods.
+
+18
+00:04:04.510 --> 00:04:27.270
+So I will probably go back and forth between the backboard and Isabelle, just to show you how to use the different automation methods.
+
+19
+00:04:27.270 --> 00:04:34.270
+So the first method that I will discuss with you, and it's the most basic and important one, is simplification.
+
+20
+00:04:34.270 --> 00:04:41.330
+So what is simplification? You're right.
+
+21
+00:04:41.330 --> 00:04:51.490
+So simplification is a proof automation method that depends on something called the simplifier, which basically is a proof.
+
+22
+00:04:51.490 --> 00:05:34.480
+So it applies substitutions to a given goal, the hope, finish the goal, or at least makes it easier for you to finish it.
+
+23
+00:05:34.480 --> 00:05:48.280
+And when I say it applies substitutions to a given goal, what I mean by that, if you remember, we had these substitutions.
+
+24
+00:05:48.280 --> 00:05:55.210
+So let me just give you an example substitution. For example, an example substitution is the following.
+
+25
+00:05:55.210 --> 00:06:20.010
+So if you have, like, so, for example, the length of X is attended to I's is equal to the length of X's plus the length of Y's.
+
+26
+00:06:22.290 --> 00:06:34.320
+So this is an example substitution. So another example substitution is conditional one, for example, that says we have done, like, all of these are things that we have seen.
+
+27
+00:06:34.320 --> 00:06:49.460
+So if X is greater than or equal to Y, then let's say X minus Y plus C equals X plus C minus Y.
+
+28
+00:06:49.460 --> 00:06:57.460
+So the idea here is that you just change the goal and the simplifier applies these substitutions always from left to right.
+
+29
+00:06:57.460 --> 00:07:20.030
+In the same way, the subs method does. So it applies substitutions from left to right, and it does so as many times as possible.
+
+30
+00:07:20.030 --> 00:08:01.660
+What does that mean? What does as many times as possible mean? It means that sometimes, like, not sometimes, it always will try to do these simplifications until no simplification can be substituted in the goal.
+
+31
+00:08:01.660 --> 00:08:27.190
+So, for instance, we substituted in the goal. So, for instance, this rule here, it will be applied until there aren't any length of X's appended to Y's in the goal.
+
+32
+00:08:27.190 --> 00:08:31.190
+So it will keep applying this until they're all gone. And the same for this one.
+
+33
+00:08:31.190 --> 00:09:02.140
+But because of that, it sometimes does not terminate. And what they mean by that, that, for example, if you have two simple rules, one of them says that, let's say just abstractly, if I say F of X equals G of X and G of X equals F of X, then you have a loop in the simplifier.
+
+34
+00:09:02.140 --> 00:09:22.390
+And then loops, because we keep rewriting every F to G, and then after it does that, it looks again, if the goal can be simplified with any of its rules, and it will apply the G of X to F and then can go back and forth between F and G.
+
+35
+00:09:22.390 --> 00:09:31.860
+So it would loop forever. So that's one thing.
+
+36
+00:09:31.860 --> 00:09:42.820
+Another thing I want to say, so let me just, I'll just say one more thing and then do a demo, a quick demo with it.
+
+37
+00:09:42.820 --> 00:10:25.900
+So, did I say it has a library already? Yeah, no, it's a cell filling. It has, by default, a very large library of same rules or substitutions, and for example, for example, like about all the different concepts that are already defined in Isabelle.
+
+38
+00:10:25.900 --> 00:10:45.020
+For example, when we say imports main, we get concepts like append and length of list, et cetera, and has so many simplifications like this one up here in its sim set that automatically would be applied.
+
+39
+00:10:45.020 --> 00:10:53.020
+So if you just say apply, so if you say apply simplifier, apply sim, if you say apply sim, it will already do this library.
+
+40
+00:10:53.020 --> 00:11:24.730
+Also, whenever you define any recursive function, F simps, if you remember, these are the rules that define the equations of that recursive function, F simps are added to the simplifier automatically.
+
+41
+00:11:24.730 --> 00:11:35.430
+So that whenever you try to prove anything about this function that you define, it will apply these rules.
+
+42
+00:11:35.430 --> 00:11:59.420
+Okay, you can manually extend it. Yeah, maybe that's enough for this. I'll just try it a few times, like on a few goals, and then you can go back and continue here.
+
+43
+00:11:59.420 --> 00:12:12.910
+So let's go to Isabelle to try it. So now I will just open, if you remember that theory file list induction, I will open it again, just to try and automate the proofs in it.
+
+44
+00:12:12.910 --> 00:12:38.090
+But before I do that, I'll just try and do some simple theorem. So, for example, the way you use the simplifier, you say for here, for example, if I say lemma, let's say five equals two plus three, then that should work by the simplifier.
+
+45
+00:12:38.090 --> 00:12:42.090
+So that's how you use it, basically. And then you have proved the theorem. So you say by simp.
+
+46
+00:12:42.090 --> 00:13:00.810
+Also, you can, that's how you invoke it. So let's go back here quickly to the blackboard and then try it on the previous theorems that we have done to see how much it can automate.
+
+47
+00:13:00.810 --> 00:13:46.950
+So another thing is that you can manually extend it, extend its simp rules or remove things from the simp rules using apply simp, add rule one, for example, and delete rule two.
+
+48
+00:13:46.950 --> 00:14:04.400
+So let me just try and do that again on Isabelle with you. So, for example, here we were doing this application list. Let's try something on lists and then see whether it works.
+
+49
+00:14:04.400 --> 00:14:34.750
+So let's try the length, show that the length of a list appended with two other lists, x's, y's, and z's, is the same as the length of x's plus the length of y's plus the length of z's.
+
+50
+00:14:34.750 --> 00:14:47.080
+So you can do that by simp, because the simplifier, as I said, has that simple about length of x's appended to y's.
+
+51
+00:14:47.080 --> 00:14:58.590
+But if we remove that theorem, so I'll just show you how to remove it. For example, if we can say del, by the way, apply, if you say by, that's very similar.
+
+52
+00:14:58.590 --> 00:15:10.190
+That's almost the same as saying apply something and then dot. So, for instance, here, apply simp, and then dot, it's the same as saying by.
+
+53
+00:15:10.190 --> 00:15:22.820
+So here I will just say apply simp, delete, length, append, which is the theorem that has, let me just show you that theorem.
+
+54
+00:15:22.820 --> 00:15:39.840
+This is the theorem that has that relationship between the length of the appended two lists and that is the sum of the two lengths.
+
+55
+00:15:39.840 --> 00:15:46.840
+So if we remove that from the simp set, then simplifier fails. As you can see here down, it just failed to apply proof method.
+
+56
+00:15:46.840 --> 00:15:59.230
+So that's, for example, how you remove theorems from the simp set.
+
+57
+00:15:59.230 --> 00:16:12.790
+So now, after deleting this lemma like that, you can delete it like that. Let's try something else.
+
+58
+00:16:12.790 --> 00:16:25.950
+Let's try the addition to add the lemma to the simp set. So I will just do the same thing. I'll just add it again after removing it.
+
+59
+00:16:25.950 --> 00:16:44.580
+And now we have it proved. So basically, even if we have removed it here, but then you can also add it with the simp add like that.
+
+60
+00:16:44.580 --> 00:16:56.960
+So now, to make that more real, to make it clear what the impact of that is, let's try it on one of the proofs, on some of the proofs that we did.
+
+61
+00:16:56.960 --> 00:17:11.790
+Remember, we had this, well, not this lemma. Maybe I will just not do this lemma. I will do the other lemma about max list and the problem with this previous lemma.
+
+62
+00:17:12.790 --> 00:17:28.220
+Remember, we defined this max list, max from list. So I will just prove the same lemma that we discussed in our last video.
+
+63
+00:17:28.220 --> 00:17:39.180
+So what was it? x in this set of x's, then that implies that x is smaller than or equal to max list x's, right?
+
+64
+00:17:39.180 --> 00:18:03.660
+But we actually didn't define the function list set. So I will just define it here. So list set, the function that returns, it takes a list and returns a set of elements in that list.
+
+65
+00:18:03.660 --> 00:18:38.900
+So let's say list set of the empty list is the empty set and list set, so again, this is a recursive function, as you can see, of x and x's is insert x in lists, the resulting set from calling list set on the rest of the list.
+
+66
+00:18:38.900 --> 00:18:46.900
+So now we have that lemma that we wanted to prove. So before I prove that lemma, I just want to show you the simps again, the simp rules that were added.
+
+67
+00:18:46.900 --> 00:19:01.910
+So list set, for example, list set simps, those were added to the simp set, and max list simps were all added to the simp set, right?
+
+68
+00:19:01.910 --> 00:19:43.510
+So let's see that as well, max prime simps. So let's prove this theorem again. So what we did in PennyPair, we did it by induction, and then a few rule, a few substitutions, and also some forward reasoning steps.
+
+69
+00:19:43.510 --> 00:19:50.510
+So let's try to see if the simplifier can handle the substitutions, and then I'll show you how we can handle the forward reasoning steps later.
+
+70
+00:19:50.510 --> 00:20:00.400
+Maybe the simplifier can handle the forward reasoning as well. So I'm experimenting here with you.
+
+71
+00:20:00.400 --> 00:20:14.500
+So nil, so that's the empty list. OK, so we have here what? So we here have that x is in list set of empty, which means that x is an empty set, and that should be a contradiction.
+
+72
+00:20:14.500 --> 00:20:26.030
+From a contradiction, you can derive anything. So let's see if the simplifier can just do it. So yeah, it can do it, as you can see.
+
+73
+00:20:26.030 --> 00:20:42.250
+So it summarizes a huge number of steps. So here we have x is in list set of x's, then that implies, so this is the induction hypothesis, and this is the, these are the premises of induction hypothesis, and this is the conclusion.
+
+74
+00:20:42.250 --> 00:21:05.510
+So let's see if the simplifier can also do that. Yeah, it couldn't do that because it has forward reasoning, and then we need to divide the proof slightly more for the simplifier to handle.
+
+75
+00:21:05.510 --> 00:21:19.430
+So let's try and do that together. So the original, and on the blackboard, our proof was, let me just see what the steps were.
+
+76
+00:21:19.430 --> 00:21:35.310
+So let's just try and do that. Let's just try to trace the steps as we did them there. So what we did there was that x is in this set of y's, this is from the case assumption, and lemma 2 was lemma 2 again.
+
+77
+00:21:35.310 --> 00:21:48.140
+lemma 2 is a is in list, if a is in this set, then either a equals b or a is in list of b's. Okay, so that, that we need to firstly have that lemma.
+
+78
+00:21:48.140 --> 00:21:57.520
+Perhaps I will just prove that lemma now, like here as well. So I'll just call this lemma what? What did you call it?
+
+79
+00:21:58.940 --> 00:22:30.780
+And lemma 2, so this lemma. So let's try and prove that. So what does the lemma, what did the lemma say? The lemma said if x is in this, I mean, we already had that lemma actually automatically concluded by the simplifier.
+
+80
+00:22:30.780 --> 00:22:37.780
+I just remembered, like, look at the proof state. When we applied simplifier, the simplifier, it didn't finish the goal, but it gives us another proof state.
+
+81
+00:22:37.780 --> 00:22:49.870
+And that proof state included the result of this lemma that we wanted, and it could automatically understand that or know that from its own many rewrite rules that are stored in it.
+
+82
+00:22:49.870 --> 00:23:01.870
+So it knew that given that x is in this set of a cons x's, it was able to conclude that i x is either in this one or it is equal to that one.
+
+83
+00:23:01.870 --> 00:23:18.370
+So then that means that we have this step there. So that's, yeah, but let's do that. Okay, so sorry, I missed actually the main step of the proof, which was just to do case splits.
+
+84
+00:23:18.370 --> 00:23:40.830
+So let's do that, to split cases on whether x is equal to a. So let's try that. So case two means that x is the same as a, right?
+
+85
+00:23:40.830 --> 00:23:56.140
+So we, in this case, like, how did we, how did the proof go? So let's go to the, like, board. In this case, the proof went by saying, okay, y is smaller than that.
+
+86
+00:23:56.140 --> 00:24:05.420
+This is from lemma one. So that's this lemma. So we need to show that lemma or see if simplifier can conclude it.
+
+87
+00:24:05.420 --> 00:24:22.630
+And then by case assumptions, we have that y was equal to x. Okay, so what I can do there, okay, so the first step here, we needed this first lemma, right?
+
+88
+00:24:22.630 --> 00:24:30.590
+And the second step here, we needed the substitution, the case assumption, right?
+
+89
+00:24:30.590 --> 00:24:42.910
+So let's see if simplifier can conclude these things or we need to actually prove lemma one. Yeah, so the simplifier was able to conclude both, like, it was able.
+
+90
+00:24:42.910 --> 00:24:53.700
+Sorry, I need to show you the Isabelle again. So we need to get this step and this step.
+
+91
+00:24:53.700 --> 00:25:00.700
+In order for us to get the first step, we needed lemma one, and then the second step was just a substitution of the case assumption, right?
+
+92
+00:25:00.700 --> 00:25:14.700
+So let's go back to Isabelle and just show, just see how that works there. So here we have the case assumption, okay, x equals a, as you can see, and we have then show thesis, which means that we can, we're trying to show that knowing the case assumption.
+
+93
+00:25:14.700 --> 00:25:22.890
+So the case assumption is included in our knowledge now, because we have then, if we remove the then, then we don't know that, right?
+
+94
+00:25:22.890 --> 00:25:32.980
+So, so what we want to do is the following. We wanted to do two steps. Firstly, say y is less than max list of y y's, or, you know, a here in this case, it's called a.
+
+95
+00:25:32.980 --> 00:25:43.560
+So we can just, and then, and then there was a substitution of the case assumption. So we can just try to do simp and see whether it works or no. And yes, it does work.
+
+96
+00:25:45.460 --> 00:26:02.450
+The second case, which was the four, which was, and when they're not equal, we had three steps. So firstly, so let's try it first and see if Simplify were able to handle it. Otherwise, yeah, we needed the induction hypothesis as well, if I remember correctly.
+
+97
+00:26:02.450 --> 00:26:24.740
+So we can just say using comms ih, it couldn't do it. And the reason it didn't do it, I think, as far as I can see from the proof is that we actually, let me just take you to the board, because we actually are using more than the induction hypothesis.
+
+98
+00:26:24.740 --> 00:26:58.750
+So we look here. So in the second step, in the second step, we're using induction hypothesis. And in the first step, we're using the case assumption, right? So I think what we can do then is to add the case assumption to the facts that simp uses.
+
+99
+00:26:58.750 --> 00:27:21.850
+So instead of cons ih, what was the other one called? Cons of two, I think. So let's try and see if that is what's going on, because it can also be the case that, you know, it just doesn't have the ability to do the reasoning, like when it failed to realise that you need to do case splits on x equals a.
+
+100
+00:27:21.850 --> 00:27:37.580
+So that's all for the simplification. And yeah, I hope you try it on other examples. Please do it on your own, on all the other demos that I did with you, and I hope that you have done on your own as well.

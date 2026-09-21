@@ -1,0 +1,31 @@
+1
+00:00:01,260 --> 00:00:22,300
+Hello, everyone. I hope you're all well. Today I'll be talking about how to do, oh, in this video I'll be talking about how to prove things about functions that are recursively defined on algebraic datatypes.
+
+2
+00:00:22,300 --> 00:00:35,120
+So before I do that, let me just remind you of where I am, where we are, and what this video is about.
+
+3
+00:00:35,120 --> 00:00:57,010
+So in the previous videos, what did we do? We dealt with Isabelle's interface.
+
+4
+00:00:58,010 --> 00:01:39,060
+We talked about basic reasoning methods or approaches, forward reasoning, backward reasoning, fusion, induction on maths, and case analysis.
+
+5
+00:01:39,060 --> 00:02:16,770
+And then we discussed how to deal with lists, both proving primitive recursive functions on lists, sorry, doing things, defining recursive functions on lists and proving theorems by structural induction on lists.
+
+6
+00:02:16,770 --> 00:02:38,780
+And then we discussed this topics video, which is algebraic datatypes in Isabelle, recursive algebraic datatypes in general in Isabelle and otherwise.
+
+7
+00:02:38,780 --> 00:03:48,420
+And then we discussed two things, encode data structure in datatype, in algebraic datatype, and then how to define functions recursively, how to define primitive recursive, primitive recursively on datatypes.
+
+8
+00:03:48,420 --> 00:04:23,250
+In this video, we will discuss by structural induction on datatypes.

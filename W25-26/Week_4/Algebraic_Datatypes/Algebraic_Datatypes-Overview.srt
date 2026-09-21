@@ -1,0 +1,31 @@
+1
+00:00:02,740 --> 00:00:20,440
+Hello, everyone. Today, I'll be talking to you about a more general approach to tackle recursion and defining datatypes in Isabelle.
+
+2
+00:00:20,440 --> 00:00:26,600
+So before I do that, let me just recap what we know until now so that it's clearer where we're going.
+
+3
+00:00:26,600 --> 00:01:05,580
+So in the previous weeks, what we did was as follows. So we learned how to deal with Isabelle's interface and how to prove and state theorems in Isabelle.
+
+4
+00:01:05,580 --> 00:01:28,340
+And that involved forward, backward reasoning and substitution induction on nets.
+
+5
+00:01:28,340 --> 00:02:04,500
+And we then learned last week how to do recursion on lists and structural mathematical induction on lists as well.
+
+6
+00:02:04,500 --> 00:02:17,450
+So this video, or this week in general, we're going to learn how to do that more generally, what we did for lists, but we're going to learn how to do it more generally.
+
+7
+00:02:17,450 --> 00:02:39,850
+So a summary of the topic of this video is maybe I can just call it defining algebraic datatypes in Isabelle, okay? Or in general.
+
+8
+00:02:39,850 --> 00:02:44,850
+So what are algebraic datatypes? I'll just summarize that. Maybe you just call it algebraic datatypes.
