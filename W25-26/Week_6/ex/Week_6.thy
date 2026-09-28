@@ -1,8 +1,8 @@
-(*<*)
+
 theory Week_6
   imports Main "HOL-Library.Multiset"
 begin
-(*>*)
+
 
 text \<open>\ExerciseSheet{6}{Algorithm Correctness \& Locales}\<close>
 
@@ -64,7 +64,7 @@ locale Map_ADT =
     and lookup :: "'k \<Rightarrow> 'm \<Rightarrow> 'v option"
   assumes lookup_empty: "lookup k empty_map = None"
       and lookup_update_same: "lookup k (update k v m) = Some v"
-      and lookup_update_diff: "k \<ne> k' \<Longrightarrow> lookup k (update k' v m) = lookup k m"
+      and lookup_update_diff: "k \<noteq> k' \<Longrightarrow> lookup k (update k' v m) = lookup k m"
 
 text \<open>
   Prove that inserting a key-value pair and immediately overriding the same key yields the same lookup result.
@@ -74,6 +74,6 @@ lemma (in Map_ADT) lookup_override:
   "lookup k (update k v2 (update k v1 m)) = Some v2"
   sorry
 
-(*<*)
+
 end
-(*>*)
+
