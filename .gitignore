@@ -76,3 +76,24 @@ isabelle-pide-mcp/
 *_sol.thy
 long_paper.bib
 **/long_paper.bib
+
+# Demo theories live only in the private repo: students construct them while following the videos
+W25-26/Week_*/*/ex/
+W25-26/Week_*/*/ROOT
+W25-26/Week_*/*/build.sh
+W25-26/Week_*/*/*.thy
+!W25-26/Week_*/ex/Week_*.thy
+W25-26/Week_*/*_Demo.thy
+W25-26/Week_*/Distrib_Eg.thy
+W25-26/Week_*/Natural_Deduction.thy
+W25-26/Week_*/LGT.thy
+W25-26/Week_1/2-FW/FW.pdf
+W25-26/Week_1/3-BW/BW.pdf
+W25-26/Week_1/4-Subst/Subst.pdf
+W25-26/Week_2/5-Induction/Induction.pdf
+W25-26/Week_2/6-CaseAnalysis/CaseAnalysis.pdf
+W25-26/Week_3/List_Induction/List_Induction.pdf
+W25-26/Week_3/List_Recursion/List_Recursion.pdf
+W25-26/Week_4/Algebraic_Datatypes/Algebraic_Datatypes.pdf
+W25-26/Week_4/Primitive_Recursion/Primitive_Recursion.pdf
+W25-26/Week_4/Structural_Induction/Structural_Induction.pdf
