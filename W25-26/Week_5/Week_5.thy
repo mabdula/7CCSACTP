@@ -1,8 +1,8 @@
-(*<*)
+
 theory Week_5
 imports Main
 begin
-(*>*)
+
 text \<open>\ExerciseSheet{5}{}\<close>
 
 text \<open>
@@ -63,10 +63,9 @@ text \<open>
 \<close>
 
 fun sum_upto :: "nat \<Rightarrow> nat" where
-(*<*)
-  "sum_upto 0 = 0"
-| "sum_upto (Suc n) = Suc n + sum_upto n"
-(*>*)
+
+  (* TODO: complete this definition *)
+
 
 text \<open>
   Before trying to prove a theorem, it is good practice to test conjectures with automated
@@ -96,25 +95,9 @@ text \<open>
 \<close>
 
 lemma sum_upto_gauss: "2 * sum_upto n = n * (n + 1)"
-(*<*)
-proof (induction n)
-  case 0
-  show ?case by simp
-next
-  case (Suc n)
-  have "2 * sum_upto (Suc n) = 2 * (Suc n + sum_upto n)"
-    by simp
-  also have "... = 2 * Suc n + 2 * sum_upto n"
-    by simp
-  also have "... = 2 * (n + 1) + n * (n + 1)"
-    using Suc.IH by simp
-  also have "... = (n + 2) * (n + 1)"
-    by (simp add: algebra_simps)
-  also have "... = Suc n * (Suc n + 1)"
-    by (simp add: algebra_simps)
-  finally show ?case .
-qed
-(*>*)
+
+  sorry
+
 
 text \<open>\Exercise{Proof Automation and Sledgehammer}\<close>
 
@@ -127,9 +110,9 @@ text \<open>
 \<close>
 
 lemma sum_upto_gauss_auto: "2 * sum_upto n = n * (n + 1)"
-(*<*)
-  by (induction n) (auto simp: algebra_simps)
-(*>*)
+
+  sorry
+
 
 text \<open>\Exercise{Accumulator-Based Tail-Recursive Summation}\<close>
 
@@ -146,10 +129,9 @@ text \<open>
 \<close>
 
 fun sum_upto_acc :: "nat \<Rightarrow> nat \<Rightarrow> nat" where
-(*<*)
-  "sum_upto_acc 0 acc = acc"
-| "sum_upto_acc (Suc n) acc = sum_upto_acc n (Suc n + acc)"
-(*>*)
+
+  (* TODO: complete this definition *)
+
 
 text \<open>
   Prove the invariant generalisation lemma relating \<open>sum_upto\_acc\<close> to \<open>sum_upto\<close>:
@@ -160,9 +142,9 @@ text \<open>
 \<close>
 
 lemma sum_upto_acc_eq: "sum_upto_acc n acc = sum_upto n + acc"
-(*<*)
-  by (induction n arbitrary: acc) auto
-(*>*)
+
+  sorry
+
 
 text \<open>
   Conclude that the tail-recursive summation starting with an accumulator of 0 satisfies the
@@ -170,9 +152,9 @@ text \<open>
 \<close>
 
 lemma sum_upto_acc_gauss: "2 * sum_upto_acc n 0 = n * (n + 1)"
-(*<*)
-  using sum_upto_acc_eq[of n 0] sum_upto_gauss by simp
-(*>*)
+
+  sorry
+
 
 text \<open>\Exercise{Multi-Agent Proof Engineering: Stack Machine Compiler Correctness}\<close>
 
@@ -250,15 +232,14 @@ text \<open>
 \<close>
 
 lemma exec_compile: "exec (compile e @ ins) s = exec ins (eval e # s)"
-(*<*)
-  by (induction e arbitrary: ins s) simp_all
-(*>*)
+
+  sorry
+
 
 theorem compiler_correct: "exec (compile e) [] = [eval e]"
-(*<*)
-  using exec_compile[where ins="[]" and s="[]"] by simp
-(*>*)
 
-(*<*)
+  sorry
+
+
 end
-(*>*)
+

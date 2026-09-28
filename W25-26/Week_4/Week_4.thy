@@ -1,11 +1,10 @@
-(*<*)
+
 theory Week_4
   imports Main
 begin
-(*>*)
+
 
 text \<open>\ExerciseSheet{4}{}\<close>
-
 
 
 text \<open>
@@ -37,10 +36,9 @@ text \<open>
 \<close>
 
 fun bst::"nat tree \<Rightarrow> bool" where
-(*<*)
-"bst Leaf = True"
-| "bst (Node l a r) = ((\<forall>x\<in>tree_set l. x < a) \<and> bst l \<and> (\<forall>x\<in>tree_set r. a < x) \<and> bst r)"
-(*>*)
+
+  (* TODO: complete this definition *)
+
 
 text \<open>\Exercise{Binary Search Trees: Search}\<close>
 
@@ -61,22 +59,16 @@ text \<open>
 \<close>
 
 fun isin :: "('a::linorder) tree \<Rightarrow> 'a \<Rightarrow> bool" where
-(*<*)
-"isin Leaf x = False" |
-"isin (Node l a r) x =
-  (if x < a then isin l x else
-   if x > a then isin r x
-   else True)"
-(*>*)
+
+  (* TODO: complete this definition *)
+
 
 text \<open>Prove that this program is correct.\<close>
 
 lemma tree_set_isin: "bst t \<Longrightarrow> isin t x = (x \<in> tree_set t)"
-(*<*)
-  apply (induction t)
-  apply (auto)
-  done
-(*>*)
+
+  sorry
+
 
 text \<open>\Exercise{Binary Search Trees: Inserting an Element}\<close>
 
@@ -84,32 +76,21 @@ text \<open>Write a functional program that inserts an element into a binary sea
       the new tree computed by the program is also a binary search tree.\<close>
 
 fun ins :: "'a::linorder \<Rightarrow> 'a tree \<Rightarrow> 'a tree" where
-(*<*)
-"ins x Leaf = Node Leaf x Leaf" |
-"ins x (Node l a r) =
-  (if x < a then Node (ins x l) a r else
-   if x > a then Node l a (ins x r)
-   else Node l a r)"
-(*>*)
+
+  (* TODO: complete this definition *)
 
 
 text \<open>Prove that your program is correct by showing that the inserted element is actually in the 
       resulting tree, and that the resulting tree is a binary search tree.\<close>
 
 lemma tree_set_ins: "tree_set (ins x t) = {x} \<union> tree_set t"
-(*<*)
-apply(induction t)
-apply auto
-done
-(*>*)
+
+  sorry
+
 
 lemma bst_ins: "bst t \<Longrightarrow> bst (ins x t)"
-(*<*)
-apply(induction t)
-apply (auto simp: tree_set_ins)
-done
-(*>*)
 
-(*<*)
+  sorry
+
+
 end
-(*>*)
