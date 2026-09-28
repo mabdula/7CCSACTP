@@ -1,8 +1,8 @@
-(*<*)
+
 theory Week_2
 imports Main
 begin
-(*>*)
+
 text \<open>\ExerciseSheet{2}{}\<close>
 
 text \<open>Important Note: Please download Isabelle from the link provided in the slides and bring a 
@@ -55,43 +55,9 @@ text \<open>\paragraph{Hints:}
 
    \<open>add_0_right, add_0_left, add_Suc_right, add_Suc\<close>
 \<close>
-(*<*)
-proof(induction n)
-  case 0
-  have 1: "0 + m = m"
-    using Groups.comm_monoid_add_class.add_0[where ?a = m]
-    .
 
-  have 2: "m + 0 = m"
-    using Groups.monoid_add_class.add_0_right
-    .
+  sorry
 
-  show ?case
-    apply(subst 1)
-    apply(subst 2)
-    ..
-
-next
-  case (Suc n)
-  have 1: "(Suc n) + m = Suc (n + m)"
-    using Nat.plus_nat.add_Suc
-    .
-
-  have 2: "m + Suc n = Suc (m + n)"
-    using Nat.add_Suc_right
-    .
-
-  show ?case
-    apply(subst 1)
-    apply(subst 2)
-    apply(subst Suc.IH)
-    ..
-
-qed
-(*show them how to use then and hence*)
-(*Show them how the lemma is universally quantified*)
-(*Tell them it is an exercise to perform the proof with the equational style*)
-(*>*)
 
 text \<open>\Exercise{Multiplication is Monotone}\<close>
 
@@ -154,73 +120,61 @@ Your pen-and-paper proof should indicate
 
 (*Note that finding the proof is like solving a puzzle where all the pieces fit together*)
 
-(*<*)
-  using assms
-proof(induction d)
-  case assms: 0
-  have 1: "c = 0"
-    using  Nat.bot_nat_0.extremum_uniqueI[OF assms(2)]
-    .
-    find_theorems "?x \<le> ?x"
 
-  show ?case
-    apply(subst 1) 
-    apply(subst mult_zero_right)
-    apply(subst mult_zero_right)
-    using preorder_class.order.refl
-    .
-
-next
-  case Suc: (Suc d)
-
-  show ?case
-  proof(cases "c = Suc d")
-    case c_eq_sucd: True
-    show ?thesis
-      apply(subst c_eq_sucd)
-      using mult_le_mono1[OF assms(1)]
-      .
-
-  next
-    case c_lt_sucd: False
-
-    have 1: "c > Suc d \<or> c < Suc d"
-      apply(subst neq_iff[symmetric])
-      using c_lt_sucd[symmetric]
-      .
-    have 2: "\<not> c > Suc d"
-      using leD[OF Suc(3)]
-      .
-    have 3: "c < Suc d"
-      using Meson.make_pos_rule'[OF 1 2]
-      .
-
-    have 4: "c \<le> d"
-      apply(subst less_Suc_eq_le[symmetric])
-      using 3
-      .
-                 
-
-    have 5: "a * c \<le> b * d"
-      using Suc.IH[OF assms(1) 4]
-      .
-
-    have 6: "b * d \<le> b * (Suc d)"
-      apply(rule mult_le_mono2)
-      apply(rule order.strict_implies_order)
-      using Nat.lessI
-      .
-    show ?thesis
-      using le_trans[OF 5 6]
-      .
-
-  qed
+  sorry
 
 
-qed
-(*>*)
+text \<open>\Exercise{Induction Hypothesis Generalisation}\<close>
+
+text \<open>Consider the following function, which adds two natural numbers using an accumulator: in
+      each recursive call it moves one @{term Suc} from its first argument to its second.\<close>
+
+fun add_acc :: "nat \<Rightarrow> nat \<Rightarrow> nat" where
+  "add_acc 0 m = m"
+| "add_acc (Suc n) m = add_acc n (Suc m)"
+
+text \<open>We want to prove that \<open>add_acc\<close> computes addition.\<close>
+
+lemma add_acc_correct: "add_acc n m = n + m"
+
+text \<open>
+ \paragraph{(a)} First try to prove the lemma by plain induction on \<open>n\<close>, i.e.\ with
+  \<open>proof(induction n)\<close>. Write down the goal of the step case and the induction hypothesis. Explain,
+  pen-and-paper, why the induction hypothesis is not strong enough to prove the step case.
+
+ \paragraph{(b)} Now prove the lemma, first pen-and-paper and then formally in Isabelle, by
+  generalising the induction hypothesis over \<open>m\<close>, i.e.\ with \<open>proof(induction n arbitrary: m)\<close>.
+  Your pen-and-paper proof should state the generalised induction hypothesis and say with which term
+  you instantiate its universally quantified variable in the step case.
+
+\paragraph{Hints:}
+ 1. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
+    \<open>arbitrary: m\<close>.
+
+ 2. An instance of a universally quantified fact can be obtained with \<open>of\<close>, e.g.\
+    \<open>Suc.IH[of "Suc m"]\<close>.
+
+ 3. The following lemmas suffice: \<open>add_acc.simps, add_0_left, add_Suc, add_Suc_right\<close>.
+\<close>
+
+  sorry
 
 
-(*<*)
+text \<open>
+ \paragraph{(c) Challenge (optional)} The following function multiplies using an accumulator.
+  Prove, pen-and-paper and in Isabelle, that it computes \<open>acc + n * m\<close>. Which variable must you
+  generalise over this time, and why?\<close>
+
+fun mult_acc :: "nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> nat" where
+  "mult_acc 0 m acc = acc"
+| "mult_acc (Suc n) m acc = mult_acc n m (acc + m)"
+
+lemma mult_acc_correct: "mult_acc n m acc = acc + n * m"
+
+text \<open>\paragraph{Hint:} The following lemmas suffice:
+      \<open>mult_acc.simps, mult_0, add_0_right, mult_Suc, add.assoc\<close>.\<close>
+
+  sorry
+
+
 end
-(*>*)

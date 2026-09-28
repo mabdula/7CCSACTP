@@ -16,7 +16,7 @@
 \endisadelimtheory
 %
 \begin{isamarkuptext}%
-\ExerciseSheet{7}{}%
+\ExerciseSheet{2}{}%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \begin{isamarkuptext}%
@@ -43,7 +43,7 @@ Consider the function \isa{{\isacharparenleft}{\kern0pt}{\isacharplus}{\kern0pt}
 
 Prove the following theorem, first pen-and-paper, and then formally in Isabelle.%
 \end{isamarkuptext}\isamarkuptrue%
-\isacommand{lemma}\isamarkupfalse%
+\isakeywordONE{lemma}\isamarkupfalse%
 \ add{\isacharunderscore}{\kern0pt}commutes{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}n{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ m\ {\isacharplus}{\kern0pt}\ n{\isachardoublequoteclose}%
 \begin{isamarkuptext}%
 \paragraph{Hints:} 
@@ -81,13 +81,13 @@ Consider the multiplication function \isa{{\isacharparenleft}{\kern0pt}{\isachar
       property of it, i.e.\ that it is monotonically increasing in both arguments. You should prove
       it both, pen-and-paper and in Isabelle.%
 \end{isamarkuptext}\isamarkuptrue%
-\isacommand{lemma}\isamarkupfalse%
+\isakeywordONE{lemma}\isamarkupfalse%
 \ mult{\isacharunderscore}{\kern0pt}mono{\isacharcolon}{\kern0pt}\isanewline
-\ \ \isakeyword{fixes}\ a\ b\ c\ d{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ nat\ %
+\ \ \isakeywordTWO{fixes}\ a\ b\ c\ d{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ nat\ %
 \isamarkupcmt{Note the alternative way of fixing the types of the constants%
 }\isanewline
-\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ {\isachardoublequoteopen}c\ {\isasymle}\ d{\isachardoublequoteclose}\isanewline
-\ \ \isakeyword{shows}\ {\isachardoublequoteopen}a\ {\isacharasterisk}{\kern0pt}\ c\ {\isasymle}\ b\ {\isacharasterisk}{\kern0pt}\ d{\isachardoublequoteclose}%
+\ \ \isakeywordTWO{assumes}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ {\isachardoublequoteopen}c\ {\isasymle}\ d{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}a\ {\isacharasterisk}{\kern0pt}\ c\ {\isasymle}\ b\ {\isacharasterisk}{\kern0pt}\ d{\isachardoublequoteclose}%
 \begin{isamarkuptext}%
 Your pen-and-paper proof should indicate
 
@@ -119,6 +119,86 @@ Your pen-and-paper proof should indicate
 \endisadelimproof
 %
 \isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Induction Hypothesis Generalisation}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Consider the following function, which adds two natural numbers using an accumulator: in
+      each recursive call it moves one \isa{\isaconst{Suc}} from its first argument to its second.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{fun}\isamarkupfalse%
+\ add{\isacharunderscore}{\kern0pt}acc\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}add{\isacharunderscore}{\kern0pt}acc\ {\isadigit{0}}\ m\ {\isacharequal}{\kern0pt}\ m{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}add{\isacharunderscore}{\kern0pt}acc\ {\isacharparenleft}{\kern0pt}Suc\ n{\isacharparenright}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}acc\ n\ {\isacharparenleft}{\kern0pt}Suc\ m{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes addition.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ add{\isacharunderscore}{\kern0pt}acc{\isacharunderscore}{\kern0pt}correct{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}add{\isacharunderscore}{\kern0pt}acc\ n\ m\ {\isacharequal}{\kern0pt}\ n\ {\isacharplus}{\kern0pt}\ m{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+\paragraph{(a)} First try to prove the lemma by plain induction on \isa{n}, i.e.\ with
+  \isa{proof{\isacharparenleft}{\kern0pt}induction\ n{\isacharparenright}{\kern0pt}}. Write down the goal of the step case and the induction hypothesis. Explain,
+  pen-and-paper, why the induction hypothesis is not strong enough to prove the step case.
+
+ \paragraph{(b)} Now prove the lemma, first pen-and-paper and then formally in Isabelle, by
+  generalising the induction hypothesis over \isa{m}, i.e.\ with \isa{proof{\isacharparenleft}{\kern0pt}induction\ n\ arbitrary{\isacharcolon}{\kern0pt}\ m{\isacharparenright}{\kern0pt}}.
+  Your pen-and-paper proof should state the generalised induction hypothesis and say with which term
+  you instantiate its universally quantified variable in the step case.
+
+\paragraph{Hints:}
+ 1. Use \isa{thm\ Suc{\isachardot}{\kern0pt}IH} in the step case to compare the induction hypothesis you get with and without
+    \isa{arbitrary{\isacharcolon}{\kern0pt}\ m}.
+
+ 2. An instance of a universally quantified fact can be obtained with \isa{of}, e.g.\
+    \isa{Suc{\isachardot}{\kern0pt}IH{\isacharbrackleft}{\kern0pt}of\ {\isachardoublequote}{\kern0pt}Suc\ m{\isachardoublequote}{\kern0pt}{\isacharbrackright}{\kern0pt}}.
+
+ 3. The following lemmas suffice: \isa{add{\isacharunderscore}{\kern0pt}acc{\isachardot}{\kern0pt}simps{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right}.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\paragraph{(c) Challenge (optional)} The following function multiplies using an accumulator.
+  Prove, pen-and-paper and in Isabelle, that it computes \isa{acc\ {\isacharplus}{\kern0pt}\ n\ {\isacharasterisk}{\kern0pt}\ m}. Which variable must you
+  generalise over this time, and why?%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{fun}\isamarkupfalse%
+\ mult{\isacharunderscore}{\kern0pt}acc\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}mult{\isacharunderscore}{\kern0pt}acc\ {\isadigit{0}}\ m\ acc\ {\isacharequal}{\kern0pt}\ acc{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}mult{\isacharunderscore}{\kern0pt}acc\ {\isacharparenleft}{\kern0pt}Suc\ n{\isacharparenright}{\kern0pt}\ m\ acc\ {\isacharequal}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}acc\ n\ m\ {\isacharparenleft}{\kern0pt}acc\ {\isacharplus}{\kern0pt}\ m{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ mult{\isacharunderscore}{\kern0pt}acc{\isacharunderscore}{\kern0pt}correct{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}mult{\isacharunderscore}{\kern0pt}acc\ n\ m\ acc\ {\isacharequal}{\kern0pt}\ acc\ {\isacharplus}{\kern0pt}\ n\ {\isacharasterisk}{\kern0pt}\ m{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+\paragraph{Hint:} The following lemmas suffice:
+      \isa{mult{\isacharunderscore}{\kern0pt}acc{\isachardot}{\kern0pt}simps{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ add{\isachardot}{\kern0pt}assoc}.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
 \isanewline
 %
 \endisatagproof
@@ -143,7 +223,7 @@ Your pen-and-paper proof should indicate
 %
 \end{isabellebody}%
 \endinput
-%:%file=Week_2.tex%:%
+%:%file=/media/llms/Theorem_Proving/7CCSACTP-private/Week_2/ex/Week_2.thy%:%
 %:%19=6%:%
 %:%23=8%:%
 %:%24=9%:%
@@ -206,4 +286,43 @@ Your pen-and-paper proof should indicate
 %:%112=150%:%
 %:%113=151%:%
 %:%114=152%:%
-%:%122=222%:%
+%:%131=223%:%
+%:%135=225%:%
+%:%136=226%:%
+%:%138=228%:%
+%:%139=228%:%
+%:%140=229%:%
+%:%141=230%:%
+%:%143=232%:%
+%:%145=234%:%
+%:%146=234%:%
+%:%148=237%:%
+%:%149=238%:%
+%:%150=239%:%
+%:%151=240%:%
+%:%152=241%:%
+%:%153=242%:%
+%:%154=243%:%
+%:%155=244%:%
+%:%156=245%:%
+%:%157=246%:%
+%:%158=247%:%
+%:%159=248%:%
+%:%160=249%:%
+%:%161=250%:%
+%:%162=251%:%
+%:%163=252%:%
+%:%164=253%:%
+%:%181=280%:%
+%:%182=281%:%
+%:%183=282%:%
+%:%185=284%:%
+%:%186=284%:%
+%:%187=285%:%
+%:%188=286%:%
+%:%189=287%:%
+%:%190=288%:%
+%:%191=288%:%
+%:%193=290%:%
+%:%194=291%:%
+%:%202=313%:%
