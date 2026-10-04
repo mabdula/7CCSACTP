@@ -37,7 +37,9 @@ proof-
   \<comment> \<open>Style: declarative (Isar \<open>have\<close>/\<open>show\<close>) with apply-style steps; forward (\<open>OF\<close>); backward (\<open>rule\<close>); \<open>subst\<close>.\<close>
 
   have 1: "A b"
+    \<comment> \<open>\<open>have\<close> states an intermediate fact (here named \<open>1\<close>) and proves it.\<close>
     using TA[OF T]
+    \<comment> \<open>\<open>using\<close> passes facts to the proof method that follows.\<close>
     .
     \<comment> \<open>\<open>.\<close> proves the goal directly by a fact given with \<open>using\<close>, instantiating its variables if needed.\<close>
 
@@ -55,11 +57,13 @@ proof-
     .
 
   show ?thesis
+    \<comment> \<open>\<open>show\<close> proves the goal of the enclosing proof; \<open>?thesis\<close> abbreviates that goal.\<close>
     using T
     apply(subst 3)
     \<comment> \<open>\<open>subst eq\<close> rewrites the goal with the equation \<open>eq\<close>, left to right; here \<open>a\<close> becomes \<open>b\<close>.\<close>
     .
 qed
+\<comment> \<open>\<open>qed\<close> closes the proof block, once \<open>show\<close> has proved its goal.\<close>
 
 
 end
