@@ -63,23 +63,21 @@ text \<open>Consider the multiplication function @{term "(*)"} defined in Isabel
       it both, pen-and-paper and in Isabelle.\<close>
 (*
 
-thm refl 
-
-thm diff_le_self
-
-thm mult_le_mono2
+thm le_0_eq
 
 thm mult_zero_right
 
-thm le0
+thm le_refl
 
-thm mult_Suc_right
+thm le_SucE
 
-thm add_mono
+thm le_SucI
 
-thm Suc_eq_plus1
+thm mult_le_mono1
 
-thm le_diff_conv
+thm mult_le_mono2
+
+thm le_trans
 
 *)
 
@@ -104,15 +102,14 @@ Your pen-and-paper proof should indicate
 \paragraph{Hints:}
  1. The proof should be by induction
 
- 2. The following lemmas suffice to prove the goal with only substitution, forward reasoning, and
-     induction:
+ 2. The following lemmas suffice to prove the goal with only substitution, forward reasoning using
+     \<open>OF\<close>, backward reasoning using \<open>rule\<close>, and induction:
 
-     \<open>refl, diff_le_self, mult_le_mono2, mult_zero_right, le0, mult_Suc_right, add_mono, Suc_eq_plus1,
-      le_diff_conv\<close>
+     \<open>le_0_eq, iffD1, mult_zero_right, le_refl, le_SucE, le_SucI, mult_le_mono1, mult_le_mono2, le_trans\<close>
 
- 3. When you have a term like \<open>x - y\<close>, where \<open>x\<close> is a \<open>nat\<close>, in the goal or the assumptions, you 
-     should perform proof by case analysis on whether \<open>y \<le> x\<close>. This is because of the way \<open>-\<close> is
-     defined for natural numbers, where \<open>x - y = 0\<close>, for any \<open>x \<le> y\<close>.
+ 3. In the step case, the assumption \<open>c \<le> Suc d\<close> leaves two possibilities: \<open>c \<le> d\<close> or
+     \<open>c = Suc d\<close>. Look at \<open>thm le_SucE\<close>, and use it with \<open>rule\<close> to split the proof into these two
+     cases.
 \<close>
 
 (*Note that finding the proof is like solving a puzzle where all the pieces fit together*)

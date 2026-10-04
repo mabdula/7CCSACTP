@@ -105,14 +105,14 @@ Your pen-and-paper proof should indicate
 \paragraph{Hints:}
  1. The proof should be by induction
 
- 2. The following lemmas suffice to prove the goal with only substitution, forward reasoning, and
-     induction:
+ 2. The following lemmas suffice to prove the goal with only substitution, forward reasoning using
+     \isa{OF}, backward reasoning using \isa{rule}, and induction:
 
-     \isa{refl{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}self{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{2}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}zero{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ le{\isadigit{0}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}mono{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}eq{\isacharunderscore}{\kern0pt}plus{\isadigit{1}}{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}conv}
+     \isa{le{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}eq{\isacharcomma}{\kern0pt}\ iffD{\isadigit{1}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}zero{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}refl{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}SucE{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}SucI{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{1}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{2}}{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}trans}
 
- 3. When you have a term like \isa{x\ {\isacharminus}{\kern0pt}\ y}, where \isa{x} is a \isa{nat}, in the goal or the assumptions, you 
-     should perform proof by case analysis on whether \isa{y\ {\isasymle}\ x}. This is because of the way \isa{{\isacharminus}{\kern0pt}} is
-     defined for natural numbers, where \isa{x\ {\isacharminus}{\kern0pt}\ y\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}}, for any \isa{x\ {\isasymle}\ y}.%
+ 3. In the step case, the assumption \isa{c\ {\isasymle}\ Suc\ d} leaves two possibilities: \isa{c\ {\isasymle}\ d} or
+     \isa{c\ {\isacharequal}{\kern0pt}\ Suc\ d}. Look at \isa{thm\ le{\isacharunderscore}{\kern0pt}SucE}, and use it with \isa{rule} to split the proof into these two
+     cases.%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -253,78 +253,77 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
 %:%58=51%:%
 %:%59=52%:%
 %:%60=53%:%
-%:%77=89%:%
-%:%81=91%:%
-%:%82=92%:%
-%:%83=93%:%
-%:%85=116%:%
-%:%86=116%:%
-%:%87=117%:%
-%:%88=117%:%
-%:%89=117%:%
-%:%90=118%:%
-%:%91=119%:%
-%:%93=122%:%
-%:%94=123%:%
-%:%95=124%:%
-%:%96=125%:%
-%:%97=126%:%
-%:%98=127%:%
-%:%99=128%:%
-%:%100=129%:%
-%:%101=130%:%
-%:%102=131%:%
-%:%103=132%:%
-%:%104=133%:%
-%:%105=134%:%
-%:%106=135%:%
-%:%107=136%:%
-%:%108=137%:%
-%:%109=138%:%
-%:%110=139%:%
-%:%111=140%:%
-%:%111=141%:%
-%:%112=142%:%
-%:%113=143%:%
-%:%114=144%:%
-%:%115=145%:%
-%:%132=216%:%
-%:%136=218%:%
-%:%137=219%:%
-%:%139=221%:%
-%:%140=221%:%
-%:%141=222%:%
-%:%142=223%:%
-%:%144=225%:%
-%:%146=227%:%
-%:%147=227%:%
-%:%149=230%:%
-%:%150=231%:%
-%:%151=232%:%
-%:%152=233%:%
-%:%153=234%:%
-%:%154=235%:%
-%:%155=236%:%
-%:%156=237%:%
-%:%157=238%:%
-%:%158=239%:%
-%:%159=240%:%
-%:%160=241%:%
-%:%161=242%:%
-%:%162=243%:%
-%:%163=244%:%
-%:%164=245%:%
-%:%165=246%:%
-%:%182=282%:%
-%:%183=283%:%
-%:%184=284%:%
-%:%186=286%:%
-%:%187=286%:%
-%:%188=287%:%
-%:%189=288%:%
-%:%190=289%:%
-%:%191=290%:%
-%:%192=290%:%
-%:%194=292%:%
-%:%195=293%:%
-%:%203=320%:%
+%:%77=94%:%
+%:%81=96%:%
+%:%82=97%:%
+%:%83=98%:%
+%:%85=119%:%
+%:%86=119%:%
+%:%87=120%:%
+%:%88=120%:%
+%:%89=120%:%
+%:%90=121%:%
+%:%91=122%:%
+%:%93=125%:%
+%:%94=126%:%
+%:%95=127%:%
+%:%96=128%:%
+%:%97=129%:%
+%:%98=130%:%
+%:%99=131%:%
+%:%100=132%:%
+%:%101=133%:%
+%:%102=134%:%
+%:%103=135%:%
+%:%104=136%:%
+%:%105=137%:%
+%:%106=138%:%
+%:%107=139%:%
+%:%108=140%:%
+%:%109=141%:%
+%:%110=142%:%
+%:%111=143%:%
+%:%112=144%:%
+%:%113=145%:%
+%:%114=146%:%
+%:%115=147%:%
+%:%132=192%:%
+%:%136=194%:%
+%:%137=195%:%
+%:%139=197%:%
+%:%140=197%:%
+%:%141=198%:%
+%:%142=199%:%
+%:%144=201%:%
+%:%146=203%:%
+%:%147=203%:%
+%:%149=206%:%
+%:%150=207%:%
+%:%151=208%:%
+%:%152=209%:%
+%:%153=210%:%
+%:%154=211%:%
+%:%155=212%:%
+%:%156=213%:%
+%:%157=214%:%
+%:%158=215%:%
+%:%159=216%:%
+%:%160=217%:%
+%:%161=218%:%
+%:%162=219%:%
+%:%163=220%:%
+%:%164=221%:%
+%:%165=222%:%
+%:%182=258%:%
+%:%183=259%:%
+%:%184=260%:%
+%:%186=262%:%
+%:%187=262%:%
+%:%188=263%:%
+%:%189=264%:%
+%:%190=265%:%
+%:%191=266%:%
+%:%192=266%:%
+%:%194=268%:%
+%:%195=269%:%
+%:%203=296%:%
