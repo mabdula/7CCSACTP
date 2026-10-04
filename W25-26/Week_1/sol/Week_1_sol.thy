@@ -40,6 +40,8 @@ proof-
     \<comment> \<open>\<open>have\<close> states an intermediate fact (here named \<open>1\<close>) and proves it.\<close>
     using TA[OF T]
     \<comment> \<open>\<open>using\<close> passes facts to the proof method that follows.\<close>
+    \<comment> \<open>\<open>r[OF f]\<close> discharges the first premise of rule \<open>r\<close> with fact \<open>f\<close> (forward reasoning);
+       here \<open>TA[OF T]\<close> is \<open>A b\<close>.\<close>
     .
     \<comment> \<open>\<open>.\<close> proves the goal directly by a fact given with \<open>using\<close>, instantiating its variables if needed.\<close>
 
