@@ -74,60 +74,6 @@ Prove the following theorem, first pen-and-paper, and then formally in Isabelle.
 \endisadelimproof
 %
 \begin{isamarkuptext}%
-\Exercise{Multiplication is Monotone}%
-\end{isamarkuptext}\isamarkuptrue%
-%
-\begin{isamarkuptext}%
-Consider the multiplication function \isa{{\isacharparenleft}{\kern0pt}{\isacharasterisk}{\kern0pt}{\isacharparenright}{\kern0pt}} defined in Isabelle. Prove the following
-      property of it, i.e.\ that it is monotonically increasing in both arguments. You should prove
-      it both, pen-and-paper and in Isabelle.%
-\end{isamarkuptext}\isamarkuptrue%
-\isakeywordONE{lemma}\isamarkupfalse%
-\ mult{\isacharunderscore}{\kern0pt}mono{\isacharcolon}{\kern0pt}\isanewline
-\ \ \isakeywordTWO{fixes}\ a\ b\ c\ d{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ nat\ %
-\isamarkupcmt{Note the alternative way of fixing the types of the constants%
-}\isanewline
-\ \ \isakeywordTWO{assumes}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ {\isachardoublequoteopen}c\ {\isasymle}\ d{\isachardoublequoteclose}\isanewline
-\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}a\ {\isacharasterisk}{\kern0pt}\ c\ {\isasymle}\ b\ {\isacharasterisk}{\kern0pt}\ d{\isachardoublequoteclose}%
-\begin{isamarkuptext}%
-Your pen-and-paper proof should indicate
-
- 1. what lemmas are you assuming,
-
- 2. on what variable are you preforming induction,
-
- 3. what are assumptions and the proof goals in the base case and the step case, and what is the
-    induction hypothesis, and
-
- 4. how are you instantiating the induction hypothesis, i.e. how do you show that its assumptions
-    hold and which quantified variables are instantiated with which constants.
-
-\paragraph{Hints:}
- 1. The proof should be by induction
-
- 2. The following lemmas suffice to prove the goal with only substitution, forward reasoning using
-     \isa{OF}, backward reasoning using \isa{rule}, and induction:
-
-     \isa{le{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}eq{\isacharcomma}{\kern0pt}\ iffD{\isadigit{1}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}zero{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}refl{\isacharcomma}{\kern0pt}\ not{\isacharunderscore}{\kern0pt}le{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}leI{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}antisym{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}SucI{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{1}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{2}}{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}trans}
-
- 3. In the step case, perform a case analysis with \isa{proof\ {\isacharparenleft}{\kern0pt}cases\ {\isachardoublequote}{\kern0pt}c\ {\isasymle}\ d{\isachardoublequote}{\kern0pt}{\isacharparenright}{\kern0pt}}. In the second case,
-     together with the assumption \isa{c\ {\isasymle}\ Suc\ d}, you can derive \isa{c\ {\isacharequal}{\kern0pt}\ Suc\ d}.%
-\end{isamarkuptext}\isamarkuptrue%
-%
-\isadelimproof
-%
-\endisadelimproof
-%
-\isatagproof
-%
-\endisatagproof
-{\isafoldproof}%
-%
-\isadelimproof
-%
-\endisadelimproof
-%
-\begin{isamarkuptext}%
 \Exercise{Induction Hypothesis Generalisation}%
 \end{isamarkuptext}\isamarkuptrue%
 %
@@ -180,6 +126,60 @@ Subtraction on natural numbers is truncated: \isa{n\ {\isacharminus}{\kern0pt}\ 
 \begin{isamarkuptext}%
 \paragraph{Hint:} In the case \isa{n\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}}, the assumption \isa{Suc\ m\ {\isasymle}\ {\isadigit{0}}} is impossible: look at
       \isa{thm\ Suc{\isacharunderscore}{\kern0pt}neq{\isacharunderscore}{\kern0pt}Zero}.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\Exercise{Multiplication is Monotone}%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Consider the multiplication function \isa{{\isacharparenleft}{\kern0pt}{\isacharasterisk}{\kern0pt}{\isacharparenright}{\kern0pt}} defined in Isabelle. Prove the following
+      property of it, i.e.\ that it is monotonically increasing in both arguments. You should prove
+      it both, pen-and-paper and in Isabelle.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ mult{\isacharunderscore}{\kern0pt}mono{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{fixes}\ a\ b\ c\ d{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ nat\ %
+\isamarkupcmt{Note the alternative way of fixing the types of the constants%
+}\isanewline
+\ \ \isakeywordTWO{assumes}\ {\isachardoublequoteopen}a\ {\isasymle}\ b{\isachardoublequoteclose}\ {\isachardoublequoteopen}c\ {\isasymle}\ d{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}a\ {\isacharasterisk}{\kern0pt}\ c\ {\isasymle}\ b\ {\isacharasterisk}{\kern0pt}\ d{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Your pen-and-paper proof should indicate
+
+ 1. what lemmas are you assuming,
+
+ 2. on what variable are you preforming induction,
+
+ 3. what are assumptions and the proof goals in the base case and the step case, and what is the
+    induction hypothesis, and
+
+ 4. how are you instantiating the induction hypothesis, i.e. how do you show that its assumptions
+    hold and which quantified variables are instantiated with which constants.
+
+\paragraph{Hints:}
+ 1. The proof should be by induction
+
+ 2. The following lemmas suffice to prove the goal with only substitution, forward reasoning using
+     \isa{OF}, backward reasoning using \isa{rule}, and induction:
+
+     \isa{le{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}eq{\isacharcomma}{\kern0pt}\ iffD{\isadigit{1}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}zero{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}refl{\isacharcomma}{\kern0pt}\ not{\isacharunderscore}{\kern0pt}le{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}leI{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}antisym{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}SucI{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{1}}{\isacharcomma}{\kern0pt}\ mult{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isadigit{2}}{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}trans}
+
+ 3. In the step case, perform a case analysis with \isa{proof\ {\isacharparenleft}{\kern0pt}cases\ {\isachardoublequote}{\kern0pt}c\ {\isasymle}\ d{\isachardoublequote}{\kern0pt}{\isacharparenright}{\kern0pt}}. In the second case,
+     together with the assumption \isa{c\ {\isasymle}\ Suc\ d}, you can derive \isa{c\ {\isacharequal}{\kern0pt}\ Suc\ d}.%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -243,65 +243,65 @@ Subtraction on natural numbers is truncated: \isa{n\ {\isacharminus}{\kern0pt}\ 
 %:%77=111%:%
 %:%81=113%:%
 %:%82=114%:%
-%:%83=115%:%
-%:%85=140%:%
-%:%86=140%:%
-%:%87=141%:%
-%:%88=141%:%
-%:%89=141%:%
-%:%90=142%:%
-%:%91=143%:%
-%:%93=146%:%
-%:%94=147%:%
-%:%95=148%:%
-%:%96=149%:%
-%:%97=150%:%
-%:%98=151%:%
-%:%99=152%:%
-%:%100=153%:%
-%:%101=154%:%
-%:%102=155%:%
-%:%103=156%:%
-%:%104=157%:%
-%:%105=158%:%
-%:%106=159%:%
-%:%107=160%:%
-%:%108=161%:%
-%:%109=162%:%
-%:%110=163%:%
-%:%111=164%:%
-%:%111=165%:%
-%:%112=166%:%
-%:%113=167%:%
-%:%114=168%:%
-%:%131=225%:%
-%:%135=227%:%
-%:%136=228%:%
-%:%138=230%:%
-%:%139=230%:%
-%:%141=233%:%
-%:%142=234%:%
-%:%143=235%:%
-%:%144=236%:%
-%:%145=237%:%
-%:%146=238%:%
-%:%147=239%:%
-%:%148=240%:%
-%:%149=241%:%
-%:%150=242%:%
-%:%151=243%:%
-%:%152=244%:%
-%:%153=245%:%
-%:%154=246%:%
-%:%155=247%:%
-%:%156=248%:%
-%:%157=249%:%
-%:%158=250%:%
-%:%158=251%:%
-%:%175=342%:%
-%:%176=343%:%
-%:%178=345%:%
-%:%179=345%:%
-%:%181=347%:%
-%:%182=348%:%
-%:%190=407%:%
+%:%84=116%:%
+%:%85=116%:%
+%:%87=119%:%
+%:%88=120%:%
+%:%89=121%:%
+%:%90=122%:%
+%:%91=123%:%
+%:%92=124%:%
+%:%93=125%:%
+%:%94=126%:%
+%:%95=127%:%
+%:%96=128%:%
+%:%97=129%:%
+%:%98=130%:%
+%:%99=131%:%
+%:%100=132%:%
+%:%101=133%:%
+%:%102=134%:%
+%:%103=135%:%
+%:%104=136%:%
+%:%104=137%:%
+%:%121=230%:%
+%:%122=231%:%
+%:%124=233%:%
+%:%125=233%:%
+%:%127=235%:%
+%:%128=236%:%
+%:%145=296%:%
+%:%149=298%:%
+%:%150=299%:%
+%:%151=300%:%
+%:%153=325%:%
+%:%154=325%:%
+%:%155=326%:%
+%:%156=326%:%
+%:%157=326%:%
+%:%158=327%:%
+%:%159=328%:%
+%:%161=331%:%
+%:%162=332%:%
+%:%163=333%:%
+%:%164=334%:%
+%:%165=335%:%
+%:%166=336%:%
+%:%167=337%:%
+%:%168=338%:%
+%:%169=339%:%
+%:%170=340%:%
+%:%171=341%:%
+%:%172=342%:%
+%:%173=343%:%
+%:%174=344%:%
+%:%175=345%:%
+%:%176=346%:%
+%:%177=347%:%
+%:%178=348%:%
+%:%179=349%:%
+%:%179=350%:%
+%:%180=351%:%
+%:%181=352%:%
+%:%182=353%:%
+%:%190=410%:%

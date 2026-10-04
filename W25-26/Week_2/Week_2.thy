@@ -57,6 +57,50 @@ text \<open>\paragraph{Hints:}
   sorry
 
 
+text \<open>\Exercise{Induction Hypothesis Generalisation}\<close>
+
+text \<open>Subtraction on natural numbers is truncated: \<open>n - m = 0\<close> whenever \<open>n \<le> m\<close>. Prove that, as long
+      as \<open>m \<le> n\<close>, subtracting \<open>m\<close> and adding it back gives \<open>n\<close> again.\<close>
+
+lemma sub_add: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
+
+text \<open>
+ \paragraph{(a)} First try to prove the lemma by plain induction on \<open>n\<close>, i.e.\ with
+  \<open>proof(induction n)\<close>. Write down the goal of the step case, its assumption and the induction
+  hypothesis. Explain, pen-and-paper, why the induction hypothesis is not strong enough to prove the
+  step case. Consider the case \<open>m = Suc k\<close>.
+
+ \paragraph{(b)} Now prove the lemma, first pen-and-paper and then formally in Isabelle, by
+  generalising the induction hypothesis over \<open>m\<close>, i.e.\ with \<open>proof(induction n arbitrary: m)\<close>.
+  Your pen-and-paper proof should state the generalised induction hypothesis and say with which term
+  you instantiate its universally quantified variable in the step case.
+
+\paragraph{Hints:}
+ 1. In the step case, perform a case analysis on \<open>m\<close> with \<open>proof(cases m)\<close>: either \<open>m = 0\<close> or
+    \<open>m = Suc k\<close> for some \<open>k\<close>. You can name the case assumption, e.g.\ \<open>case m_eq: (Suc k)\<close>.
+
+ 2. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
+    \<open>arbitrary: m\<close>. The induction hypothesis has an assumption, which you can discharge with \<open>OF\<close>.
+
+ 3. The following lemmas suffice: \<open>le_0_eq, iffD1, diff_zero, add_0_left, add_0_right, Suc_le_mono,
+    diff_Suc_Suc, add_Suc_right\<close>.
+\<close>
+
+  sorry
+
+
+text \<open>
+ \paragraph{(c) Challenge (optional)} Prove the same lemma, pen-and-paper and in Isabelle, by
+  induction on \<open>m\<close> instead. Which variable must you generalise now, and why?\<close>
+
+lemma sub_add_on_m: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
+
+text \<open>\paragraph{Hint:} In the case \<open>n = 0\<close>, the assumption \<open>Suc m \<le> 0\<close> is impossible: look at
+      \<open>thm Suc_neq_Zero\<close>.\<close>
+
+  sorry
+
+
 text \<open>\Exercise{Multiplication is Monotone}\<close>
 
 text \<open>Consider the multiplication function @{term "(*)"} defined in Isabelle. Prove the following
@@ -119,50 +163,6 @@ Your pen-and-paper proof should indicate
 
 (*Note that finding the proof is like solving a puzzle where all the pieces fit together*)
 
-
-  sorry
-
-
-text \<open>\Exercise{Induction Hypothesis Generalisation}\<close>
-
-text \<open>Subtraction on natural numbers is truncated: \<open>n - m = 0\<close> whenever \<open>n \<le> m\<close>. Prove that, as long
-      as \<open>m \<le> n\<close>, subtracting \<open>m\<close> and adding it back gives \<open>n\<close> again.\<close>
-
-lemma sub_add: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
-
-text \<open>
- \paragraph{(a)} First try to prove the lemma by plain induction on \<open>n\<close>, i.e.\ with
-  \<open>proof(induction n)\<close>. Write down the goal of the step case, its assumption and the induction
-  hypothesis. Explain, pen-and-paper, why the induction hypothesis is not strong enough to prove the
-  step case. Consider the case \<open>m = Suc k\<close>.
-
- \paragraph{(b)} Now prove the lemma, first pen-and-paper and then formally in Isabelle, by
-  generalising the induction hypothesis over \<open>m\<close>, i.e.\ with \<open>proof(induction n arbitrary: m)\<close>.
-  Your pen-and-paper proof should state the generalised induction hypothesis and say with which term
-  you instantiate its universally quantified variable in the step case.
-
-\paragraph{Hints:}
- 1. In the step case, perform a case analysis on \<open>m\<close> with \<open>proof(cases m)\<close>: either \<open>m = 0\<close> or
-    \<open>m = Suc k\<close> for some \<open>k\<close>. You can name the case assumption, e.g.\ \<open>case m_eq: (Suc k)\<close>.
-
- 2. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
-    \<open>arbitrary: m\<close>. The induction hypothesis has an assumption, which you can discharge with \<open>OF\<close>.
-
- 3. The following lemmas suffice: \<open>le_0_eq, iffD1, diff_zero, add_0_left, add_0_right, Suc_le_mono,
-    diff_Suc_Suc, add_Suc_right\<close>.
-\<close>
-
-  sorry
-
-
-text \<open>
- \paragraph{(c) Challenge (optional)} Prove the same lemma, pen-and-paper and in Isabelle, by
-  induction on \<open>m\<close> instead. Which variable must you generalise now, and why?\<close>
-
-lemma sub_add_on_m: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
-
-text \<open>\paragraph{Hint:} In the case \<open>n = 0\<close>, the assumption \<open>Suc m \<le> 0\<close> is impossible: look at
-      \<open>thm Suc_neq_Zero\<close>.\<close>
 
   sorry
 
