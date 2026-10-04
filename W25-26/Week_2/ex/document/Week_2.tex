@@ -35,7 +35,7 @@ begin%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \begin{isamarkuptext}%
-\Exercise{Addition Commutes}%
+\Exercise{Addition is Associative}%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \begin{isamarkuptext}%
@@ -44,19 +44,20 @@ Consider the function \isa{{\isacharparenleft}{\kern0pt}{\isacharplus}{\kern0pt}
 Prove the following theorem, first pen-and-paper, and then formally in Isabelle.%
 \end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{lemma}\isamarkupfalse%
-\ add{\isacharunderscore}{\kern0pt}commutes{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}n{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ m\ {\isacharplus}{\kern0pt}\ n{\isachardoublequoteclose}%
+\ add{\isacharunderscore}{\kern0pt}associative{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isacharparenleft}{\kern0pt}a{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ b{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ c\ {\isacharequal}{\kern0pt}\ a\ {\isacharplus}{\kern0pt}\ {\isacharparenleft}{\kern0pt}b\ {\isacharplus}{\kern0pt}\ c{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
 \begin{isamarkuptext}%
-\paragraph{Hints:} 
+\paragraph{Hints:}
 
- 1. Perform the proof by induction on \isa{n}, using substitutions \isa{subst}, backward reasoning using
-   the method \isa{rule}, and forward reasoning using \isa{OF}.
+ 1. Perform the proof by induction, using substitutions \isa{subst}, backward reasoning using the method
+   \isa{rule}, and forward reasoning using \isa{OF}.
 
- 2. You will need to identify multiple lemmas about how \isa{add} works. Do not prove those lemmas. Use 
-    \isa{sorry} as the proof. This is the top-down approach. 
+ 2. Think about which variable to perform induction on. Addition on natural numbers is defined by
+    recursion on its first argument: look at \isa{thm\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left\ add{\isacharunderscore}{\kern0pt}Suc}.
 
- 3. There is a proof which uses the following lemmas:
+ 3. You will need to identify multiple lemmas about how \isa{add} works. Do not prove those lemmas. Use
+    \isa{sorry} as the proof. This is the top-down approach.
 
-   \isa{add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc}%
+ 4. There is a proof which uses only the following lemmas: \isa{add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc}%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -238,91 +239,92 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
 %:%42=25%:%
 %:%43=26%:%
 %:%44=27%:%
-%:%46=44%:%
-%:%47=44%:%
-%:%49=46%:%
-%:%50=47%:%
-%:%51=48%:%
-%:%52=49%:%
-%:%53=50%:%
-%:%54=51%:%
-%:%55=52%:%
-%:%56=53%:%
-%:%57=54%:%
-%:%58=55%:%
-%:%59=56%:%
-%:%76=96%:%
-%:%80=98%:%
-%:%81=99%:%
-%:%82=100%:%
-%:%84=123%:%
-%:%85=123%:%
-%:%86=124%:%
-%:%87=124%:%
-%:%88=124%:%
-%:%89=125%:%
-%:%90=126%:%
-%:%92=129%:%
-%:%93=130%:%
-%:%94=131%:%
-%:%95=132%:%
-%:%96=133%:%
-%:%97=134%:%
-%:%98=135%:%
-%:%99=136%:%
-%:%100=137%:%
-%:%101=138%:%
-%:%102=139%:%
-%:%103=140%:%
-%:%104=141%:%
-%:%105=142%:%
-%:%106=143%:%
-%:%107=144%:%
-%:%108=145%:%
-%:%109=146%:%
-%:%110=147%:%
+%:%46=40%:%
+%:%47=40%:%
+%:%49=42%:%
+%:%50=43%:%
+%:%51=44%:%
+%:%52=45%:%
+%:%53=46%:%
+%:%54=47%:%
+%:%55=48%:%
+%:%56=49%:%
+%:%57=50%:%
+%:%58=51%:%
+%:%59=52%:%
+%:%60=53%:%
+%:%77=98%:%
+%:%81=100%:%
+%:%82=101%:%
+%:%83=102%:%
+%:%85=125%:%
+%:%86=125%:%
+%:%87=126%:%
+%:%88=126%:%
+%:%89=126%:%
+%:%90=127%:%
+%:%91=128%:%
+%:%93=131%:%
+%:%94=132%:%
+%:%95=133%:%
+%:%96=134%:%
+%:%97=135%:%
+%:%98=136%:%
+%:%99=137%:%
+%:%100=138%:%
+%:%101=139%:%
+%:%102=140%:%
+%:%103=141%:%
+%:%104=142%:%
+%:%105=143%:%
+%:%106=144%:%
+%:%107=145%:%
+%:%108=146%:%
+%:%109=147%:%
 %:%110=148%:%
 %:%111=149%:%
-%:%112=150%:%
-%:%113=151%:%
-%:%114=152%:%
-%:%131=223%:%
-%:%135=225%:%
-%:%136=226%:%
-%:%138=228%:%
-%:%139=228%:%
-%:%140=229%:%
-%:%141=230%:%
-%:%143=232%:%
-%:%145=234%:%
-%:%146=234%:%
-%:%148=237%:%
-%:%149=238%:%
-%:%150=239%:%
-%:%151=240%:%
-%:%152=241%:%
-%:%153=242%:%
-%:%154=243%:%
-%:%155=244%:%
-%:%156=245%:%
-%:%157=246%:%
-%:%158=247%:%
-%:%159=248%:%
-%:%160=249%:%
-%:%161=250%:%
-%:%162=251%:%
-%:%163=252%:%
-%:%164=253%:%
-%:%181=289%:%
-%:%182=290%:%
-%:%183=291%:%
-%:%185=293%:%
-%:%186=293%:%
-%:%187=294%:%
-%:%188=295%:%
-%:%189=296%:%
-%:%190=297%:%
-%:%191=297%:%
-%:%193=299%:%
-%:%194=300%:%
-%:%202=327%:%
+%:%111=150%:%
+%:%112=151%:%
+%:%113=152%:%
+%:%114=153%:%
+%:%115=154%:%
+%:%132=225%:%
+%:%136=227%:%
+%:%137=228%:%
+%:%139=230%:%
+%:%140=230%:%
+%:%141=231%:%
+%:%142=232%:%
+%:%144=234%:%
+%:%146=236%:%
+%:%147=236%:%
+%:%149=239%:%
+%:%150=240%:%
+%:%151=241%:%
+%:%152=242%:%
+%:%153=243%:%
+%:%154=244%:%
+%:%155=245%:%
+%:%156=246%:%
+%:%157=247%:%
+%:%158=248%:%
+%:%159=249%:%
+%:%160=250%:%
+%:%161=251%:%
+%:%162=252%:%
+%:%163=253%:%
+%:%164=254%:%
+%:%165=255%:%
+%:%182=291%:%
+%:%183=292%:%
+%:%184=293%:%
+%:%186=295%:%
+%:%187=295%:%
+%:%188=296%:%
+%:%189=297%:%
+%:%190=298%:%
+%:%191=299%:%
+%:%192=299%:%
+%:%194=301%:%
+%:%195=302%:%
+%:%203=329%:%

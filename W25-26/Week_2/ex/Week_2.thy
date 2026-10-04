@@ -18,7 +18,7 @@ imports Main\\
 begin
 \<close>
 
-text\<open>\Exercise{Addition Commutes}\<close>
+text\<open>\Exercise{Addition is Associative}\<close>
 
 
 text\<open>
@@ -27,33 +27,30 @@ Consider the function @{term "(+)"} defined in Isabelle/HOL for natural numbers.
 Prove the following theorem, first pen-and-paper, and then formally in Isabelle.
 \<close>
 (*
-thm add_0_right
-
-(*Note that 0 is also overloaded*)
-
 thm add_0_left
 
-thm add_Suc_right
+(*Note that 0 is also overloaded*)
 
 thm add_Suc
 *)
 (*
   Note that when we prove this lemma, we will have a lemma where there is a universal quantification
-  on n and m
+  on a, b and c
 *)
-lemma add_commutes: "(n::nat) + m = m + n"
+lemma add_associative: "((a::nat) + b) + c = a + (b + c)"
 
-text \<open>\paragraph{Hints:} 
+text \<open>\paragraph{Hints:}
 
- 1. Perform the proof by induction on \<open>n\<close>, using substitutions \<open>subst\<close>, backward reasoning using
-   the method \<open>rule\<close>, and forward reasoning using \<open>OF\<close>.
+ 1. Perform the proof by induction, using substitutions \<open>subst\<close>, backward reasoning using the method
+   \<open>rule\<close>, and forward reasoning using \<open>OF\<close>.
 
- 2. You will need to identify multiple lemmas about how \<open>add\<close> works. Do not prove those lemmas. Use 
-    \<open>sorry\<close> as the proof. This is the top-down approach. 
+ 2. Think about which variable to perform induction on. Addition on natural numbers is defined by
+    recursion on its first argument: look at \<open>thm add_0_left add_Suc\<close>.
 
- 3. There is a proof which uses the following lemmas:
+ 3. You will need to identify multiple lemmas about how \<open>add\<close> works. Do not prove those lemmas. Use
+    \<open>sorry\<close> as the proof. This is the top-down approach.
 
-   \<open>add_0_right, add_0_left, add_Suc_right, add_Suc\<close>
+ 4. There is a proof which uses only the following lemmas: \<open>add_0_left, add_Suc\<close>
 \<close>
 
   sorry
