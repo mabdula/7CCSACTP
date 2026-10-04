@@ -38,6 +38,7 @@ proof-
   have 1: "A b"
     using TA[OF T]
     .
+    \<comment> \<open>\<open>.\<close> proves the goal directly by a fact given with \<open>using\<close>, instantiating its variables if needed.\<close>
 
   have 2: "A a \<and> A b"
     apply(rule conjI)
