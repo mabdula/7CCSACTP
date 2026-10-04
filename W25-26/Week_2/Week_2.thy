@@ -50,7 +50,7 @@ text \<open>\paragraph{Hints:}
  3. You will need to identify multiple lemmas about how \<open>add\<close> works. Do not prove those lemmas. Use
     \<open>sorry\<close> as the proof. This is the top-down approach.
 
- 4. There is a proof which uses only the following lemmas: \<open>add_0_left, add_Suc, sym, nat.inject\<close>
+ 4. There is a proof which uses only the following lemmas: \<open>add_0_left, add_Suc, nat.inject, iffD2\<close>
 \<close>
 
   sorry
