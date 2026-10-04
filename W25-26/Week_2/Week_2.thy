@@ -5,6 +5,7 @@ begin
 
 text \<open>\ExerciseSheet{2}{}\<close>
 
+
 text \<open>Important Note: Please download Isabelle from the link provided in the slides and bring a 
       laptop to the large group tutorial. Performing the proofs in Isabelle will be an integral part
       of those tutorials.\<close>
@@ -146,13 +147,18 @@ text \<open>
   you instantiate its universally quantified variable in the step case.
 
 \paragraph{Hints:}
- 1. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
+ 1. \<open>add_acc\<close> is a recursive function defined with \<open>fun\<close>, like \<open>add\<close> in Section 2.2.2 of
+    Concrete Semantics. Its defining equations are available as \<open>add_acc.simps(1)\<close> and
+    \<open>add_acc.simps(2)\<close> (look at \<open>thm add_acc.simps\<close>), and can be used with \<open>subst\<close> like any
+    other equation.
+
+ 2. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
     \<open>arbitrary: m\<close>.
 
- 2. An instance of a universally quantified fact can be obtained with \<open>of\<close>, e.g.\
+ 3. An instance of a universally quantified fact can be obtained with \<open>of\<close>, e.g.\
     \<open>Suc.IH[of "Suc m"]\<close>.
 
- 3. The following lemmas suffice: \<open>add_acc.simps, add_0_left, add_Suc, add_Suc_right\<close>.
+ 4. The following lemmas suffice: \<open>add_acc.simps, add_0_left, add_Suc, add_Suc_right\<close>.
 \<close>
 
   sorry

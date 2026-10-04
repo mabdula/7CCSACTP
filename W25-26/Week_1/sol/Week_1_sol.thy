@@ -4,6 +4,15 @@ begin
 
 text \<open>\vspace{15ex}\ExerciseSheet{1}{}\<close>
 
+text \<open>\paragraph{About these solutions.} Every Isabelle proof method (e.g.\ \<open>rule\<close>, \<open>simp\<close>),
+      Isar keyword (e.g.\ \<open>have\<close>, \<open>also\<close>), attribute (e.g.\ \<open>OF\<close>, \<open>of\<close>) and method modifier
+      (e.g.\ \<open>arbitrary:\<close>, \<open>simp add:\<close>) is explained in a short comment, marked ---, the first
+      time it appears in the solutions, in sheet order from Week 1. Later uses are not explained
+      again, so if you meet an unfamiliar construct, look for its first use in an earlier solution.
+      Each proof is also labelled with its style; the module's preferred style is declarative (Isar),
+      where every step states what it proves.\<close>
+
+
 text \<open>Important Note: Please download Isabelle from the link provided in the slides and bring a 
       laptop to the large group tutorial. Performing the proofs in Isabelle will be an integral part
       of those tutorials.\<close>
