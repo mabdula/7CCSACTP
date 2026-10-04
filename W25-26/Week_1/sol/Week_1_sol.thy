@@ -33,7 +33,7 @@ lemma
   shows "T a"
 
 proof-
-  \<comment> \<open>Style: Isar \<open>have\<close>/\<open>show\<close>; forward (\<open>OF\<close>); backward (\<open>rule\<close>); \<open>subst\<close>.\<close>
+  \<comment> \<open>Style: declarative (Isar \<open>have\<close>/\<open>show\<close>) with apply-style steps; forward (\<open>OF\<close>); backward (\<open>rule\<close>); \<open>subst\<close>.\<close>
 
   have 1: "A b"
     using TA[OF T]
