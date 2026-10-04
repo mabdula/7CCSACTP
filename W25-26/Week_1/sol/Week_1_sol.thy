@@ -33,6 +33,7 @@ lemma
   shows "T a"
 
 proof-
+  \<comment> \<open>\<open>proof -\<close> starts a structured proof without applying any method, leaving the goal unchanged.\<close>
   \<comment> \<open>Style: declarative (Isar \<open>have\<close>/\<open>show\<close>) with apply-style steps; forward (\<open>OF\<close>); backward (\<open>rule\<close>); \<open>subst\<close>.\<close>
 
   have 1: "A b"
@@ -42,6 +43,8 @@ proof-
 
   have 2: "A a \<and> A b"
     apply(rule conjI)
+    \<comment> \<open>\<open>rule r\<close> matches the conclusion of \<open>r\<close> with the goal and replaces the goal by \<open>r\<close>'s
+       premises (backward reasoning); here \<open>conjI\<close> leaves \<open>A a\<close> and \<open>A b\<close>.\<close>
     using Aab 1
     .
 
@@ -54,6 +57,7 @@ proof-
   show ?thesis
     using T
     apply(subst 3)
+    \<comment> \<open>\<open>subst eq\<close> rewrites the goal with the equation \<open>eq\<close>, left to right; here \<open>a\<close> becomes \<open>b\<close>.\<close>
     .
 qed
 
