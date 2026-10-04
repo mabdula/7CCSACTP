@@ -69,7 +69,11 @@ thm mult_zero_right
 
 thm le_refl
 
-thm le_SucE
+thm not_le
+
+thm Suc_leI
+
+thm le_antisym
 
 thm le_SucI
 
@@ -105,11 +109,11 @@ Your pen-and-paper proof should indicate
  2. The following lemmas suffice to prove the goal with only substitution, forward reasoning using
      \<open>OF\<close>, backward reasoning using \<open>rule\<close>, and induction:
 
-     \<open>le_0_eq, iffD1, mult_zero_right, le_refl, le_SucE, le_SucI, mult_le_mono1, mult_le_mono2, le_trans\<close>
+     \<open>le_0_eq, iffD1, mult_zero_right, le_refl, not_le, Suc_leI, le_antisym, le_SucI, mult_le_mono1,
+      mult_le_mono2, le_trans\<close>
 
- 3. In the step case, the assumption \<open>c \<le> Suc d\<close> leaves two possibilities: \<open>c \<le> d\<close> or
-     \<open>c = Suc d\<close>. Look at \<open>thm le_SucE\<close>, and use it with \<open>rule\<close> to split the proof into these two
-     cases.
+ 3. In the step case, perform a case analysis with \<open>proof (cases "c \<le> d")\<close>. In the second case,
+     together with the assumption \<open>c \<le> Suc d\<close>, you can derive \<open>c = Suc d\<close>.
 \<close>
 
 (*Note that finding the proof is like solving a puzzle where all the pieces fit together*)
