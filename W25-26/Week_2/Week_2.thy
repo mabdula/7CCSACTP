@@ -45,8 +45,8 @@ lemma add_commutes: "(n::nat) + m = m + n"
 
 text \<open>\paragraph{Hints:} 
 
- 1. Perform the proof by inuction on \<open>n\<close>, using substitutions \<open>subst\<close>, and forward reasoning using
-   the method \<open>rule\<close>.
+ 1. Perform the proof by induction on \<open>n\<close>, using substitutions \<open>subst\<close>, backward reasoning using
+   the method \<open>rule\<close>, and forward reasoning using \<open>OF\<close>.
 
  2. You will need to identify multiple lemmas about how \<open>add\<close> works. Do not prove those lemmas. Use 
     \<open>sorry\<close> as the proof. This is the top-down approach. 

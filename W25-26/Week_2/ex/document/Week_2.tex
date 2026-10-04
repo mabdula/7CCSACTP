@@ -48,8 +48,8 @@ Prove the following theorem, first pen-and-paper, and then formally in Isabelle.
 \begin{isamarkuptext}%
 \paragraph{Hints:} 
 
- 1. Perform the proof by inuction on \isa{n}, using substitutions \isa{subst}, and forward reasoning using
-   the method \isa{rule}.
+ 1. Perform the proof by induction on \isa{n}, using substitutions \isa{subst}, backward reasoning using
+   the method \isa{rule}, and forward reasoning using \isa{OF}.
 
  2. You will need to identify multiple lemmas about how \isa{add} works. Do not prove those lemmas. Use 
     \isa{sorry} as the proof. This is the top-down approach. 
@@ -313,16 +313,16 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
 %:%162=251%:%
 %:%163=252%:%
 %:%164=253%:%
-%:%181=280%:%
-%:%182=281%:%
-%:%183=282%:%
-%:%185=284%:%
-%:%186=284%:%
-%:%187=285%:%
-%:%188=286%:%
-%:%189=287%:%
-%:%190=288%:%
-%:%191=288%:%
-%:%193=290%:%
-%:%194=291%:%
-%:%202=313%:%
+%:%181=289%:%
+%:%182=290%:%
+%:%183=291%:%
+%:%185=293%:%
+%:%186=293%:%
+%:%187=294%:%
+%:%188=295%:%
+%:%189=296%:%
+%:%190=297%:%
+%:%191=297%:%
+%:%193=299%:%
+%:%194=300%:%
+%:%202=327%:%
