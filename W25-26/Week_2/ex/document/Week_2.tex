@@ -85,9 +85,10 @@ Subtraction on natural numbers is truncated: \isa{n\ {\isacharminus}{\kern0pt}\ 
 \ sub{\isacharunderscore}{\kern0pt}add{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}m{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isasymle}\ n\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}n\ {\isacharminus}{\kern0pt}\ m{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ n{\isachardoublequoteclose}%
 \begin{isamarkuptext}%
 \paragraph{(a)} First try to prove the lemma by plain induction on \isa{n}, i.e.\ with
-  \isa{proof{\isacharparenleft}{\kern0pt}induction\ n{\isacharparenright}{\kern0pt}}. Write down the goal of the step case, its assumption and the induction
-  hypothesis. Explain, pen-and-paper, why the induction hypothesis is not strong enough to prove the
-  step case. Consider the case \isa{m\ {\isacharequal}{\kern0pt}\ Suc\ k}.
+  \isa{proof{\isacharparenleft}{\kern0pt}induction\ n{\isacharparenright}{\kern0pt}}, splitting the step case on \isa{m} as in Hint 1 and using only the lemmas from
+  Hint 3. Write down the goal of the step case, its assumption and the induction hypothesis. Explain,
+  pen-and-paper, why the induction hypothesis is not strong enough to prove the step case. Consider
+  the case \isa{m\ {\isacharequal}{\kern0pt}\ Suc\ k}.
 
  \paragraph{(b)} Now prove the lemma, first pen-and-paper and then formally in Isabelle, by
   generalising the induction hypothesis over \isa{m}, i.e.\ with \isa{proof{\isacharparenleft}{\kern0pt}induction\ n\ arbitrary{\isacharcolon}{\kern0pt}\ m{\isacharparenright}{\kern0pt}}.
@@ -101,7 +102,7 @@ Subtraction on natural numbers is truncated: \isa{n\ {\isacharminus}{\kern0pt}\ 
  2. Use \isa{thm\ Suc{\isachardot}{\kern0pt}IH} in the step case to compare the induction hypothesis you get with and without
     \isa{arbitrary{\isacharcolon}{\kern0pt}\ m}. The induction hypothesis has an assumption, which you can discharge with \isa{OF}.
 
- 3. The following lemmas suffice: \isa{le{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}eq{\isacharcomma}{\kern0pt}\ iffD{\isadigit{1}}{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}zero{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right}.%
+ 3. In (a)--(c), use only the following lemmas: \isa{le{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}eq{\isacharcomma}{\kern0pt}\ iffD{\isadigit{1}}{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}zero{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}right{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}mono{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right}, and \isa{Suc{\isacharunderscore}{\kern0pt}neq{\isacharunderscore}{\kern0pt}Zero} in (c).%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -119,13 +120,39 @@ Subtraction on natural numbers is truncated: \isa{n\ {\isacharminus}{\kern0pt}\ 
 %
 \begin{isamarkuptext}%
 \paragraph{(c) Challenge (optional)} Prove the same lemma, pen-and-paper and in Isabelle, by
-  induction on \isa{m} instead. Which variable must you generalise now, and why?%
+  induction on \isa{m} instead, again using only the lemmas from Hint 3. Which variable must you
+  generalise now, and why?%
 \end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{lemma}\isamarkupfalse%
 \ sub{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}on{\isacharunderscore}{\kern0pt}m{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}m{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isasymle}\ n\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}n\ {\isacharminus}{\kern0pt}\ m{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ n{\isachardoublequoteclose}%
 \begin{isamarkuptext}%
 \paragraph{Hint:} In the case \isa{n\ {\isacharequal}{\kern0pt}\ {\isadigit{0}}}, the assumption \isa{Suc\ m\ {\isasymle}\ {\isadigit{0}}} is impossible: look at
       \isa{thm\ Suc{\isacharunderscore}{\kern0pt}neq{\isacharunderscore}{\kern0pt}Zero}.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+\paragraph{(d) Challenge (optional)} Prove the same lemma by plain induction on \isa{n}, i.e.\ without
+  \isa{arbitrary}, but now splitting the step case on whether \isa{m\ {\isasymle}\ n}, as in Exercise 2.3. Why does
+  the induction hypothesis suffice this time? What does this tell you about when an induction
+  hypothesis has to be generalised?%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ sub{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}plain{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}m{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}nat{\isacharparenright}{\kern0pt}\ {\isasymle}\ n\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}n\ {\isacharminus}{\kern0pt}\ m{\isacharparenright}{\kern0pt}\ {\isacharplus}{\kern0pt}\ m\ {\isacharequal}{\kern0pt}\ n{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+\paragraph{Hint:} Look at \isa{thm\ Suc{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}le}. You may also need \isa{add{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ not{\isacharunderscore}{\kern0pt}le{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}leI{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}antisym{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}self{\isacharunderscore}{\kern0pt}eq{\isacharunderscore}{\kern0pt}{\isadigit{0}}}.%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -296,7 +323,7 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
 %
 \end{isabellebody}%
 \endinput
-%:%file=/media/llms/Theorem_Proving/7CCSACTP-private/Week_2/ex/Week_2.thy%:%
+%:%file=/media/llms/Theorem_Proving/7CCSACTP-private/.claude/worktrees/week2-ex22-reframe/Week_2/ex/Week_2.thy%:%
 %:%19=6%:%
 %:%23=17%:%
 %:%24=18%:%
@@ -348,89 +375,99 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
 %:%102=134%:%
 %:%103=135%:%
 %:%104=136%:%
-%:%104=137%:%
-%:%121=230%:%
-%:%122=231%:%
-%:%124=233%:%
-%:%125=233%:%
-%:%127=235%:%
-%:%128=236%:%
-%:%145=296%:%
-%:%149=298%:%
-%:%150=299%:%
-%:%151=300%:%
-%:%153=325%:%
-%:%154=325%:%
-%:%155=326%:%
-%:%156=326%:%
-%:%157=326%:%
-%:%158=327%:%
-%:%159=328%:%
-%:%161=331%:%
-%:%162=332%:%
-%:%163=333%:%
-%:%164=334%:%
-%:%165=335%:%
-%:%166=336%:%
-%:%167=337%:%
-%:%168=338%:%
-%:%169=339%:%
-%:%170=340%:%
-%:%171=341%:%
-%:%172=342%:%
-%:%173=343%:%
-%:%174=344%:%
-%:%175=345%:%
-%:%176=346%:%
-%:%177=347%:%
-%:%178=348%:%
-%:%179=349%:%
-%:%179=350%:%
-%:%180=351%:%
-%:%181=352%:%
-%:%182=353%:%
-%:%199=411%:%
-%:%203=413%:%
-%:%204=414%:%
-%:%206=416%:%
-%:%207=416%:%
-%:%208=417%:%
-%:%209=418%:%
-%:%211=420%:%
-%:%213=422%:%
-%:%214=422%:%
-%:%216=425%:%
-%:%217=426%:%
-%:%218=427%:%
-%:%219=428%:%
-%:%220=429%:%
-%:%221=430%:%
-%:%222=431%:%
-%:%223=432%:%
-%:%224=433%:%
-%:%225=434%:%
-%:%226=435%:%
-%:%227=436%:%
-%:%228=437%:%
-%:%229=438%:%
-%:%230=439%:%
-%:%231=440%:%
-%:%232=441%:%
-%:%233=442%:%
-%:%234=443%:%
-%:%235=444%:%
-%:%236=445%:%
-%:%237=446%:%
-%:%254=496%:%
-%:%255=497%:%
-%:%256=498%:%
-%:%258=500%:%
-%:%259=500%:%
-%:%260=501%:%
-%:%261=502%:%
-%:%262=503%:%
-%:%263=504%:%
-%:%264=504%:%
-%:%266=506%:%
-%:%267=507%:%
-%:%275=549%:%
+%:%105=137%:%
+%:%105=138%:%
+%:%122=232%:%
+%:%123=233%:%
+%:%124=234%:%
+%:%126=236%:%
+%:%127=236%:%
+%:%129=238%:%
+%:%130=239%:%
+%:%147=300%:%
+%:%148=301%:%
+%:%149=302%:%
+%:%150=303%:%
+%:%152=305%:%
+%:%153=305%:%
+%:%155=307%:%
+%:%155=308%:%
+%:%172=380%:%
+%:%176=382%:%
+%:%177=383%:%
+%:%178=384%:%
+%:%180=409%:%
+%:%181=409%:%
+%:%182=410%:%
+%:%183=410%:%
+%:%184=410%:%
+%:%185=411%:%
+%:%186=412%:%
+%:%188=415%:%
+%:%189=416%:%
+%:%190=417%:%
+%:%191=418%:%
+%:%192=419%:%
+%:%193=420%:%
+%:%194=421%:%
+%:%195=422%:%
+%:%196=423%:%
+%:%197=424%:%
+%:%198=425%:%
+%:%199=426%:%
+%:%200=427%:%
+%:%201=428%:%
+%:%202=429%:%
+%:%203=430%:%
+%:%204=431%:%
+%:%205=432%:%
+%:%206=433%:%
+%:%206=434%:%
+%:%207=435%:%
+%:%208=436%:%
+%:%209=437%:%
+%:%226=493%:%
+%:%230=495%:%
+%:%231=496%:%
+%:%233=498%:%
+%:%234=498%:%
+%:%235=499%:%
+%:%236=500%:%
+%:%238=502%:%
+%:%240=504%:%
+%:%241=504%:%
+%:%243=507%:%
+%:%244=508%:%
+%:%245=509%:%
+%:%246=510%:%
+%:%247=511%:%
+%:%248=512%:%
+%:%249=513%:%
+%:%250=514%:%
+%:%251=515%:%
+%:%252=516%:%
+%:%253=517%:%
+%:%254=518%:%
+%:%255=519%:%
+%:%256=520%:%
+%:%257=521%:%
+%:%258=522%:%
+%:%259=523%:%
+%:%260=524%:%
+%:%261=525%:%
+%:%262=526%:%
+%:%263=527%:%
+%:%264=528%:%
+%:%281=578%:%
+%:%282=579%:%
+%:%283=580%:%
+%:%285=582%:%
+%:%286=582%:%
+%:%287=583%:%
+%:%288=584%:%
+%:%289=585%:%
+%:%290=586%:%
+%:%291=586%:%
+%:%293=588%:%
+%:%294=589%:%
+%:%302=631%:%

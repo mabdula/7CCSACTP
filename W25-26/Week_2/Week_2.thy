@@ -66,9 +66,10 @@ lemma sub_add: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
 
 text \<open>
  \paragraph{(a)} First try to prove the lemma by plain induction on \<open>n\<close>, i.e.\ with
-  \<open>proof(induction n)\<close>. Write down the goal of the step case, its assumption and the induction
-  hypothesis. Explain, pen-and-paper, why the induction hypothesis is not strong enough to prove the
-  step case. Consider the case \<open>m = Suc k\<close>.
+  \<open>proof(induction n)\<close>, splitting the step case on \<open>m\<close> as in Hint 1 and using only the lemmas from
+  Hint 3. Write down the goal of the step case, its assumption and the induction hypothesis. Explain,
+  pen-and-paper, why the induction hypothesis is not strong enough to prove the step case. Consider
+  the case \<open>m = Suc k\<close>.
 
  \paragraph{(b)} Now prove the lemma, first pen-and-paper and then formally in Isabelle, by
   generalising the induction hypothesis over \<open>m\<close>, i.e.\ with \<open>proof(induction n arbitrary: m)\<close>.
@@ -82,8 +83,8 @@ text \<open>
  2. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
     \<open>arbitrary: m\<close>. The induction hypothesis has an assumption, which you can discharge with \<open>OF\<close>.
 
- 3. The following lemmas suffice: \<open>le_0_eq, iffD1, diff_zero, add_0_left, add_0_right, Suc_le_mono,
-    diff_Suc_Suc, add_Suc_right\<close>.
+ 3. In (a)--(c), use only the following lemmas: \<open>le_0_eq, iffD1, diff_zero, add_0_left, add_0_right,
+    Suc_le_mono, diff_Suc_Suc, add_Suc_right\<close>, and \<open>Suc_neq_Zero\<close> in (c).
 \<close>
 
   sorry
@@ -91,12 +92,27 @@ text \<open>
 
 text \<open>
  \paragraph{(c) Challenge (optional)} Prove the same lemma, pen-and-paper and in Isabelle, by
-  induction on \<open>m\<close> instead. Which variable must you generalise now, and why?\<close>
+  induction on \<open>m\<close> instead, again using only the lemmas from Hint 3. Which variable must you
+  generalise now, and why?\<close>
 
 lemma sub_add_on_m: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
 
 text \<open>\paragraph{Hint:} In the case \<open>n = 0\<close>, the assumption \<open>Suc m \<le> 0\<close> is impossible: look at
       \<open>thm Suc_neq_Zero\<close>.\<close>
+
+  sorry
+
+
+text \<open>
+ \paragraph{(d) Challenge (optional)} Prove the same lemma by plain induction on \<open>n\<close>, i.e.\ without
+  \<open>arbitrary\<close>, but now splitting the step case on whether \<open>m \<le> n\<close>, as in Exercise 2.3. Why does
+  the induction hypothesis suffice this time? What does this tell you about when an induction
+  hypothesis has to be generalised?\<close>
+
+lemma sub_add_plain: "(m::nat) \<le> n \<Longrightarrow> (n - m) + m = n"
+
+text \<open>\paragraph{Hint:} Look at \<open>thm Suc_diff_le\<close>. You may also need \<open>add_Suc, not_le, Suc_leI,
+      le_antisym, diff_self_eq_0\<close>.\<close>
 
   sorry
 
