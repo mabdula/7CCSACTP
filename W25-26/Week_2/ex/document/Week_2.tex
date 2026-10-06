@@ -91,7 +91,7 @@ Subtraction on natural numbers is truncated: \isa{n\ {\isacharminus}{\kern0pt}\ 
  2. Use \isa{thm\ Suc{\isachardot}{\kern0pt}IH} in the step case to look at the induction hypothesis. It has an assumption,
     which you can discharge with \isa{OF}.
 
- 3. The following lemmas suffice: \isa{le{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}eq{\isacharcomma}{\kern0pt}\ iffD{\isadigit{1}}{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}zero{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}le{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ not{\isacharunderscore}{\kern0pt}le{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}leI{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}antisym{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}self{\isacharunderscore}{\kern0pt}eq{\isacharunderscore}{\kern0pt}{\isadigit{0}}}.%
+ 3. The following lemmas suffice: \isa{le{\isadigit{0}}{\isacharcomma}{\kern0pt}\ le{\isacharunderscore}{\kern0pt}antisym{\isacharcomma}{\kern0pt}\ diff{\isacharunderscore}{\kern0pt}self{\isacharunderscore}{\kern0pt}eq{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}le{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ not{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}imp{\isacharunderscore}{\kern0pt}less{\isacharcomma}{\kern0pt}\ Suc{\isacharunderscore}{\kern0pt}leI}.%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -143,10 +143,7 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
  2. Use \isa{thm\ Suc{\isachardot}{\kern0pt}IH} in the step case to compare the induction hypothesis you get with and without
     \isa{arbitrary{\isacharcolon}{\kern0pt}\ m}.
 
- 3. An instance of a universally quantified fact can be obtained with \isa{of}, e.g.\
-    \isa{Suc{\isachardot}{\kern0pt}IH{\isacharbrackleft}{\kern0pt}of\ {\isachardoublequote}{\kern0pt}Suc\ m{\isachardoublequote}{\kern0pt}{\isacharbrackright}{\kern0pt}}.
-
- 4. The following lemmas suffice: \isa{add{\isacharunderscore}{\kern0pt}acc{\isachardot}{\kern0pt}simps{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right}.%
+ 3. The following lemmas suffice: \isa{add{\isacharunderscore}{\kern0pt}acc{\isachardot}{\kern0pt}simps{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}{\isadigit{0}}{\isacharunderscore}{\kern0pt}left{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharcomma}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right}.%
 \end{isamarkuptext}\isamarkuptrue%
 %
 \isadelimproof
@@ -280,19 +277,16 @@ We want to prove that \isa{add{\isacharunderscore}{\kern0pt}acc} computes additi
 %:%144=212%:%
 %:%145=213%:%
 %:%146=214%:%
-%:%147=215%:%
-%:%148=216%:%
-%:%149=217%:%
-%:%166=269%:%
-%:%167=270%:%
-%:%168=271%:%
-%:%170=273%:%
-%:%171=273%:%
-%:%172=274%:%
-%:%173=275%:%
-%:%174=276%:%
-%:%175=277%:%
-%:%176=277%:%
-%:%178=279%:%
-%:%179=280%:%
-%:%187=322%:%
+%:%163=263%:%
+%:%164=264%:%
+%:%165=265%:%
+%:%167=267%:%
+%:%168=267%:%
+%:%169=268%:%
+%:%170=269%:%
+%:%171=270%:%
+%:%172=271%:%
+%:%173=271%:%
+%:%175=273%:%
+%:%176=274%:%
+%:%184=313%:%

@@ -72,8 +72,8 @@ text \<open>
  2. Use \<open>thm Suc.IH\<close> in the step case to look at the induction hypothesis. It has an assumption,
     which you can discharge with \<open>OF\<close>.
 
- 3. The following lemmas suffice: \<open>le_0_eq, iffD1, diff_zero, add_0_left, Suc_diff_le, add_Suc,
-    not_le, Suc_leI, le_antisym, diff_self_eq_0\<close>.
+ 3. The following lemmas suffice: \<open>le0, le_antisym, diff_self_eq_0, add_0_left, Suc_diff_le,
+    add_Suc, not_le_imp_less, Suc_leI\<close>.
 \<close>
 
   sorry
@@ -111,10 +111,7 @@ text \<open>
  2. Use \<open>thm Suc.IH\<close> in the step case to compare the induction hypothesis you get with and without
     \<open>arbitrary: m\<close>.
 
- 3. An instance of a universally quantified fact can be obtained with \<open>of\<close>, e.g.\
-    \<open>Suc.IH[of "Suc m"]\<close>.
-
- 4. The following lemmas suffice: \<open>add_acc.simps, add_0_left, add_Suc, add_Suc_right\<close>.
+ 3. The following lemmas suffice: \<open>add_acc.simps, add_0_left, add_Suc, add_Suc_right\<close>.
 \<close>
 
   sorry
