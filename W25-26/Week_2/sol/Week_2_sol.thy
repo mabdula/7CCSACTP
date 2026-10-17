@@ -181,8 +181,6 @@ qed
 
 text \<open>\Exercise{Induction Hypothesis Generalisation with an Accumulator}\<close>
 
-text \<open>\emph{The solution to this exercise will be released later.}\<close>
-
 text \<open>Consider the following function, which adds two natural numbers using an accumulator: in
       each recursive call it moves one @{term Suc} from its first argument to its second.\<close>
 
@@ -215,7 +213,51 @@ text \<open>
 
  3. The following lemmas suffice: \<open>add_acc.simps, add_0_left, add_Suc, add_Suc_right\<close>.
 \<close>
-sorry
+
+text \<open>
+ \paragraph{Solution (a).} With \<open>proof(induction n)\<close>, the step case has to show
+  \<open>add_acc (Suc n) m = Suc n + m\<close>, i.e.\ after unfolding \<open>add_acc\<close>,
+  \<open>add_acc n (Suc m) = Suc n + m\<close>. The induction hypothesis is \<open>add_acc n m = n + m\<close> for the
+  same, fixed \<open>m\<close>. It talks about \<open>add_acc n m\<close>, but the goal is about \<open>add_acc n (Suc m)\<close>, so
+  the induction hypothesis cannot be applied: the second argument changes in the recursive call.
+
+ \paragraph{Solution (b).} With \<open>arbitrary: m\<close> the induction hypothesis becomes
+  \<open>\<And>m. add_acc n m = n + m\<close>. In the step case we instantiate it with \<open>Suc m\<close>, giving
+  \<open>add_acc n (Suc m) = n + Suc m = Suc (n + m) = Suc n + m\<close>.
+\<close>
+proof(induction n arbitrary: m)
+  \<comment> \<open>\<open>arbitrary: m\<close> generalises \<open>m\<close>, so the induction hypothesis holds for every \<open>m\<close>.\<close>
+  \<comment> \<open>Style: declarative (Isar); generalised induction with \<open>arbitrary\<close> (new) for a recursive function;
+     IH instantiated with \<open>of\<close> (new); equational reasoning.\<close>
+  case 0
+  have "add_acc 0 m = m"
+    apply(subst add_acc.simps(1))
+    ..
+  also have "... = 0 + m"
+    apply(subst add_0_left)
+    ..
+  finally show ?case
+    .
+next
+  case (Suc n)
+  have "add_acc (Suc n) m = add_acc n (Suc m)"
+    apply(subst add_acc.simps(2))
+    ..
+  also have "... = n + Suc m"
+    apply(subst Suc.IH[of "Suc m"])
+    \<comment> \<open>\<open>th[of t]\<close> instantiates the first variable of \<open>th\<close> with the term \<open>t\<close>; here the IH
+       with \<open>Suc m\<close> for \<open>m\<close>.\<close>
+    ..
+  also have "... = Suc (n + m)"
+    apply(subst add_Suc_right)
+    ..
+  also have "... = Suc n + m"
+    apply(subst add_Suc)
+    ..
+  finally show ?case
+    .
+qed
+
 
 text \<open>
  \paragraph{(c) Challenge (optional)} The following function multiplies using an accumulator.
@@ -230,7 +272,45 @@ lemma mult_acc_correct: "mult_acc n m acc = acc + n * m"
 
 text \<open>\paragraph{Hint:} The following lemmas suffice:
       \<open>mult_acc.simps, mult_0, add_0_right, mult_Suc, add.assoc\<close>.\<close>
-sorry
+
+text \<open>
+ \paragraph{Solution (c).} We generalise over \<open>acc\<close>: the recursive call changes the accumulator
+  from \<open>acc\<close> to \<open>acc + m\<close>, so the induction hypothesis is needed for \<open>acc + m\<close>. The argument
+  \<open>m\<close> stays the same in the recursive call, so it does not need to be generalised.
+\<close>
+proof(induction n arbitrary: acc)
+  \<comment> \<open>Style: as in (b).\<close>
+  case 0
+  have "mult_acc 0 m acc = acc"
+    apply(subst mult_acc.simps(1))
+    ..
+  also have "... = acc + 0"
+    apply(subst add_0_right)
+    ..
+  also have "... = acc + 0 * m"
+    apply(subst mult_0)
+    ..
+  finally show ?case
+    .
+next
+  case (Suc n)
+  have "mult_acc (Suc n) m acc = mult_acc n m (acc + m)"
+    apply(subst mult_acc.simps(2))
+    ..
+  also have "... = (acc + m) + n * m"
+    apply(subst Suc.IH)
+    ..
+  also have "... = acc + (m + n * m)"
+    apply(subst add.assoc)
+    ..
+  also have "... = acc + Suc n * m"
+    apply(subst mult_Suc)
+    ..
+  finally show ?case
+    .
+qed
+
+
 
 
 end
