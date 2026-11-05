@@ -97,3 +97,8 @@ W25-26/Week_3/List_Recursion/List_Recursion.pdf
 W25-26/Week_4/Algebraic_Datatypes/Algebraic_Datatypes.pdf
 W25-26/Week_4/Primitive_Recursion/Primitive_Recursion.pdf
 W25-26/Week_4/Structural_Induction/Structural_Induction.pdf
+
+# Videos are published as GitHub release assets (v1.0-course-videos), never committed
+*.mp4
+*.mkv
+*.webm
