@@ -40,7 +40,7 @@
       <b>Core Module Aims:</b>
       <ul style="margin-top: 5px; margin-bottom: 10px;">
         <li><b>Foundations of ITPs:</b> Higher-order logic, functional programming, algebraic datatypes, structural &amp; computational induction, and proof automation (simplifier, sledgehammer, counter-example generators).</li>
-        <li><b>Software Verification:</b> Formal semantics of programming languages, Hoare logic, and verifying practical software programs using frameworks such as AutoCorres2.</li>
+        <li><b>Software Verification:</b> Formal semantics of programming languages, Hoare logic, and verifying practical software programs.</li>
         <li><b>Formal Mathematics &amp; Algorithms:</b> Specification and verification of fundamental algorithms and data structures (sorting algorithms, search trees, graph algorithms).</li>
         <li><b>AI &amp; Machine Learning for Theorem Proving:</b> Applications of modern LLMs, neural theorem provers, proof sketch generation, and agentic reasoning systems.</li>
       </ul>
@@ -329,14 +329,35 @@
       </li>
     </ul>
 
-    <h3 id="week8">Week 8: Proving Graph Algorithms Correct — Depth-First Search (DFS)</h3>
+    <h3 id="week8">Week 8: Proving Data Structures Correct — Abstract Data Types</h3>
     <ul style="width: 800px;">
       <li style="margin-bottom: 14px;">
-        <b>Abstract Data Types in Isabelle using Locales (Set ADT)</b><br/>
-        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Locales Theory Video')">Theory Video</a> | 
-          <a href="W25-26/Week_7/Locales_Set_ADT/adts_slides.pdf">Slides (PDF)</a> ]<br/>
+        <b>1. Specifying Abstract Data Types</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Specifying Abstract Data Types')">Video</a> | 
+          <a href="W25-26/Week_8/1-ADTs_Specifying/adts_specifying_slides.pdf">Slides (PDF)</a> ]<br/>
         <small style="color: #444;"><b>Obligatory Reading:</b> <a href="http://concrete-semantics.org/">Concrete Semantics</a> (Section 5.5: Locales — Structuring Proof Contexts) | <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Sections 1–3) | <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Chapter 1: Abstract Specifications &amp; ADTs)</small>
       </li>
+      <li style="margin-bottom: 14px;">
+        <b>2. Using Abstract Data Types</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Using Abstract Data Types')">Video</a> | 
+          <a href="W25-26/Week_8/2-ADTs_Using/adts_using_slides.pdf">Slides (PDF)</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Sections 1–3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>3. Implementing Abstract Data Types</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Implementing Abstract Data Types')">Video</a> | 
+          <a href="W25-26/Week_8/3-ADTs_Implementing/adts_implementing_slides.pdf">Slides (PDF)</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Sections 1–3)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>Large Group Tutorial (LGT)</b><br/>
+        [ <a href="W25-26/Week_8/Week_8.pdf">Exercise Sheet (PDF)</a> | 
+          <a href="W25-26/Week_8/ex/Week_8.thy">Exercise Theory (.thy)</a> ]
+      </li>
+    </ul>
+
+    <h3 id="week9">Week 9: Proving Graph Algorithms Correct — Depth-First Search (DFS)</h3>
+    <ul style="width: 800px;">
       <li style="margin-bottom: 14px;">
         <b>Abstract Data Type for Directed Graphs</b><br/>
         [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Graphs ADT Video')">Graphs ADT Video</a> ]<br/>
@@ -359,12 +380,12 @@
       </li>
       <li style="margin-bottom: 14px;">
         <b>Large Group Tutorial (LGT)</b><br/>
-        [ <a href="W25-26/Week_8/Week_8.pdf">Exercise Sheet (PDF)</a> | 
-          <a href="W25-26/Week_8/ex/Week_8.thy">Exercise Theory (.thy)</a> ]
+        [ <a href="W25-26/Week_9/Week_9.pdf">Exercise Sheet (PDF)</a> | 
+          <a href="W25-26/Week_9/ex/Week_9.thy">Exercise Theory (.thy)</a> ]
       </li>
     </ul>
 
-    <h3 id="week9">Week 9: Proving Correctness &amp; Loop Invariants</h3>
+    <h3 id="week10">Week 10: Proving Correctness &amp; Loop Invariants</h3>
     <ul style="width: 800px;">
       <li style="margin-bottom: 14px;">
         <b>Loop Invariants Idea</b><br/>
@@ -380,30 +401,6 @@
         <b>Formal Proof of Primary DFS Invariant</b><br/>
         [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Invariant Proof Video')">Theory Video</a> ]<br/>
         <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Graph Algorithms Chapter: DFS Invariant Proofs &amp; Correctness Theorems)</small>
-      </li>
-      <li style="margin-bottom: 14px;">
-        <b>Large Group Tutorial (LGT)</b><br/>
-        [ <a href="W25-26/Week_9/Week_9.pdf">Exercise Sheet (PDF)</a> | 
-          <a href="W25-26/Week_9/ex/Week_9.thy">Exercise Theory (.thy)</a> ]
-      </li>
-    </ul>
-
-    <h3 id="week10">Week 10: Verifying Real-World Programs — AutoCorres2</h3>
-    <ul style="width: 800px;">
-      <li style="margin-bottom: 14px;">
-        <b>AutoCorres2: C-to-Isabelle Monadic Lifting &amp; 4-Stage Data Refinement Pipeline</b><br/>
-        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'AutoCorres2 Overview Video')">Overview Video</a> ]<br/>
-        <small style="color: #444;"><b>Obligatory Reading:</b> David Greenaway, June Andronick, Gerwin Klein — <i><a href="https://doi.org/10.1007/978-3-642-32347-8_8">Bridging the Gap: Automatic Verified Abstraction of C</a></i> (ITP 2012 / Springer DOI)<br/>
-        <b>Further Reference:</b> David Greenaway, Gerwin Klein, Norbert Schirmer, Thomas Sewell et al. — <i><a href="https://www.isa-afp.org/entries/AutoCorres2.html">AutoCorres2 Entry</a></i> (Archive of Formal Proofs)</small>
-      </li>
-      <li style="margin-bottom: 14px;">
-        <b>Program Logics for C: Level 4 Monadic WP Calculus &amp; Typed Heap Invariants</b><br/>
-        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Weakest Precondition Video')">Theory Video</a> ]<br/>
-        <small style="color: #444;"><b>Obligatory Reading:</b> David Greenaway, June Andronick, Gerwin Klein — <i><a href="https://doi.org/10.1007/978-3-642-32347-8_8">Bridging the Gap: Automatic Verified Abstraction of C</a></i> (ITP 2012 / Springer DOI)</small>
-      </li>
-      <li style="margin-bottom: 14px;">
-        <b>Industrial Verification Case Studies: Apple corecrypto, AWS Nitro &amp; seL4</b><br/>
-        <small style="color: #444;"><b>Obligatory Reading:</b> Apple Security Engineering &amp; Architecture (SEAR) — <i><a href="https://security.apple.com/blog/formal-verification-corecrypto/">A Blueprint for Formal Verification of Apple corecrypto</a></i> (Apple Security Research) | AWS Automated Reasoning Group — <i><a href="https://www.amazon.science/publications/formally-verifying-the-aws-nitro-isolation-engine">Formally Verifying the AWS Nitro Isolation Engine in Isabelle/HOL</a></i> (Amazon Science)</small>
       </li>
       <li style="margin-bottom: 14px;">
         <b>Large Group Tutorial (LGT)</b><br/>
