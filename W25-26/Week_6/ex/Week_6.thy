@@ -65,45 +65,7 @@ text \<open>\paragraph{Hints:}
     \<open>sorted_merge\<close> needs \<open>set_merge\<close>.
 \<close>
 
-text \<open>
-  \paragraph{(c) Comparisons.} As in the lecture, we count the comparisons between list elements.
-  For \<open>msort\<close>, the number of comparisons is:
-\<close>
-
-fun c_merge :: "'a::linorder list \<Rightarrow> 'a list \<Rightarrow> nat" where
-  "c_merge [] ys = 0"
-| "c_merge xs [] = 0"
-| "c_merge (x#xs) (y#ys) = 1 + (if x \<le> y then c_merge xs (y#ys) else c_merge (x#xs) ys)"
-
-fun c_msort :: "'a::linorder list \<Rightarrow> nat" where
-  "c_msort [] = 0"
-| "c_msort [x] = 0"
-| "c_msort xs = (let n = length xs div 2; ys = take n xs; zs = drop n xs
-                 in c_msort ys + c_msort zs + c_merge (msort ys) (msort zs))"
-
-text \<open>
-  Prove, first pen-and-paper and then in Isabelle, that sorting a list of length \<open>2^k\<close> takes at
-  most \<open>k * 2^k\<close> comparisons. The first lemma was proved in the lecture.
-\<close>
-
-lemma c_merge_ub: "c_merge xs ys \<le> length xs + length ys"
-  sorry
-
-lemma length_msort: "length (msort xs) = length xs"
-  sorry
-
-lemma c_msort_le: "length xs = 2 ^ k \<Longrightarrow> c_msort xs \<le> k * 2 ^ k"
-  sorry
-
-text \<open>\paragraph{Hints:}
- 1. \<open>c_merge_ub\<close> and \<open>length_msort\<close> are proved by computation induction; \<open>length_msort\<close> needs
-    \<open>length (merge xs ys) = length xs + length ys\<close>.
-
- 2. Prove \<open>c_msort_le\<close> by induction on \<open>k\<close>, generalising over \<open>xs\<close>. In the step case, both
-    halves of \<open>xs\<close> have length \<open>2^k\<close>.
-\<close>
-
-text \<open>\Exercise{Time Functions}\<close>
+text \<open>\Exercise{Running Time}\<close>
 
 text \<open>
   Consider list append, the naive reverse function, which appends each element at the end, and the
@@ -137,6 +99,48 @@ text \<open>
  2. For \<open>t_itrev\<close>, think about which variable the induction hypothesis must be generalised over.
 
  3. See Section 1.2 (Running Time) of the FDS book.
+\<close>
+
+text \<open>
+  \paragraph{(c) Comparisons.} For sorting algorithms that compare list elements, a common cost
+  measure is the number of comparisons between list elements, instead of all function calls. The
+  following functions count the comparisons (the tests \<open>x \<le> y\<close>) that \<open>merge\<close> and \<open>msort\<close> from
+  Exercise 6.1 make:
+\<close>
+
+fun c_merge :: "'a::linorder list \<Rightarrow> 'a list \<Rightarrow> nat" where
+  "c_merge [] ys = 0"
+| "c_merge xs [] = 0"
+| "c_merge (x#xs) (y#ys) = 1 + (if x \<le> y then c_merge xs (y#ys) else c_merge (x#xs) ys)"
+
+fun c_msort :: "'a::linorder list \<Rightarrow> nat" where
+  "c_msort [] = 0"
+| "c_msort [x] = 0"
+| "c_msort xs = (let n = length xs div 2; ys = take n xs; zs = drop n xs
+                 in c_msort ys + c_msort zs + c_merge (msort ys) (msort zs))"
+
+text \<open>
+  Prove, first pen-and-paper and then in Isabelle, that sorting a list of length \<open>2^k\<close> takes at
+  most \<open>k * 2^k\<close> comparisons.
+\<close>
+
+lemma c_merge_ub: "c_merge xs ys \<le> length xs + length ys"
+  sorry
+
+lemma length_msort: "length (msort xs) = length xs"
+  sorry
+
+lemma c_msort_le: "length xs = 2 ^ k \<Longrightarrow> c_msort xs \<le> k * 2 ^ k"
+  sorry
+
+text \<open>\paragraph{Hints:}
+ 1. \<open>c_merge_ub\<close> and \<open>length_msort\<close> are proved by computation induction; \<open>length_msort\<close> needs
+    \<open>length (merge xs ys) = length xs + length ys\<close>.
+
+ 2. Prove \<open>c_msort_le\<close> by induction on \<open>k\<close>, generalising over \<open>xs\<close>. In the step case, both
+    halves of \<open>xs\<close> have length \<open>2^k\<close>.
+
+ 3. The number of comparisons of merge sort is analysed in Chapter 2 of the FDS book.
 \<close>
 
 text \<open>\Exercise{Bottom-Up Merge Sort}\<close>
@@ -181,7 +185,7 @@ text \<open>\paragraph{Hints:}
  2. Prove those lemmas by computation induction, with \<open>merge_adj.induct\<close> and \<open>merge_all.induct\<close>.
 \<close>
 
-text \<open>\paragraph{(b) Running time.} We count comparisons as in Exercise 6.1(c):\<close>
+text \<open>\paragraph{(b) Running time.} We count comparisons as in Exercise 6.2(c):\<close>
 
 fun c_merge_adj :: "('a::linorder) list list \<Rightarrow> nat" where
   "c_merge_adj [] = 0"
@@ -202,7 +206,7 @@ lemma c_msort_bu: "length xs = 2 ^ k \<Longrightarrow> c_msort_bu xs \<le> k * 2
   sorry
 
 text \<open>\paragraph{Hints:}
- 1. Use \<open>c_merge_ub\<close> from Exercise 6.1(c).
+ 1. Use \<open>c_merge_ub\<close> from Exercise 6.2(c).
 
  2. If all lists in \<open>xss\<close> have length \<open>m\<close>, then \<open>c_merge_adj xss \<le> m * length xss\<close>; if moreover
     \<open>length xss\<close> is even, all lists in \<open>merge_adj xss\<close> have length \<open>2 * m\<close>.
