@@ -1,0 +1,823 @@
+WEBVTT
+
+
+1
+00:00:00.430 --> 00:00:09.510
+Ok, so now, given that we have talked about the interface
+
+2
+00:00:09.510 --> 00:00:16.670
+and the abstraction functions and the invariant, how would an entire abstract data type look like?
+
+3
+00:00:17.210 --> 00:00:27.210
+So, you would firstly say that the abstract data type has a couple of functions, so any implementation of sets will have a couple of functions.
+
+4
+00:00:27.210 --> 00:00:30.290
+So, it will have an empty set, an insertion, an isin.
+
+5
+00:00:30.430 --> 00:00:31.530
+Ok, this is already talked about.
+
+6
+00:00:31.930 --> 00:00:35.730
+And then you will have an abstraction function and an invariant.
+
+7
+00:00:35.790 --> 00:00:39.490
+So, the abstraction function here, I will just call it set, and this one will just call it invar,
+
+8
+00:00:39.870 --> 00:00:45.530
+and this one indeed takes an s and returns to you an alpha set, and the invariant takes an s and returns to you a bool.
+
+9
+00:00:49.920 --> 00:00:59.240
+And those five functions give us already the language or the terminology in which we can go into more details
+
+10
+00:00:59.240 --> 00:01:02.020
+about specifying how the abstract data type should behave.
+
+11
+00:01:02.840 --> 00:01:10.600
+Now that we have these five functions, we can talk about the logical properties of those functions,
+
+12
+00:01:10.740 --> 00:01:14.880
+empty, insert, isin, of those three functions, empty, insert and isin.
+
+13
+00:01:14.880 --> 00:01:21.660
+So, we want to say that empty, as I said, behaves like the empty set, the mathematical empty set.
+
+14
+00:01:21.780 --> 00:01:28.360
+How do we say that? We simply say, if you abstract empty with the function set,
+
+15
+00:01:28.560 --> 00:01:35.010
+if you remember, this is the function set, if you abstract empty with set,
+
+16
+00:01:35.570 --> 00:01:41.910
+what you get is the mathematical empty set, which is the curly brackets.
+
+17
+00:01:45.170 --> 00:01:54.390
+The same for insertion, if you take the set, so the abstraction of insert of
+
+18
+00:01:54.390 --> 00:02:00.450
+x and s, insert is this function, if you take the abstraction of that function,
+
+19
+00:02:01.720 --> 00:02:05.920
+if you take the abstraction of the output of that function,
+
+20
+00:02:05.920 --> 00:02:15.740
+so after being applied to an argument x and a set s, if you take the output of that whole thing and abstract
+
+21
+00:02:15.740 --> 00:02:23.220
+it with the function set, the abstraction function, the output should be the same,
+
+22
+00:02:24.480 --> 00:02:25.480
+so it should be equal,
+
+23
+00:02:25.480 --> 00:02:34.520
+so the output on the left-hand side should be equal, or exactly the same, as the abstraction of the
+
+24
+00:02:34.520 --> 00:02:42.300
+set that you started with, so this is the set s, the abstraction of that set on its own,
+
+25
+00:02:42.360 --> 00:02:52.590
+and then union, so this is not an operation on
+
+26
+00:02:54.800 --> 00:02:55.180
+s,
+
+27
+00:02:55.180 --> 00:03:07.000
+so this is an operation, it is an operation on alpha
+
+28
+00:03:07.000 --> 00:03:15.320
+sets, so this is just the function, the union function for the Isabelle 'a sets, mathematical sets,
+
+29
+00:03:15.320 --> 00:03:22.950
+so if you take the abstraction of the set s, and then you take the abstraction here,
+
+30
+00:03:23.330 --> 00:03:33.190
+and then you give that as an argument to union, in addition to the singleton set formed by only putting x in a set on its own,
+
+31
+00:03:33.190 --> 00:03:42.070
+that set overall is going to be the same as the set resulting from the abstraction of the left-hand side,
+
+32
+00:03:42.470 --> 00:03:48.250
+from this to this, so the set resulting from this, from the abstraction of that thing on the left-hand side,
+
+33
+00:03:48.250 --> 00:03:54.050
+is the same as the set resulting from the union of the abstraction of s and the singleton set x.
+
+34
+00:03:56.360 --> 00:04:03.860
+And then the same approach applies to isin, so we say isin s x,
+
+35
+00:04:04.140 --> 00:04:12.500
+so isin s x is true, if you remember, because isin is a function that gives you a bool here,
+
+36
+00:04:12.520 --> 00:04:20.440
+so this is the function isin, so isin s x equals x in set s.
+
+37
+00:04:20.440 --> 00:04:26.460
+So what does that mean? Let me first clear that space a bit.
+
+38
+00:04:27.700 --> 00:04:37.300
+So what does it mean that isin s x isin s x equals x
+
+39
+00:04:37.300 --> 00:04:38.780
+is in set s?
+
+40
+00:04:38.780 --> 00:04:44.860
+So this means that the function isin, if you give it a set of the type s,
+
+41
+00:04:45.220 --> 00:04:52.590
+so this is a set of that type s, if you give it a set of that type and you give it an x, so this x is type alpha,
+
+42
+00:04:53.350 --> 00:04:55.150
+so this is a type alpha and this is type s,
+
+43
+00:04:55.970 --> 00:05:05.270
+if you give it both of those things, it will return true if and only if you give x as
+
+44
+00:05:05.270 --> 00:05:10.410
+an argument to the mathematical set membership, or in other words, element,
+
+45
+00:05:10.410 --> 00:05:16.970
+and applied to the abstraction of the set s.
+
+46
+00:05:17.330 --> 00:05:26.950
+So basically, if you check the membership of that x in the abstract mathematical set corresponding to the set s,
+
+47
+00:05:27.940 --> 00:05:35.220
+that will return true if and only if the function isin, which is an implementation of the membership check, returns true.
+
+48
+00:05:35.220 --> 00:05:41.320
+So this, again, connects that implementation to that mathematical function.
+
+49
+00:05:44.750 --> 00:05:54.730
+And as you have seen, in both of those properties that we have stated for insert and end,
+
+50
+00:05:54.950 --> 00:06:04.520
+so this property here and that property there, both of them assume that the s we're talking about conforms to that invariant
+
+51
+00:06:04.520 --> 00:06:06.480
+predicate invar.
+
+52
+00:06:06.480 --> 00:06:16.280
+If you remember from up there, we had this invariant invar, which is a function that takes a
+
+53
+00:06:16.370 --> 00:06:22.170
+set of type s and returns to you a Boolean, so a true or a false.
+
+54
+00:06:22.170 --> 00:06:28.530
+And that function or that predicate, that function that returns to you a Boolean, which is a predicate,
+
+55
+00:06:29.930 --> 00:06:39.300
+we assume that it holds for the s for which the function's insert or the function isin work.
+
+56
+00:06:39.900 --> 00:06:48.910
+So if we don't have the invariant holds for s, we don't know anything about the output of insert or the output of isin.
+
+57
+00:06:48.980 --> 00:06:55.950
+So basically we say that assuming that the invariant holds, the function inserts, behaves as expected.
+
+58
+00:06:56.110 --> 00:07:00.950
+And assuming that the invariant holds for s, the function isin behaves as expected.
+
+59
+00:07:02.010 --> 00:07:10.950
+Now, okay, so we said how do the functions, how do the implementation functions empty,
+
+60
+00:07:11.170 --> 00:07:13.150
+insert, and isin behave mathematically,
+
+61
+00:07:13.150 --> 00:07:16.830
+and we said that we can specify them using the abstraction function set,
+
+62
+00:07:16.910 --> 00:07:24.580
+and that this specification only makes sense for s's,
+
+63
+00:07:24.720 --> 00:07:28.260
+for members of the type s, for which the invariant holds.
+
+64
+00:07:29.670 --> 00:07:35.170
+But we didn't actually say how should the invariant hold.
+
+65
+00:07:35.170 --> 00:07:44.060
+How do we know what kind of s's does the invariant hold for?
+
+66
+00:07:44.560 --> 00:07:47.900
+So we say that we have to assume that the invariant holds for the empty set,
+
+67
+00:07:47.980 --> 00:07:49.840
+because otherwise we cannot build anything that's valid.
+
+68
+00:07:50.000 --> 00:07:54.940
+So basically if the empty set is valid, as in if it conforms to the invariant,
+
+69
+00:07:55.910 --> 00:08:00.270
+then we can at least talk about whatever else we build on top of that empty set.
+
+70
+00:08:00.270 --> 00:08:09.760
+And we say that if the invariant holds for any set s, then the invariant will hold for that s with something inserted in it.
+
+71
+00:08:10.310 --> 00:08:22.700
+So this is a specification of how the invariant progresses
+
+72
+00:08:23.090 --> 00:08:29.820
+with time, or how does it evolve with time, or with computation steps.
+
+73
+00:08:31.800 --> 00:08:36.440
+So now, this is a full abstract data type for the set ADT.
+
+74
+00:08:36.960 --> 00:08:45.110
+So to summarize again, we have a number of functions that we provide with that abstract data type.
+
+75
+00:08:45.190 --> 00:08:50.930
+The first three of them are the implementation function, and the fourth one is the abstraction function,
+
+76
+00:08:50.970 --> 00:08:52.690
+and the fifth one is the invariant.
+
+77
+00:08:52.690 --> 00:09:01.310
+And we have a number of logical assumptions that we can assume on the behavior of the implementation functions that we provided,
+
+78
+00:09:01.890 --> 00:09:03.230
+empty, insert, and isin.
+
+79
+00:09:04.030 --> 00:09:13.230
+And those logical assumptions on the implementation, they can only be
+
+80
+00:09:13.230 --> 00:09:16.170
+stated in terms of the abstraction function and the invariant,
+
+81
+00:09:16.170 --> 00:09:25.370
+because otherwise, in order for you to specify, you would not be able to talk about how these implementation functions work,
+
+82
+00:09:25.370 --> 00:09:27.730
+because they operate on a type that doesn't exist,
+
+83
+00:09:28.330 --> 00:09:36.110
+and the only way for you to really say that they operate correctly is that you have to connect that type that doesn't exist to a type that exists,
+
+84
+00:09:37.270 --> 00:09:40.410
+and for which there are functions that we know whose properties we know.
+
+85
+00:09:40.410 --> 00:09:49.910
+So here we have the abstraction function that connects that type S to an alpha set which is an already existing type in Isabelle.
+
+86
+00:09:50.860 --> 00:10:00.140
+So now, to summarize what we discussed now, or to just give you a view of the general pattern
+
+87
+00:10:00.140 --> 00:10:01.780
+that we're talking about here,
+
+88
+00:10:02.760 --> 00:10:04.800
+what we want is the following.
+
+89
+00:10:04.800 --> 00:10:11.240
+We want to say that any function, any implementation function that comes in the interface of the abstract teratype,
+
+90
+00:10:12.460 --> 00:10:16.860
+so any function that we assume an implementation provides in the abstract teratype,
+
+91
+00:10:16.960 --> 00:10:22.200
+like for example, empty or isin or insert, any function f like that,
+
+92
+00:10:23.620 --> 00:10:29.180
+which takes an argument of type t, or a number of arguments of type t,
+
+93
+00:10:29.180 --> 00:10:35.890
+must behave like some other function, what we'll just call fA,
+
+94
+00:10:36.290 --> 00:10:38.550
+which is defined in a mathematical type,
+
+95
+00:10:38.610 --> 00:10:41.370
+like for example, an alpha set.
+
+96
+00:10:45.370 --> 00:10:50.930
+So A is an alpha set, which is a mathematical function in Isabelle on sets.
+
+97
+00:10:52.660 --> 00:10:58.320
+So we say any function f behaves like a function fA on the corresponding element A.
+
+98
+00:10:58.320 --> 00:11:04.900
+So you have to connect the t and the A, and then from that connection you get the connection between f and fA.
+
+99
+00:11:07.430 --> 00:11:14.910
+So in order for that pattern to happen, in order for us to be able to connect all the functions of the abstract teratype
+
+100
+00:11:14.910 --> 00:11:19.610
+with previously existing functions in Isabelle, we want to assume the following.
+
+101
+00:11:25.460 --> 00:11:32.040
+So here the function f takes a number of arguments, t1, t2, tn,
+
+102
+00:11:32.300 --> 00:11:33.480
+so any number of arguments.
+
+103
+00:11:33.820 --> 00:11:39.540
+This is well beyond sets, this is just about the set A to t, this is just a general pattern.
+
+104
+00:11:40.140 --> 00:11:46.600
+So for the function f, when you apply it to arguments t1, t2, tn, what we want to have is
+
+105
+00:11:46.600 --> 00:11:52.320
+if you abstract the output, the value of that function f applied to t1 to tn,
+
+106
+00:11:52.720 --> 00:11:58.860
+so if we abstract it with this abstraction function alpha, the abstracted value,
+
+107
+00:11:59.020 --> 00:12:01.520
+so the output of that whole thing,
+
+108
+00:12:01.640 --> 00:12:07.900
+so alpha of that whole thing, the abstraction of the whole thing, is going to be the same value
+
+109
+00:12:09.140 --> 00:12:13.600
+as the function fA, so the previously existing mathematical function,
+
+110
+00:12:13.600 --> 00:12:19.710
+applied to the abstractions of each and every one of the arguments separately.
+
+111
+00:12:21.720 --> 00:12:30.830
+And this equality holds if the invariant applies to each
+
+112
+00:12:30.830 --> 00:12:32.610
+one of the arguments of the function f.
+
+113
+00:12:33.030 --> 00:12:39.900
+Because in principle the function f can take more than one argument of type t,
+
+114
+00:12:40.020 --> 00:12:42.420
+it's not just necessarily one, it can take any number.
+
+115
+00:12:42.420 --> 00:12:47.140
+So for each one of them, they all have to satisfy the invariants,
+
+116
+00:12:47.840 --> 00:12:55.920
+and if they all satisfy the invariant, then we know that the abstraction function applied to the function f
+
+117
+00:12:56.750 --> 00:13:01.970
+is going to have the same value as the output of the function fA,
+
+118
+00:13:02.110 --> 00:13:06.110
+which is the previously existing function applied to the abstracted arguments.
+
+119
+00:13:08.050 --> 00:13:16.810
+And we also need, so this is, so for example, this property is a generalization of the property that
+
+120
+00:13:16.810 --> 00:13:28.300
+invar of s implies that is in sx
+
+121
+00:13:28.300 --> 00:13:37.030
+equals x in the abstraction of s.
+
+122
+00:13:38.130 --> 00:13:44.970
+And the other property that we want to say is that if the invariant holds for each and every one of the arguments of the function f,
+
+123
+00:13:45.110 --> 00:13:50.030
+so f takes a number of arguments of the set, if the invariant applies to each one of them,
+
+124
+00:13:50.130 --> 00:13:55.830
+so if all of them conform to the invariant, all of them are correct, all of them are well formed and correct and valid,
+
+125
+00:13:56.310 --> 00:14:04.810
+then the resulting output of the function f will also conform to the invariant.
+
+126
+00:14:04.810 --> 00:14:12.420
+So insertion, easing and so on,
+
+127
+00:14:12.540 --> 00:14:16.020
+sorry, insertion will always return,
+
+128
+00:14:18.010 --> 00:14:22.970
+like if you insert something in a set, will always return a set, another set, an abstract set,
+
+129
+00:14:23.050 --> 00:14:28.130
+that satisfies the invariant predicate.
+
+130
+00:14:29.290 --> 00:14:34.650
+So as we, as we, if you remember from the last slide, we have that invariant s,
+
+131
+00:14:35.150 --> 00:14:38.770
+if s had the invariant, so this is just because it takes only one,
+
+132
+00:14:39.590 --> 00:14:51.560
+it implies that the invariant will hold for insertion of x in s.
+
+133
+00:14:51.920 --> 00:14:58.790
+So the function f is inserted and the invariant will hold for the output of that insert.
+
+134
+00:15:01.740 --> 00:15:11.420
+So basically that is the general pattern of an abstract data type,
+
+135
+00:15:11.680 --> 00:15:19.600
+so you have functions which identify the interface of that implementation of that abstract data type,
+
+136
+00:15:19.700 --> 00:15:27.400
+and you have specifications or properties or logical properties that have to apply to these functions
+
+137
+00:15:27.400 --> 00:15:37.600
+and those logical properties are specified in terms of that type that already exists in Isabelle,
+
+138
+00:15:39.130 --> 00:15:41.970
+like for example the alpha set and so on,
+
+139
+00:15:42.710 --> 00:15:50.230
+and the connection between the data types can be done with an abstraction function in the invariant.
+
+140
+00:15:52.450 --> 00:15:56.350
+Now, I won't, as I said, in the second half of this module,
+
+141
+00:15:56.350 --> 00:16:00.530
+so the later five weeks, I'm not doing Isabelle in these recordings,
+
+142
+00:16:00.630 --> 00:16:04.310
+I'm only doing it in the lecture, in the in-person lecture,
+
+143
+00:16:05.130 --> 00:16:12.650
+so here, but I want you to just take a quick look into actually how we specify an abstract data type in Isabelle.
+
+144
+00:16:12.790 --> 00:16:19.550
+So we have a so-called construct, a syntax in Isabelle, a construct called locale. So what is a locale?
+
+145
+00:16:19.550 --> 00:16:29.640
+So basically a locale is an Isabelle
+
+146
+00:16:29.640 --> 00:16:32.140
+construct in which you fix a context
+
+147
+00:16:32.200 --> 00:16:37.220
+and then you say within this context, so here, for example, we fix the context set,
+
+148
+00:16:37.840 --> 00:16:45.270
+and then we say within this context, I want to identify a number of functions,
+
+149
+00:16:45.270 --> 00:16:50.030
+so for our number of symbols, constant symbols, which can be functions or anything else,
+
+150
+00:16:50.090 --> 00:16:54.450
+so here we say empty fix, fix insert, fix isin, fix set, and so on,
+
+151
+00:16:54.890 --> 00:16:59.750
+and we also fix a number of assumptions within that context, we assume this, this, and that,
+
+152
+00:17:00.290 --> 00:17:05.800
+and then anything within that context, after we have said locale set,
+
+153
+00:17:07.040 --> 00:17:11.020
+anything within that will see, will have access to these constants,
+
+154
+00:17:11.020 --> 00:17:15.920
+will have access to these functions, and will also have access to these assumptions on those constants.
+
+155
+00:17:17.800 --> 00:17:24.540
+And that's the way we implement, we specify, we write down an abstract data type in Isabelle,
+
+156
+00:17:24.540 --> 00:17:26.000
+so we use so-called locales.
+
+157
+00:17:26.920 --> 00:17:32.200
+So what, so as you can see, here we have said, okay, it fixes the empty function,
+
+158
+00:17:32.400 --> 00:17:36.620
+like this function empty insert isin, and it fixes that abstraction function,
+
+159
+00:17:36.620 --> 00:17:46.640
+and it fixes the invariant, and it assumes that set empty returns the same thing as the empty set,
+
+160
+00:17:46.780 --> 00:17:52.880
+which is just a couple of curly brackets, so abstraction, so abstracting empty,
+
+161
+00:17:53.380 --> 00:17:56.560
+so if you abstract empty, so you abstract that like this,
+
+162
+00:17:57.040 --> 00:17:59.780
+will return to you that set, and then the same for isin,
+
+163
+00:18:00.140 --> 00:18:02.480
+returns the same thing as mathematical membership,
+
+164
+00:18:03.100 --> 00:18:07.580
+and insertion is going to be the same thing as union with a singleton.
+
+165
+00:18:08.380 --> 00:18:11.660
+So the same assumptions that we stated earlier, we just state them like this in a locale,
+
+166
+00:18:11.840 --> 00:18:16.640
+so you just literally say locale set equals all the functions that you fix,
+
+167
+00:18:16.740 --> 00:18:18.220
+and then all the assumptions in those functions.
+
+168
+00:18:18.620 --> 00:18:21.520
+And I want you to take a look into this file specifically,
+
+169
+00:18:22.140 --> 00:18:27.980
+all that structure set specs, because that will have the actual locale for set same Isabelle.
+
+170
+00:18:28.750 --> 00:18:38.300
+So now that we have kind of had a relatively in-depth overview of how,
+
+171
+00:18:38.360 --> 00:18:42.390
+of the abstract paratype for sets, for implementing sets,
+
+172
+00:18:43.900 --> 00:18:50.740
+I want to just note very quickly that this is not, in Isabelle we have more than just abstract paratypes for sets,
+
+173
+00:18:50.800 --> 00:18:55.040
+we also have one for a map, and queues, and priority queues,
+
+174
+00:18:56.420 --> 00:19:01.700
+where the mathematical model for a map is just a function, an Isabelle function,
+
+175
+00:19:02.000 --> 00:19:06.540
+so you can see here that arrow there, and for queue it's going to be a list,
+
+176
+00:19:07.260 --> 00:19:09.540
+and for priority queue it's going to be a multiset.
+
+177
+00:19:10.360 --> 00:19:13.120
+And we have again an interface for each one of them,
+
+178
+00:19:13.280 --> 00:19:17.820
+so empty insert and isin is for set, and empty update and lookup is for a map,
+
+179
+00:19:18.240 --> 00:19:20.880
+and these are the same as the maps that are, for example,
+
+180
+00:19:20.940 --> 00:19:25.340
+implemented in the C standard library or Java standard library and so on.
+
+181
+00:19:25.340 --> 00:19:29.380
+And the same for a queue, empty, enq, so add something to the queue,
+
+182
+00:19:29.660 --> 00:19:32.140
+get the first element, dequeue, remove something from the queue,
+
+183
+00:19:32.260 --> 00:19:35.700
+and then empty insert, get minimum element, delete minimum element.
+
+184
+00:19:39.440 --> 00:19:46.600
+So all of them are implemented, or all of these abstract paratypes are defined with the same recipe,
+
+185
+00:19:46.760 --> 00:19:55.920
+so you have a locale that fixes a set of interface functions and an abstraction function and an invariant,
+
+186
+00:19:56.920 --> 00:20:01.760
+and all of them assume some logical properties of that interface,
+
+187
+00:20:02.620 --> 00:20:07.390
+which connect the type that we have here,
+
+188
+00:20:07.470 --> 00:20:10.250
+like for example for the queue it's going to be something like a queue like that,
+
+189
+00:20:11.310 --> 00:20:16.090
+and so that's connected to an alpha list with an abstraction function,
+
+190
+00:20:16.870 --> 00:20:18.430
+and they have an invariant.
+
+191
+00:20:19.080 --> 00:20:23.560
+So for instance for a queue, with an abstraction function alpha that I will just call list,
+
+192
+00:20:24.300 --> 00:20:27.140
+basically we assume that if the invariant holds for a queue,
+
+193
+00:20:27.900 --> 00:20:33.500
+then the list resulting from adding an element to the queue, an element x to the queue,
+
+194
+00:20:33.660 --> 00:20:38.480
+so enq x, is going to be the same as the list resulting from abstracting the original queue,
+
+195
+00:20:38.680 --> 00:20:43.840
+queue with an element x added to the end of it, so not to the front,
+
+196
+00:20:44.000 --> 00:20:51.300
+because when you add something to a queue, you add it towards the end of the queue, not to the front.
+
+197
+00:20:51.300 --> 00:20:58.120
+And similarly for the function that removes an element from a queue, the queue,
+
+198
+00:20:58.300 --> 00:21:01.160
+so if we get the list abstraction of the queue of queue,
+
+199
+00:21:01.900 --> 00:21:04.320
+that list abstraction is going to be the same as the tail,
+
+200
+00:21:04.600 --> 00:21:07.680
+so all the elements in the list except for the first one,
+
+201
+00:21:08.100 --> 00:21:11.940
+of the list abstraction of the queue without removing the first element.
+
+202
+00:21:13.800 --> 00:21:16.280
+So you can take a look into all of them,
+
+203
+00:21:16.280 --> 00:21:24.640
+into the map spec or queue spec or priority queue spec in the whole data structures directory in Isabelle, in Isabelle sources,
+
+204
+00:21:25.240 --> 00:21:32.980
+and also you need to read the chapters on those abstract data types in the FDS book,
+
+205
+00:21:33.100 --> 00:21:41.020
+in the functional data structures and algorithms book that I've linked on KEATS.
+

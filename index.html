@@ -332,24 +332,30 @@
     <h3 id="week8">Week 8: Proving Data Structures Correct — Abstract Data Types</h3>
     <ul style="width: 800px;">
       <li style="margin-bottom: 14px;">
-        <b>1. Specifying Abstract Data Types</b><br/>
-        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Specifying Abstract Data Types')">Video</a> | 
-          <a href="W25-26/Week_8/1-ADTs_Specifying/adts_specifying_slides.pdf">Slides (PDF)</a> ]<br/>
-        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Sections 6.1–6.2: ADTs and Model-Oriented Specification, the Set ADT; Section 6.4: Maps; Chapter 14 introduction: the Priority Queue ADT; Section 20.1: Queue Specification) | <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Sections 1–2: Simple Locales)</small>
+        <b>1. Introducing Abstract Data Types</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/adts_introduction.mp4', 'Introducing Abstract Data Types')">Video</a> | 
+          <a href="W25-26/Week_8/1-ADTs_Introduction/adts_introduction_slides.pdf">Slides (PDF)</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Sections 6.1–6.2: Abstract Data Types and Model-Oriented Specification)</small>
       </li>
       <li style="margin-bottom: 14px;">
-        <b>2. Using Abstract Data Types</b><br/>
-        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Using Abstract Data Types')">Video</a> | 
-          <a href="W25-26/Week_8/2-ADTs_Using/adts_using_slides.pdf">Slides (PDF)</a> ]<br/>
+        <b>2. The Set ADT and Locales</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/adts_set_locale.mp4', 'The Set ADT and Locales')">Video</a> | 
+          <a href="W25-26/Week_8/2-ADTs_Set_Locale/adts_set_locale_slides.pdf">Slides (PDF)</a> ]<br/>
+        <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Sections 6.1–6.2: the Set ADT; Section 6.4: Maps; Chapter 14 introduction: the Priority Queue ADT; Section 20.1: Queue Specification) | <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Sections 1–2: Simple Locales)</small>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <b>3. Using Abstract Data Types</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/adts_using.mp4', 'Using Abstract Data Types')">Video</a> | 
+          <a href="W25-26/Week_8/3-ADTs_Using/adts_using_slides.pdf">Slides (PDF)</a> ]<br/>
         <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Section 6.1: writing applications on top of an ADT) | <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Section 2.2: Context Blocks)</small>
       </li>
       <li style="margin-bottom: 14px;">
-        <b>3. Implementing Abstract Data Types</b><br/>
-        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/1-Logical_Reasoning_Overview.mp4', 'Implementing Abstract Data Types')">Video</a> | 
-          <a href="W25-26/Week_8/3-ADTs_Implementing/adts_implementing_slides.pdf">Slides (PDF)</a> ]<br/>
+        <b>4. Implementing Abstract Data Types</b><br/>
+        [ <a href="javascript:void(0)" onclick="playVideo('https://github.com/mabdula/7CCSACTP/releases/download/v1.0-course-videos/adts_implementing.mp4', 'Implementing Abstract Data Types')">Video</a> | 
+          <a href="W25-26/Week_8/4-ADTs_Implementing/adts_implementing_slides.pdf">Slides (PDF)</a> ]<br/>
         <small style="color: #444;"><b>Obligatory Reading:</b> <a href="https://fdsa-book.net/">Functional Data Structures and Algorithms</a> (Section 6.3: Implementing ADTs; Section 6.5: Implementing Maps by BSTs; Section 7.1: Implementation of ADT Set by 2-3 Trees) | <a href="https://isabelle.in.tum.de/doc/locales.pdf">Isabelle Locales Tutorial</a> (Section 5: Use of Locales in Theories and Proofs — interpretation)</small>
       </li>
-      <li style="margin-bottom: 14px;">
+<li style="margin-bottom: 14px;">
         <b>Large Group Tutorial (LGT)</b><br/>
         [ <a href="W25-26/Week_8/Week_8.pdf">Exercise Sheet (PDF)</a> | 
           <a href="W25-26/Week_8/ex/Week_8.thy">Exercise Theory (.thy)</a> ]
@@ -478,7 +484,11 @@
     "2-Sledgehammer_Demo.mp4": "Week_5/1-Sledgehammer/2-Sledgehammer_Demo.vtt",
     "3-Custom_Models_and_Agentic_Proving.mp4": "Week_5/2-Custom_Models_and_Agentic_Proving/3-Custom_Models_and_Agentic_Proving.vtt",
     "MCP_Tutorial.mp4": "Week_5/2-LLMs-for-Isabelle/MCP_Tutorial.vtt",
-    "4-Agentic_Proving_Architectures.mp4": "Week_5/3-Agentic_Proving_Architectures/4-Agentic_Proving_Architectures.vtt"
+    "4-Agentic_Proving_Architectures.mp4": "Week_5/3-Agentic_Proving_Architectures/4-Agentic_Proving_Architectures.vtt",
+    "adts_introduction.mp4": "Week_8/1-ADTs_Introduction/adts_introduction.vtt",
+    "adts_set_locale.mp4": "Week_8/2-ADTs_Set_Locale/adts_set_locale.vtt",
+    "adts_using.mp4": "Week_8/3-ADTs_Using/adts_using.vtt",
+    "adts_implementing.mp4": "Week_8/4-ADTs_Implementing/adts_implementing.vtt"
   };
 
   var CC_BASE_PREFIX = "W25-26/";

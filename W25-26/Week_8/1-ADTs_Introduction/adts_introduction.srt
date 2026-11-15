@@ -1,0 +1,880 @@
+1
+00:00:00,460 --> 00:00:10,520
+Hello everyone! Today I'll
+
+2
+00:00:11,220 --> 00:00:18,820
+be discussing a topic that you must have seen in other modules,
+
+3
+00:00:18,860 --> 00:00:21,680
+especially data structures and maybe even software engineering.
+
+4
+00:00:23,020 --> 00:00:26,460
+Before I go into that topic, let me just remind you of where we are.
+
+5
+00:00:26,940 --> 00:00:34,540
+In the first 5 weeks, we studied the foundations of Isabelle,
+
+6
+00:00:34,540 --> 00:00:41,240
+what is Isabelle, what is theorem proving, what is the syntax, what is the basic interaction mode,
+
+7
+00:00:41,440 --> 00:00:44,800
+how can you interact with it and use it to prove theorems and so on.
+
+8
+00:00:44,830 --> 00:00:51,580
+In week 6, we worked on proving correctness of algorithms,
+
+9
+00:00:51,980 --> 00:00:57,980
+specified dysfunctional programs, like for example sorting, in particular we studied computation induction and also we studied how
+
+10
+00:00:57,980 --> 00:01:00,040
+to reason about running times and functions.
+
+11
+00:01:00,040 --> 00:01:08,720
+And lastly, in week 7, we focused on how to formally verify implementations of data structures,
+
+12
+00:01:09,220 --> 00:01:18,060
+in particular balanced search trees, and we focused on 2-3 trees, so we focused on how to implement them and how to prove them correct
+
+13
+00:01:18,060 --> 00:01:19,760
+and to show that they are balanced.
+
+14
+00:01:21,590 --> 00:01:25,170
+Today we'll be talking about something else, which is called abstract data types.
+
+15
+00:01:29,780 --> 00:01:37,640
+So today's lecture will be about 4 subtopics.
+
+16
+00:01:38,120 --> 00:01:41,360
+The first one is what is an abstract data type, so I'll just introduce you to the notion.
+
+17
+00:01:41,820 --> 00:01:46,580
+Secondly, I'll give you an example data type, an abstract data type.
+
+18
+00:01:46,580 --> 00:01:53,960
+And thirdly, I'll be talking to you about how to use these abstract data types by showing you an example of how to use abstract data types.
+
+19
+00:01:55,800 --> 00:02:03,420
+And lastly, I will show you how we can implement these data types to get efficient algorithms out of them.
+
+20
+00:02:05,340 --> 00:02:10,260
+So let's go for the first subtopic.
+
+21
+00:02:10,610 --> 00:02:20,130
+So if you remember, in weeks 4 and 7, we talked about 2 types of trees.
+
+22
+00:02:20,710 --> 00:02:28,430
+First was just binary search trees, so we did binary search trees,
+
+23
+00:02:29,240 --> 00:02:35,930
+and here we did balanced search trees.
+
+24
+00:02:40,690 --> 00:02:46,330
+I'll just call these binary search trees.
+
+25
+00:02:50,250 --> 00:02:59,620
+So if you remember, the search trees were ones where we knew that there is a certain ordering of
+
+26
+00:03:00,320 --> 00:03:02,800
+the elements.
+
+27
+00:03:02,800 --> 00:03:12,090
+For example, if an element is at the root, we know that it is strictly bigger than all the elements in the left subtree,
+
+28
+00:03:12,170 --> 00:03:17,900
+and it's strictly smaller than all the elements in the right subtree.
+
+29
+00:03:19,380 --> 00:03:25,500
+So this was a search tree, and had the advantage that if you were searching,
+
+30
+00:03:25,620 --> 00:03:27,160
+you know in which direction to go.
+
+31
+00:03:27,280 --> 00:03:33,440
+So if you're searching for something smaller than the root, you go there, otherwise you go to the other subtree.
+
+32
+00:03:33,440 --> 00:03:42,740
+And the second type, which is called balanced, if we use balanced search trees,
+
+33
+00:03:43,420 --> 00:03:48,020
+what we're talking about is making sure that the height of the tree is small enough,
+
+34
+00:03:48,220 --> 00:03:58,310
+so that whenever you're doing search, the running time of the search is limited due
+
+35
+00:03:58,310 --> 00:04:00,130
+to the limits on the height,
+
+36
+00:04:00,130 --> 00:04:08,330
+because you don't want all the tree to be stored in one subtree,
+
+37
+00:04:08,430 --> 00:04:11,090
+like you don't want all the elements to be here, and then this one to be empty,
+
+38
+00:04:11,570 --> 00:04:16,010
+which would lead to a very skewed search time.
+
+39
+00:04:16,150 --> 00:04:19,270
+If you were searching for something smaller than the root, then you would spend a lot of time,
+
+40
+00:04:19,330 --> 00:04:21,250
+otherwise you'd spend almost no time.
+
+41
+00:04:21,250 --> 00:04:30,890
+You don't want that, you want balancing, so that the worst case search running time is bounded by the log of the size of the tree.
+
+42
+00:04:31,770 --> 00:04:33,410
+So that was last week.
+
+43
+00:04:43,660 --> 00:04:47,180
+Those two trees are ways to implement sets.
+
+44
+00:04:48,140 --> 00:04:55,840
+You want to implement operations like empty, what is an empty set, which is just an empty tree in the case of the implementation, so it's a leaf,
+
+45
+00:04:57,190 --> 00:05:02,650
+and what is insert, because we had a function to insert in a tree, and is it, and we have the function to search in a tree.
+
+46
+00:05:02,650 --> 00:05:08,790
+So now we know that those two trees that we did in those two weeks are just two implementation of sets,
+
+47
+00:05:09,250 --> 00:05:14,020
+but we actually want two things.
+
+48
+00:05:14,220 --> 00:05:23,110
+We want the implementation of a set to be something separate, and we want the properties of the set implementation to be something else.
+
+49
+00:05:23,110 --> 00:05:24,130
+So you have two things.
+
+50
+00:05:25,630 --> 00:05:32,090
+You have an implementation, which is done with those trees,
+
+51
+00:05:32,650 --> 00:05:35,950
+so that the implementation is our tree, so this and that are implementations.
+
+52
+00:05:36,810 --> 00:05:44,150
+And the other thing that you want is properties of all implementations of trees,
+
+53
+00:05:44,190 --> 00:05:46,030
+that don't depend on the actual implementation,
+
+54
+00:05:46,130 --> 00:05:48,530
+it's just the properties that have to hold for all of them.
+
+55
+00:05:48,530 --> 00:05:52,190
+So what are the properties that have to hold for all the implementation of trees?
+
+56
+00:05:52,710 --> 00:05:58,730
+They all have to have the same interface, and they all have to have the same so-called specification. What does that mean?
+
+57
+00:06:00,450 --> 00:06:06,510
+A specification is the logical properties, like for example, is in,
+
+58
+00:06:07,630 --> 00:06:14,920
+always finds an element, even only if it were in the tree, or if it were in the set, because this is an implementation of a set.
+
+59
+00:06:15,420 --> 00:06:16,940
+That's a part of the specification.
+
+60
+00:06:16,940 --> 00:06:26,300
+The interface, on the other hand, is what operations does that implementation give you.
+
+61
+00:06:26,420 --> 00:06:35,660
+So in our case, in the case for sets, and the way we implemented them as trees in the last two weeks,
+
+62
+00:06:36,260 --> 00:06:39,500
+in weeks 4 and 7, we had three parts of the interface.
+
+63
+00:06:39,500 --> 00:06:42,700
+We had an empty, insert, and isin.
+
+64
+00:06:42,700 --> 00:06:48,500
+So any implementation of trees has to have those three elements in its interface.
+
+65
+00:06:48,580 --> 00:06:55,640
+It has to give you a function to build an empty tree, and a function to insert in a tree,
+
+66
+00:06:55,640 --> 00:07:01,140
+and a function that gives you true or false based on whether a certain element that you're looking for isin't a tree.
+
+67
+00:07:02,580 --> 00:07:12,490
+Now, any data structure that meets that specification
+
+68
+00:07:12,490 --> 00:07:21,730
+of an abstract data type, which is namely an interface and a specification, is an implementation of that abstract data type.
+
+69
+00:07:22,340 --> 00:07:29,700
+So the two trees that we talked about are both implementations of the abstract data type of sets,
+
+70
+00:07:32,080 --> 00:07:41,780
+which means that they both have satisfied interface constraints, so they both have the same functions for a set abstract data type,
+
+71
+00:07:41,780 --> 00:07:47,920
+and they both satisfy the logical properties of an implementation of a set data type,
+
+72
+00:07:47,940 --> 00:07:49,180
+namely in the specification.
+
+73
+00:07:51,110 --> 00:08:01,580
+So, to summarize, an abstract data type, at a very high level, is a way for us to understand
+
+74
+00:08:01,580 --> 00:08:06,120
+and state the properties of an implementation of a data structure
+
+75
+00:08:06,120 --> 00:08:09,060
+without actually knowing anything about the implementation of the data structure.
+
+76
+00:08:09,780 --> 00:08:16,800
+So here, if you want to know the properties of the implementation of a data structure,
+
+77
+00:08:16,940 --> 00:08:18,160
+you have two types of properties.
+
+78
+00:08:18,160 --> 00:08:22,140
+One is called the interface, so what functions does it provide you, and the other one is called the specification,
+
+79
+00:08:22,240 --> 00:08:30,400
+which is what are the logical properties that that implementation satisfies.
+
+80
+00:08:32,340 --> 00:08:39,340
+So an example abstract data type is the one for sets.
+
+81
+00:08:39,980 --> 00:08:43,360
+So as I said, we have already implemented sets in rig 4 and 7 using trees,
+
+82
+00:08:44,580 --> 00:08:49,470
+but if you want to not really care about the actual implementation,
+
+83
+00:08:49,610 --> 00:08:57,010
+you want to just know the abstract data type of sets, namely what are the properties that any implementation has to satisfy, you have two things, as I said.
+
+84
+00:08:57,150 --> 00:09:02,440
+You have the interface, the first one, and the second one, we'll come to later, is the specification.
+
+85
+00:09:02,680 --> 00:09:05,320
+So what is the interface of the set abstract data type?
+
+86
+00:09:07,360 --> 00:09:12,060
+As I said, the interface says what are the functions, so the first function is empty,
+
+87
+00:09:12,060 --> 00:09:14,440
+the second function is a function that does insertion,
+
+88
+00:09:14,880 --> 00:09:20,860
+the third function is a function that asks whether an element is in the set or not.
+
+89
+00:09:22,470 --> 00:09:26,410
+And I want you to look here at the types of the three functions,
+
+90
+00:09:29,120 --> 00:09:31,700
+and to pause for a second and think about those types.
+
+91
+00:09:31,700 --> 00:09:40,730
+So here we're talking about three functions that
+
+92
+00:09:40,730 --> 00:09:44,250
+are taken as an argument, 's.
+
+93
+00:09:45,910 --> 00:09:46,770
+So what is 's?
+
+94
+00:09:47,210 --> 00:09:51,450
+'s is actually a polymorphic type, as I mentioned in the first few weeks.
+
+95
+00:09:51,890 --> 00:09:59,170
+You can talk about a polymorphic type or a type variable that you can instantiate with implementations or concrete values for that type.
+
+96
+00:09:59,170 --> 00:10:09,440
+So in this case, we have this type 's, and that means, or that is the type, the abstract,
+
+97
+00:10:10,360 --> 00:10:15,460
+or the polymorphic type that we use to represent a set, an implementation of a set.
+
+98
+00:10:15,960 --> 00:10:22,800
+So for every abstract data type, we have such a type of interest,
+
+99
+00:10:22,800 --> 00:10:32,040
+only one type of interest, which is the type corresponding to what that abstract data type is supposed to be
+
+100
+00:10:32,040 --> 00:10:33,380
+implementing.
+
+101
+00:10:33,900 --> 00:10:43,970
+So here the type, as I said, is s, and our abstract data type is supposed to be implementing a set of type s.
+
+102
+00:10:45,330 --> 00:10:54,560
+Now, the function empty doesn't take anything as an argument and only returns
+
+103
+00:10:54,560 --> 00:10:59,360
+to you an empty set of type s.
+
+104
+00:10:59,360 --> 00:11:05,440
+The function insert takes an element of type alpha or a,
+
+105
+00:11:09,220 --> 00:11:14,520
+and takes a set and returns to you another set
+
+106
+00:11:14,520 --> 00:11:21,220
+where that other set that you returned is the same as this one, but with that element added to it.
+
+107
+00:11:21,640 --> 00:11:24,990
+So this is the function insert.
+
+108
+00:11:25,630 --> 00:11:32,770
+And lastly, we have the function isin that takes a set as a first input,
+
+109
+00:11:35,670 --> 00:11:42,290
+and an alpha as an element to look for, and returns to you a boolean value, so true or false,
+
+110
+00:11:42,890 --> 00:11:47,670
+based on whether this alpha was in the set that we're talking about or no.
+
+111
+00:11:49,150 --> 00:11:55,280
+So an abstract data type for a set within this module, within this lecture,
+
+112
+00:11:55,280 --> 00:12:02,560
+I want you to think about it as only something that will have the interface with three functions.
+
+113
+00:12:02,860 --> 00:12:07,120
+Empty, insert, isin. We're not talking about deletion, we're not talking about unions or any other operations in sets.
+
+114
+00:12:08,960 --> 00:12:13,480
+So this is the interface of an abstract data type, in our case for sets.
+
+115
+00:12:14,160 --> 00:12:20,480
+So to summarize that, again, it includes functions, so empty, insert, and isin,
+
+116
+00:12:20,480 --> 00:12:27,900
+and includes a type of interest, which is, in our case here, is this s,
+
+117
+00:12:28,480 --> 00:12:32,440
+which basically stands for a set.
+
+118
+00:12:34,960 --> 00:12:41,900
+The next part of an abstract data type is the specification.
+
+119
+00:12:41,900 --> 00:12:51,370
+So this is a specification of the logical properties of
+
+120
+00:12:52,200 --> 00:12:56,100
+the functions that implement an abstract data type.
+
+121
+00:12:56,820 --> 00:12:57,940
+So what does that mean?
+
+122
+00:12:59,510 --> 00:13:06,490
+So if you remember, I said we have this type T of interest for every abstract data type,
+
+123
+00:13:06,490 --> 00:13:09,230
+so that can be s, for instance, for a set.
+
+124
+00:13:10,210 --> 00:13:19,520
+And we want to say that the functions that we have defined on that type s,
+
+125
+00:13:19,780 --> 00:13:23,350
+like, for example, the function empty or insert or isin,
+
+126
+00:13:23,880 --> 00:13:28,020
+we want to say that either one of those three functions behaves a certain way.
+
+127
+00:13:28,540 --> 00:13:31,020
+So how can we say that the function behaves a certain way?
+
+128
+00:13:31,020 --> 00:13:38,940
+We talk about its input and output, and the relationship between its input and output,
+
+129
+00:13:38,940 --> 00:13:42,000
+in a mathematical way.
+
+130
+00:13:42,140 --> 00:13:44,020
+And how do we talk about them in a mathematical way?
+
+131
+00:13:44,420 --> 00:13:48,940
+We relate that abstract type s, the type of interest that we talked about,
+
+132
+00:13:49,040 --> 00:13:57,440
+to an existing type in Isabelle, so a type in Isabelle Hall.
+
+133
+00:13:57,440 --> 00:14:09,450
+So for example, that type could be alpha sets, or it could be alpha lists, etc.
+
+134
+00:14:09,570 --> 00:14:13,910
+But in our case, in the case of an abstract data type for sets,
+
+135
+00:14:14,110 --> 00:14:18,890
+we're going to be talking about alpha sets as the mathematical model for the type s.
+
+136
+00:14:19,910 --> 00:14:23,890
+So that mathematical model allows you to talk about,
+
+137
+00:14:23,890 --> 00:14:32,640
+to devise a specification for how the functions that the abstract data type provides behave,
+
+138
+00:14:32,680 --> 00:14:33,780
+for how they behave.
+
+139
+00:14:37,100 --> 00:14:39,760
+So let's try and make that a little more concrete.
+
+140
+00:14:41,000 --> 00:14:43,160
+So in order for us to say, for instance,
+
+141
+00:14:43,740 --> 00:14:48,360
+so what do we want to say in a specification before I go there?
+
+142
+00:14:48,360 --> 00:14:54,410
+So you want to say that, basically, informally, you want to say that empty,
+
+143
+00:14:57,230 --> 00:15:00,130
+empty, the function that we provided here, so this function,
+
+144
+00:15:00,690 --> 00:15:10,500
+you want to say empty, for instance, behaves like the empty set from Isabelle.
+
+145
+00:15:10,500 --> 00:15:16,230
+So like this, curly brackets, like that.
+
+146
+00:15:16,590 --> 00:15:20,710
+So how can we say empty always behaves like that?
+
+147
+00:15:20,900 --> 00:15:27,810
+So first of all, in order for us to say that empty behaves like that,
+
+148
+00:15:28,150 --> 00:15:36,880
+or that, for example, we also would like to say that is in,
+
+149
+00:15:40,000 --> 00:15:50,020
+which is the function that we provided, behaves like set membership. So how can we say that?
+
+150
+00:15:51,120 --> 00:15:53,800
+And in general, you want to say these kinds of properties
+
+151
+00:15:53,800 --> 00:15:58,500
+for whatever your abstract data type provides,
+
+152
+00:15:58,620 --> 00:16:00,560
+so the function that your abstract data type provides,
+
+153
+00:16:00,640 --> 00:16:03,700
+you want to relate them all to the existing functions
+
+154
+00:16:05,080 --> 00:16:08,780
+on a mathematical type that is defined in Isabelle.
+
+155
+00:16:08,820 --> 00:16:10,460
+For example, in our case here is sets.
+
+156
+00:16:11,460 --> 00:16:15,560
+So the first way, the main way you can connect these functions,
+
+157
+00:16:15,900 --> 00:16:17,820
+the functions empty that you provide, for example,
+
+158
+00:16:17,920 --> 00:16:19,520
+is in to the functions that exist already,
+
+159
+00:16:19,520 --> 00:16:25,240
+so this empty set symbol there, or this set membership.
+
+160
+00:16:25,940 --> 00:16:28,920
+The way you can do that is firstly you need to provide a connection
+
+161
+00:16:29,520 --> 00:16:33,220
+between the two types AT of interest and A,
+
+162
+00:16:33,760 --> 00:16:35,540
+which is the mathematical type in whole.
+
+163
+00:16:35,660 --> 00:16:38,400
+So you want to provide a connection, a function alpha,
+
+164
+00:16:38,400 --> 00:16:47,520
+that takes an set S of our type and returns to
+
+165
+00:16:47,520 --> 00:16:50,060
+you an A set.
+
+166
+00:16:51,360 --> 00:16:55,160
+So first of all, if you want to connect the functions
+
+167
+00:16:55,160 --> 00:16:58,760
+that the data type defines to the functions that already exist in Isabelle,
+
+168
+00:16:58,760 --> 00:17:01,600
+you need to connect firstly the type of tree S
+
+169
+00:17:01,860 --> 00:17:06,240
+to the mathematical type alpha set in Isabelle with a function.
+
+170
+00:17:06,360 --> 00:17:07,980
+It's called an abstraction function.
+
+171
+00:17:10,300 --> 00:17:14,800
+The second thing that I want you to believe for now,
+
+172
+00:17:15,180 --> 00:17:17,460
+and then we will see how later on,
+
+173
+00:17:17,760 --> 00:17:26,940
+is that this function alpha takes any S
+
+174
+00:17:26,940 --> 00:17:29,980
+and gives you a corresponding mathematical alpha set.
+
+175
+00:17:30,680 --> 00:17:36,560
+But not all the S's, not all the elements in this type,
+
+176
+00:17:36,560 --> 00:17:42,740
+so not every S will be corresponding to an alpha set.
+
+177
+00:17:42,920 --> 00:17:45,800
+Not all of them, it's not always the case that they will be like that,
+
+178
+00:17:45,820 --> 00:17:47,780
+and I will show you why later on.
+
+179
+00:17:47,780 --> 00:17:50,700
+But I want you to just believe that and keep that in your notes
+
+180
+00:17:50,700 --> 00:17:54,080
+that not all of them are going to be corresponding,
+
+181
+00:17:54,200 --> 00:17:56,260
+not all S's are going to be corresponding to alpha sets,
+
+182
+00:17:56,980 --> 00:17:58,580
+and some of them only will.
+
+183
+00:17:58,920 --> 00:18:03,920
+So we have an invariant which is a predicate
+
+184
+00:18:04,600 --> 00:18:08,080
+that takes the type T of interest,
+
+185
+00:18:08,240 --> 00:18:11,740
+so it takes, in our case, S, in the case of sets, and returns a bool,
+
+186
+00:18:11,900 --> 00:18:14,240
+and this invariant tells you,
+
+187
+00:18:14,280 --> 00:18:18,680
+is that set S, does it really correspond,
+
+188
+00:18:18,920 --> 00:18:22,200
+can you really map it to an alpha set or no?
+
+189
+00:18:22,720 --> 00:18:27,060
+And if that's true, that means that the mapping
+
+190
+00:18:27,060 --> 00:18:31,380
+by the function alpha, the abstraction function,
+
+191
+00:18:31,380 --> 00:18:33,880
+is meaningful.
+
+192
+00:18:34,360 --> 00:18:38,280
+If the predicate invar is false for a given S,
+
+193
+00:18:38,700 --> 00:18:45,360
+then we cannot really talk about the abstraction
+
+194
+00:18:45,360 --> 00:18:48,080
+of S into an alpha set,
+
+195
+00:18:48,080 --> 00:18:51,840
+because the invariant doesn't hold for S.
+
+196
+00:18:53,640 --> 00:18:57,660
+So what is this alpha and invar?
+
+197
+00:18:57,940 --> 00:18:59,880
+There are actually two parts of the interface
+
+198
+00:18:59,880 --> 00:19:01,160
+that we will always have.
+
+199
+00:19:01,160 --> 00:19:05,480
+As I said, the interface will have some operations,
+
+200
+00:19:05,680 --> 00:19:07,920
+like empty, insert, isin,
+
+201
+00:19:08,420 --> 00:19:10,460
+and then, in addition to that,
+
+202
+00:19:10,520 --> 00:19:12,640
+you also will have two more parts of the interface.
+
+203
+00:19:13,080 --> 00:19:15,240
+Firstly, the abstraction function alpha,
+
+204
+00:19:15,840 --> 00:19:19,590
+and secondly, the invariant predicate invar,
+
+205
+00:19:19,650 --> 00:19:24,550
+which identifies which elements of the abstract type T
+
+206
+00:19:24,550 --> 00:19:31,170
+are the ones that correspond to an element of the mathematical type,
+
+207
+00:19:31,170 --> 00:19:34,010
+like for example here alpha set in our case.
+
+208
+00:19:36,330 --> 00:19:38,750
+And those functions are only, as I said,
+
+209
+00:19:39,250 --> 00:19:43,150
+useful for specification and verification purposes.
+
+210
+00:19:43,270 --> 00:19:45,650
+They don't serve any implementation,
+
+211
+00:19:46,470 --> 00:19:48,070
+and actual implementation uses the basic.
+
+212
+00:19:48,610 --> 00:19:51,110
+Basically, the reason we have an alpha
+
+213
+00:19:51,110 --> 00:19:55,270
+is to be able to say things like empty behaves like this,
+
+214
+00:19:55,490 --> 00:19:58,550
+like empty here, and isin, the function isin,
+
+215
+00:19:58,750 --> 00:20:01,430
+behaves like the set membership function
+
+216
+00:20:02,870 --> 00:20:04,890
+and the only way for you to connect these functions
+
+217
+00:20:04,890 --> 00:20:07,410
+is first to connect the things that they take as input
+
+218
+00:20:07,410 --> 00:20:08,870
+and the things that they return as output,
+
+219
+00:20:08,870 --> 00:20:10,250
+and the way to do that connection,
+
+220
+00:20:10,410 --> 00:20:14,010
+to make that connection, is using the function, alpha, the abstraction function.
+

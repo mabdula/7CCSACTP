@@ -1,0 +1,371 @@
+WEBVTT
+
+
+1
+00:00:00.590 --> 00:00:08.550
+So now let's talk about the actual practical usage of abstract data types in Isabelle.
+
+2
+00:00:08.630 --> 00:00:16.040
+So what's the point of an abstract data type? It's basically to provide a context in which we can implement an algorithm,
+
+3
+00:00:16.680 --> 00:00:25.430
+so for implementing generic algorithms, without knowing how a certain data structure is implemented.
+
+4
+00:00:25.430 --> 00:00:32.750
+We only know that we will have access to that data structure by saying that the algorithm has access to this ADT.
+
+5
+00:00:33.790 --> 00:00:40.750
+But you don't really care about the precise details about how the abstract data type is implemented.
+
+6
+00:00:40.810 --> 00:00:48.000
+So you don't, for example, care about how a set is implemented for your function, or how a queue and so on are implemented.
+
+7
+00:00:48.000 --> 00:00:53.820
+All that you care about is that you have an abstract data type, so you have an interface with some logical properties that are specified
+
+8
+00:00:53.820 --> 00:00:55.780
+to an interface, and that's all that you care about.
+
+9
+00:00:56.380 --> 00:01:05.210
+And given this context, given this abstract data type, you just define your algorithm and then prove it correct once,
+
+10
+00:01:06.750 --> 00:01:12.530
+and that proof of correctness once happens within the context, so in Isabelle terms, within the locale,
+
+11
+00:01:15.410 --> 00:01:21.930
+and then for any implementation of an abstract data type, you don't have to prove your algorithm correctly.
+
+12
+00:01:22.050 --> 00:01:28.230
+All you need to do is just to say, okay, I'm going to use a 2-3 tree implementation of a set,
+
+13
+00:01:28.430 --> 00:01:31.730
+or just any other tree implementation of a set,
+
+14
+00:01:31.890 --> 00:01:36.390
+and then you get, for example, you get your algorithm that uses sets correct, for example.
+
+15
+00:01:39.730 --> 00:01:47.210
+So an example algorithm that we've talked about, that I want to talk about, is the so-called rem_dups.
+
+16
+00:01:47.330 --> 00:01:51.610
+So it's a function that removes duplicates from a list.
+
+17
+00:01:52.090 --> 00:02:01.570
+So here, for instance, you have, for example, if you have a list, say, like this,
+
+18
+00:02:03.990 --> 00:02:09.890
+so you have a list 1, 2, 1, 5, 2, 1,
+
+19
+00:02:09.890 --> 00:02:20.840
+you want to remove the duplicate elements from that list, so that rem_dups takes an intuitive level,
+
+20
+00:02:20.980 --> 00:02:26.320
+it's supposed to be taking that list and removing these duplicate elements from that list,
+
+21
+00:02:26.480 --> 00:02:34.070
+so you don't want all these 1s and 2s there, you only want one instance of each one of them occurring in the list.
+
+22
+00:02:37.590 --> 00:02:46.640
+So let's talk about, let's actually see how that
+
+23
+00:02:46.640 --> 00:02:49.520
+function would be implemented
+
+24
+00:02:50.150 --> 00:02:56.050
+with the aid of the set abstract data type that we have discussed a moment ago.
+
+25
+00:02:56.050 --> 00:03:06.260
+So in order for you to know
+
+26
+00:03:06.680 --> 00:03:11.980
+whether, in order for you to remove duplicates in this way,
+
+27
+00:03:12.640 --> 00:03:16.760
+you can define the function recursively over the list that you have,
+
+28
+00:03:17.340 --> 00:03:19.760
+so you have a list and you return a list.
+
+29
+00:03:20.340 --> 00:03:25.060
+But in addition to that list argument, I'm also adding a set argument,
+
+30
+00:03:25.060 --> 00:03:36.280
+which is namely the set of elements that they have seen so far in our recursion over the list.
+
+31
+00:03:36.640 --> 00:03:41.800
+So you have a function rem_dups, remove duplicates, it takes a list,
+
+32
+00:03:42.080 --> 00:03:46.800
+it's defined recursively over the list, and takes the set, which is the set of elements that we've seen so far.
+
+33
+00:03:47.760 --> 00:03:52.180
+And we say that, okay, if something, if we have an empty list,
+
+34
+00:03:52.180 --> 00:03:54.960
+then we're trying the empty list because there's nothing to remove from the empty list.
+
+35
+00:03:55.280 --> 00:03:58.640
+If we have an empty list, what we do is the following.
+
+36
+00:03:58.920 --> 00:04:04.790
+We see that this X that we have at the front of our non-empty list,
+
+37
+00:04:05.190 --> 00:04:11.410
+does it ever occur in the set of elements that we have seen so far?
+
+38
+00:04:12.030 --> 00:04:17.610
+So in other words, is in XX, is that true or is that not true?
+
+39
+00:04:18.450 --> 00:04:27.460
+If it is true, so if we have seen X before, then what we want to do is discard
+
+40
+00:04:27.460 --> 00:04:30.660
+the X from our list.
+
+41
+00:04:30.800 --> 00:04:34.660
+So we say we return remove duplicates of S and Xs only.
+
+42
+00:04:35.480 --> 00:04:41.340
+If we have never seen X on the other hand, we don't discard X, so we return X cons REM duplicates,
+
+43
+00:04:41.520 --> 00:04:43.680
+but what do we do here?
+
+44
+00:04:43.760 --> 00:04:49.520
+We have that set of elements that we've seen until now and we add X to that set.
+
+45
+00:04:49.610 --> 00:04:56.750
+And the second argument is Xs, which is the list without the front element.
+
+46
+00:04:57.670 --> 00:05:06.790
+So this is an example of a function that you can define with using the set abstract data type.
+
+47
+00:05:06.790 --> 00:05:15.810
+So this function doesn't really care about
+
+48
+00:05:17.410 --> 00:05:26.750
+how the set ADT is implemented.
+
+49
+00:05:27.410 --> 00:05:33.110
+All it cares about is that you have the operations from the set abstract data type,
+
+50
+00:05:33.190 --> 00:05:39.730
+which are insertion and is in and empty, for instance, in the case of sets.
+
+51
+00:05:39.730 --> 00:05:46.770
+And once you have those operations, you can specify the function rem_dups without really caring about how the set operations are implemented.
+
+52
+00:05:48.180 --> 00:05:53.710
+And then in order for you to prove that rem_dups is correct,
+
+53
+00:05:54.630 --> 00:06:02.250
+all what we do is we say, okay, we have here, if the invariant holds for the set that we have,
+
+54
+00:06:02.370 --> 00:06:09.950
+the initial set that we have, then basically the rem_dups of S and Xs,
+
+55
+00:06:09.950 --> 00:06:19.120
+so if you remove the duplicates from S and Xs, the set of elements that return from that
+
+56
+00:06:19.120 --> 00:06:25.460
+is the same as the set of elements in the initial list Xs without S.
+
+57
+00:06:25.760 --> 00:06:31.980
+So you remove the set of elements in S, all those elements, you remove them from the list Xs.
+
+58
+00:06:32.940 --> 00:06:42.140
+And you also know that all the elements that are
+
+59
+00:06:42.680 --> 00:06:45.720
+in the list returned by rem_dups as Xs
+
+60
+00:06:45.720 --> 00:06:52.840
+are going to be pairwise distinguished, because anything that would have occurred twice or more
+
+61
+00:06:52.840 --> 00:06:59.000
+would have already been seen in a previous call for the function rem_dups
+
+62
+00:06:59.000 --> 00:07:04.460
+and would have accordingly been added here to the set S.
+
+63
+00:07:06.660 --> 00:07:13.440
+So in other words, you end up with a list that doesn't have duplicates,
+
+64
+00:07:13.740 --> 00:07:22.520
+and also you end up with a list that has all the elements in Xs here,
+
+65
+00:07:23.830 --> 00:07:28.610
+minus the elements in the set of previously seen elements,
+
+66
+00:07:29.770 --> 00:07:34.910
+because maybe you would initialize, for example, the set of seen elements with something that is not empty,
+
+67
+00:07:36.380 --> 00:07:41.000
+then in that case you know that you would remove anything that was put in that set.
+
+68
+00:07:42.140 --> 00:07:50.020
+And as a corollary, we know that if we provide that set of seen elements initially,
+
+69
+00:07:50.120 --> 00:07:53.880
+if we initialize it with empty, so if that set is empty,
+
+70
+00:07:54.360 --> 00:08:00.160
+we can then say, okay, rem_dups empty Xs is going to be the same as set of Xs,
+
+71
+00:08:00.160 --> 00:08:10.250
+so in other words, the set of elements in that
+
+72
+00:08:10.250 --> 00:08:13.400
+list is going to be the set of elements in the set Xs,
+
+73
+00:08:14.440 --> 00:08:20.520
+because you only remove duplicates if you initialize the set of seen elements with empty.
+
+74
+00:08:20.520 --> 00:08:29.580
+And similarly here, we know that the rem_dups of empty Xs will be
+
+75
+00:08:29.580 --> 00:08:31.480
+a distinct list of elements.
+
+76
+00:08:32.650 --> 00:08:36.650
+And both of those, this property is a consequence of that lemma,
+
+77
+00:08:37.110 --> 00:08:46.740
+with the S initialized with the empty set, with the empty function from the ADT,
+
+78
+00:08:46.740 --> 00:08:52.400
+and this thing is again resulting from that lemma with the same initialization of S.
+
+79
+00:08:56.530 --> 00:09:04.130
+So this actually is the way,
+
+80
+00:09:04.310 --> 00:09:16.330
+the general way, we prove, we use an element,
+
+81
+00:09:16.550 --> 00:09:19.470
+we use an abstract type as a locale
+
+82
+00:09:19.470 --> 00:09:22.110
+to implement an algorithm and to prove it correct.
+
+83
+00:09:22.250 --> 00:09:25.150
+So we prove lemmas about it as if it's a normal algorithm,
+
+84
+00:09:25.610 --> 00:09:31.030
+all of that is going to be within the context that fixes the assumed functions
+
+85
+00:09:31.030 --> 00:09:34.530
+and fixes the specifications about those functions.
+
+86
+00:09:35.540 --> 00:09:44.080
+And as an exercise, I would like you to prove lemma 1 in the same way we did all the proofs about lists
+
+87
+00:09:44.080 --> 00:09:45.880
+that we've done in the weeks before,
+
+88
+00:09:46.280 --> 00:09:50.740
+but I want you to prove it using the assumptions.
+
+89
+00:09:51.160 --> 00:09:59.560
+So all the difference that we will have is that you will have the assumptions from the abstract data type,
+
+90
+00:10:00.360 --> 00:10:04.620
+from the set abstract data type, we'll have all these assumptions accessible to you as if they are lemmas.
+
+91
+00:10:04.740 --> 00:10:11.660
+So I want you to prove, to pause the video and prove lemma 1, this lemma here,
+
+92
+00:10:11.660 --> 00:10:16.960
+I want you to prove that with those assumptions from the locale available to you.
+
