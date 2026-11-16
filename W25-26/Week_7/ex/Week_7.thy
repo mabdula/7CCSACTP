@@ -109,40 +109,6 @@ text \<open>\paragraph{Hints:}
     which breaks up the goal after every split of an \<open>if\<close> or \<open>case\<close>, takes a few seconds.
 \<close>
 
-text \<open>\Exercise{The Height of 2-3 Trees}\<close>
-
-text \<open>
-  The height of a complete 2-3 tree is logarithmic in its size:
-  \[\log_3(|t|+1) \le h(t) \le \log_2(|t|+1)\]
-  In Isabelle, \<open>|t|\<close> is \<open>size t\<close>, the number of nodes, which the \<open>datatype\<close> command defines
-  automatically.
-
-  \paragraph{(a)} Prove, first pen-and-paper and then in Isabelle:
-\<close>
-
-lemma size_lb: "complete t \<Longrightarrow> 2 ^ height t \<le> size t + 1"
-  sorry
-
-lemma size_ub: "complete t \<Longrightarrow> size t + 1 \<le> 3 ^ height t"
-  sorry
-
-text \<open>\paragraph{(b)} Derive the logarithmic bounds:\<close>
-
-lemma height_ub: "complete t \<Longrightarrow> height t \<le> log 2 (size t + 1)"
-  sorry
-
-lemma height_lb: "complete t \<Longrightarrow> log 3 (size t + 1) \<le> height t"
-  sorry
-
-text \<open>\paragraph{Hints:}
- 1. \<open>size_lb\<close> is the lemma from the lecture.
-
- 2. For (b), use (a) and sledgehammer. \<open>find_theorems "log" "_ ^ _"\<close> lists library lemmas
-    relating logarithms and powers. \<open>log\<close> works on real numbers: Isabelle converts \<open>size t + 1\<close>
-    to a real number automatically, written \<open>real (size t + 1)\<close>. To turn an inequality between
-    natural numbers into one between real numbers, use \<open>of_nat_mono\<close>.
-\<close>
-
 text \<open>\Exercise{Joining 2-3 Trees}\<close>
 
 text \<open>
@@ -178,6 +144,40 @@ text \<open>\paragraph{Hints:}
  2. Prove both lemmas by computation induction (\<open>join.induct\<close>), with \<open>auto split: up\<^sub>i.splits\<close>.
     There are many cases: if \<open>auto\<close> fails, use an Isar proof to look at the cases one by one.
     This also helps to find mistakes in your definition of \<open>join\<close>.
+\<close>
+
+text \<open>\Exercise{The Height of 2-3 Trees}\<close>
+
+text \<open>
+  The height of a complete 2-3 tree is logarithmic in its size:
+  \[\log_3(|t|+1) \le h(t) \le \log_2(|t|+1)\]
+  In Isabelle, \<open>|t|\<close> is \<open>size t\<close>, the number of nodes, which the \<open>datatype\<close> command defines
+  automatically.
+
+  \paragraph{(a)} Prove, first pen-and-paper and then in Isabelle:
+\<close>
+
+lemma size_lb: "complete t \<Longrightarrow> 2 ^ height t \<le> size t + 1"
+  sorry
+
+lemma size_ub: "complete t \<Longrightarrow> size t + 1 \<le> 3 ^ height t"
+  sorry
+
+text \<open>\paragraph{(b)} Derive the logarithmic bounds:\<close>
+
+lemma height_ub: "complete t \<Longrightarrow> height t \<le> log 2 (size t + 1)"
+  sorry
+
+lemma height_lb: "complete t \<Longrightarrow> log 3 (size t + 1) \<le> height t"
+  sorry
+
+text \<open>\paragraph{Hints:}
+ 1. \<open>size_lb\<close> is the lemma from the lecture.
+
+ 2. For (b), use (a) and sledgehammer. \<open>find_theorems "log" "_ ^ _"\<close> lists library lemmas
+    relating logarithms and powers. \<open>log\<close> works on real numbers: Isabelle converts \<open>size t + 1\<close>
+    to a real number automatically, written \<open>real (size t + 1)\<close>. To turn an inequality between
+    natural numbers into one between real numbers, use \<open>of_nat_mono\<close>.
 \<close>
 
 
