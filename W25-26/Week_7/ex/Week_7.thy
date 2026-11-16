@@ -112,28 +112,48 @@ text \<open>\paragraph{Hints:}
 text \<open>\Exercise{Joining 2-3 Trees}\<close>
 
 text \<open>
-  Define a function \<open>join\<close> that combines two complete 2-3 trees of the same height into one
+  Define a function \<open>join\<^sub>i\<close> that combines two complete 2-3 trees of the same height into one
   tree. The in-order traversal of the result must be the in-order traversal of the first tree
   followed by that of the second, and the height of the result must be either the height of the
   arguments or one more. As for \<open>ins\<close>, use \<open>'a up\<^sub>i\<close> to return the result: \<open>Of\<close> signals that
   the height has increased.
 \<close>
 
-fun join :: "'a tree23 \<Rightarrow> 'a tree23 \<Rightarrow> 'a up\<^sub>i" where
+fun join\<^sub>i :: "'a tree23 \<Rightarrow> 'a tree23 \<Rightarrow> 'a up\<^sub>i" where
 
   (* TODO: complete this definition *)
 
 
-text \<open>Prove that your function is correct:\<close>
+text \<open>
+  As \<open>insert\<close> does for \<open>ins\<close>, the function \<open>join\<close> turns the result of \<open>join\<^sub>i\<close> into a
+  2-3 tree:
+\<close>
 
-lemma join_inorder:
+definition join :: "'a tree23 \<Rightarrow> 'a tree23 \<Rightarrow> 'a tree23" where
+  "join t1 t2 = tree\<^sub>i (join\<^sub>i t1 t2)"
+
+text \<open>Prove that your function is correct. First prove these lemmas about \<open>join\<^sub>i\<close>:\<close>
+
+lemma inorder_join\<^sub>i:
   assumes "height t1 = height t2" "complete t1" "complete t2"
-  shows "inorder (tree\<^sub>i (join t1 t2)) = inorder t1 @ inorder t2"
+  shows "inorder (tree\<^sub>i (join\<^sub>i t1 t2)) = inorder t1 @ inorder t2"
   sorry
 
-lemma join_complete:
+lemma complete_join\<^sub>i:
   assumes "height t1 = height t2" "complete t1" "complete t2"
-  shows "complete (tree\<^sub>i (join t1 t2)) \<and> h\<^sub>i (join t1 t2) = height t2"
+  shows "complete (tree\<^sub>i (join\<^sub>i t1 t2)) \<and> h\<^sub>i (join\<^sub>i t1 t2) = height t2"
+  sorry
+
+text \<open>Then use them to prove that \<open>join\<close> is correct:\<close>
+
+lemma inorder_join:
+  assumes "height t1 = height t2" "complete t1" "complete t2"
+  shows "inorder (join t1 t2) = inorder t1 @ inorder t2"
+  sorry
+
+lemma complete_join:
+  assumes "height t1 = height t2" "complete t1" "complete t2"
+  shows "complete (join t1 t2)"
   sorry
 
 text \<open>\paragraph{Hints:}
@@ -141,9 +161,12 @@ text \<open>\paragraph{Hints:}
     with the leftmost subtree of the second, then rebuild the outer nodes, splitting them if the
     result overflows.
 
- 2. Prove both lemmas by computation induction (\<open>join.induct\<close>), with \<open>auto split: up\<^sub>i.splits\<close>.
-    There are many cases: if \<open>auto\<close> fails, use an Isar proof to look at the cases one by one.
-    This also helps to find mistakes in your definition of \<open>join\<close>.
+ 2. Prove the lemmas about \<open>join\<^sub>i\<close> by computation induction (\<open>join\<^sub>i.induct\<close>), with
+    \<open>auto split: up\<^sub>i.splits\<close>. There are many cases: if \<open>auto\<close> fails, use an Isar proof to
+    look at the cases one by one. This also helps to find mistakes in your definition of \<open>join\<^sub>i\<close>.
+
+ 3. The lemmas about \<open>join\<close> follow from those about \<open>join\<^sub>i\<close> and the definition of
+    \<open>join\<close> (\<open>join_def\<close>), as \<open>complete_insert\<close> follows from your lemma about \<open>ins\<close>.
 \<close>
 
 text \<open>\Exercise{The Height of 2-3 Trees}\<close>
