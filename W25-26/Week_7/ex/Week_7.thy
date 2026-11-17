@@ -125,12 +125,14 @@ fun join\<^sub>i :: "'a tree23 \<Rightarrow> 'a tree23 \<Rightarrow> 'a up\<^sub
 
 
 text \<open>
-  As \<open>insert\<close> does for \<open>ins\<close>, the function \<open>join\<close> turns the result of \<open>join\<^sub>i\<close> into a
-  2-3 tree:
+  Using \<open>join\<^sub>i\<close>, define a function \<open>join\<close> that returns the joined tree as a 2-3 tree,
+  as \<open>insert\<close> does for \<open>ins\<close>:
 \<close>
 
 definition join :: "'a tree23 \<Rightarrow> 'a tree23 \<Rightarrow> 'a tree23" where
-  "join t1 t2 = tree\<^sub>i (join\<^sub>i t1 t2)"
+
+  (* TODO: complete this definition *)
+
 
 text \<open>Prove that your function is correct. First prove these lemmas about \<open>join\<^sub>i\<close>:\<close>
 
