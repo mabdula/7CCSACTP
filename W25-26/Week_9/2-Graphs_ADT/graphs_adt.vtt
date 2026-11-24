@@ -1,0 +1,1367 @@
+WEBVTT
+
+
+1
+00:00:00.020 --> 00:00:07.260
+Now, the second topic, so what I did until now, was tell you how to mathematically model graphs in Isabelle,
+
+2
+00:00:07.260 --> 00:00:13.940
+as in, how can we come up with a model of graphs in Isabelle that allows us to prove general theorems about graphs,
+
+3
+00:00:14.360 --> 00:00:17.720
+like for example things about connect components and trees and so forth.
+
+4
+00:00:21.180 --> 00:00:30.370
+The second question is how can we get formalized graphs in such a way that allows an
+
+5
+00:00:30.500 --> 00:00:32.620
+executable algorithm to run on that graph.
+
+6
+00:00:35.700 --> 00:00:45.440
+So one specific thing, one specific operation on graphs that we would need for an executable algorithm that we cannot do
+
+7
+00:00:45.440 --> 00:00:54.220
+on this mathematical model of graphs that I just mentioned in the last video, is the operation of picking a neighbor of a vertex in a graph.
+
+8
+00:00:54.220 --> 00:01:01.350
+So if you have a vertex, for example, if you remember we had A,
+
+9
+00:01:02.820 --> 00:01:11.980
+we had A and then B and then C, and then we somehow want to pick one neighbor of
+
+10
+00:01:11.980 --> 00:01:19.860
+A, we don't know which one, we just want to pick one of its neighbors, so one element of its neighborhood.
+
+11
+00:01:19.860 --> 00:01:27.500
+We cannot do that with a mathematical model, because simply the set of pairs, like the set of pairs model in the mathematical model
+
+12
+00:01:27.500 --> 00:01:33.840
+is not executable, the set could be infinite, we don't know if the set is finite or not, so we cannot make it an executable program.
+
+13
+00:01:33.840 --> 00:01:42.860
+There is also no order between the vertices in the way we model them, we just say the neighborhood is just a
+
+14
+00:01:42.860 --> 00:01:48.640
+set of vertices.
+
+15
+00:01:48.640 --> 00:01:57.920
+So if you remember, we had the neighborhood of
+
+16
+00:01:57.920 --> 00:02:05.090
+a vertex U in a graph, to be defined that it takes a graph,
+
+17
+00:02:06.860 --> 00:02:11.080
+so it takes a set like that and returns to you a set of vertices.
+
+18
+00:02:11.300 --> 00:02:20.220
+So there is nothing that orders these, there is nothing that tells you how to choose one neighbor over the other.
+
+19
+00:02:23.530 --> 00:02:32.770
+So one option to make our graphs usable in the
+
+20
+00:02:32.770 --> 00:02:43.310
+context of an executable algorithm is to use lists to implement the graphs, which means that instead of having
+
+21
+00:02:43.310 --> 00:02:46.430
+neighborhood return a V set,
+
+22
+00:02:46.430 --> 00:02:56.540
+it can also return a list of vertices as the neighborhood of a given vertex.
+
+23
+00:02:57.160 --> 00:03:03.260
+And then the operation that we're talking about, which is pick a neighbor of a vertex,
+
+24
+00:03:03.520 --> 00:03:07.510
+can just be taking the head of the list.
+
+25
+00:03:07.510 --> 00:03:16.090
+So for instance, in the first case, in the first definition, the neighborhood of U would be the set,
+
+26
+00:03:17.010 --> 00:03:22.490
+sorry, the neighborhood of, let me just write that,
+
+27
+00:03:23.090 --> 00:03:30.020
+so the neighborhood of A, with the first definition, we just get the set B and C,
+
+28
+00:03:30.080 --> 00:03:34.520
+so we don't have an order in between the elements, so we cannot really pick one of them.
+
+29
+00:03:35.220 --> 00:03:45.020
+Because there is no single algorithm to pick an element of a set where there
+
+30
+00:03:45.020 --> 00:03:48.000
+is not an order between the elements of the set.
+
+31
+00:03:48.770 --> 00:03:57.820
+So either we have that, or we can turn it into a list and instead return a list of elements as our neighborhood.
+
+32
+00:03:59.090 --> 00:04:04.390
+And that would work, but there are two problems with it.
+
+33
+00:04:04.390 --> 00:04:10.750
+Firstly, this would be a slow implementation, a very slow one,
+
+34
+00:04:11.010 --> 00:04:20.770
+because if, for example, I want to know if
+
+35
+00:04:20.770 --> 00:04:25.250
+a certain vertex is an element of another vertex's neighborhood,
+
+36
+00:04:25.250 --> 00:04:30.730
+how can you do that check? You can only do that check by going through every element in the list,
+
+37
+00:04:31.800 --> 00:04:34.560
+and that can take linear time,
+
+38
+00:04:35.480 --> 00:04:42.240
+so that's a very slow implementation of neighborhoods, versus, for instance, if we implement the neighborhood as a tree,
+
+39
+00:04:42.560 --> 00:04:49.710
+as a search tree, like a balanced search tree, like what we did in Week 6, in that case,
+
+40
+00:04:50.390 --> 00:04:54.730
+sorry, in Week 7, in that case, the search would take log n.
+
+41
+00:04:54.730 --> 00:05:03.950
+So if we fix, so a problem with lists is that it's very slow, and another problem with it is that proofs about
+
+42
+00:05:03.950 --> 00:05:06.190
+graphs as lists are very cumbersome.
+
+43
+00:05:08.650 --> 00:05:17.010
+So the other option, so we had two options, the first one is just not possible, and the second one is also bad, because it is slow,
+
+44
+00:05:17.010 --> 00:05:24.480
+and you're fixing, like if you just use, if you always use lists as your neighborhood, then you're fixing yourself,
+
+45
+00:05:24.940 --> 00:05:30.840
+then you're fixing a slow implementation and you cannot change it at any point.
+
+46
+00:05:31.980 --> 00:05:35.580
+While, for example, what if you want to use a tree instead, which is a bit faster.
+
+47
+00:05:36.060 --> 00:05:43.850
+So the solution is, what I said last time, in last week, is to have an abstract data type.
+
+48
+00:05:44.730 --> 00:05:49.810
+Basically, what we want to say, what we want to have is, what is the interface of a graph,
+
+49
+00:05:50.170 --> 00:05:51.870
+and what is the specification of that interface.
+
+50
+00:05:51.970 --> 00:05:56.150
+And we don't care about how it's implemented, we just want to know the interface and its specification,
+
+51
+00:05:56.330 --> 00:06:02.710
+and then use that whenever we're reasoning about the graph algorithm, and then later on, when you want to implement the graph,
+
+52
+00:06:02.890 --> 00:06:05.990
+when you want to implement the neighborhoods, for instance, you can use a tree, or you can use a list,
+
+53
+00:06:06.050 --> 00:06:07.390
+or you can use whatever you want.
+
+54
+00:06:07.390 --> 00:06:13.530
+And this allows you to prove, to do the reasoning once and for all of the graph algorithm,
+
+55
+00:06:13.530 --> 00:06:15.770
+and then the implementation is a separate matter.
+
+56
+00:06:17.600 --> 00:06:24.620
+So basically, we want an abstract data type for graphs which has an adjacency map for the neighborhood.
+
+57
+00:06:24.740 --> 00:06:30.720
+So every vertex maps, that gives you a mapping between every vertex and its neighborhood.
+
+58
+00:06:31.740 --> 00:06:41.690
+And we want, in that abstract data type for directed graphs, to fix the neighborhoods as sets,
+
+59
+00:06:42.210 --> 00:06:45.930
+so using the set ADT,
+
+60
+00:06:45.970 --> 00:06:54.030
+but we add to it an operation to pick an element, because as a set here, a lot of times you need to pick a neighborhood,
+
+61
+00:06:54.310 --> 00:06:58.530
+a neighbor of a given vertex in graph algorithms.
+
+62
+00:06:58.530 --> 00:07:07.670
+So we want a graph abstract data type that has two things, an adjacency map and a type for neighborhoods as sets that
+
+63
+00:07:07.670 --> 00:07:09.270
+allows you to pick elements.
+
+64
+00:07:10.810 --> 00:07:19.750
+So let's start with the latter problem, or the latter requirement, which is we want a set abstract data type that allows you to pick.
+
+65
+00:07:19.750 --> 00:07:26.330
+So what we do here is we take the set ADT,
+
+66
+00:07:26.330 --> 00:07:32.860
+if you remember, that was defined as a locale in week 8, so we take that,
+
+67
+00:07:33.680 --> 00:07:41.350
+and then we define another locale, so another ADT, so this is a new ADT,
+
+68
+00:07:43.570 --> 00:07:47.050
+and that new ADT has the same interface as set,
+
+69
+00:07:47.050 --> 00:07:53.780
+so that's why we say equal set, plus some other parts of the interface.
+
+70
+00:07:53.900 --> 00:08:00.940
+So we say a set choose ADT, a set choose abstract data type, is the same as a set plus a selection function,
+
+71
+00:08:00.960 --> 00:08:07.920
+so this is a function that takes a set and returns to you an element in that set,
+
+72
+00:08:07.920 --> 00:08:15.500
+and it assumes that if the set is non-empty,
+
+73
+00:08:16.320 --> 00:08:19.220
+then isin, if you remember, that was an operation,
+
+74
+00:08:20.400 --> 00:08:30.740
+this comes from the set abstract data type from last week, so the isin operation will always
+
+75
+00:08:31.260 --> 00:08:34.320
+be true for whatever you select from S.
+
+76
+00:08:34.320 --> 00:08:44.340
+So you assume an extra operation select, and you say, if you select an element, that element will always be selected out of the set S.
+
+77
+00:08:50.130 --> 00:09:00.110
+So this solves one of our problems, which is that we wanted a neighborhood set that allows for choosing an element,
+
+78
+00:09:00.110 --> 00:09:08.550
+and here, of course, whenever you're using that abstract data type, your proofs should work regardless of what type of element select picks.
+
+79
+00:09:08.870 --> 00:09:13.470
+So select can pick any, can select the element with the shortest name.
+
+80
+00:09:14.420 --> 00:09:20.300
+We're not saying how it's implemented, we're only saying that the condition is, if the set is non-empty,
+
+81
+00:09:20.480 --> 00:09:21.900
+then it chooses an element of the set.
+
+82
+00:09:22.740 --> 00:09:30.060
+We're not saying how it does so, so it could choose it by selecting the element with the shortest name,
+
+83
+00:09:30.180 --> 00:09:40.630
+or the element with the longest name, or the element with the minimal or the maximal alphabetical ordering, and so on.
+
+84
+00:09:40.690 --> 00:09:45.350
+It doesn't matter how we implement it, or what matters is that it conforms to this assumption.
+
+85
+00:09:45.350 --> 00:09:51.810
+So if you choose an element from a non-empty set, what you get is a member of that element,
+
+86
+00:09:52.890 --> 00:09:53.510
+of that set.
+
+87
+00:09:54.890 --> 00:10:05.390
+So now that we have solved our smaller problem, which is how to get an
+
+88
+00:10:05.640 --> 00:10:07.380
+adjacency set for,
+
+89
+00:10:09.860 --> 00:10:19.710
+adjacency, how can we make sure that the neighborhood of a vertex is a
+
+90
+00:10:19.710 --> 00:10:22.610
+set abstract data type with choice?
+
+91
+00:10:23.750 --> 00:10:26.990
+So the next thing is we want to have an abstract data type for the whole graph.
+
+92
+00:10:27.610 --> 00:10:30.370
+So what is the abstract data type for the whole graph? What is the interface?
+
+93
+00:10:30.370 --> 00:10:38.810
+So we do it in the same way we did before, so we define a new locale, so this is a new ADT for abstract data types.
+
+94
+00:10:40.380 --> 00:10:48.880
+And then we say that locale is the same as the map ADT, so this is an ADT from week 8,
+
+95
+00:10:50.700 --> 00:10:55.600
+and the set choose ADT, which is the one that I described just in the last slide.
+
+96
+00:10:56.620 --> 00:11:02.780
+And then the abstract data type of the graph has a long interface with a lot of functions in it,
+
+97
+00:11:02.780 --> 00:11:11.120
+because it takes the interface of the adjacency map, so we call this map, adjacency map,
+
+98
+00:11:11.770 --> 00:11:16.050
+and we call this set 2, we call this ADT vset.
+
+99
+00:11:16.450 --> 00:11:21.490
+So we get the entire interface of adjacency map, and we get the entire interface of vset.
+
+100
+00:11:21.490 --> 00:11:25.170
+So from adjacency map we got a couple of functions.
+
+101
+00:11:26.230 --> 00:11:32.490
+We got the function empty, update, lookup, and adjacency map invariant.
+
+102
+00:11:33.150 --> 00:11:38.830
+The invariant of adjacency map, these are the things that come from the map ADT.
+
+103
+00:11:41.320 --> 00:11:50.700
+And we also got the interface of the vset ADT,
+
+104
+00:11:50.700 --> 00:11:54.060
+which is the set choose.
+
+105
+00:11:54.860 --> 00:12:08.340
+So vset here, we're calling it vset because it's just set of vertices.
+
+106
+00:12:11.340 --> 00:12:17.580
+So this is from vset, and we get from that the empty set,
+
+107
+00:12:17.660 --> 00:12:20.580
+insert is in the abstraction function,
+
+108
+00:12:21.060 --> 00:12:27.680
+we call it that, and we get vset, the invariant, and we get the selection function.
+
+109
+00:12:28.180 --> 00:12:32.940
+And I want you to notice here in this table that the functions that come from the original ADT
+
+110
+00:12:32.940 --> 00:12:38.020
+will be called, for example, adjacency map empty, but then we can rename it to something else,
+
+111
+00:12:38.020 --> 00:12:43.600
+and I advise you to look into the book chapter and associated Isabelle sources
+
+112
+00:12:43.600 --> 00:12:47.300
+to see how this renaming is happening in the actual theory files.
+
+113
+00:12:47.880 --> 00:13:03.160
+So here you have, this is the original interface, and
+
+114
+00:13:03.160 --> 00:13:05.660
+here we rename it to these things
+
+115
+00:13:05.660 --> 00:13:07.780
+so it's a bit of a shortened name.
+
+116
+00:13:11.060 --> 00:13:16.960
+So for the Pair_Graph_Specs, we actually are not adding any operations,
+
+117
+00:13:17.400 --> 00:13:19.040
+we're not assuming any operations.
+
+118
+00:13:19.680 --> 00:13:25.480
+All we're doing is that we say that a graph abstract data type has an interface of a map,
+
+119
+00:13:25.640 --> 00:13:32.440
+an adjacency map, and a set of vertices for each one of the neighborhoods.
+
+120
+00:13:33.660 --> 00:13:39.450
+And of course, what we want to make sure is that the types of the two abstract data types fit together,
+
+121
+00:13:39.590 --> 00:13:43.910
+so the two abstract data types, namely the map and the set choose abstract data type,
+
+122
+00:13:43.910 --> 00:13:46.950
+we want to make sure that they both talk about the same types.
+
+123
+00:13:47.190 --> 00:13:51.980
+So for instance, an adjacency map has a function that looks up
+
+124
+00:13:55.790 --> 00:14:05.000
+by taking an adjacency map and a vertex and returning to you the v-set
+
+125
+00:14:05.000 --> 00:14:06.880
+of this neighborhood,
+
+126
+00:14:07.020 --> 00:14:10.260
+an option v-set, so it's either a Some or a None, so it either has a neighborhood
+
+127
+00:14:10.260 --> 00:14:11.360
+or it doesn't have any neighborhood.
+
+128
+00:14:12.080 --> 00:14:16.820
+And we want to make sure that this neighborhood type, v-set,
+
+129
+00:14:17.020 --> 00:14:26.520
+is the same as that type, which is used for specifying the interface,
+
+130
+00:14:26.600 --> 00:14:35.630
+which is used for the signatures of the interface of the set choose abstract data type.
+
+131
+00:14:35.750 --> 00:14:39.070
+So that's why we have to make sure that this is the same state,
+
+132
+00:14:39.070 --> 00:14:43.190
+this is a tick v-set, and this is a tick v-set.
+
+133
+00:14:43.330 --> 00:14:45.350
+We need to make sure that both of them have the same type.
+
+134
+00:14:46.960 --> 00:14:52.420
+So now that we have a graph abstract data type,
+
+135
+00:14:53.570 --> 00:15:02.200
+what we can do is to implement within that abstract data type
+
+136
+00:15:02.840 --> 00:15:04.140
+more operations on graphs.
+
+137
+00:15:04.140 --> 00:15:14.050
+For example, remember here, we
+
+138
+00:15:14.050 --> 00:15:15.910
+didn't add any operations for the graph,
+
+139
+00:15:16.050 --> 00:15:21.210
+so we only had the operations for the set of vertices,
+
+140
+00:15:22.390 --> 00:15:26.890
+sorry, the operations for the map, that is the adjacency map,
+
+141
+00:15:27.010 --> 00:15:30.550
+and the operations for the set of vertices, which is a neighborhood.
+
+142
+00:15:31.530 --> 00:15:33.670
+Now we can add on top of that, for example,
+
+143
+00:15:33.750 --> 00:15:36.410
+a function for the graph that adds an edge.
+
+144
+00:15:36.730 --> 00:15:40.530
+So if we say add edge g u v,
+
+145
+00:15:40.830 --> 00:15:42.990
+so if you have a graph and two vertices u and v,
+
+146
+00:15:43.070 --> 00:15:46.590
+and you want to add an edge from u to v in that graph,
+
+147
+00:15:47.290 --> 00:15:48.290
+what you do is the following.
+
+148
+00:15:48.670 --> 00:15:53.700
+You look up in the graph the neighborhood of v,
+
+149
+00:15:53.860 --> 00:15:57.190
+so you look up in the adjacency map, which is g,
+
+150
+00:15:57.190 --> 00:16:01.950
+so g is just an adjacency map, so this is an adjacency map.
+
+151
+00:16:10.750 --> 00:16:13.830
+So you look up the neighborhood of u in that adjacency map,
+
+152
+00:16:14.390 --> 00:16:15.590
+and then you see what happens.
+
+153
+00:16:15.630 --> 00:16:26.780
+If it has a neighborhood, then you update the
+
+154
+00:16:26.780 --> 00:16:29.900
+neighborhood of u,
+
+155
+00:16:30.060 --> 00:16:34.680
+so you update the entry of u in the adjacency map g.
+
+156
+00:16:36.060 --> 00:16:39.160
+Instead of having that original neighborhood v's,
+
+157
+00:16:39.160 --> 00:16:41.280
+you have a new neighborhood, which is v's,
+
+158
+00:16:41.580 --> 00:16:44.160
+with the extra vertex added to it v,
+
+159
+00:16:44.760 --> 00:16:47.860
+because remember here we want to add an edge from u to v,
+
+160
+00:16:49.370 --> 00:16:51.570
+so we wanted to add an edge u to v,
+
+161
+00:16:51.670 --> 00:16:55.830
+so we look up in the adjacency map the neighborhood of u,
+
+162
+00:16:55.830 --> 00:17:00.450
+that gives us some neighborhood, which we call v's here,
+
+163
+00:17:00.530 --> 00:17:06.390
+and if that neighborhood exists, we just add v to it.
+
+164
+00:17:06.490 --> 00:17:07.930
+If it doesn't have a neighborhood,
+
+165
+00:17:07.930 --> 00:17:16.500
+then we basically create a new neighborhood by saying,
+
+166
+00:17:18.220 --> 00:17:20.640
+let's start from the empty neighborhood,
+
+167
+00:17:20.780 --> 00:17:22.180
+so this is the empty set,
+
+168
+00:17:23.950 --> 00:17:28.350
+this is the symbol corresponding for that, v set empty,
+
+169
+00:17:29.350 --> 00:17:32.110
+and then we insert in the empty set the vertex v,
+
+170
+00:17:32.210 --> 00:17:33.690
+so then it has a singleton neighbor.
+
+171
+00:17:37.330 --> 00:17:41.680
+And this can define many functions
+
+172
+00:17:42.700 --> 00:17:46.280
+within that directed graph abstract data type,
+
+173
+00:17:47.560 --> 00:17:50.160
+in the same way I did here for adding edges,
+
+174
+00:17:50.340 --> 00:17:51.460
+so you can have also delete edge,
+
+175
+00:17:51.620 --> 00:17:55.000
+you can also have a function for, I don't know,
+
+176
+00:17:55.260 --> 00:17:58.480
+a new, simpler function for the neighborhood,
+
+177
+00:17:58.660 --> 00:18:01.040
+for instance here of the vertex,
+
+178
+00:18:01.280 --> 00:18:03.620
+and many, many other functions.
+
+179
+00:18:03.620 --> 00:18:06.820
+So the idea that I'm trying to show you here is that
+
+180
+00:18:06.820 --> 00:18:09.480
+once we have an abstract data type for graphs,
+
+181
+00:18:09.880 --> 00:18:13.980
+you can then implement executable operations on that graph,
+
+182
+00:18:15.700 --> 00:18:20.660
+assuming that you have executable operations like add edge here,
+
+183
+00:18:21.280 --> 00:18:23.720
+and this is done assuming that you have
+
+184
+00:18:25.330 --> 00:18:27.890
+an abstract data type for maps,
+
+185
+00:18:28.050 --> 00:18:29.310
+which is the adjacency map of the graph,
+
+186
+00:18:29.470 --> 00:18:31.730
+and an abstract data type for a set choosing within
+
+187
+00:18:33.890 --> 00:18:36.830
+an abstract data type that allows you to choose
+
+188
+00:18:37.730 --> 00:18:39.430
+an abstract data type of a set
+
+189
+00:18:39.430 --> 00:18:42.550
+that allows you also to choose arbitrary elements from that set.
+
+190
+00:18:47.140 --> 00:18:49.590
+So now, if you remember,
+
+191
+00:18:51.310 --> 00:18:53.630
+for abstract data types, we always had
+
+192
+00:18:54.090 --> 00:19:01.050
+a couple of parts of an abstract data type.
+
+193
+00:19:01.170 --> 00:19:03.390
+So the first thing is, we had an interface,
+
+194
+00:19:03.610 --> 00:19:05.770
+and the interface for an abstract data type for a graph is there,
+
+195
+00:19:05.770 --> 00:19:06.910
+so that's the interface,
+
+196
+00:19:12.960 --> 00:19:17.040
+but here we have the other part,
+
+197
+00:19:17.100 --> 00:19:19.840
+which is the abstraction function
+
+198
+00:19:20.660 --> 00:19:23.460
+and the invariant of the abstract data type.
+
+199
+00:19:23.980 --> 00:19:25.240
+So first of all, if you remember,
+
+200
+00:19:25.360 --> 00:19:29.000
+the abstraction function used to map the abstract data type,
+
+201
+00:19:29.600 --> 00:19:31.480
+the type of interest in the abstract data type,
+
+202
+00:19:31.480 --> 00:19:34.200
+which in our case is going to be just adjacency maps,
+
+203
+00:19:34.800 --> 00:19:36.380
+it maps it to the mathematical model,
+
+204
+00:19:36.380 --> 00:19:39.940
+which in our case will be the mathematical model of directed graphs,
+
+205
+00:19:40.440 --> 00:19:42.580
+so this is the mathematical model,
+
+206
+00:19:43.860 --> 00:19:49.220
+mathematical directed graph,
+
+207
+00:19:51.430 --> 00:19:55.630
+and this is the abstraction function,
+
+208
+00:19:56.510 --> 00:19:58.530
+so this is the abstraction function,
+
+209
+00:19:59.260 --> 00:20:02.260
+which maps an adjacency map,
+
+210
+00:20:03.040 --> 00:20:04.040
+which we just call G,
+
+211
+00:20:10.330 --> 00:20:14.960
+maps it to a set,
+
+212
+00:20:15.180 --> 00:20:16.620
+so again, this is a set comprehension,
+
+213
+00:20:16.620 --> 00:20:18.240
+so it maps it to a set of edges,
+
+214
+00:20:18.320 --> 00:20:19.620
+so a set of pairs like that,
+
+215
+00:20:19.720 --> 00:20:21.280
+so here you say,
+
+216
+00:20:21.760 --> 00:20:26.080
+I'm going to take all u, v pairs,
+
+217
+00:20:26.240 --> 00:20:32.280
+such that if I take the neighborhood of u in the graph G, and remember,
+
+218
+00:20:33.240 --> 00:20:37.120
+ng is this new neighborhood function that we defined just there,
+
+219
+00:20:37.950 --> 00:20:41.870
+so if I take the neighborhood of u in the graph G,
+
+220
+00:20:41.870 --> 00:20:47.590
+and find that v occurs in that neighborhood,
+
+221
+00:20:51.050 --> 00:20:53.470
+then I'll take u and v and put them in this,
+
+222
+00:20:53.570 --> 00:20:57.070
+I'll take that pair u and v and put them in this comprehension,
+
+223
+00:20:57.710 --> 00:21:00.710
+so then you end up with a set of pairs,
+
+224
+00:21:00.830 --> 00:21:06.800
+like for example, a, b, c, d, and so on,
+
+225
+00:21:07.550 --> 00:21:10.260
+and then this is basically,
+
+226
+00:21:10.260 --> 00:21:14.860
+this is exactly the type that we wanted for the mathematical directed graph,
+
+227
+00:21:14.860 --> 00:21:16.640
+which is a set of pairs,
+
+228
+00:21:18.380 --> 00:21:23.460
+so this digraph abstraction function
+
+229
+00:21:23.780 --> 00:21:29.580
+is just a function that takes G of type adjacency map
+
+230
+00:21:29.580 --> 00:21:33.060
+and returns to you a set of pairs,
+
+231
+00:21:33.700 --> 00:21:36.760
+and we have a shorthand notation for this abstraction function,
+
+232
+00:21:36.760 --> 00:21:39.220
+which is just square brackets G,
+
+233
+00:21:39.220 --> 00:21:46.050
+so if we want to say the abstraction of a graph abstract data type
+
+234
+00:21:46.050 --> 00:21:49.790
+into a mathematical directed graph is right square bracket G,
+
+235
+00:21:52.720 --> 00:21:54.400
+so that's for the abstraction function.
+
+236
+00:21:54.900 --> 00:21:57.440
+The next part is the invariant,
+
+237
+00:21:57.640 --> 00:22:03.680
+which is, what is the invariant of the directed graph abstract data type,
+
+238
+00:22:03.940 --> 00:22:06.920
+so the invariant is going to be a predicate
+
+239
+00:22:06.920 --> 00:22:09.410
+that again takes a G,
+
+240
+00:22:09.410 --> 00:22:13.630
+so it's going to be, we'll just call it a graph invariant, graph_inv, so it takes a G,
+
+241
+00:22:14.050 --> 00:22:16.930
+and tells you that that G,
+
+242
+00:22:17.390 --> 00:22:18.790
+which is an adjacency map,
+
+243
+00:22:20.070 --> 00:22:30.000
+conforms to the invariant that we inherited from the adjacency map interface, so this one,
+
+244
+00:22:34.480 --> 00:22:39.340
+and it also has the problem for a property that every neighborhood in it,
+
+245
+00:22:39.740 --> 00:22:41.460
+so if you look up for any vertex,
+
+246
+00:22:41.460 --> 00:22:46.180
+if you look up the neighborhood of that vertex in the adjacency map, which is G,
+
+247
+00:22:47.560 --> 00:22:50.560
+and find that it indeed has a neighborhood,
+
+248
+00:22:50.880 --> 00:22:53.420
+then that neighborhood will conform to the invariant
+
+249
+00:22:53.420 --> 00:22:58.200
+that we inherited from the set abstract data type,
+
+250
+00:22:58.240 --> 00:23:00.960
+so remember that's the second invariant, B-set invariant.
+
+251
+00:23:01.620 --> 00:23:03.840
+So what we basically have is that
+
+252
+00:23:04.610 --> 00:23:09.070
+that graph is represented as an adjacency matrix,
+
+253
+00:23:09.430 --> 00:23:11.330
+so as an adjacency mapping,
+
+254
+00:23:11.330 --> 00:23:13.530
+so for example we have,
+
+255
+00:23:15.300 --> 00:23:19.140
+so for example A, B, C, D,
+
+256
+00:23:19.560 --> 00:23:23.180
+and then this one is mapped to a set of neighborhoods,
+
+257
+00:23:23.420 --> 00:23:31.550
+so for example B, C, and this one is mapped to C, D, and so on,
+
+258
+00:23:32.690 --> 00:23:33.810
+and what we say is,
+
+259
+00:23:34.290 --> 00:23:38.330
+so this is, so the graph is this adjacency map,
+
+260
+00:23:38.470 --> 00:23:39.630
+so this is an adjacency mapping,
+
+261
+00:23:46.440 --> 00:23:49.540
+and every neighborhood in that adjacency map,
+
+262
+00:23:49.540 --> 00:23:51.960
+so this one is a B-set,
+
+263
+00:23:53.720 --> 00:23:55.700
+and this one is a B-set,
+
+264
+00:23:56.500 --> 00:24:01.000
+and what we're saying is that
+
+265
+00:24:01.000 --> 00:24:18.540
+this entire thing conforms to the adjacency map invariant, and each
+
+266
+00:24:18.540 --> 00:24:22.620
+one of those conforms to the B-set invariant,
+
+267
+00:24:23.270 --> 00:24:25.450
+so that's the whole, so that's the,
+
+268
+00:24:25.830 --> 00:24:29.650
+that's the invariant of a graph,
+
+269
+00:24:30.050 --> 00:24:34.170
+so if we represent a graph as an adjacency map,
+
+270
+00:24:34.170 --> 00:24:36.990
+then the whole graph conforms to the adjacency map invariant,
+
+271
+00:24:36.990 --> 00:24:41.370
+and every neighborhood conforms to the set choose invariant.
+
+272
+00:24:43.960 --> 00:24:45.980
+And now, what are the conditions,
+
+273
+00:24:46.180 --> 00:24:51.720
+if you remember, we have a specification on every abstract data type
+
+274
+00:24:53.250 --> 00:25:00.650
+that specify what the behavior of the different elements in this interface are.
+
+275
+00:25:00.710 --> 00:25:03.330
+If you remember, we have, so we have,
+
+276
+00:25:04.490 --> 00:25:09.650
+so the graph abstract data type is the map abstract data type,
+
+277
+00:25:11.230 --> 00:25:16.410
+and additionally, it is the set choose abstract data type,
+
+278
+00:25:16.410 --> 00:25:19.010
+and each one of those comes with its own assumptions,
+
+279
+00:25:21.510 --> 00:25:25.310
+but we also need to add more assumptions to connect both the map,
+
+280
+00:25:25.890 --> 00:25:27.470
+the two abstract data types,
+
+281
+00:25:28.160 --> 00:25:32.400
+the map abstract data type, and the set choose abstract data type in the context of a graph.
+
+282
+00:25:32.680 --> 00:25:40.090
+So, for instance, we want to say that if the graph conforms to the graph invariant, G,
+
+283
+00:25:41.580 --> 00:25:47.680
+then the abstraction, so this is the set, this is the abstraction function for a B-set,
+
+284
+00:25:48.180 --> 00:25:50.320
+we call it here T-set,
+
+285
+00:25:51.600 --> 00:25:57.440
+that abstraction function applied to the neighborhood of a vertex U in the graph
+
+286
+00:25:57.440 --> 00:26:00.220
+is going to be, so this is the executable neighborhood,
+
+287
+00:26:00.400 --> 00:26:04.660
+so this is the executable neighborhood, which is this,
+
+288
+00:26:07.190 --> 00:26:09.650
+and as you can see, I'm saying it's written like that.
+
+289
+00:26:10.130 --> 00:26:13.710
+So the executable neighborhood, when you abstract it to a set,
+
+290
+00:26:13.810 --> 00:26:17.520
+is going to be the same as the mathematical neighborhood,
+
+291
+00:26:17.560 --> 00:26:20.820
+which is what we did in the beginning of this video,
+
+292
+00:26:21.400 --> 00:26:24.420
+applied to the abstraction of the graph and that vertex.
+
+293
+00:26:24.780 --> 00:26:26.260
+So if you take the executable graph,
+
+294
+00:26:27.280 --> 00:26:31.080
+apply the executable neighborhood function to it and to a vertex U,
+
+295
+00:26:31.540 --> 00:26:33.200
+and then abstract the whole thing,
+
+296
+00:26:33.760 --> 00:26:40.450
+what you get is the same as the mathematical neighborhood function
+
+297
+00:26:40.450 --> 00:26:44.270
+applied to the abstraction of the graph and the same vertex.
+
+298
+00:26:46.000 --> 00:26:50.080
+And similarly, we say, for instance, that if we add an edge,
+
+299
+00:26:51.970 --> 00:26:55.430
+so we apply the function addEdge to the executable graph,
+
+300
+00:26:55.430 --> 00:26:58.490
+the abstract error type graph, the adjacency map graph,
+
+301
+00:26:58.710 --> 00:27:00.510
+and that edge goes from U to V,
+
+302
+00:27:01.150 --> 00:27:04.770
+and then we do an abstraction of the whole thing with the square brackets.
+
+303
+00:27:05.730 --> 00:27:11.830
+If we do that, that will be the same as if we do a set and insertion,
+
+304
+00:27:13.220 --> 00:27:15.940
+so this is an operation on mathematical sets,
+
+305
+00:27:16.100 --> 00:27:19.940
+if we apply it to the edge UV and the abstraction of the graph.
+
+306
+00:27:20.680 --> 00:27:23.780
+And similarly, we say, for instance,
+
+307
+00:27:25.080 --> 00:27:28.920
+similarly to the other abstract data types that we did in Week 8,
+
+308
+00:27:30.530 --> 00:27:34.250
+so adding an edge UV to the graph G
+
+309
+00:27:34.250 --> 00:27:39.070
+will lead to the preservation of the invariant
+
+310
+00:27:39.070 --> 00:27:44.170
+if that graph already had the invariant holding before the edge was added.
+
+311
+00:27:44.520 --> 00:27:53.930
+So now that we've seen how to build an abstract error type for graphs,
+
+312
+00:27:54.130 --> 00:28:01.650
+which would allow us to use graphs in the context of executable algorithms
+
+313
+00:28:01.650 --> 00:28:07.350
+instead of just proving theorems, like sets of pairs,
+
+314
+00:28:08.150 --> 00:28:12.590
+the next question is how can we make that abstract error type executable?
+
+315
+00:28:12.590 --> 00:28:15.020
+And the answer is really simple,
+
+316
+00:28:15.080 --> 00:28:19.500
+because we will just use the same methodology for abstract data types,
+
+317
+00:28:20.430 --> 00:28:31.400
+where, for instance, you have to instantiate every interface function
+
+318
+00:28:31.860 --> 00:28:35.400
+with a function that is executable
+
+319
+00:28:35.400 --> 00:28:39.680
+and that satisfies the properties of the specification.
+
+320
+00:28:40.040 --> 00:28:43.220
+So for example, whether it's the adjacency map
+
+321
+00:28:43.220 --> 00:28:47.380
+or the neighborhoods, which are basically set abstract data types,
+
+322
+00:28:47.720 --> 00:28:49.240
+both of those can be implemented with trees.
+
+323
+00:28:50.000 --> 00:28:51.940
+So they can be implemented with red-black trees,
+
+324
+00:28:52.080 --> 00:28:53.480
+they can be implemented with 2-3 trees,
+
+325
+00:28:54.590 --> 00:28:57.570
+and 2-3 trees is basically what we did in last week,
+
+326
+00:28:57.750 --> 00:28:59.670
+where I showed you how to do sets with them,
+
+327
+00:28:59.790 --> 00:29:02.390
+so this time we can do the same thing
+
+328
+00:29:03.670 --> 00:29:08.150
+and do an interpretation of our locale, Pair_Graph_Specs,
+
+329
+00:29:09.650 --> 00:29:15.470
+but with one of those trees as the implementation of maps, as well as sets.
+
+330
+00:29:17.080 --> 00:29:23.730
+Then, once we do that, we can run an algorithm on these graph abstract data types
+
+331
+00:29:24.560 --> 00:29:26.820
+without having to reprove everything for that algorithm,
+
+332
+00:29:26.900 --> 00:29:29.480
+because once you prove it for that abstract error type,
+
+333
+00:29:29.580 --> 00:29:33.360
+any implementation will have those properties of what you proved.
+
+334
+00:29:36.330 --> 00:29:46.060
+So this is the high-level methodology for writing down an executable graph algorithm.
+
+335
+00:29:48.590 --> 00:29:51.250
+So as I said with the last section,
+
+336
+00:29:51.250 --> 00:29:54.710
+where we talked about the mathematical model of graphs,
+
+337
+00:29:55.270 --> 00:29:57.250
+I want you to take a look into the book chapter
+
+338
+00:29:57.250 --> 00:30:00.150
+and also with the associated theory files,
+
+339
+00:30:00.820 --> 00:30:05.440
+so you can actually look into the implementation of what we said here.
+
+340
+00:30:06.300 --> 00:30:07.960
+We will do that in the group tutorial,
+
+341
+00:30:08.080 --> 00:30:10.060
+but it will be good if you also look at it on your own.
+

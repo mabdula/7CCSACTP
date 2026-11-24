@@ -1,0 +1,1508 @@
+1
+00:00:00,720 --> 00:00:08,520
+Now, the next topic is how do we implement an actual algorithm,
+
+2
+00:00:08,840 --> 00:00:15,000
+a non-trivial algorithm, like, for example, depth-first search, using this graph abstract data type.
+
+3
+00:00:16,290 --> 00:00:19,810
+So, let me just very quickly remind you of what depth-first search was.
+
+4
+00:00:20,570 --> 00:00:29,770
+So, depth-first search, in this algorithm, you have, it's an algorithm that tries to solve a specific
+
+5
+00:00:29,770 --> 00:00:36,430
+problem, which is, basically, you're given a source,
+
+6
+00:00:37,400 --> 00:00:43,540
+a vertex, for instance, you might be given this as a source,
+
+7
+00:00:43,940 --> 00:00:50,360
+and this as a goal, say, D as a goal, or E as a goal, or whatever.
+
+8
+00:00:52,960 --> 00:00:59,040
+And the goal for depth-first search is to find if there is a path from the source A to the goal D,
+
+9
+00:00:59,040 --> 00:01:00,300
+for instance, in this case.
+
+10
+00:01:01,120 --> 00:01:11,000
+So, what we have here is, depth-first search tries to find the path using a so-called depth-first
+
+11
+00:01:11,000 --> 00:01:12,680
+traversal from A.
+
+12
+00:01:12,680 --> 00:01:19,040
+So, in particular, what it would do is, you would take A as a vertex,
+
+13
+00:01:19,840 --> 00:01:26,670
+and then say, okay, I will process A,
+
+14
+00:01:27,550 --> 00:01:38,120
+so I will remove A from the set of vertices to be processed, but I will add both of its neighbors to what I need to process.
+
+15
+00:01:38,120 --> 00:01:45,860
+So, you have processed A, removed it, okay, now A is done, but then you have to still process both of its neighbors.
+
+16
+00:01:46,020 --> 00:01:52,630
+And then you process the first neighbor first, so we would say process B, so in order for us to process B,
+
+17
+00:01:52,710 --> 00:02:01,800
+we add its neighbors, so we would add D, and C is already added in the list
+
+18
+00:02:01,800 --> 00:02:07,850
+of vertices to process, so those are all the neighbors of B, and then we say, okay, we're done with processing B.
+
+19
+00:02:07,850 --> 00:02:14,160
+But then, we will continue with the neighbors of B, and for example here,
+
+20
+00:02:14,740 --> 00:02:21,140
+we will process D before we process C, not so long, we don't process C, but we process D, because the algorithm is depth-first.
+
+21
+00:02:21,140 --> 00:02:32,000
+So, every neighbor, you go to the deepest possible route
+
+22
+00:02:32,000 --> 00:02:38,170
+from that neighbor, so for example, from A, you firstly would go B, and then D,
+
+23
+00:02:38,750 --> 00:02:44,810
+and then from D, you would go to E, and then you would backtrack, and then you would go from D to C,
+
+24
+00:02:45,570 --> 00:02:52,290
+and then you would backtrack, and then you would go from B, you already have processed C,
+
+25
+00:02:52,290 --> 00:03:00,040
+so you would go back to A. So that first search works in this way, so for instance,
+
+26
+00:03:00,160 --> 00:03:09,220
+you would say, okay, A, and then I'll process B, and then we process, so let me just write down how the pressure
+
+27
+00:03:09,220 --> 00:03:12,880
+will look like, so you have A, and then you, as I said, you process B,
+
+28
+00:03:13,560 --> 00:03:21,140
+and then after B, you process D, and after D, you process E, and then you backtrack,
+
+29
+00:03:22,290 --> 00:03:28,630
+and then you backtrack, and then to D,
+
+30
+00:03:28,830 --> 00:03:38,320
+and then you backtrack to B, and then you backtrack to A, and then you process C, and then you
+
+31
+00:03:38,320 --> 00:03:42,420
+say, okay, are there any children of C, are there any neighbors of C that I didn't process yet?
+
+32
+00:03:42,440 --> 00:03:45,480
+No, because all the neighbors of C have already seen before.
+
+33
+00:03:48,960 --> 00:03:57,730
+So the algorithm at the high level operates in this depth-first way.
+
+34
+00:03:59,330 --> 00:04:08,220
+So now the next thing to see is how the pseudocode of the algorithm looks like.
+
+35
+00:04:08,730 --> 00:04:13,970
+So to make the algorithm look a little bit more formal, although we're not formalizing
+
+36
+00:04:13,970 --> 00:04:16,570
+it yet, I want to show you the pseudocode of that.
+
+37
+00:04:16,570 --> 00:04:25,220
+So basically, the way you keep track of what you need to process versus what you have already
+
+38
+00:04:25,220 --> 00:04:28,860
+processed in the depth-first search is the following.
+
+39
+00:04:29,340 --> 00:04:34,140
+So you have a stack of the vertices that you're currently processing, and then for
+
+40
+00:04:34,140 --> 00:04:40,900
+instance in our example there, that starts with A and then you push to that stack C
+
+41
+00:04:41,060 --> 00:04:49,980
+and then B and then you pop, sorry, it starts with A, the stack, and then you pop A,
+
+42
+00:04:51,860 --> 00:04:52,100
+and
+
+43
+00:04:52,100 --> 00:04:58,040
+then you push C and then B, and then you pop B, and then you push the neighbors of
+
+44
+00:04:58,040 --> 00:05:04,360
+B, which would be D, and then you pop D,
+
+45
+00:05:04,500 --> 00:05:07,400
+and then you push E, and then you pop
+
+46
+00:05:07,400 --> 00:05:11,420
+E, and then you have only C, because you didn't push anything, because he has no neighbors,
+
+47
+00:05:11,420 --> 00:05:13,440
+and then you pop C, and then you're done.
+
+48
+00:05:15,720 --> 00:05:17,140
+So this is the stack.
+
+49
+00:05:17,360 --> 00:05:24,600
+So the stack keeps track of what you're currently processing, so what are we currently
+
+50
+00:05:29,900 --> 00:05:41,200
+processing, and
+
+51
+00:05:41,200 --> 00:05:45,700
+then we have the set seen, which is the set of vertices that you have already processed.
+
+52
+00:05:46,000 --> 00:06:01,440
+So we say while,
+
+53
+00:06:01,980 --> 00:06:07,040
+and this is quite important because today we'll be talking about how
+
+54
+00:06:07,040 --> 00:06:12,320
+to turn while loops into visible functions, so you say while the stack is not empty, you
+
+55
+00:06:12,320 --> 00:06:16,600
+do a couple of things, so you pop the stack, the top of the stack, and then you
+
+56
+00:06:16,600 --> 00:06:23,160
+see if the vertex that we're looking for, if the top of the stack is the same as
+
+57
+00:06:23,160 --> 00:06:30,900
+the target vertex, so T is the target, then you return reachable, so it means that
+
+58
+00:06:31,450 --> 00:06:39,300
+there is a path from the source to the target, otherwise if V has a neighbor that is not
+
+59
+00:06:39,300 --> 00:06:45,380
+seen, then you push that neighbor into the stack, and then you say we already have
+
+60
+00:06:48,040 --> 00:06:55,580
+seen U, and if it doesn't have a neighbor,
+
+61
+00:06:55,940 --> 00:06:57,860
+then you pop V from the stack, and that's
+
+62
+00:06:57,860 --> 00:07:07,270
+it, so basically you keep pushing
+
+63
+00:07:07,270 --> 00:07:11,930
+neighbors of V here until it doesn't have a neighbor
+
+64
+00:07:11,930 --> 00:07:17,670
+anymore, so until it doesn't have a neighbor that hasn't been seen, and then once we reach
+
+65
+00:07:17,670 --> 00:07:26,150
+that, we pop V from the stack, and then we start, we get another V which is a new
+
+66
+00:07:26,150 --> 00:07:31,250
+top of the stack, and then if we get out of this while loop, and we haven't seen the
+
+67
+00:07:32,070 --> 00:07:39,300
+target vertex, then we conclude that the vertex that we want is not reachable, so this is
+
+68
+00:07:39,300 --> 00:07:46,480
+the pseudocode of depth-first search, so now the question is how can we represent
+
+69
+00:07:46,480 --> 00:07:51,220
+the pseudocode of something like this which has a while loop in Isabelle in a systematic
+
+70
+00:07:51,220 --> 00:07:56,140
+way that would work for even more complicated algorithms that also have while loops,
+
+71
+00:08:04,920 --> 00:08:09,880
+so before I want to model the algorithm, I also want to say what precisely we want
+
+72
+00:08:09,880 --> 00:08:15,740
+from the algorithm, so what we want precisely from the algorithm is the following,
+
+73
+00:08:15,960 --> 00:08:21,840
+so you're given, because we're specifying the algorithm to be able to formally verify
+
+74
+00:08:21,840 --> 00:08:26,990
+in Isabelle, in other words, to prove that it works, so in order for us to do that,
+
+75
+00:08:27,050 --> 00:08:31,110
+we firstly need to know what the algorithm does, so in order for us to prove that
+
+76
+00:08:31,110 --> 00:08:37,580
+it does it, so what the algorithm does is, if you're given a graph G and a source S
+
+77
+00:08:37,580 --> 00:08:46,430
+and a target T in that graph G, and we know that the algorithm will output
+
+78
+00:08:46,430 --> 00:08:50,190
+either reachable or not reachable, then we want to prove the following,
+
+79
+00:08:50,810 --> 00:08:56,150
+if it outputs reachable, then there is a walk from the source to the target,
+
+80
+00:08:57,320 --> 00:09:02,900
+if, and the other thing that we want to prove is that if there is a walk from
+
+81
+00:09:02,900 --> 00:09:09,410
+the source to the target, then it returns reachable, or in other words, we can also say
+
+82
+00:09:10,070 --> 00:09:15,960
+if it's not reachable, then there is no walk, if it returns not reachable, then there is no walk,
+
+83
+00:09:16,320 --> 00:09:22,740
+so this is basically what we want to show about depth-first search formally,
+
+84
+00:09:22,920 --> 00:09:28,590
+so in order first to show any of that, we firstly need to model depth-first search in Isabelle,
+
+85
+00:09:28,590 --> 00:09:34,770
+so how do we do that? So what we do is,
+
+86
+00:09:35,870 --> 00:09:37,870
+if you remember from last week,
+
+87
+00:09:38,010 --> 00:09:44,410
+we had this algorithm RemDupes that used the set abstract data type,
+
+88
+00:09:45,510 --> 00:09:50,870
+and it did so by assuming the set abstract data type in a locale of its own,
+
+89
+00:09:51,290 --> 00:09:55,730
+so here we do the same thing for depth-first search, so the first step is to say,
+
+90
+00:09:55,730 --> 00:09:58,910
+okay, we have a locale for depth-first search where we can define the algorithm,
+
+91
+00:09:59,530 --> 00:10:03,710
+and that locale assumes a couple of abstract data types, the first one is the directed graph
+
+92
+00:10:03,710 --> 00:10:07,970
+abstract data type, which is called the Pair_Graph_Specs from a couple slides ago,
+
+93
+00:10:10,050 --> 00:10:15,750
+and the second locale is another one, the second abstract data type, I assume,
+
+94
+00:10:16,430 --> 00:10:22,620
+is another one that is an extension of the set abstract data type,
+
+95
+00:10:22,620 --> 00:10:27,500
+which is just a locale called set2 that has binary operations on sets,
+
+96
+00:10:28,620 --> 00:10:32,300
+so it has union, intersection, and set difference,
+
+97
+00:10:33,460 --> 00:10:39,730
+and it of course says that, for example, the difference operation
+
+98
+00:10:39,730 --> 00:10:45,690
+when abstracted using the function set returns the mathematical set difference of the two abstractions,
+
+99
+00:10:45,690 --> 00:10:54,360
+so it's basically stated this abstract data type is specified,
+
+100
+00:10:55,220 --> 00:10:58,540
+has its interface and specification done with the locale,
+
+101
+00:10:59,020 --> 00:11:02,580
+in the same way we did for all the other abstract data types,
+
+102
+00:11:04,170 --> 00:11:08,250
+and then we say, and then here we say, okay, we're just going to call our,
+
+103
+00:11:09,010 --> 00:11:12,550
+we're going to fix a graph, which is an adjacency map,
+
+104
+00:11:12,550 --> 00:11:16,450
+and a source vertex, which is a type, which is of type V,
+
+105
+00:11:16,690 --> 00:11:19,530
+and a target vertex, which is also of type V,
+
+106
+00:11:19,960 --> 00:11:27,500
+and we define some extra notation that we'll use a bit later on,
+
+107
+00:11:29,160 --> 00:11:34,980
+but the high-level idea here is that we use a locale to specify what,
+
+108
+00:11:35,900 --> 00:11:43,260
+to specify what abstract data types the depth first search uses.
+
+109
+00:11:43,260 --> 00:11:51,230
+The second thing is to define what the state variables of that first search,
+
+110
+00:11:52,110 --> 00:11:54,610
+the program variables of that first search,
+
+111
+00:11:55,140 --> 00:11:59,780
+and in order for us to do that, I want to firstly tell you about something called records,
+
+112
+00:12:00,400 --> 00:12:05,480
+so a record is basically, an isable record, or in general in programming,
+
+113
+00:12:05,640 --> 00:12:11,120
+a record is a tuple with named components, or fields in other words,
+
+114
+00:12:11,120 --> 00:12:14,720
+so for instance, if I want to define a record for a point,
+
+115
+00:12:15,780 --> 00:12:20,380
+it's an xy, a point in the xy plane, so here you have the x, and here you have the y,
+
+116
+00:12:20,920 --> 00:12:25,300
+we can just say, okay, that record has two components,
+
+117
+00:12:25,640 --> 00:12:29,240
+one is an integer, and another one is an integer, and the first one is called,
+
+118
+00:12:30,220 --> 00:12:33,500
+the first field is called x, and the second one is called y,
+
+119
+00:12:33,680 --> 00:12:38,580
+or the first component is called x and y, so for instance that would represent points on the plane like that.
+
+120
+00:12:40,500 --> 00:12:50,520
+And then, if we want to say that, okay, we want to say that the record is,
+
+121
+00:12:52,360 --> 00:12:55,820
+the record is, for this record, for example the point record,
+
+122
+00:12:56,660 --> 00:13:01,220
+if we want to say that, okay, if we want to refer to specifically the point 1, 2,
+
+123
+00:13:01,640 --> 00:13:05,540
+like this point in the plane, or 2, 2, whatever, so 2, 2 for instance,
+
+124
+00:13:05,540 --> 00:13:12,160
+then we say, we use this interesting bracket, and then say x equals 1,
+
+125
+00:13:12,860 --> 00:13:18,200
+and y, sorry, x equals 2, and y equals 2.
+
+126
+00:13:19,880 --> 00:13:25,400
+Similarly, if we want to say the x-coordinate of a given point record,
+
+127
+00:13:25,480 --> 00:13:32,700
+so this is a record of that point, so if I want to say the x-coordinate,
+
+128
+00:13:32,700 --> 00:13:42,500
+we just say x of p, so for instance x, the x-coordinate of,
+
+129
+00:13:43,280 --> 00:13:50,460
+so if we just call that thing up there, if we say that p equals,
+
+130
+00:13:50,860 --> 00:13:55,340
+is defined as that record, and then we say x of p, then it will turn to us 2,
+
+131
+00:13:58,060 --> 00:14:04,740
+and if I want to just update the specific field of the record,
+
+132
+00:14:04,820 --> 00:14:09,060
+for example if I want to make, say, I want to update the y-coordinate of p,
+
+133
+00:14:09,060 --> 00:14:15,800
+I want to get another point where y is equal to 3, that would be the notation for this,
+
+134
+00:14:17,930 --> 00:14:22,030
+and we can do that for multiple fields, for example we can do that for,
+
+135
+00:14:22,650 --> 00:14:25,210
+I don't know, if you want to say x is 3 and y is 3,
+
+136
+00:14:25,610 --> 00:14:30,310
+we want to change both fields in this specific point, so we say this,
+
+137
+00:14:31,940 --> 00:14:35,910
+so the point here is, the point here in this,
+
+138
+00:14:37,560 --> 00:14:40,160
+is that I'm just showing you the notation for these records, okay,
+
+139
+00:14:40,160 --> 00:14:42,980
+so what we will do is,
+
+140
+00:14:43,680 --> 00:14:50,530
+what we will do is, sorry before we go there,
+
+141
+00:14:50,630 --> 00:14:52,770
+I just want to tell you that you type these brackets,
+
+142
+00:14:53,770 --> 00:14:56,970
+using those two shortcuts in Isabelle,
+
+143
+00:14:57,630 --> 00:15:03,140
+or you can write a left bracket and then a pipe,
+
+144
+00:15:03,360 --> 00:15:06,820
+and then for the left one,
+
+145
+00:15:06,820 --> 00:15:11,360
+and for the right one you can write a pipe and then a right bracket.
+
+146
+00:15:12,980 --> 00:15:15,340
+So the point of showing you the fields is that I want,
+
+147
+00:15:16,200 --> 00:15:18,060
+whenever we model a complicated algorithm,
+
+148
+00:15:18,240 --> 00:15:20,500
+one method to model it is to have a field,
+
+149
+00:15:20,720 --> 00:15:26,300
+to have a record with different fields corresponding to the different variables in the program,
+
+150
+00:15:26,300 --> 00:15:28,820
+so for instance, in our case, in our depth first search,
+
+151
+00:15:29,080 --> 00:15:30,980
+we had three variables of return, if you remember,
+
+152
+00:15:31,600 --> 00:15:34,420
+the first one was stack, and the second was seen,
+
+153
+00:15:34,420 --> 00:15:37,220
+so this is a set, a set of seen vertices,
+
+154
+00:15:37,340 --> 00:15:39,040
+and the stack was just a list of vertices,
+
+155
+00:15:40,420 --> 00:15:46,200
+and we also have a variable field for the return value,
+
+156
+00:15:48,080 --> 00:15:52,220
+and that variable for the return value is a type that we just call return,
+
+157
+00:15:52,400 --> 00:15:57,160
+and it has in our case two possible values that the algorithm returns,
+
+158
+00:15:57,260 --> 00:15:59,260
+either reachable or not reachable.
+
+159
+00:16:01,570 --> 00:16:10,460
+And then we say, okay, if I want for example to talk about the algorithm and how it starts,
+
+160
+00:16:11,080 --> 00:16:15,760
+we just say, we initialize the stack with the first vertex, the source vertex,
+
+161
+00:16:16,400 --> 00:16:20,740
+and we initialize the set of seen vertices with just the singleton set,
+
+162
+00:16:21,440 --> 00:16:25,560
+a set that has only one element, which is the source vertex again,
+
+163
+00:16:25,640 --> 00:16:29,100
+you insert S in the empty set, ADT,
+
+164
+00:16:29,200 --> 00:16:33,360
+and then you return, you start by saying return is not reachable,
+
+165
+00:16:33,600 --> 00:16:35,100
+and then you let the algorithm compute,
+
+166
+00:16:35,500 --> 00:16:37,660
+and if it finds a path from S to T,
+
+167
+00:16:37,940 --> 00:16:42,140
+that will change return to reachable instead of NotReachable,
+
+168
+00:16:42,360 --> 00:16:45,100
+so this is basically an example state of the program,
+
+169
+00:16:45,740 --> 00:16:46,880
+of the depth first search program,
+
+170
+00:16:47,660 --> 00:16:50,980
+and it has different values for the different variables as you can see here.
+
+171
+00:16:53,180 --> 00:16:58,140
+Now, the next thing is how we define the while loop,
+
+172
+00:16:58,140 --> 00:17:03,500
+and this is actually quite systematic,
+
+173
+00:17:03,540 --> 00:17:08,460
+once you know what the while loop that you want to formalize in Isabelle.
+
+174
+00:17:09,100 --> 00:17:14,260
+So in our case, we had a pseudocode that had a while loop in it,
+
+175
+00:17:14,400 --> 00:17:16,820
+and we want to write it as a recursive function,
+
+176
+00:17:16,900 --> 00:17:20,520
+so let's go through that step by step, let's say.
+
+177
+00:17:21,200 --> 00:17:27,000
+So the first thing is, we say depth first search is a recursive function,
+
+178
+00:17:27,000 --> 00:17:29,740
+so it's a function that is recursive,
+
+179
+00:17:29,760 --> 00:17:38,180
+but in our case here, it's recursive on an argument of type DFS_state.
+
+180
+00:17:38,780 --> 00:17:43,820
+DFS_state is the record here with the program variables.
+
+181
+00:17:44,520 --> 00:17:48,280
+So basically, we say that the depth first search is a recursive function
+
+182
+00:17:48,280 --> 00:17:53,110
+that takes the program variables, the state of the program,
+
+183
+00:17:53,110 --> 00:18:01,290
+and then does some processing to it in one iteration corresponding to one iteration of a while loop,
+
+184
+00:18:01,990 --> 00:18:10,860
+and then goes to another iteration by calling itself again recursively on an updated state.
+
+185
+00:18:10,980 --> 00:18:14,540
+So here, we update the state variables, we update the program variables,
+
+186
+00:18:15,640 --> 00:18:21,380
+and here we also update the program variables according to the different execution paths.
+
+187
+00:18:22,080 --> 00:18:25,640
+Now, let's make that more precise,
+
+188
+00:18:25,640 --> 00:18:31,740
+but the first thing I want to tell you is that we model a while loop using a recursive function.
+
+189
+00:18:31,880 --> 00:18:35,380
+So a while loop is always modeled as a recursive function here in this case,
+
+190
+00:18:35,380 --> 00:18:40,020
+and in most other methodologies to model while loops,
+
+191
+00:18:40,860 --> 00:18:46,400
+it's either going to be explicitly a recursive function like how I'm doing it here,
+
+192
+00:18:46,400 --> 00:18:49,360
+or it's going to be something equivalent or corresponding to a recursive function.
+
+193
+00:18:51,730 --> 00:18:56,130
+And every recursive call is one iteration of the algorithm.
+
+194
+00:18:56,310 --> 00:18:57,990
+So one iteration is a recursive call.
+
+195
+00:19:00,010 --> 00:19:06,210
+So now, let's see what happens in every iteration of the while loop.
+
+196
+00:19:07,070 --> 00:19:11,760
+So let's see this. Let's see here.
+
+197
+00:19:12,500 --> 00:19:18,400
+So first of all, we say case the stack of the argument which is the state.
+
+198
+00:19:18,400 --> 00:19:22,840
+So this is a program state that is an argument of that record type.
+
+199
+00:19:23,160 --> 00:19:27,770
+So it's a record, and that record, as you can see here,
+
+200
+00:19:27,850 --> 00:19:34,130
+takes two type arguments for the two fields that have types here,
+
+201
+00:19:34,310 --> 00:19:36,130
+this field and that field.
+
+202
+00:19:37,130 --> 00:19:42,650
+And then we say, okay, if the stack is not empty,
+
+203
+00:19:42,810 --> 00:19:47,150
+in other words, if the stack has a vertex at the top of the stack,
+
+204
+00:19:47,150 --> 00:19:52,150
+or at the head of the stack, and a tail of the stack, then do something.
+
+205
+00:19:52,470 --> 00:19:54,030
+So what is that equivalent to?
+
+206
+00:19:54,780 --> 00:19:58,530
+This is equivalent to this part of the while loop.
+
+207
+00:19:58,630 --> 00:20:02,210
+So we say while the stack is not empty, go ahead and do something.
+
+208
+00:20:02,270 --> 00:20:03,610
+If it is empty, do something else.
+
+209
+00:20:04,270 --> 00:20:11,830
+So this is empty, so this is stack equals empty,
+
+210
+00:20:12,310 --> 00:20:16,400
+and this is stack is not empty.
+
+211
+00:20:16,400 --> 00:20:22,460
+So the while loop happens, the body of the while loop will always go into one iteration after the next,
+
+212
+00:20:22,820 --> 00:20:24,540
+if the stack is not empty.
+
+213
+00:20:26,940 --> 00:20:32,120
+So then we say, okay, if the stack is not empty, we do the iteration of the while loop,
+
+214
+00:20:32,160 --> 00:20:33,960
+which is the following.
+
+215
+00:20:35,590 --> 00:20:38,590
+If, we say the first thing, if v equals t,
+
+216
+00:20:38,690 --> 00:20:42,410
+so if the vertex that is at the top of the stack is the target,
+
+217
+00:20:42,810 --> 00:20:46,570
+so this is corresponding to that part of the if branch,
+
+218
+00:20:46,570 --> 00:20:51,760
+so that if branch, so if v equals t here,
+
+219
+00:20:53,840 --> 00:20:56,240
+then we return reachable.
+
+220
+00:20:56,840 --> 00:20:58,080
+This is the pseudocarpet.
+
+221
+00:20:58,760 --> 00:21:05,820
+There, in the program, in the model of our program in Isabelle,
+
+222
+00:21:05,840 --> 00:21:14,880
+we say if v equals t, then we return a state with the
+
+223
+00:21:15,450 --> 00:21:18,010
+return field set to reachable.
+
+224
+00:21:19,290 --> 00:21:22,630
+Remember, when we had, when this is a recursive function,
+
+225
+00:21:22,970 --> 00:21:31,110
+so when we say, when we end the call, when we end the computation,
+
+226
+00:21:31,410 --> 00:21:36,590
+when we end this branch with just saying st of something,
+
+227
+00:21:36,590 --> 00:21:40,970
+that means that we return the state, maybe with the update of return to reachable.
+
+228
+00:21:42,880 --> 00:21:46,400
+And then we do the same thing, and then we do the else,
+
+229
+00:21:52,280 --> 00:21:55,360
+where, before I go into the else, I just want to say here,
+
+230
+00:21:55,640 --> 00:21:59,020
+because we return something, we don't call dfs, if you notice,
+
+231
+00:21:59,180 --> 00:22:03,140
+we just say then return st updated like that.
+
+232
+00:22:03,820 --> 00:22:09,360
+Let's go in a path where we do a recursive call,
+
+233
+00:22:09,760 --> 00:22:15,700
+so say here, the next, not the if, but the else,
+
+234
+00:22:15,700 --> 00:22:21,540
+so we say else if the neighborhood of the vertex in the graph
+
+235
+00:22:22,800 --> 00:22:27,760
+minus the seen vertices in the state,
+
+236
+00:22:28,120 --> 00:22:32,680
+so we have this variable called seen here, so we take that variable,
+
+237
+00:22:33,360 --> 00:22:35,920
+and then we take the neighborhood of the vertex and then say,
+
+238
+00:22:36,120 --> 00:22:38,240
+okay, if the neighborhood minus seen is not empty,
+
+239
+00:22:38,380 --> 00:22:41,500
+so if there is a neighbor that was not seen,
+
+240
+00:22:42,700 --> 00:22:45,760
+so again, let's connect that to the pseudocode,
+
+241
+00:22:46,600 --> 00:22:51,420
+so here we say, if v has a neighbor that was u that is not seen,
+
+242
+00:22:51,900 --> 00:22:54,960
+so this, what do we do here?
+
+243
+00:22:55,700 --> 00:23:00,300
+We push u in the stack, and then we say that u has been seen now,
+
+244
+00:23:01,750 --> 00:23:02,970
+how do we do that there?
+
+245
+00:23:03,310 --> 00:23:08,570
+What we do is, we say, okay, first of all, let's take such a u,
+
+246
+00:23:09,310 --> 00:23:11,990
+and this is one thing that you need to really,
+
+247
+00:23:13,220 --> 00:23:15,180
+when we're doing verification, we need to focus on
+
+248
+00:23:15,180 --> 00:23:19,580
+where do we do these arbitrary choices of, say, neighbors or elements of a set,
+
+249
+00:23:19,940 --> 00:23:23,880
+so here we say, okay, u is just a selected vertex
+
+250
+00:23:23,880 --> 00:23:27,140
+from the neighborhood of v minus seen,
+
+251
+00:23:27,280 --> 00:23:32,060
+so basically we select, so this is the neighborhood of v,
+
+252
+00:23:32,780 --> 00:23:36,760
+and we subtract from it or remove from it the set of seen vertices,
+
+253
+00:23:37,160 --> 00:23:40,180
+and then we get another set, and then we choose from that set
+
+254
+00:23:40,180 --> 00:23:45,290
+using the function select, a vertex of color u,
+
+255
+00:23:45,410 --> 00:23:47,130
+so this is an unseen vertex,
+
+256
+00:23:48,240 --> 00:23:49,560
+and then we do the following.
+
+257
+00:23:51,640 --> 00:23:56,920
+We first update, so let's just rub that,
+
+258
+00:23:57,680 --> 00:24:01,420
+so first we take the current state and update the stack by saying,
+
+259
+00:24:01,600 --> 00:24:05,560
+okay, we're going to put u on the stack of the state,
+
+260
+00:24:06,180 --> 00:24:09,360
+so we take the current stack of the state and add u to it,
+
+261
+00:24:09,360 --> 00:24:12,840
+and then say, okay, we're going to put, we're going to say seen,
+
+262
+00:24:13,840 --> 00:24:16,940
+we're going to update seen by adding the set,
+
+263
+00:24:17,260 --> 00:24:20,820
+by adding the vertex u to it, so by saying insert seen.
+
+264
+00:24:21,520 --> 00:24:24,500
+So this execution branch has two steps,
+
+265
+00:24:24,600 --> 00:24:26,320
+so firstly it updates, it pushes something in the stack
+
+266
+00:24:26,320 --> 00:24:28,300
+and adds something to the seen set,
+
+267
+00:24:29,260 --> 00:24:32,080
+and here that corresponds to those two steps,
+
+268
+00:24:32,200 --> 00:24:35,420
+so you add this to the stack and then add this to the seen set,
+
+269
+00:24:35,420 --> 00:24:41,240
+and then you go again and do another iteration of the while loop.
+
+270
+00:24:42,960 --> 00:24:46,000
+That going again and doing another iteration of the while loop
+
+271
+00:24:46,000 --> 00:24:50,000
+corresponds to calling yourself, calling depth first search,
+
+272
+00:24:50,200 --> 00:24:53,240
+doing a recursive call on the new state,
+
+273
+00:24:53,480 --> 00:24:58,320
+so on state with updated value of, with updated stack and updated seen,
+
+274
+00:24:59,240 --> 00:25:01,860
+and that's another iteration of the while loop.
+
+275
+00:25:02,660 --> 00:25:14,040
+The last execution branch is in our pseudocode that one,
+
+276
+00:25:14,400 --> 00:25:20,400
+so here we have a vert, we don't have here,
+
+277
+00:25:20,540 --> 00:25:22,400
+this is, what is this execution branch?
+
+278
+00:25:22,500 --> 00:25:24,980
+This execution branch happens when we say,
+
+279
+00:25:25,340 --> 00:25:28,520
+when v has no neighbor that hasn't been seen,
+
+280
+00:25:28,580 --> 00:25:30,060
+so all its neighbors have been seen.
+
+281
+00:25:30,060 --> 00:25:35,490
+In this case, what we do is we simply pop v from the stack,
+
+282
+00:25:35,570 --> 00:25:37,190
+and then let's see how that's done.
+
+283
+00:25:38,570 --> 00:25:42,210
+We pop, we say stack equals the tail of the stack,
+
+284
+00:25:42,350 --> 00:25:49,000
+remember we said here, case stack of v cons stack l,
+
+285
+00:25:49,280 --> 00:25:55,900
+so if the stack is a v and the tail of the stack,
+
+286
+00:25:56,040 --> 00:25:59,800
+then we just turn the new stack into its tail,
+
+287
+00:25:59,800 --> 00:26:04,040
+and that's it, and then we call depth first search,
+
+288
+00:26:04,060 --> 00:26:07,120
+which corresponds to another iteration of the while loop,
+
+289
+00:26:07,540 --> 00:26:10,360
+because we don't return in the pseudocode in this case.
+
+290
+00:26:12,460 --> 00:26:15,520
+The second case is if the stack is empty,
+
+291
+00:26:15,680 --> 00:26:19,980
+and this is what happened after the while loop in the pseudocode,
+
+292
+00:26:20,360 --> 00:26:23,440
+in that case we simply return NotReachable, that's it.
+
+293
+00:26:23,580 --> 00:26:26,980
+We just say, okay, return state as NotReachable.
+
+294
+00:26:28,100 --> 00:26:33,140
+We have modeled that while loop as a recursive function
+
+295
+00:26:33,140 --> 00:26:34,920
+with four execution branches.
+
+296
+00:26:35,620 --> 00:26:39,500
+The first branch is here, where it's not recursive.
+
+297
+00:26:40,200 --> 00:26:42,580
+The second branch is this one, which is recursive.
+
+298
+00:26:42,620 --> 00:26:44,340
+The third one is this one, which is recursive.
+
+299
+00:26:44,380 --> 00:26:46,300
+The fourth one is this one, which is not recursive.
+
+300
+00:26:47,080 --> 00:26:50,260
+One, two, three, four branches,
+
+301
+00:26:51,030 --> 00:26:55,160
+and each one of them corresponds to something in the pseudocode,
+
+302
+00:26:55,160 --> 00:27:04,540
+which is one, two,
+
+303
+00:27:06,220 --> 00:27:08,500
+three, and four.
+
+304
+00:27:09,740 --> 00:27:14,580
+This is basically the idea of modeling a while loop as a recursive call,
+
+305
+00:27:15,900 --> 00:27:20,520
+and that idea is actually quite standard.
+
+306
+00:27:21,340 --> 00:27:27,760
+This is called tail recursion,
+
+307
+00:27:27,760 --> 00:27:32,180
+and as you remember from earlier weeks,
+
+308
+00:27:32,700 --> 00:27:34,700
+we did tail recursion over the times,
+
+309
+00:27:34,940 --> 00:27:36,740
+where the last recursive call is...
+
+310
+00:27:36,740 --> 00:27:40,960
+If there is recursion, the last call is the recursive call,
+
+311
+00:27:41,080 --> 00:27:42,940
+and here, always, if there is recursion,
+
+312
+00:27:43,040 --> 00:27:45,760
+the last call is TFS, which is the recursive call.
+
+313
+00:27:46,810 --> 00:27:49,350
+You can always transform any while loop.
+
+314
+00:27:50,700 --> 00:27:51,980
+You can always do this.
+
+315
+00:27:51,980 --> 00:27:55,980
+We can always transform any while loop
+
+316
+00:27:55,980 --> 00:28:00,110
+into such a tail recursive call.
+
+317
+00:28:10,990 --> 00:28:13,490
+So that's how we model the function,
+
+318
+00:28:16,430 --> 00:28:26,380
+and now you can run this algorithm on that example,
+
+319
+00:28:26,420 --> 00:28:28,660
+so you can do the same examples that I did from the first video,
+
+320
+00:28:29,810 --> 00:28:33,030
+just to confirm for yourself that you understand
+
+321
+00:28:33,030 --> 00:28:36,890
+the translation between the pseudocode and the recursive function,
+
+322
+00:28:37,930 --> 00:28:39,710
+but I will let you do that as an exercise,
+
+323
+00:28:39,830 --> 00:28:41,150
+because it's really going to be repeated
+
+324
+00:28:41,150 --> 00:28:42,410
+in the same thing that we said before,
+
+325
+00:28:42,530 --> 00:28:45,990
+just that you need to trace it on this recursive call.
+
+326
+00:28:47,210 --> 00:28:51,970
+And then that's basically it for this week.
+
+327
+00:28:52,730 --> 00:28:55,490
+So what we need to do next, which we'll do next week,
+
+328
+00:28:55,490 --> 00:28:57,350
+is to prove this algorithm correct.
+
+329
+00:28:57,450 --> 00:28:58,490
+So how can we prove this algorithm,
+
+330
+00:28:58,530 --> 00:29:00,530
+or what do we need to prove that this algorithm is correct?
+
+331
+00:29:00,530 --> 00:29:02,890
+As I said, we need to prove two properties.
+
+332
+00:29:03,910 --> 00:29:05,890
+The first property, and now we can formally state them,
+
+333
+00:29:05,890 --> 00:29:07,630
+because we have the algorithm formally stated,
+
+334
+00:29:08,070 --> 00:29:15,030
+is that if the return field of the final state of the depth first search,
+
+335
+00:29:15,130 --> 00:29:16,870
+so we call depth first search on the initial state,
+
+336
+00:29:16,950 --> 00:29:18,430
+and then it keeps calling itself progressively,
+
+337
+00:29:18,470 --> 00:29:20,090
+doing many iterations of our loop,
+
+338
+00:29:20,530 --> 00:29:22,890
+if the return field says NotReachable,
+
+339
+00:29:23,790 --> 00:29:27,210
+then that means that there does not exist a P,
+
+340
+00:29:27,210 --> 00:29:30,310
+such that this P is a distinct path,
+
+341
+00:29:31,450 --> 00:29:36,130
+which is a walk between S and T.
+
+342
+00:29:36,410 --> 00:29:38,910
+If you remember, this was the definition from the beginning of the slide,
+
+343
+00:29:39,470 --> 00:29:41,070
+of a vwalk, so vwalk between.
+
+344
+00:29:41,730 --> 00:29:46,520
+It says that P is a walk between S and T in the graph G,
+
+345
+00:29:46,660 --> 00:29:50,260
+so here this is the abstraction of the graph, abstract data type.
+
+346
+00:29:51,680 --> 00:29:53,280
+And similarly, for soundness,
+
+347
+00:29:53,820 --> 00:29:58,040
+we say if the return value of that first search
+
+348
+00:29:58,040 --> 00:30:01,000
+called on the initial state is reachable,
+
+349
+00:30:01,560 --> 00:30:08,400
+then that means that the stack of the final state,
+
+350
+00:30:09,280 --> 00:30:10,800
+if you take its reverse,
+
+351
+00:30:11,360 --> 00:30:17,700
+that's going to be a vertex walk between the source and target vertex
+
+352
+00:30:17,700 --> 00:30:21,600
+in the abstracted graph.
+
+353
+00:30:23,520 --> 00:30:26,640
+And of course, in order for us to prove that,
+
+354
+00:30:26,740 --> 00:30:28,380
+we have to do that within a locale,
+
+355
+00:30:29,220 --> 00:30:31,500
+which includes all the assumptions,
+
+356
+00:30:31,800 --> 00:30:34,240
+all the assumed abstract data types for depth-first search.
+
+357
+00:30:34,640 --> 00:30:36,080
+So we have this locale,
+
+358
+00:30:36,720 --> 00:30:38,460
+called depth-first search theorems,
+
+359
+00:30:38,640 --> 00:30:43,040
+which is basically the same as the depth-first search locale,
+
+360
+00:30:43,040 --> 00:30:47,000
+plus some further axioms,
+
+361
+00:30:47,220 --> 00:30:48,840
+so it just has some extra assumptions.
+
+362
+00:30:49,360 --> 00:30:51,280
+We assume that the graph conforms to the invariant,
+
+363
+00:30:51,840 --> 00:30:54,100
+and we assume that the graph is finite,
+
+364
+00:30:54,600 --> 00:30:56,660
+and we assume that the vertices are finite,
+
+365
+00:30:57,460 --> 00:30:59,380
+all the neighborhoods of all vertices are finite,
+
+366
+00:31:00,180 --> 00:31:05,240
+and we assume that the source is a source of the graph.
+
+367
+00:31:05,580 --> 00:31:08,260
+So basically, we assume that the problem is well-formed.
+
+368
+00:31:08,880 --> 00:31:10,760
+The given problem, the given reachability problem
+
+369
+00:31:10,760 --> 00:31:12,260
+that we give to DFS is well-formed,
+
+370
+00:31:12,340 --> 00:31:13,800
+and once it's well-formed,
+
+371
+00:31:14,300 --> 00:31:18,160
+we assume that we can then prove the completeness and the soundness,
+
+372
+00:31:18,220 --> 00:31:21,280
+and this will be the topic of next week. Thank you for watching,
+
+373
+00:31:21,560 --> 00:31:23,880
+and I hope you check again
+
+374
+00:31:23,880 --> 00:31:28,180
+the sources, the Isabelle sources corresponding to this in the book chapter,
+
+375
+00:31:28,540 --> 00:31:35,100
+and we will do some exercises on that in the in-person lecture,
+
+376
+00:31:35,820 --> 00:31:37,240
+and those will be on Isabelle
+
+377
+00:31:37,240 --> 00:31:44,120
+to actually give you a practical taste of how to do this practically. Thank you.
+

@@ -1,0 +1,511 @@
+WEBVTT
+
+
+1
+00:00:00.750 --> 00:00:07.490
+Hello everyone, welcome to the 9th topic of this module.
+
+2
+00:00:08.970 --> 00:00:18.210
+Today I'll be talking to you about a slightly more applied extension of what
+
+3
+00:00:18.210 --> 00:00:20.830
+we were talking about in the last 8 weeks.
+
+4
+00:00:20.830 --> 00:00:29.740
+So just to remind you, in the first 5 weeks we covered the foundations of Isabelle,
+
+5
+00:00:29.780 --> 00:00:37.600
+and in the last 3 weeks we worked on the correctness of some simple function programs like merge sort,
+
+6
+00:00:38.240 --> 00:00:40.880
+and then we talked about data structures, and then we talked about abstract data types.
+
+7
+00:00:40.880 --> 00:00:48.320
+In this week and the next one we will talk about more complicated algorithms, how to model them in Isabelle and how to formally verify
+
+8
+00:00:48.320 --> 00:00:54.620
+them, employing all the techniques that we have seen in the last 8 weeks.
+
+9
+00:00:56.280 --> 00:01:04.940
+So today I'll be talking about how to model graph algorithms in general, and more specifically depth-first search.
+
+10
+00:01:05.760 --> 00:01:12.900
+So I'll be talking about 3 things. First I'll give you an introduction to how to formalize directed graphs and depth-first search.
+
+11
+00:01:14.060 --> 00:01:19.160
+So what are directed graphs and what is depth-first search, and then how to formalize directed graphs in Isabelle.
+
+12
+00:01:19.940 --> 00:01:26.740
+Second I'll be talking about how to have abstract data types, an abstract data type for a graph,
+
+13
+00:01:27.180 --> 00:01:32.040
+and third I'll be talking about how to model the entirety of depth-first search in Isabelle,
+
+14
+00:01:32.150 --> 00:01:34.030
+and how to make it executable.
+
+15
+00:01:37.300 --> 00:01:41.310
+So let's talk about directed graphs.
+
+16
+00:01:41.510 --> 00:01:48.430
+What is a directed graph? A directed graph is something like this network that we can see here.
+
+17
+00:01:49.780 --> 00:01:56.260
+So in this network you have vertices A,
+
+18
+00:01:56.520 --> 00:02:05.240
+B, C, D and E, and you have edges between say A and B,
+
+19
+00:02:05.320 --> 00:02:09.260
+so this is a directed edge, and so on.
+
+20
+00:02:09.420 --> 00:02:18.700
+So you must have seen that already in a number of areas before today, but my focus today will be about how to model these
+
+21
+00:02:18.700 --> 00:02:21.420
+directed graphs in Isabelle.
+
+22
+00:02:22.180 --> 00:02:31.090
+So as I mentioned in the abstract data types lecture, whenever we're modeling something in Isabelle for the purpose of building algorithms,
+
+23
+00:02:31.530 --> 00:02:33.810
+we might need to have 2 types of models.
+
+24
+00:02:33.810 --> 00:02:41.930
+The first is an abstract mathematical model, and this is what we'll be talking about now for directed graphs.
+
+25
+00:02:43.640 --> 00:02:53.540
+And the second one is something more geared towards building algorithms on it and making it executable.
+
+26
+00:02:53.540 --> 00:02:57.180
+So I'll first start with the mathematical model of directed graphs.
+
+27
+00:02:58.340 --> 00:03:07.800
+So one way to model directed graphs in Isabelle is using mathematical sets in Isabelle.
+
+28
+00:03:07.820 --> 00:03:15.700
+So if you remember we had this type set that takes a type variable as an argument.
+
+29
+00:03:15.700 --> 00:03:25.330
+So for instance we had the alpha set, or an alpha set is an Isabelle mathematical set for instance.
+
+30
+00:03:26.440 --> 00:03:33.440
+In the case of directed graphs, we're not going to be doing an alpha set, but we're going to do a set that takes a pair as an argument,
+
+31
+00:03:34.120 --> 00:03:39.720
+where every pair in the set represents an edge of the graph.
+
+32
+00:03:39.720 --> 00:03:45.740
+So for instance, if we want to talk about this directed graph, represented as a mathematical set in Isabelle,
+
+33
+00:03:45.920 --> 00:03:47.180
+it would look like this.
+
+34
+00:03:47.720 --> 00:03:54.780
+So you would have a pair for the first edge, AB, a pair for the second edge, BC,
+
+35
+00:03:57.120 --> 00:04:00.780
+and BD, and so on.
+
+36
+00:04:02.370 --> 00:04:10.890
+So this is a mathematical representation of directed graphs that I will be using in Isabelle in the rest of this module.
+
+37
+00:04:10.890 --> 00:04:21.320
+And it's quite nice in terms of allowing you to prove theorems formally about graphs,
+
+38
+00:04:22.020 --> 00:04:28.560
+because mathematical sets are easy to deal with in Isabelle, because there is a lot of automation and simplification rules for them and so on.
+
+39
+00:04:29.670 --> 00:04:35.730
+So after we define graphs,
+
+40
+00:04:36.070 --> 00:04:40.950
+or the type of the graphs as shown here, as a set of pairs,
+
+41
+00:04:40.950 --> 00:04:46.390
+the next thing we do is define concepts on top of that graph.
+
+42
+00:04:46.590 --> 00:04:50.550
+For example, what is the neighborhood of a vertex, what is the set of vertices in a graph, and so forth.
+
+43
+00:04:51.550 --> 00:04:59.680
+So for instance, to define the neighborhood of a vertex, we define a function that takes a function neighborhood,
+
+44
+00:05:00.240 --> 00:05:09.180
+it takes a graph, a set of pairs, and takes a vertex, and gives you a set of vertices which are the neighborhood of that vertex.
+
+45
+00:05:09.180 --> 00:05:15.580
+And in order for us to formalize that in Isabelle, we use so-called set comprehensions.
+
+46
+00:05:16.640 --> 00:05:26.320
+So here in this format, this thing is a set comprehension, where we're saying we want all vertices,
+
+47
+00:05:26.900 --> 00:05:38.160
+given a vertex U in a graph G, we want all the vertices V such that there is an edge going from U to V in G.
+
+48
+00:05:38.160 --> 00:05:47.420
+So this is the set of all the neighbors of U, which is the set of all vertices on which an edge outgoing
+
+49
+00:05:47.420 --> 00:05:50.980
+from U is an incident.
+
+50
+00:05:51.680 --> 00:05:58.810
+So for instance, if we call that graph G,
+
+51
+00:06:01.000 --> 00:06:05.940
+and then I say, if we just call that graph G,
+
+52
+00:06:05.940 --> 00:06:14.200
+so let's say the neighborhood of G say A, we would get the set of B and C.
+
+53
+00:06:17.100 --> 00:06:25.000
+And that's nothing more complicated set comprehension, but it's the same idea, it's the set of vertices of the whole graph.
+
+54
+00:06:25.280 --> 00:06:31.280
+So this is a function called dVs, it takes a graph, it takes a set of pairs, and it turns to a set of vertices of V set.
+
+55
+00:06:32.280 --> 00:06:41.840
+And the way it's done is firstly we say, I want all vertices V1 and V2 such that there is an edge V1,
+
+56
+00:06:41.960 --> 00:06:45.000
+V2 in the graph,
+
+57
+00:06:45.420 --> 00:06:53.360
+so an edge from V1 to V2, occurring in the graph, each pair of vertices which occur in the graph as an edge,
+
+58
+00:06:53.360 --> 00:07:01.240
+I want to turn them into an ordered pair or a set of vertices, a set with two vertices,
+
+59
+00:07:01.420 --> 00:07:02.540
+so V1 and V2,
+
+60
+00:07:02.760 --> 00:07:09.660
+and then I take all these sets and take their union, their big union, and that's the set of vertices in the graph.
+
+61
+00:07:10.120 --> 00:07:17.180
+So to make that concrete with the example, so dVs of our graph would look like,
+
+62
+00:07:17.600 --> 00:07:20.400
+for this example graph that we have there,
+
+63
+00:07:20.400 --> 00:07:30.120
+it would look like the set, the big union of the set AB and
+
+64
+00:07:30.120 --> 00:07:39.380
+the set BC and the set AC and
+
+65
+00:07:41.460 --> 00:07:41.860
+so on,
+
+66
+00:07:41.880 --> 00:07:47.880
+you do this for every edge, and then you take the big union of all of that, so you'd get A,
+
+67
+00:07:48.240 --> 00:07:51.500
+B, and C and so on.
+
+68
+00:07:52.330 --> 00:07:57.510
+So as I mentioned, this abstract mathematical representation of graphs is good for proofs,
+
+69
+00:07:58.090 --> 00:07:59.510
+because the graph is just a set,
+
+70
+00:07:59.930 --> 00:08:03.870
+and there's a lot of automation in Isabelle and simplification rules and so on to deal with that,
+
+71
+00:08:04.390 --> 00:08:11.850
+but the disadvantage of this representation, as is the disadvantage of most mathematical representations in Isabelle,
+
+72
+00:08:11.910 --> 00:08:18.890
+is that it's not executable, because the set may be infinite, or we don't have an order to pick a neighbor, for instance,
+
+73
+00:08:18.890 --> 00:08:25.270
+so you cannot write an algorithm based on this notion of graphs.
+
+74
+00:08:25.790 --> 00:08:32.720
+You need an executable version of graphs, you cannot use these sets to build a graph for an executable algorithm.
+
+75
+00:08:33.020 --> 00:08:39.940
+So this notion of graphs is just for us to specify properties of graphs,
+
+76
+00:08:39.960 --> 00:08:44.820
+rather than to write algorithms that run on them.
+
+77
+00:08:47.100 --> 00:08:55.340
+Another notion of graphs, which is very basic,
+
+78
+00:08:55.880 --> 00:08:58.920
+is the notion of a walk.
+
+79
+00:09:00.080 --> 00:09:07.900
+What is a walk in a graph? For instance, informally,
+
+80
+00:09:08.280 --> 00:09:15.480
+a walk is the list of vertices, such that consecutive vertices in this list,
+
+81
+00:09:17.450 --> 00:09:20.630
+every two consecutive vertices in this list, are joined by an edge.
+
+82
+00:09:21.190 --> 00:09:28.680
+So for instance, in this graph here, if I say a, b,
+
+83
+00:09:29.960 --> 00:09:33.980
+and then c, that is our vwalk,
+
+84
+00:09:34.680 --> 00:09:43.340
+because, let me put it under definition here, a, b,
+
+85
+00:09:43.340 --> 00:09:46.840
+c is a vwalk, because there is an edge from a to b,
+
+86
+00:09:46.840 --> 00:09:53.820
+and there is an edge from b to c, so every two consecutive vertices have an edge connecting them.
+
+87
+00:09:53.860 --> 00:09:56.410
+So there is this edge, and that edge.
+
+88
+00:09:57.760 --> 00:10:06.530
+While, for example, b, a, c is not a vwalk,
+
+89
+00:10:06.630 --> 00:10:09.170
+because there is not an edge going from b to a,
+
+90
+00:10:09.250 --> 00:10:11.070
+there is only an edge going from a to b.
+
+91
+00:10:13.200 --> 00:10:16.420
+So, informally, that's what a vwalk is.
+
+92
+00:10:17.110 --> 00:10:22.010
+In this example we define it, again, as a function, but this time it's a recursive function.
+
+93
+00:10:22.770 --> 00:10:29.180
+So here we would say, it's a function that takes a graph, and a list of vertices, which is the walk,
+
+94
+00:10:30.280 --> 00:10:35.180
+so this is the walk, or the potential walk, and returns to us bool,
+
+95
+00:10:36.100 --> 00:10:41.240
+so either true or false, indicating whether the second argument is a walk or not.
+
+96
+00:10:43.280 --> 00:10:52.880
+So, how is that defined? It's defined recursively, in terms of the given list of vertices.
+
+97
+00:10:53.680 --> 00:10:58.200
+So for an empty list of vertices, or in other words, an empty walk, is always going to be true,
+
+98
+00:10:58.240 --> 00:11:01.380
+because it's a walk that has nothing in it.
+
+99
+00:11:03.100 --> 00:11:12.560
+A singleton walk, so a list that has only one vertex, will also be considered a walk in only one case,
+
+100
+00:11:12.560 --> 00:11:15.340
+if and only if that vertex occurs in the graph.
+
+101
+00:11:15.540 --> 00:11:23.160
+So, for instance, in our case, we can say the empty list is a walk,
+
+102
+00:11:24.780 --> 00:11:29.880
+the singleton list that only has a is a walk, the singleton list that only has b is a walk,
+
+103
+00:11:30.020 --> 00:11:31.240
+so that's just our convention.
+
+104
+00:11:31.440 --> 00:11:37.880
+We define, we call vertices, singleton vertices that occur in the graph a walk,
+
+105
+00:11:37.880 --> 00:11:46.140
+but the most interesting case, which is the case when the graph, when the list of vertices has at least two members in it,
+
+106
+00:11:46.260 --> 00:11:48.440
+has at least two elements, has two vertices in it,
+
+107
+00:11:48.680 --> 00:11:57.660
+in this case, the vwalk is true if and only if there is an edge between u and v in the graph,
+
+108
+00:11:58.580 --> 00:12:02.060
+and the rest of the list of vertices is also a walk.
+
+109
+00:12:02.060 --> 00:12:10.340
+So, in the recursive case, if there is an edge from u to v, and the rest is a walk,
+
+110
+00:12:12.700 --> 00:12:16.620
+the rest of the list of vertices is a walk, then the whole thing is a walk.
+
+111
+00:12:17.600 --> 00:12:22.040
+So that's the recursive definition for a vwalk in Isabelle.
+
+112
+00:12:23.100 --> 00:12:27.680
+Then we define another topic, another notion called vwalk_bet,
+
+113
+00:12:27.680 --> 00:12:34.470
+and here we take a graph, a first vertex, a list of vertices,
+
+114
+00:12:34.690 --> 00:12:35.870
+and the last vertex,
+
+115
+00:12:35.990 --> 00:12:51.020
+and then we say, that definition is basically saying that p, vwalk_bet
+
+116
+00:12:52.080 --> 00:12:56.120
+u and v,
+
+117
+00:12:56.660 --> 00:13:01.620
+and starting at u and ending at v, so that definition is defined such that you have vwalk,
+
+118
+00:13:01.980 --> 00:13:07.940
+so that the list of vertices p has to be a walk, has to be a walk in the graph,
+
+119
+00:13:07.940 --> 00:13:14.700
+and it should not be an empty one, and the first vertex in it,
+
+120
+00:13:14.720 --> 00:13:17.230
+the head of that list of vertices,
+
+121
+00:13:17.890 --> 00:13:20.610
+should be u, and the last vertex should be v.
+
+122
+00:13:21.540 --> 00:13:25.020
+This is another notion that we define for graphs.
+
+123
+00:13:26.760 --> 00:13:32.640
+So this concludes the mathematical definition of graphs in Isabelle,
+
+124
+00:13:33.280 --> 00:13:45.350
+which is not what you would run
+
+125
+00:13:45.860 --> 00:13:47.640
+with an algorithm,
+
+126
+00:13:47.960 --> 00:13:55.560
+but it is the mathematical notion for graphs in which we define most of our interesting properties of graphs,
+
+127
+00:13:55.680 --> 00:13:58.560
+like for example, what is a tree, what is a connected component, and so on.
+
